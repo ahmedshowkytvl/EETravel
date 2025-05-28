@@ -129,11 +129,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     },
     onSuccess: () => {
+      // Clear all user-related data from cache
       queryClient.setQueryData(["/api/user"], null);
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
+      
       toast({
         title: "Logged out successfully",
         description: "You have been logged out",
       });
+      
+      // Redirect to home page after logout
+      window.location.href = '/';
     },
     onError: (error: Error) => {
       toast({
