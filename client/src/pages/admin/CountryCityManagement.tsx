@@ -968,7 +968,7 @@ export default function CountryCityManagement() {
   };
 
   return (
-    <DashboardLayout>
+    <DashboardLayout location="/admin/countries-cities">
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">Travel Locations Management</h1>

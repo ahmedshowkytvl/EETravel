@@ -5222,6 +5222,113 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Setup export and import routes
   setupExportImportRoutes(app);
+
+  // AI-powered country and cities generation endpoint
+  app.post('/api/admin/ai-generate-country-cities', isAdmin, async (req, res) => {
+    try {
+      const { countryName } = req.body;
+      
+      if (!countryName || typeof countryName !== 'string') {
+        return res.status(400).json({ message: 'Country name is required' });
+      }
+
+      console.log(`AI generation started for country: ${countryName}`);
+
+      // Generate comprehensive country and cities data using Google Gemini
+      const prompt = `Generate detailed information for the country "${countryName}" including:
+
+1. Country details:
+   - Official name
+   - ISO 2-letter country code
+   - Brief tourism-focused description (2-3 sentences)
+   
+2. List of 10-15 major cities with details:
+   - City name
+   - Brief description highlighting tourist attractions or significance
+   
+Return the data in this exact JSON format:
+{
+  "country": {
+    "name": "Country Name",
+    "code": "XX",
+    "description": "Tourism description..."
+  },
+  "cities": [
+    {
+      "name": "City Name",
+      "description": "City description..."
+    }
+  ]
+}
+
+Ensure all information is accurate and tourism-focused for a travel booking platform.`;
+
+      const aiResponse = await geminiService.generateContent(prompt);
+      console.log('Raw AI response:', aiResponse);
+
+      if (!aiResponse) {
+        throw new Error('No response from AI service');
+      }
+
+      let parsedData;
+      try {
+        // Clean and parse the AI response
+        const cleanedResponse = aiResponse.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        parsedData = JSON.parse(cleanedResponse);
+      } catch (parseError) {
+        console.error('Failed to parse AI response:', parseError);
+        throw new Error('Invalid AI response format');
+      }
+
+      if (!parsedData.country || !parsedData.cities) {
+        throw new Error('AI response missing required data structure');
+      }
+
+      // Create country in database
+      const countryData = {
+        name: parsedData.country.name,
+        code: parsedData.country.code.toUpperCase(),
+        description: parsedData.country.description,
+        active: true
+      };
+
+      const newCountry = await storage.createCountry(countryData);
+      console.log('Created country:', newCountry);
+
+      // Create cities for the country
+      const createdCities = [];
+      for (const cityData of parsedData.cities) {
+        try {
+          const newCity = await storage.createCity({
+            name: cityData.name,
+            countryId: newCountry.id,
+            description: cityData.description || '',
+            active: true
+          });
+          createdCities.push(newCity);
+          console.log('Created city:', newCity.name);
+        } catch (cityError) {
+          console.error(`Failed to create city ${cityData.name}:`, cityError);
+          // Continue with other cities even if one fails
+        }
+      }
+
+      console.log(`AI generation completed: ${newCountry.name} with ${createdCities.length} cities`);
+
+      res.json({
+        success: true,
+        country: newCountry,
+        cities: createdCities,
+        message: `Successfully generated ${newCountry.name} with ${createdCities.length} cities using AI`
+      });
+
+    } catch (error) {
+      console.error('Error in AI country generation:', error);
+      res.status(500).json({ 
+        message: error instanceof Error ? error.message : 'Failed to generate country and cities with AI'
+      });
+    }
+  });
   
   return httpServer;
 }
