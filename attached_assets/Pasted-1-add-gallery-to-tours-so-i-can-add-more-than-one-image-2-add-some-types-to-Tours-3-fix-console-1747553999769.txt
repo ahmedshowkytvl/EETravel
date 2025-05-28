@@ -1,0 +1,47 @@
+1-add gallery to tours so i can add more than one image 
+2- add some types to Tours
+3- fix console error
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+🏷️ Seeding package categories...
+🔐 Setting up admin users...
+🌱 Seeding data...
+✅ Data already seeded
+✅ Package categories already seeded
+✅ Package categories seeding complete
+✅ Main admin user already exists
+✅ Test admin user already exists
+7:29:41 AM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+7:29:58 AM [express] GET /api/destinations 200 in 170ms :: [{"id":1,"name":"Cairo","country":"Egypt"…
+7:29:58 AM [express] GET /api/cities 200 in 223ms :: [{"id":1,"name":"Cairo","countryId":1,"descript…
+7:29:58 AM [express] GET /api/countries 200 in 227ms :: [{"id":1,"name":"Egypt","code":"EG","descrip…
+7:29:58 AM [express] GET /api/translations 200 in 220ms :: [{"id":1,"key":"common.english","enText":…
+7:29:58 AM [express] GET /api/user 401 in 2ms :: {"message":"Not authenticated"}
+7:29:58 AM [express] GET /api/translations/settings 200 in 66ms :: {"id":1,"defaultLanguage":"en","a…
+7:29:58 AM [express] GET /api/tour-categories 200 in 269ms :: []
+7:29:58 AM [express] GET /api/menus/location/footer 200 in 252ms :: {"menu":{"id":3,"name":"Footer M…
+7:30:01 AM [express] GET /api/user 401 in 0ms :: {"message":"Not authenticated"}
+7:30:01 AM [express] GET /api/translations/settings 304 in 20ms :: {"id":1,"defaultLanguage":"en","a…
+7:30:01 AM [express] GET /api/translations 304 in 24ms :: [{"id":1,"key":"common.english","enText":"…
+7:30:01 AM [express] GET /api/menus/location/footer 304 in 43ms :: {"menu":{"id":3,"name":"Footer Me…
+7:30:15 AM [express] POST /api/login 200 in 124ms :: {"id":1,"username":"EETADMIN","email":"admin@eg…
+7:30:15 AM [express] GET /api/tour-categories 304 in 46ms :: []
+7:30:15 AM [express] GET /api/cities 304 in 99ms :: [{"id":1,"name":"Cairo","countryId":1,"descripti…
+7:30:15 AM [express] GET /api/countries 304 in 132ms :: [{"id":1,"name":"Egypt","code":"EG","descrip…
+7:30:15 AM [express] GET /api/destinations 304 in 143ms :: [{"id":1,"name":"Cairo","country":"Egypt"…
+7:30:23 AM [express] GET /api/admin/menus 304 in 76ms :: [{"id":3,"name":"Footer Menu","location":"f…
+7:31:01 AM [express] POST /api/admin/menus 201 in 185ms :: {"id":5,"name":"Quick Links","location":"…
+7:31:01 AM [express] POST /api/admin/menus 400 in 110ms :: {"message":"Menu with this name already e…
+7:31:01 AM [express] GET /api/admin/menus 200 in 33ms :: [{"id":3,"name":"Footer Menu","location":"f…
+7:31:04 AM [express] GET /api/admin/menus/5/items 200 in 55ms :: []
+7:31:05 AM [express] GET /api/admin/menus/3/items 200 in 51ms :: [{"id":19,"menuId":3,"parentId":nul…
+7:31:21 AM [express] GET /api/admin/hotel-categories 200 in 99ms
+7:31:21 AM [express] GET /api/admin/destinations 200 in 115ms
+Error fetching hotels: TypeError: db.$client.prepare is not a function
+    at <anonymous> (/home/runner/workspace/server/routes.ts:2147:43)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+7:31:21 AM [express] GET /api/admin/hotels 500 in 148ms :: {"message":"Failed to fetch hotels"}

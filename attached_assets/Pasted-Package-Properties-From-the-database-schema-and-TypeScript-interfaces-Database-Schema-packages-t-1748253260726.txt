@@ -1,0 +1,177 @@
+Package Properties
+From the database schema and TypeScript interfaces:
+Database Schema (packages table):
+id - Primary key
+title - Package name
+description - Detailed description
+price - Base price in integer
+discountedPrice - Optional discounted price
+imageUrl - Main image URL
+galleryUrls - JSON array of additional images
+duration - Duration in days/hours
+rating - Average rating
+reviewCount - Number of reviews
+destinationId - Foreign key to destinations
+countryId - Foreign key to countries
+cityId - Foreign key to cities
+featured - Boolean for featured packages
+type - Package type (e.g., "Cultural", "Beach", "Luxury")
+inclusions - JSON array of what's included
+slug - URL-friendly identifier
+createdAt / updatedAt - Timestamps
+Static Data Properties (from packages.ts):
+locations - Array of location names
+mainLocation - Primary location
+highlights - Key features array
+includes - What's included in the package
+accommodationLevel - Hotel/accommodation standard
+packageDates - Available dates with availability status
+activities - Types of activities included
+itinerary - Day-by-day schedule
+specialOffer - Discount information
+tags - Searchable tags
+minimumPeople / maximumPeople - Group size limits
+ageRestrictions - Age requirements
+difficulty - Difficulty level
+cancellationPolicy - Cancellation terms
+Tour Properties
+Database Schema (tours table):
+id - Primary key
+name - Tour name
+description - Tour description
+imageUrl - Main image
+galleryUrls - JSON array of images
+destinationId - Foreign key to destinations
+tripType - Type of trip
+duration - Duration in days/hours
+date - Tour date
+numPassengers - Number of passengers
+price - Base price
+discountedPrice - Optional discount price
+included - JSON array of inclusions
+excluded - JSON array of exclusions
+itinerary - Detailed itinerary
+maxGroupSize - Maximum group size
+featured - Featured tour flag
+rating - Average rating
+reviewCount - Number of reviews
+status - Tour status (active/inactive)
+createdAt / updatedAt - Timestamps
+Static Data Properties (from tours.ts):
+destination - Destination name
+country - Country name
+region - Geographic region
+category - Tour category
+subcategory - Subcategory
+startDates - Available start dates
+priceIncludes / priceExcludes - What's included/excluded
+groupSize - Min/max group size
+shortDescription - Brief description
+highlights - Key highlights
+tourGuide - Guide information and languages
+accommodation - Accommodation details
+transportation - Transport details
+difficulty - Difficulty level
+minimumAge - Age restrictions
+available - Available spots
+tags - Search tags
+Transportation Properties
+Database Schema (transportation table):
+id - Primary key
+name - Transportation name
+description - Description
+typeId - Foreign key to transport types
+destinationId - Foreign key to destinations
+fromLocationId - Pickup location
+toLocationId - Drop-off location
+durationId - Duration reference
+passengerCapacity - Maximum passengers
+baggageCapacity - Baggage capacity
+price - Base price
+discountedPrice - Optional discount
+imageUrl - Main image
+galleryUrls - JSON array of images
+features - JSON array of features
+withDriver - Driver included flag
+available - Availability status
+pickupIncluded - Pickup service included
+featured - Featured transport flag
+rating - Average rating
+reviewCount - Number of reviews
+status - Status
+createdAt / updatedAt - Timestamps
+Static Data Properties (from transportation.ts):
+type - Vehicle type (Car, Bus, Private Transfer, etc.)
+subtype - Specific subtype (Economy, Luxury, SUV, etc.)
+company - Service provider
+model - Vehicle model
+capacity - Passenger capacity
+pickupLocation / dropoffLocation - Pickup/drop-off points
+pickupDate / pickupTime - Pickup schedule
+returnDate / returnTime - Return schedule
+duration - Trip duration
+currency - Price currency
+pricePerDay - Daily pricing flag
+image - Vehicle image
+features - Vehicle features
+cancellationPolicy - Cancellation terms
+insuranceIncluded - Insurance inclusion
+additionalDriverAllowed - Extra driver option
+minimumAge - Driver age requirement
+driverRequirements - Driver requirements
+mileagePolicy / fuelPolicy - Usage policies
+Visa Properties
+Database Schema (visas table):
+id - Primary key
+title - Visa title
+description - Visa description
+targetCountryId - Foreign key to countries
+imageUrl - Country flag/image
+price - Visa fee
+processingTime - Processing duration
+requiredDocuments - JSON array of required docs
+validityPeriod - Visa validity
+entryType - Single/multiple entry
+active - Active status
+createdAt / updatedAt - Timestamps
+Static Data Properties (from visas.ts):
+type - Visa type (Tourist, Business, Transit, etc.)
+country - Target country
+flag - Country flag URL
+targetNationality - Applicable nationality
+eligibility - Eligibility requirements
+duration - Stay duration
+entries - Entry type (Single/Multiple)
+standardProcessingTime / expressProcessingTime / rushProcessingTime - Processing options
+expressFee / rushFee - Additional fees
+currency - Fee currency
+requirements - Document requirements
+validity - Visa validity period
+stayLength - Maximum stay duration
+documents - Required documents
+additionalInfo - Extra information
+rating - Service rating
+reviewCount - Number of reviews
+embassyWebsite - Official website
+applicationLink - Application URL
+refundPolicy - Refund terms
+Flight Properties
+Static Data Properties (from flights.ts):
+id - Flight ID
+airline - Airline name
+flightNumber - Flight number
+departureAirport / arrivalAirport - Airport codes
+departureCity / arrivalCity - City names
+departureCountry / arrivalCountry - Countries
+departureTime / arrivalTime - Flight times
+duration - Flight duration
+price - Ticket price
+currency - Price currency
+stops - Number of stops
+stopAirport / stopCity - Stopover details
+date - Flight date
+class - Travel class (Economy, Business, First)
+availableSeats - Available seats
+amenities - Flight amenities array
+airlineImage - Airline logo URL
+These properties provide comprehensive data structures for managing travel bookings, search functionality, and detailed information display across the application.

@@ -1,0 +1,76 @@
+/* Admin Panel Input Styles and Classes */
+
+/* Base admin input classes */
+.admin-input {
+  @apply transition-all duration-200 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
+}
+
+.admin-textarea {
+  @apply transition-all duration-200 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 resize-vertical;
+}
+
+.admin-select {
+  @apply transition-all duration-200 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
+}
+
+.admin-number-input {
+  @apply admin-input text-right;
+}
+
+.admin-currency-input {
+  @apply admin-number-input;
+}
+
+.admin-email-input {
+  @apply admin-input;
+}
+
+.admin-password-input {
+  @apply admin-input;
+}
+
+.admin-url-input {
+  @apply admin-input;
+}
+
+.admin-phone-input {
+  @apply admin-input;
+}
+
+/* Form-specific classes */
+.room-name-input,
+.hotel-name-input,
+.tour-name-input,
+.package-name-input,
+.user-username-input {
+  @apply admin-input font-medium;
+}
+
+.room-description-input,
+.hotel-description-input,
+.tour-description-input,
+.package-description-input {
+  @apply admin-textarea;
+}
+
+.room-price-input,
+.hotel-price-input,
+.tour-price-input,
+.package-price-input {
+  @apply admin-currency-input;
+}
+
+.max-adults-input,
+.max-children-input,
+.max-infants-input {
+  @apply admin-number-input;
+}
+
+/* Selection inputs */
+.hotel-select,
+.country-select,
+.city-select,
+.category-select,
+.status-select {
+  @apply admin-select;
+}

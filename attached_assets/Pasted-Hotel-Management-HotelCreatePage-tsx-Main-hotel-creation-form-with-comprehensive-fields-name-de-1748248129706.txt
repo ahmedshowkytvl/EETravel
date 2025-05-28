@@ -1,0 +1,47 @@
+Hotel Management
+HotelCreatePage.tsx - Main hotel creation form with comprehensive fields (name, description, location, amenities, etc.)
+EnhancedHotelCreatePage.tsx - Enhanced version of hotel creation
+AdvancedHotelsManagement.tsx - Advanced hotel management with creation capabilities
+Room Management
+RoomCreatePage.tsx - Room creation form (name, hotel selection, capacity, amenities, pricing)
+RoomsManagement.tsx - Room management with inline creation
+RoomsPage.tsx - Room page with creation functionality
+Package Management
+PackageCreatorPage.tsx - Package creation page
+PackagesPage.tsx - Packages page with creation
+CreateManualPackage.tsx - Manual package creation
+PackagesManagement.tsx - Package management with creation
+Tour Management
+TourCreatorPage.tsx - Tour creation form
+ToursManagement.tsx - Tour management with creation capabilities
+Transportation Management
+TransportationCreate.tsx - Transportation option creation (vehicles, pricing, routes)
+TransportationManagement.tsx - Transportation management
+TransportationManagementFixed.tsx - Fixed version of transportation management
+User Management
+UsersManagement.tsx - User creation and management form
+Location Management
+DestinationsManagement.tsx - Destination creation and management
+CountryCityManagement.tsx - Country and city creation
+TransportLocationsManagement.tsx - Transport location creation
+TransportTypesManagement.tsx - Transport type creation
+TransportDurationsManagement.tsx - Transport duration creation
+Visa Management
+VisasManagement.tsx - Visa creation and management
+Feature Management
+hotels/categories.tsx - Hotel category creation
+hotels/facilities.tsx - Hotel facilities creation
+hotels/highlights.tsx - Hotel highlights creation
+hotels/cleanliness-features.tsx - Cleanliness features creation
+packages/categories.tsx - Package category creation
+rooms/categories.tsx - Room category creation
+tours/categories.tsx - Tour category creation
+Specialized Forms
+MenuManager.tsx - Menu creation and management
+TranslationManagement.tsx - Translation management
+DataExportImportPage.tsx - Data import/export functionality
+Component-Level Creation Forms
+FacilityManager.tsx - Generic facility creation component
+CategoryManager.tsx - Generic category creation component
+PackageCreatorForm.tsx - Package creation form component
+TourCreatorForm.tsx - Tour creation form component

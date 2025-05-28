@@ -1,0 +1,69 @@
+Implement a dynamic City & Airport selection system for both "From" and "To" fields with the following specifications:
+
+1. Grouped Dropdown Structure:
+Each dropdown (From and To) should display a grouped, searchable list of Cities.
+
+Under each city group, list its corresponding Airports.
+
+Example format:
+
+diff
+Copy
+Edit
+-- Cairo, Egypt  
+   Cairo International Airport  
+   Almaza Airport  
+
+-- Alexandria, Egypt  
+   Borg El Arab Airport  
+2. Search Behavior:
+Users can type any part of a City or Airport name (e.g., "Cairo", "Borj", "Almaza") and all relevant matches should appear.
+
+Matching results should include both airport names and the cities they belong to.
+
+Selecting an airport should highlight it under its corresponding city.
+
+3. Selection Output:
+When an airport is selected, show the full output in this format:
+Selected Airport – City, Country
+Example: Borg El Arab Airport – Alexandria, Egypt
+
+4. Test Dataset (Seed for Testing):
+Include the following cities and airports:
+
+Cairo, Egypt → Cairo International Airport, Almaza Airport
+
+Alexandria, Egypt → Borg El Arab Airport
+
+Dubai, UAE → Dubai International Airport, Al Maktoum International Airport
+
+Istanbul, Turkey → Istanbul Airport, Sabiha Gökçen International Airport
+
+London, UK → Heathrow Airport, Gatwick Airport, Stansted Airport
+
+New York, USA → JFK, LaGuardia, Newark
+
+Paris, France → Charles de Gaulle Airport, Orly Airport
+
+Rome, Italy → Fiumicino, Ciampino
+
+Tokyo, Japan → Haneda Airport, Narita Airport
+
+Jeddah, Saudi Arabia → King Abdulaziz International Airport
+
+5. Admin Panel Integration (Inside Settings Section):
+Within the Admin Panel, under the Settings section, add a new management screen titled:
+Manage Cities & Airports
+
+Features:
+
+Add / Edit / Delete Countries
+
+Add / Edit / Delete Cities nested under each country
+
+Add / Edit / Delete Airports nested under each city
+
+The data created/updated here should automatically populate the From and To dropdowns on the front-end.
+
+6. Bonus (Optional):
+If available in future data, include and display IATA codes next to airport names.

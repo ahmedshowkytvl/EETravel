@@ -1,0 +1,2808 @@
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (35, Cairo, null, The capital of Egypt and the largest city in the Arab world., null, t, 2025-05-20 08:00:15.048438, 2025-05-20 08:00:15.048438).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (36, Luxor, null, A city on the east bank of the Nile River, known for its ancient..., null, t, 2025-05-20 08:00:15.089385, 2025-05-20 08:00:15.089385).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (37, Sharm El Sheikh, null, A resort town between the desert of the Sinai Peninsula and the ..., null, t, 2025-05-20 08:00:15.13688, 2025-05-20 08:00:15.13688).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (38, Dubai, null, A city known for luxury shopping, ultramodern architecture, and ..., null, t, 2025-05-20 08:00:15.176371, 2025-05-20 08:00:15.176371).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (39, Abu Dhabi, null, The capital of the UAE, known for its cultural landmarks and hig..., null, t, 2025-05-20 08:00:15.211407, 2025-05-20 08:00:15.211407).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (40, Amman, null, The capital and largest city of Jordan, featuring a unique blend..., null, t, 2025-05-20 08:00:15.250181, 2025-05-20 08:00:15.250181).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (41, Petra, null, An archaeological city famous for its rock-cut architecture and ..., null, t, 2025-05-20 08:00:15.283344, 2025-05-20 08:00:15.283344).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (42, Marrakech, null, A major city known for its vibrant markets, gardens, palaces, an..., null, t, 2025-05-20 08:00:15.316367, 2025-05-20 08:00:15.316367).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (43, Casablanca, null, Morocco's chief port and one of the largest financial centers in..., null, t, 2025-05-20 08:00:15.360567, 2025-05-20 08:00:15.360567).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (44, Alexandria, null, Egypt's Mediterranean port city with a rich history., null, t, 2025-05-20 08:00:15.402931, 2025-05-20 08:00:15.402931).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (45, Istanbul, null, Turkey's cultural and economic hub spanning Europe and Asia., null, t, 2025-05-20 08:00:15.442727, 2025-05-20 08:00:15.442727).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (46, London, null, The capital of England and the UK, a global city with rich histo..., null, t, 2025-05-20 08:00:15.473946, 2025-05-20 08:00:15.473946).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (47, New York, null, A major US city known for its skyscrapers and cultural diversity..., null, t, 2025-05-20 08:00:15.505872, 2025-05-20 08:00:15.505872).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (48, Paris, null, The capital of France, known for its art, fashion, and landmarks..., null, t, 2025-05-20 08:00:15.548998, 2025-05-20 08:00:15.548998).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (49, Rome, null, The capital of Italy, home to ancient ruins and Renaissance art., null, t, 2025-05-20 08:00:15.588569, 2025-05-20 08:00:15.588569).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (50, Tokyo, null, Japan's capital, a blend of traditional culture and cutting-edge..., null, t, 2025-05-20 08:00:15.636943, 2025-05-20 08:00:15.636943).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (51, Jeddah, null, Saudi Arabia's commercial center and gateway to Mecca., null, t, 2025-05-20 08:00:15.677999, 2025-05-20 08:00:15.677999).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (41, Cairo International Airport, null, CAI, The main international airport serving Cairo, Egypt., null, t, 2025-05-20 08:00:15.709838, 2025-05-20 08:00:15.709838).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (42, Almaza Airport, null, ALM, A military airport in Cairo with limited civilian operations., null, t, 2025-05-20 08:00:15.759791, 2025-05-20 08:00:15.759791).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (43, Borg El Arab Airport, null, HBE, The main airport serving Alexandria, Egypt., null, t, 2025-05-20 08:00:15.803023, 2025-05-20 08:00:15.803023).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (44, Dubai International Airport, null, DXB, One of the busiest international airports in the world., null, t, 2025-05-20 08:00:15.848481, 2025-05-20 08:00:15.848481).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (45, Al Maktoum International Airport, null, DWC, Dubai's second international airport, also known as Dubai World ..., null, t, 2025-05-20 08:00:15.885473, 2025-05-20 08:00:15.885473).",
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (46, Istanbul Airport, null, IST, The main international airport serving Istanbul, Turkey., null, t, 2025-05-20 08:00:15.917567, 2025-05-20 08:00:15.917567).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (47, Sabiha Gökçen International Airport, null, SAW, Istanbul's second international airport located on the Asian sid..., null, t, 2025-05-20 08:00:15.952712, 2025-05-20 08:00:15.952712).",
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (48, Heathrow Airport, null, LHR, One of the busiest airports in Europe and the main hub for Londo..., null, t, 2025-05-20 08:00:15.997475, 2025-05-20 08:00:15.997475).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (49, Gatwick Airport, null, LGW, London's second largest international airport., null, t, 2025-05-20 08:00:16.036641, 2025-05-20 08:00:16.036641).",
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (50, Stansted Airport, null, STN, A major base for low-cost carriers serving London and the East o..., null, t, 2025-05-20 08:00:16.073365, 2025-05-20 08:00:16.073365).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (51, John F. Kennedy International Airport, null, JFK, The primary international airport serving New York City., null, t, 2025-05-20 08:00:16.106261, 2025-05-20 08:00:16.106261).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (52, LaGuardia Airport, null, LGA, An airport in Queens that serves domestic flights to New York Ci..., null, t, 2025-05-20 08:00:16.152116, 2025-05-20 08:00:16.152116).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (53, Newark Liberty International Airport, null, EWR, An international airport serving the New York metropolitan area., null, t, 2025-05-20 08:00:16.192143, 2025-05-20 08:00:16.192143).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (54, Charles de Gaulle Airport, null, CDG, The largest international airport in France., null, t, 2025-05-20 08:00:16.235097, 2025-05-20 08:00:16.235097).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (55, Orly Airport, null, ORY, The second main airport serving Paris, located south of the city..., null, t, 2025-05-20 08:00:16.291345, 2025-05-20 08:00:16.291345).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (56, Leonardo da Vinci International Airport, null, FCO, The main airport serving Rome, also known as Fiumicino Airport., null, t, 2025-05-20 08:00:16.330571, 2025-05-20 08:00:16.330571).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (57, Rome Ciampino Airport, null, CIA, A secondary international airport serving Rome., null, t, 2025-05-20 08:00:16.367063, 2025-05-20 08:00:16.367063).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (58, Haneda Airport, null, HND, One of the two primary airports serving the Greater Tokyo Area., null, t, 2025-05-20 08:00:16.41867, 2025-05-20 08:00:16.41867).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (59, Narita International Airport, null, NRT, The main international airport serving the Greater Tokyo Area., null, t, 2025-05-20 08:00:16.47889, 2025-05-20 08:00:16.47889).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (60, King Abdulaziz International Airport, null, JED, The main airport serving Jeddah, Saudi Arabia., null, t, 2025-05-20 08:00:16.524357, 2025-05-20 08:00:16.524357).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menus: PostgresError: duplicate key value violates unique constraint "menus_name_unique"
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key (name)=(Footer Menu) already exists.',
+  schema_name: 'public',
+  table_name: 'menus',
+  constraint_name: 'menus_name_unique',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
+}
+Error importing item to users: PostgresError: duplicate key value violates unique constraint "users_username_unique"
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key (username)=(EETADMIN) already exists.',
+  schema_name: 'public',
+  table_name: 'users',
+  constraint_name: 'users_username_unique',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
+}
+Error importing item to users: PostgresError: duplicate key value violates unique constraint "users_username_unique"
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key (username)=(testadmin) already exists.',
+  schema_name: 'public',
+  table_name: 'users',
+  constraint_name: 'users_username_unique',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (1, Deluxe Room 549, Deluxe room featuring King + Single bed(s), with landmark view. ..., null, Deluxe, null, null, 0, 0, 153, null, null, 38 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:17.773482, 2025-05-20 08:00:17.773482).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (2, Family Suite 901, Family room featuring Twin bed(s), with pool view. Nostrum casus..., null, Family, null, null, 0, 0, 305, null, null, 51 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:17.854215, 2025-05-20 08:00:17.854215).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (3, Executive Suite 357, Executive room featuring Twin bed(s), with garden view. Ara auxi..., null, Executive, null, null, 0, 0, 489, null, null, 42 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:17.921641, 2025-05-20 08:00:17.921641).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (4, Standard Room 758, Standard room featuring Double bed(s), with city view. Certe cib..., null, Standard, null, null, 0, 0, 103, null, null, 26 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:17.970511, 2025-05-20 08:00:17.970511).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (5, Executive Suite 925, Executive room featuring Double bed(s), with pool view. Ocer vul..., null, Executive, null, null, 0, 0, 311, null, null, 49 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:18.013126, 2025-05-20 08:00:18.013126).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (6, Suite Suite 884, Suite room featuring King bed(s), with city view. Auditor bene p..., null, Suite, null, null, 0, 0, 342, null, null, 57 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:18.06256, 2025-05-20 08:00:18.06256).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (7, Suite Suite 542, Suite room featuring Single bed(s), with city view. Derelinquo i..., null, Suite, null, null, 0, 0, 286, null, null, 60 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:18.117426, 2025-05-20 08:00:18.117426).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (8, Deluxe Room 659, Deluxe room featuring King bed(s), with mountain view. Possimus ..., null, Deluxe, null, null, 0, 0, 247, null, null, 45 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:18.157399, 2025-05-20 08:00:18.157399).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (9, Suite Suite 734, Suite room featuring King + Single bed(s), with landmark view. A..., null, Suite, null, null, 0, 0, 350, null, null, 56 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:18.203208, 2025-05-20 08:00:18.203208).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (10, Executive Suite 660, Executive room featuring King + Single bed(s), with landmark vie..., null, Executive, null, null, 0, 0, 349, null, null, 46 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:18.260899, 2025-05-20 08:00:18.260899).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (11, Penthouse Suite 4, Penthouse room featuring King + Single bed(s), with landmark vie..., null, Penthouse, null, null, 0, 0, 943, null, null, 91 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:18.299999, 2025-05-20 08:00:18.299999).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (12, Penthouse Suite 5, Penthouse room featuring King + Single bed(s), with city view. C..., null, Penthouse, null, null, 0, 0, 527, null, null, 116 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:18.340874, 2025-05-20 08:00:18.340874).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (13, Executive Suite 293, Executive room featuring Twin bed(s), with pool view. Ver consec..., null, Executive, null, null, 0, 0, 455, null, null, 40 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:18.382212, 2025-05-20 08:00:18.382212).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (14, Suite Suite 947, Suite room featuring Twin bed(s), with landmark view. Blandior n..., null, Suite, null, null, 0, 0, 356, null, null, 58 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:18.425141, 2025-05-20 08:00:18.425141).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (15, Executive Suite 531, Executive room featuring Twin bed(s), with ocean view. Peior sup..., null, Executive, null, null, 0, 0, 370, null, null, 48 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:18.469095, 2025-05-20 08:00:18.469095).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (16, Penthouse Suite 1, Penthouse room featuring King bed(s), with ocean view. Amiculum ..., null, Penthouse, null, null, 0, 0, 748, null, null, 139 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:18.522972, 2025-05-20 08:00:18.522972).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (17, Family Suite 610, Family room featuring King bed(s), with city view. Suppono urbs ..., null, Family, null, null, 0, 0, 341, null, null, 53 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:18.559889, 2025-05-20 08:00:18.559889).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (18, Suite Suite 711, Suite room featuring King + Single bed(s), with landmark view. V..., null, Suite, null, null, 0, 0, 342, null, null, 58 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:18.596916, 2025-05-20 08:00:18.596916).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (19, Suite Suite 847, Suite room featuring Double bed(s), with garden view. Angulus ve..., null, Suite, null, null, 0, 0, 392, null, null, 57 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:18.640955, 2025-05-20 08:00:18.640955).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (20, Suite Suite 273, Suite room featuring King bed(s), with ocean view. Vesco turpis ..., null, Suite, null, null, 0, 0, 311, null, null, 47 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:18.681484, 2025-05-20 08:00:18.681484).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (21, Family Suite 418, Family room featuring Single bed(s), with city view. Odit comis ..., null, Family, null, null, 0, 0, 338, null, null, 58 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:18.726854, 2025-05-20 08:00:18.726854).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (22, Standard Room 350, Standard room featuring King + Single bed(s), with garden view. ..., null, Standard, null, null, 0, 0, 101, null, null, 26 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:18.7683, 2025-05-20 08:00:18.7683).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (23, Standard Room 289, Standard room featuring King bed(s), with landmark view. Tabesco..., null, Standard, null, null, 0, 0, 109, null, null, 35 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:18.814895, 2025-05-20 08:00:18.814895).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (24, Deluxe Room 884, Deluxe room featuring King + Single bed(s), with garden view. So..., null, Deluxe, null, null, 0, 0, 230, null, null, 37 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:18.85713, 2025-05-20 08:00:18.85713).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (25, Executive Suite 564, Executive room featuring Twin bed(s), with ocean view. Correptiu..., null, Executive, null, null, 0, 0, 499, null, null, 46 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:18.901971, 2025-05-20 08:00:18.901971).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (26, Standard Room 874, Standard room featuring Queen bed(s), with garden view. Adsuesco..., null, Standard, null, null, 0, 0, 88, null, null, 34 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:18.956877, 2025-05-20 08:00:18.956877).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (27, Suite Suite 303, Suite room featuring Twin bed(s), with garden view. Quae soleo c..., null, Suite, null, null, 0, 0, 304, null, null, 45 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:19.002101, 2025-05-20 08:00:19.002101).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (28, Deluxe Room 192, Deluxe room featuring Queen bed(s), with landmark view. Cum ab t..., null, Deluxe, null, null, 0, 0, 193, null, null, 44 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:19.044159, 2025-05-20 08:00:19.044159).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (29, Standard Room 674, Standard room featuring King + Single bed(s), with city view. Sy..., null, Standard, null, null, 0, 0, 82, null, null, 29 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:19.08701, 2025-05-20 08:00:19.08701).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (30, Family Suite 256, Family room featuring King bed(s), with landmark view. Tempore c..., null, Family, null, null, 0, 0, 309, null, null, 58 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:19.130422, 2025-05-20 08:00:19.130422).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (31, Executive Suite 631, Executive room featuring King bed(s), with mountain view. Delego..., null, Executive, null, null, 0, 0, 397, null, null, 42 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:19.170588, 2025-05-20 08:00:19.170588).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (32, Suite Suite 419, Suite room featuring Twin bed(s), with garden view. Aveho tot ha..., null, Suite, null, null, 0, 0, 256, null, null, 52 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:19.21193, 2025-05-20 08:00:19.21193).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (33, Deluxe Room 437, Deluxe room featuring Single bed(s), with mountain view. Paulati..., null, Deluxe, null, null, 0, 0, 165, null, null, 40 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:19.253241, 2025-05-20 08:00:19.253241).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (34, Standard Room 571, Standard room featuring Double bed(s), with landmark view. Ait d..., null, Standard, null, null, 0, 0, 104, null, null, 31 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:19.287509, 2025-05-20 08:00:19.287509).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (35, Executive Suite 660, Executive room featuring Single bed(s), with garden view. Dapife..., null, Executive, null, null, 0, 0, 381, null, null, 52 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:19.328454, 2025-05-20 08:00:19.328454).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (36, Standard Room 588, Standard room featuring Twin bed(s), with city view. Attonbitus ..., null, Standard, null, null, 0, 0, 130, null, null, 32 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:19.368074, 2025-05-20 08:00:19.368074).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (37, Executive Suite 396, Executive room featuring Twin bed(s), with pool view. Cenaculum ..., null, Executive, null, null, 0, 0, 442, null, null, 44 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:19.408156, 2025-05-20 08:00:19.408156).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (38, Standard Room 317, Standard room featuring King + Single bed(s), with city view. Va..., null, Standard, null, null, 0, 0, 144, null, null, 29 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:19.455047, 2025-05-20 08:00:19.455047).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (39, Suite Suite 393, Suite room featuring Queen bed(s), with city view. Suffragium cu..., null, Suite, null, null, 0, 0, 276, null, null, 58 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:19.500287, 2025-05-20 08:00:19.500287).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (40, Family Suite 146, Family room featuring Queen bed(s), with mountain view. Animus v..., null, Family, null, null, 0, 0, 269, null, null, 58 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:19.547962, 2025-05-20 08:00:19.547962).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (41, Penthouse Suite 1, Penthouse room featuring King bed(s), with garden view. Eius cin..., null, Penthouse, null, null, 0, 0, 912, null, null, 133 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:19.593498, 2025-05-20 08:00:19.593498).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (42, Standard Room 870, Standard room featuring King + Single bed(s), with city view. Fu..., null, Standard, null, null, 0, 0, 111, null, null, 25 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:19.66663, 2025-05-20 08:00:19.66663).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (43, Standard Room 466, Standard room featuring King bed(s), with mountain view. Deorsum..., null, Standard, null, null, 0, 0, 126, null, null, 26 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:19.720784, 2025-05-20 08:00:19.720784).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (44, Suite Suite 644, Suite room featuring King bed(s), with garden view. Apud compreh..., null, Suite, null, null, 0, 0, 280, null, null, 55 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:19.762317, 2025-05-20 08:00:19.762317).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (45, Penthouse Suite 2, Penthouse room featuring Twin bed(s), with pool view. Currus ubi..., null, Penthouse, null, null, 0, 0, 604, null, null, 82 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:19.835866, 2025-05-20 08:00:19.835866).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (46, Penthouse Suite 2, Penthouse room featuring Double bed(s), with garden view. Cimina..., null, Penthouse, null, null, 0, 0, 692, null, null, 109 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:19.88436, 2025-05-20 08:00:19.88436).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (47, Suite Suite 266, Suite room featuring King bed(s), with pool view. Delibero casso..., null, Suite, null, null, 0, 0, 277, null, null, 45 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:19.940559, 2025-05-20 08:00:19.940559).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (48, Penthouse Suite 2, Penthouse room featuring Twin bed(s), with ocean view. Voluptate..., null, Penthouse, null, null, 0, 0, 816, null, null, 145 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:19.994168, 2025-05-20 08:00:19.994168).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (49, Penthouse Suite 5, Penthouse room featuring Twin bed(s), with mountain view. Claust..., null, Penthouse, null, null, 0, 0, 527, null, null, 113 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:20.036686, 2025-05-20 08:00:20.036686).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (50, Suite Suite 963, Suite room featuring Twin bed(s), with mountain view. Angelus of..., null, Suite, null, null, 0, 0, 289, null, null, 53 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:20.081987, 2025-05-20 08:00:20.081987).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (51, Executive Suite 921, Executive room featuring Single bed(s), with city view. Vix bell..., null, Executive, null, null, 0, 0, 430, null, null, 52 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:20.123579, 2025-05-20 08:00:20.123579).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (52, Executive Suite 305, Executive room featuring King bed(s), with city view. Umerus vol..., null, Executive, null, null, 0, 0, 329, null, null, 47 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:20.165388, 2025-05-20 08:00:20.165388).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (53, Suite Suite 105, Suite room featuring King + Single bed(s), with ocean view. Suff..., null, Suite, null, null, 0, 0, 371, null, null, 51 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:20.203437, 2025-05-20 08:00:20.203437).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (54, Deluxe Room 162, Deluxe room featuring King bed(s), with city view. Traho ambulo ..., null, Deluxe, null, null, 0, 0, 180, null, null, 45 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:20.24516, 2025-05-20 08:00:20.24516).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (55, Family Suite 663, Family room featuring Single bed(s), with garden view. Quasi sur..., null, Family, null, null, 0, 0, 221, null, null, 63 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:20.285971, 2025-05-20 08:00:20.285971).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (56, Executive Suite 560, Executive room featuring Double bed(s), with city view. Cornu ad..., null, Executive, null, null, 0, 0, 306, null, null, 46 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:20.325571, 2025-05-20 08:00:20.325571).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (57, Standard Room 307, Standard room featuring Double bed(s), with city view. Versus te..., null, Standard, null, null, 0, 0, 88, null, null, 33 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:20.360407, 2025-05-20 08:00:20.360407).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (58, Penthouse Suite 2, Penthouse room featuring Double bed(s), with city view. Voro pec..., null, Penthouse, null, null, 0, 0, 784, null, null, 141 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:20.394178, 2025-05-20 08:00:20.394178).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (59, Standard Room 244, Standard room featuring King bed(s), with landmark view. Vicinus..., null, Standard, null, null, 0, 0, 108, null, null, 29 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:20.437671, 2025-05-20 08:00:20.437671).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (60, Standard Room 548, Standard room featuring Twin bed(s), with pool view. Crustulum a..., null, Standard, null, null, 0, 0, 108, null, null, 28 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:20.480412, 2025-05-20 08:00:20.480412).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (61, Standard Room 825, Standard room featuring Double bed(s), with garden view. Consper..., null, Standard, null, null, 0, 0, 85, null, null, 33 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:20.518766, 2025-05-20 08:00:20.518766).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (62, Deluxe Room 395, Deluxe room featuring Single bed(s), with pool view. Tepidus vel..., null, Deluxe, null, null, 0, 0, 221, null, null, 44 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:20.562859, 2025-05-20 08:00:20.562859).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (63, Suite Suite 278, Suite room featuring Single bed(s), with city view. Adicio stell..., null, Suite, null, null, 0, 0, 266, null, null, 59 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:20.597242, 2025-05-20 08:00:20.597242).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (64, Deluxe Room 482, Deluxe room featuring Twin bed(s), with mountain view. Possimus ..., null, Deluxe, null, null, 0, 0, 162, null, null, 40 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:20.633588, 2025-05-20 08:00:20.633588).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (65, Suite Suite 942, Suite room featuring Single bed(s), with ocean view. Nam ter the..., null, Suite, null, null, 0, 0, 309, null, null, 58 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:20.681677, 2025-05-20 08:00:20.681677).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (66, Deluxe Room 807, Deluxe room featuring King bed(s), with landmark view. Voluntari..., null, Deluxe, null, null, 0, 0, 205, null, null, 35 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:20.728219, 2025-05-20 08:00:20.728219).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (67, Deluxe Room 923, Deluxe room featuring Queen bed(s), with ocean view. Tunc vigilo..., null, Deluxe, null, null, 0, 0, 181, null, null, 44 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:20.767381, 2025-05-20 08:00:20.767381).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (68, Family Suite 982, Family room featuring Twin bed(s), with landmark view. Pel talio..., null, Family, null, null, 0, 0, 209, null, null, 54 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:20.822808, 2025-05-20 08:00:20.822808).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (69, Family Suite 348, Family room featuring Single bed(s), with city view. Desipio des..., null, Family, null, null, 0, 0, 259, null, null, 63 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:20.878727, 2025-05-20 08:00:20.878727).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (70, Family Suite 555, Family room featuring Queen bed(s), with ocean view. Cibo cubo c..., null, Family, null, null, 0, 0, 311, null, null, 50 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:20.928761, 2025-05-20 08:00:20.928761).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (71, Standard Room 403, Standard room featuring Single bed(s), with pool view. Ustilo te..., null, Standard, null, null, 0, 0, 121, null, null, 31 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:20.971369, 2025-05-20 08:00:20.971369).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (72, Family Suite 488, Family room featuring Single bed(s), with city view. Thermae cui..., null, Family, null, null, 0, 0, 336, null, null, 68 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:21.03341, 2025-05-20 08:00:21.03341).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (73, Penthouse Suite 4, Penthouse room featuring Double bed(s), with city view. Stipes v..., null, Penthouse, null, null, 0, 0, 522, null, null, 110 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:21.078568, 2025-05-20 08:00:21.078568).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (74, Family Suite 952, Family room featuring Queen bed(s), with mountain view. Valetudo..., null, Family, null, null, 0, 0, 278, null, null, 51 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:21.129099, 2025-05-20 08:00:21.129099).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (75, Penthouse Suite 5, Penthouse room featuring Double bed(s), with pool view. Ullus so..., null, Penthouse, null, null, 0, 0, 924, null, null, 115 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:21.187129, 2025-05-20 08:00:21.187129).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (76, Executive Suite 684, Executive room featuring Double bed(s), with garden view. Eligen..., null, Executive, null, null, 0, 0, 498, null, null, 51 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:21.228141, 2025-05-20 08:00:21.228141).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (77, Standard Room 668, Standard room featuring Twin bed(s), with ocean view. Succedo su..., null, Standard, null, null, 0, 0, 137, null, null, 29 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:21.264546, 2025-05-20 08:00:21.264546).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (78, Penthouse Suite 2, Penthouse room featuring Queen bed(s), with mountain view. Adept..., null, Penthouse, null, null, 0, 0, 604, null, null, 116 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:21.298092, 2025-05-20 08:00:21.298092).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (79, Standard Room 526, Standard room featuring Twin bed(s), with ocean view. Patrocinor..., null, Standard, null, null, 0, 0, 114, null, null, 25 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Ocean View, t, active, 2025-05-20 08:00:21.337901, 2025-05-20 08:00:21.337901).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (80, Suite Suite 788, Suite room featuring King bed(s), with city view. Conventus aedi..., null, Suite, null, null, 0, 0, 343, null, null, 48 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:21.377108, 2025-05-20 08:00:21.377108).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (81, Standard Room 188, Standard room featuring Queen bed(s), with mountain view. Explic..., null, Standard, null, null, 0, 0, 86, null, null, 32 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:21.421129, 2025-05-20 08:00:21.421129).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (82, Executive Suite 625, Executive room featuring King + Single bed(s), with mountain vie..., null, Executive, null, null, 0, 0, 328, null, null, 44 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:21.455194, 2025-05-20 08:00:21.455194).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (83, Deluxe Room 931, Deluxe room featuring Single bed(s), with landmark view. Suffrag..., null, Deluxe, null, null, 0, 0, 228, null, null, 41 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:21.495932, 2025-05-20 08:00:21.495932).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (84, Family Suite 887, Family room featuring Twin bed(s), with garden view. Quisquam be..., null, Family, null, null, 0, 0, 241, null, null, 57 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:21.542974, 2025-05-20 08:00:21.542974).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (85, Family Suite 839, Family room featuring Double bed(s), with city view. Torrens add..., null, Family, null, null, 0, 0, 349, null, null, 58 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:21.583134, 2025-05-20 08:00:21.583134).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (86, Deluxe Room 745, Deluxe room featuring King + Single bed(s), with city view. Ipsa..., null, Deluxe, null, null, 0, 0, 213, null, null, 45 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:21.622494, 2025-05-20 08:00:21.622494).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (87, Penthouse Suite 1, Penthouse room featuring Double bed(s), with mountain view. Adep..., null, Penthouse, null, null, 0, 0, 651, null, null, 82 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:21.657039, 2025-05-20 08:00:21.657039).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (88, Executive Suite 513, Executive room featuring Double bed(s), with garden view. Provid..., null, Executive, null, null, 0, 0, 439, null, null, 55 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:21.686829, 2025-05-20 08:00:21.686829).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (89, Family Suite 520, Family room featuring Double bed(s), with pool view. Deinde subn..., null, Family, null, null, 0, 0, 203, null, null, 67 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:21.728638, 2025-05-20 08:00:21.728638).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (90, Family Suite 422, Family room featuring Single bed(s), with landmark view. Degener..., null, Family, null, null, 0, 0, 287, null, null, 58 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:21.766643, 2025-05-20 08:00:21.766643).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (91, Executive Suite 381, Executive room featuring King + Single bed(s), with garden view...., null, Executive, null, null, 0, 0, 346, null, null, 45 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:21.808026, 2025-05-20 08:00:21.808026).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (92, Standard Room 500, Standard room featuring Queen bed(s), with landmark view. Eaque ..., null, Standard, null, null, 0, 0, 85, null, null, 34 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Landmark View, t, active, 2025-05-20 08:00:21.842801, 2025-05-20 08:00:21.842801).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (93, Penthouse Suite 2, Penthouse room featuring Double bed(s), with city view. Combibo ..., null, Penthouse, null, null, 0, 0, 871, null, null, 134 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:21.888496, 2025-05-20 08:00:21.888496).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (94, Deluxe Room 644, Deluxe room featuring King bed(s), with city view. Aliqua perfer..., null, Deluxe, null, null, 0, 0, 243, null, null, 42 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., City View, t, active, 2025-05-20 08:00:21.954304, 2025-05-20 08:00:21.954304).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (95, Penthouse Suite 2, Penthouse room featuring Twin bed(s), with garden view. Sum accu..., null, Penthouse, null, null, 0, 0, 679, null, null, 135 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:22.005468, 2025-05-20 08:00:22.005468).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (96, Suite Suite 704, Suite room featuring Single bed(s), with pool view. Subnecto soc..., null, Suite, null, null, 0, 0, 332, null, null, 54 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Pool View, t, active, 2025-05-20 08:00:22.043971, 2025-05-20 08:00:22.043971).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (97, Suite Suite 692, Suite room featuring Single bed(s), with mountain view. Vir maio..., null, Suite, null, null, 0, 0, 319, null, null, 56 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:22.095538, 2025-05-20 08:00:22.095538).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (98, Executive Suite 847, Executive room featuring King + Single bed(s), with mountain vie..., null, Executive, null, null, 0, 0, 383, null, null, 41 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:22.132467, 2025-05-20 08:00:22.132467).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (99, Suite Suite 880, Suite room featuring Single bed(s), with mountain view. Contego ..., null, Suite, null, null, 0, 0, 257, null, null, 57 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Mountain View, t, active, 2025-05-20 08:00:22.177595, 2025-05-20 08:00:22.177595).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to rooms: PostgresError: null value in column "hotel_id" of relation "rooms" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (100, Executive Suite 673, Executive room featuring Twin bed(s), with garden view. Claudeo ..., null, Executive, null, null, 0, 0, 482, null, null, 53 m², null, "\\"[\\\\\\"Free Wi-Fi\\\\\\",\\\\\\"Flat-screen TV\\\\\\",\\\\\\"Air conditioni..., Garden View, t, active, 2025-05-20 08:00:22.228327, 2025-05-20 08:00:22.228327).',
+  schema_name: 'public',
+  table_name: 'rooms',
+  column_name: 'hotel_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+8:00:22 AM [express] POST /api/admin/import/full-database 200 in 63528ms :: {"success":true,"results…

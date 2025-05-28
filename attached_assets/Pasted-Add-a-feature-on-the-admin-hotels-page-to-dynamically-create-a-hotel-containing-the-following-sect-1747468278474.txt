@@ -1,0 +1,98 @@
+Add a feature on the /admin/hotels page to dynamically create a hotel, containing the following sections:
+
+🏨 Basic Hotel Information:
+Name
+
+Location (Address, City, Country)
+
+Star Rating
+
+Guest Rating
+
+Nearby Landmarks
+
+I want a way to depend on Google to suggest nearby landmarks once the location field is filled.
+
+✨ General Highlights:
+This section should be linked to a table in the database.
+
+Editable list (e.g., Great for activities, 24-hour check-in, etc.)
+
+🚗 Transportation Options:
+This section should be optional for the client.
+
+Airport Transfer
+
+Car Rental
+
+Shuttle or Taxi Services
+
+Parking
+
+🧼 Cleanliness and Safety:
+This section should be linked to a table in the database.
+
+Daily Disinfection
+
+Availability of Masks and Sanitizers
+
+Hygiene Certificates or Covid Testing
+
+🛎️ Facilities and Services:
+This section should be linked to a table in the database.
+
+Facilities can be created once (e.g., Wi-Fi, Elevator, Laundry Service, Concierge...)
+
+When creating or editing a hotel, the user can select a group of related facilities.
+
+There should be a Many-to-Many relationship between hotels and facilities.
+
+🛏️ Room Amenities:
+Same principle as above (e.g., Air Conditioning, Hair Dryer, Blackout Curtains, etc.)
+
+Selected from an existing database.
+
+🍽️ Food and Dining:
+Restaurant Names
+
+Type of Cuisine
+
+Breakfast Options (Halal, Vegetarian, etc.)
+
+🛌 Room Types:
+Room Name
+
+Bed Type
+
+Size
+
+View
+
+Room-Specific Amenities
+
+Price and Booking Options
+
+❓ Frequently Asked Questions:
+Stored in a separate section and should be easily addable/repeatable
+
+💡 Technical Notes:
+Use relational models
+
+Example:
+
+facilities table
+
+hotels
+
+hotel_facilities (pivot table for Many-to-Many relation)
+
+Same logic applies to room_amenities
+
+Support multi-language fields (Arabic + English)
+
+Admin panel should support Add / Edit / Delete of facilities
+
+When creating a new hotel, user can select existing facilities from a predefined list
+
+🎯 Goal:
+Make the entire system reusable, well-structured, and professionally stored in the database.

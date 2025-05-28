@@ -1,0 +1,78 @@
+/* Sailing Cruise Page Styles */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hero section animations */
+.hero-fade-in {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Hover effects for cards */
+.cruise-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cruise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Itinerary tab transitions */
+.tab-content-fade {
+  transition: opacity 0.3s ease;
+}
+
+.tab-content-fade.active {
+  opacity: 1;
+}
+
+.tab-content-fade.inactive {
+  opacity: 0;
+}
+
+/* Highlight for included/excluded items */
+.included-item {
+  transition: background-color 0.2s ease;
+}
+
+.included-item:hover {
+  background-color: rgba(0, 200, 83, 0.1);
+}
+
+.excluded-item {
+  transition: background-color 0.2s ease;
+}
+
+.excluded-item:hover {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* Booking section sticky positioning */
+.booking-sidebar-sticky {
+  position: sticky;
+  top: 2rem;
+}
+
+/* Property highlights icon pulse */
+.highlight-icon {
+  transition: transform 0.3s ease;
+}
+
+.highlight-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .booking-sidebar-sticky {
+    position: static;
+  }
+}

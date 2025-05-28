@@ -1,0 +1,192 @@
+Logo
+Home
+Destinations
+About
+Contact
+Sign In
+Book Now
+Discover the Magic of the Middle East
+Explore ancient civilizations, breathtaking landscapes, and rich culture with our curated travel experiences.
+
+Explore Destinations
+View Special Offers
+Flights
+Hotels
+Transportation
+Visas
+Tours
+Packages
+From
+Select departure airport
+To
+Select arrival airport
+Date
+
+05/12/2025
+Passengers
+
+1 Passenger
+Class
+
+Select class
+
+Search Flights
+Special Upcoming Offers
+Scroll leftScroll right
+Cairo & Luxor
+15
+Aug
+Egypt Vacation
+8 Days
+Cairo & Luxor
+$799$699/Person
+Book Now
+Dubai City Tour
+20
+Sep
+UAE Vacation
+5 Days
+Dubai City Tour
+$699$599/Person
+Book Now
+Petra Adventure
+10
+Oct
+Jordan Vacation
+6 Days
+Petra Adventure
+$849$749/Person
+Book Now
+Morocco Express
+05
+Nov
+Morocco Vacation
+7 Days
+Morocco Express
+$920$799/Person
+Book Now
+Traveler on a cliff
+Tourists
+
+5000+
+
+Destinations
+
+300+
+
+Hotels
+
+150+
+
+Travel Any Corner Of The World With Us
+Our travel agency specializes in creating unforgettable experiences for adventurous souls. We handle every aspect of your journey, from accommodations and transportation to guided tours and special activities.
+
+Whether you're looking for a relaxing beach getaway, an adventurous mountain expedition, or a cultural city tour, our expert travel consultants will craft the perfect itinerary tailored to your preferences, budget, and dream destinations.
+
+Flexible Booking
+Free cancellation options available
+
+Expert Guides
+Local, knowledgeable tour guides
+
+Contact Us
+Recommended Destination
+Popular
+Adventure
+Honeymoon
+Scroll leftScroll right
+Cairo
+4.6
+Cairo
+Egypt
+Sharm El Sheikh
+4.8
+Sharm El Sheikh
+Egypt
+Petra
+4.9
+Petra
+Jordan
+Marrakech
+5
+Marrakech
+Morocco
+Popular Travel Packages
+View All Packages
+Moroccan Magic8 Days / 7 Nights
+Moroccan Magic
+$1249
+4.5 (64 reviews)
+Explore the vibrant markets, historic medinas, and stunning landscapes of Morocco on this unforgettable journey.
+
+Marrakech, Fes, Casablanca
+Max 12 people
+Breakfast & Dinner
+View Details
+Book Now
+UAE Explorer6 Days / 5 Nights
+UAE Explorer
+$1549
+5 (92 reviews)
+Experience the perfect blend of modern luxury and cultural heritage in Dubai and Abu Dhabi.
+
+Dubai, Abu Dhabi
+Max 16 people
+Breakfast
+View Details
+Book Now
+Nile Luxury Cruise8 Days / 7 Nights
+Nile Luxury Cruise
+$1899
+4.7 (118 reviews)
+Sail the legendary Nile River in style, exploring ancient temples and monuments along the way.
+
+Cairo, Luxor, Aswan
+Max 24 people
+Full Board
+View Details
+Book Now
+Connect With Us
+Follow Our Adventures
+Join us on social media for travel tips, exclusive offers and stunning destinations
+
+Logo
+The proper Footer on proper time can preserve you protection. We assist you make sure everybody forward.
+
+Home
+Destinations
+Packages
+Visas
+About Us
+Contact
+Top Destinations
+Cairo, Egypt
+Dubai, UAE
+Petra, Jordan
+Marrakech, Morocco
+Istanbul, Turkey
+Doha, Qatar
+Contact Us
+123 Travel Street, Cairo, Egypt
++20 123 456 7890
+info@egyptexpress.com
+Mon-Fri: 9am - 6pm
+© 2025 Egypt Express Travel. All rights reserved.
+
+Privacy Policy
+Terms of Service
+Cookie Policy
+[plugin:runtime-error-plugin] Failed to execute 'fetch' on 'Window': '/api/translations/settings' is not a valid HTTP method.
+/home/runner/workspace/client/src/lib/queryClient.ts:22:21
+20 |    };
+21 |  
+22 |    const res = await fetch(url, options);
+   |                      ^
+23 |    return res;
+24 |  }
+
+    at apiRequest /home/runner/workspace/client/src/lib/queryClient.ts:22:21
+    at queryFn /home/runner/workspace/client/src/hooks/use-language.tsx:77:20
+    at Object.fetchFn [as fn] (https://1f46820e-1536-4f49-b90e-acc1a6bbc494-00-2v4pptgb8kgt8.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=78f4d5db:844:14
+Click outside, press Esc key, or fix the code to dismiss.
+You can also disable this overlay by setting server.hmr.overlay to false in vite.config.js

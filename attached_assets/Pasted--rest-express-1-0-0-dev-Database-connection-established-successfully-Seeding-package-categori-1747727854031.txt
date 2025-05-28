@@ -1,0 +1,1682 @@
+> rest-express@1.0.0 dev
+Database connection established successfully
+🏷️ Seeding package categories...
+🔐 Setting up admin users...
+🌱 Seeding data...
+✅ Data already seeded
+✅ Package categories already seeded
+✅ Package categories seeding complete
+✅ Main admin user already exists
+7:54:57 AM [express] serving on port 5000
+✅ Test admin user already exists
+Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+7:55:11 AM [express] GET /api/tour-categories 304 in 30ms :: []
+7:55:11 AM [express] GET /api/cities 304 in 17ms :: [{"id":1,"name":"Cairo","countryId":1,"descripti…
+7:55:11 AM [express] GET /api/translations 304 in 19ms :: [{"id":1,"key":"common.english","enText":"…
+7:55:11 AM [express] GET /api/menus/location/footer 304 in 65ms :: {"menu":{"id":1,"name":"Footer Me…
+7:55:11 AM [express] GET /api/countries 304 in 193ms :: [{"id":1,"name":"Egypt","code":"EG","descrip…
+7:55:11 AM [express] GET /api/destinations 304 in 193ms :: [{"id":1,"name":"Cairo","country":"Egypt"…
+7:55:11 AM [express] GET /api/translations/settings 304 in 36ms :: {"id":1,"defaultLanguage":"en","a…
+7:55:11 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+7:55:21 AM [express] POST /api/login 200 in 80ms :: {"id":1,"username":"EETADMIN","email":"admin@egy…
+7:55:34 AM [express] GET /api/admin/exports 304 in 39ms :: {"success":true,"exports":[{"name":"full_…
+7:55:41 AM [express] POST /api/admin/export/full-database 200 in 692ms :: {"success":true,"filename"…
+7:55:42 AM [express] GET /api/admin/exports 200 in 34ms :: {"success":true,"exports":[{"name":"full_…
+7:55:50 AM [express] GET /api/admin/exports/download/full_database_export_2025-05-20T07-55-41.771Z.j…
+Error importing item to dictionary_entries: PostgresError: null value in column "english_definition" of relation "dictionary_entries" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (6, travel, null, null, null, Tourism, They enjoy travel to exotic destinations., Also used as a verb: to travel, 2025-05-20 07:56:40.448457, 2025-05-20 07:56:40.448457).',
+  schema_name: 'public',
+  table_name: 'dictionary_entries',
+  column_name: 'english_definition',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to dictionary_entries: PostgresError: null value in column "english_definition" of relation "dictionary_entries" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (7, hotel, null, null, null, Accommodation, We stayed at a five-star hotel in Cairo., null, 2025-05-20 07:56:40.484541, 2025-05-20 07:56:40.484541).',
+  schema_name: 'public',
+  table_name: 'dictionary_entries',
+  column_name: 'english_definition',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to dictionary_entries: PostgresError: null value in column "english_definition" of relation "dictionary_entries" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (8, pyramid, null, null, null, Landmarks, The Great Pyramid of Giza is the oldest of the Seven Wonders of ..., Plural: pyramids, 2025-05-20 07:56:40.517309, 2025-05-20 07:56:40.517309).',
+  schema_name: 'public',
+  table_name: 'dictionary_entries',
+  column_name: 'english_definition',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to dictionary_entries: PostgresError: null value in column "english_definition" of relation "dictionary_entries" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (9, museum, null, null, null, Tourism, The Egyptian Museum houses the world's largest collection of Pha..., null, 2025-05-20 07:56:40.550707, 2025-05-20 07:56:40.550707).",
+  schema_name: 'public',
+  table_name: 'dictionary_entries',
+  column_name: 'english_definition',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to dictionary_entries: PostgresError: null value in column "english_definition" of relation "dictionary_entries" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (10, flight, null, null, null, Transportation, Our flight to Cairo takes about four hours., null, 2025-05-20 07:56:40.582633, 2025-05-20 07:56:40.582633).',
+  schema_name: 'public',
+  table_name: 'dictionary_entries',
+  column_name: 'english_definition',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (18, Cairo, null, The capital of Egypt and the largest city in the Arab world., null, t, 2025-05-20 07:56:40.612768, 2025-05-20 07:56:40.612768).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (19, Luxor, null, A city on the east bank of the Nile River, known for its ancient..., null, t, 2025-05-20 07:56:40.647606, 2025-05-20 07:56:40.647606).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (20, Sharm El Sheikh, null, A resort town between the desert of the Sinai Peninsula and the ..., null, t, 2025-05-20 07:56:40.684057, 2025-05-20 07:56:40.684057).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (21, Dubai, null, A city known for luxury shopping, ultramodern architecture, and ..., null, t, 2025-05-20 07:56:40.720163, 2025-05-20 07:56:40.720163).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (22, Abu Dhabi, null, The capital of the UAE, known for its cultural landmarks and hig..., null, t, 2025-05-20 07:56:40.759932, 2025-05-20 07:56:40.759932).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (23, Amman, null, The capital and largest city of Jordan, featuring a unique blend..., null, t, 2025-05-20 07:56:40.7928, 2025-05-20 07:56:40.7928).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (24, Petra, null, An archaeological city famous for its rock-cut architecture and ..., null, t, 2025-05-20 07:56:40.825708, 2025-05-20 07:56:40.825708).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (25, Marrakech, null, A major city known for its vibrant markets, gardens, palaces, an..., null, t, 2025-05-20 07:56:40.858887, 2025-05-20 07:56:40.858887).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (26, Casablanca, null, Morocco's chief port and one of the largest financial centers in..., null, t, 2025-05-20 07:56:40.89198, 2025-05-20 07:56:40.89198).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (27, Alexandria, null, Egypt's Mediterranean port city with a rich history., null, t, 2025-05-20 07:56:40.92292, 2025-05-20 07:56:40.92292).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (28, Istanbul, null, Turkey's cultural and economic hub spanning Europe and Asia., null, t, 2025-05-20 07:56:40.951869, 2025-05-20 07:56:40.951869).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (29, London, null, The capital of England and the UK, a global city with rich histo..., null, t, 2025-05-20 07:56:40.985022, 2025-05-20 07:56:40.985022).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (30, New York, null, A major US city known for its skyscrapers and cultural diversity..., null, t, 2025-05-20 07:56:41.01867, 2025-05-20 07:56:41.01867).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (31, Paris, null, The capital of France, known for its art, fashion, and landmarks..., null, t, 2025-05-20 07:56:41.051686, 2025-05-20 07:56:41.051686).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (32, Rome, null, The capital of Italy, home to ancient ruins and Renaissance art., null, t, 2025-05-20 07:56:41.082737, 2025-05-20 07:56:41.082737).',
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (33, Tokyo, null, Japan's capital, a blend of traditional culture and cutting-edge..., null, t, 2025-05-20 07:56:41.112619, 2025-05-20 07:56:41.112619).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to cities: PostgresError: null value in column "country_id" of relation "cities" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (34, Jeddah, null, Saudi Arabia's commercial center and gateway to Mecca., null, t, 2025-05-20 07:56:41.148757, 2025-05-20 07:56:41.148757).",
+  schema_name: 'public',
+  table_name: 'cities',
+  column_name: 'country_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menus: PostgresError: duplicate key value violates unique constraint "menus_name_unique"
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key (name)=(Footer Menu) already exists.',
+  schema_name: 'public',
+  table_name: 'menus',
+  constraint_name: 'menus_name_unique',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
+}
+Error importing item to menus: PostgresError: duplicate key value violates unique constraint "menus_name_unique"
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key (name)=(Header Menu) already exists.',
+  schema_name: 'public',
+  table_name: 'menus',
+  constraint_name: 'menus_name_unique',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
+}
+Skipping unknown table: room_categories
+Skipping unknown table: room_categories
+Skipping unknown table: room_categories
+Skipping unknown table: room_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Skipping unknown table: package_categories
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (19, common.english, null, null, Language name in language switcher, common, 2025-05-20 07:56:41.549812, 2025-05-20 07:56:41.549812).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (20, common.arabic, null, null, Language name in language switcher, common, 2025-05-20 07:56:41.582217, 2025-05-20 07:56:41.582217).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (21, common.loading, null, null, Loading state text, common, 2025-05-20 07:56:41.656133, 2025-05-20 07:56:41.656133).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (22, common.save, null, null, Save button text, common, 2025-05-20 07:56:41.689001, 2025-05-20 07:56:41.689001).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (23, common.cancel, null, null, Cancel button text, common, 2025-05-20 07:56:41.727748, 2025-05-20 07:56:41.727748).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (24, common.edit, null, null, Edit button/action text, common, 2025-05-20 07:56:41.763926, 2025-05-20 07:56:41.763926).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (25, common.delete, null, null, Delete button/action text, common, 2025-05-20 07:56:41.795336, 2025-05-20 07:56:41.795336).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (26, common.search, null, null, Search input placeholder/button, common, 2025-05-20 07:56:41.826271, 2025-05-20 07:56:41.826271).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (27, nav.home, null, null, Main navigation link, navigation, 2025-05-20 07:56:41.858585, 2025-05-20 07:56:41.858585).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (28, nav.packages, null, null, Main navigation link, navigation, 2025-05-20 07:56:41.891626, 2025-05-20 07:56:41.891626).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (29, nav.destinations, null, null, Main navigation link, navigation, 2025-05-20 07:56:41.929444, 2025-05-20 07:56:41.929444).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (30, nav.about, null, null, Main navigation link, navigation, 2025-05-20 07:56:41.964731, 2025-05-20 07:56:41.964731).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (31, nav.contact, null, null, Main navigation link, navigation, 2025-05-20 07:56:41.995108, 2025-05-20 07:56:41.995108).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (32, home.title, null, null, Homepage hero title, homepage, 2025-05-20 07:56:42.027909, 2025-05-20 07:56:42.027909).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (33, home.featured, null, null, Featured destinations section title, homepage, 2025-05-20 07:56:42.063093, 2025-05-20 07:56:42.063093).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (34, auth.login, null, null, Login button/page title, auth, 2025-05-20 07:56:42.098019, 2025-05-20 07:56:42.098019).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (35, auth.register, null, null, Register button/page title, auth, 2025-05-20 07:56:42.131278, 2025-05-20 07:56:42.131278).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to translations: PostgresError: null value in column "en_text" of relation "translations" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (36, auth.logout, null, null, Logout button, auth, 2025-05-20 07:56:42.161326, 2025-05-20 07:56:42.161326).',
+  schema_name: 'public',
+  table_name: 'translations',
+  column_name: 'en_text',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (21, Cairo International Airport, null, CAI, The main international airport serving Cairo, Egypt., null, t, 2025-05-20 07:56:42.193264, 2025-05-20 07:56:42.193264).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (22, Almaza Airport, null, ALM, A military airport in Cairo with limited civilian operations., null, t, 2025-05-20 07:56:42.22793, 2025-05-20 07:56:42.22793).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (23, Borg El Arab Airport, null, HBE, The main airport serving Alexandria, Egypt., null, t, 2025-05-20 07:56:42.262664, 2025-05-20 07:56:42.262664).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (24, Dubai International Airport, null, DXB, One of the busiest international airports in the world., null, t, 2025-05-20 07:56:42.296091, 2025-05-20 07:56:42.296091).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (25, Al Maktoum International Airport, null, DWC, Dubai's second international airport, also known as Dubai World ..., null, t, 2025-05-20 07:56:42.328413, 2025-05-20 07:56:42.328413).",
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (26, Istanbul Airport, null, IST, The main international airport serving Istanbul, Turkey., null, t, 2025-05-20 07:56:42.362571, 2025-05-20 07:56:42.362571).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (27, Sabiha Gökçen International Airport, null, SAW, Istanbul's second international airport located on the Asian sid..., null, t, 2025-05-20 07:56:42.39472, 2025-05-20 07:56:42.39472).",
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (28, Heathrow Airport, null, LHR, One of the busiest airports in Europe and the main hub for Londo..., null, t, 2025-05-20 07:56:42.430765, 2025-05-20 07:56:42.430765).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: "Failing row contains (29, Gatwick Airport, null, LGW, London's second largest international airport., null, t, 2025-05-20 07:56:42.46427, 2025-05-20 07:56:42.46427).",
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (30, Stansted Airport, null, STN, A major base for low-cost carriers serving London and the East o..., null, t, 2025-05-20 07:56:42.500009, 2025-05-20 07:56:42.500009).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (31, John F. Kennedy International Airport, null, JFK, The primary international airport serving New York City., null, t, 2025-05-20 07:56:42.531478, 2025-05-20 07:56:42.531478).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (32, LaGuardia Airport, null, LGA, An airport in Queens that serves domestic flights to New York Ci..., null, t, 2025-05-20 07:56:42.565289, 2025-05-20 07:56:42.565289).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (33, Newark Liberty International Airport, null, EWR, An international airport serving the New York metropolitan area., null, t, 2025-05-20 07:56:42.603363, 2025-05-20 07:56:42.603363).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (34, Charles de Gaulle Airport, null, CDG, The largest international airport in France., null, t, 2025-05-20 07:56:42.637773, 2025-05-20 07:56:42.637773).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (35, Orly Airport, null, ORY, The second main airport serving Paris, located south of the city..., null, t, 2025-05-20 07:56:42.666915, 2025-05-20 07:56:42.666915).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (36, Leonardo da Vinci International Airport, null, FCO, The main airport serving Rome, also known as Fiumicino Airport., null, t, 2025-05-20 07:56:42.702521, 2025-05-20 07:56:42.702521).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (37, Rome Ciampino Airport, null, CIA, A secondary international airport serving Rome., null, t, 2025-05-20 07:56:42.740544, 2025-05-20 07:56:42.740544).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (38, Haneda Airport, null, HND, One of the two primary airports serving the Greater Tokyo Area., null, t, 2025-05-20 07:56:42.774683, 2025-05-20 07:56:42.774683).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (39, Narita International Airport, null, NRT, The main international airport serving the Greater Tokyo Area., null, t, 2025-05-20 07:56:42.806296, 2025-05-20 07:56:42.806296).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to airports: PostgresError: null value in column "city_id" of relation "airports" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (40, King Abdulaziz International Airport, null, JED, The main airport serving Jeddah, Saudi Arabia., null, t, 2025-05-20 07:56:42.838644, 2025-05-20 07:56:42.838644).',
+  schema_name: 'public',
+  table_name: 'airports',
+  column_name: 'city_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to users: PostgresError: duplicate key value violates unique constraint "users_username_unique"
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key (username)=(EETADMIN) already exists.',
+  schema_name: 'public',
+  table_name: 'users',
+  constraint_name: 'users_username_unique',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
+}
+Error importing item to users: PostgresError: duplicate key value violates unique constraint "users_username_unique"
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23505',
+  detail: 'Key (username)=(testadmin) already exists.',
+  schema_name: 'public',
+  table_name: 'users',
+  constraint_name: 'users_username_unique',
+  file: 'nbtinsert.c',
+  line: '666',
+  routine: '_bt_check_unique'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (19, null, null, Home, /, null, fas, link, 0, _self, t, 2025-05-20 07:56:42.951842, 2025-05-20 07:56:42.951842).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (20, null, null, Destinations, /destinations, null, fas, link, 1, _self, t, 2025-05-20 07:56:42.986427, 2025-05-20 07:56:42.986427).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (21, null, null, Packages, /packages, null, fas, link, 2, _self, t, 2025-05-20 07:56:43.021981, 2025-05-20 07:56:43.021981).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (22, null, null, Visas, /visas, null, fas, link, 3, _self, t, 2025-05-20 07:56:43.056817, 2025-05-20 07:56:43.056817).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (23, null, null, About Us, /about, null, fas, link, 4, _self, t, 2025-05-20 07:56:43.092837, 2025-05-20 07:56:43.092837).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (24, null, null, Contact, /contact, null, fas, link, 5, _self, t, 2025-05-20 07:56:43.135825, 2025-05-20 07:56:43.135825).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (25, null, null, Home, /, null, fas, link, 0, _self, t, 2025-05-20 07:56:43.169036, 2025-05-20 07:56:43.169036).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (26, null, null, Destinations, /destinations, null, fas, link, 1, _self, t, 2025-05-20 07:56:43.200645, 2025-05-20 07:56:43.200645).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (27, null, null, Tours, /tours, null, fas, link, 2, _self, t, 2025-05-20 07:56:43.253906, 2025-05-20 07:56:43.253906).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (28, null, null, Hotels, /hotels, null, fas, link, 3, _self, t, 2025-05-20 07:56:43.296783, 2025-05-20 07:56:43.296783).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (29, null, null, Packages, /packages, null, fas, link, 4, _self, t, 2025-05-20 07:56:43.336405, 2025-05-20 07:56:43.336405).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (30, null, null, Transportation, /transportation, null, fas, link, 5, _self, t, 2025-05-20 07:56:43.374094, 2025-05-20 07:56:43.374094).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (31, null, null, About, /about, null, fas, link, 6, _self, t, 2025-05-20 07:56:43.40731, 2025-05-20 07:56:43.40731).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (32, null, null, Contact, /contact, null, fas, link, 7, _self, t, 2025-05-20 07:56:43.44618, 2025-05-20 07:56:43.44618).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (33, null, null, Sedan, /transportation/sedan, null, fas, link, 0, _self, t, 2025-05-20 07:56:43.485467, 2025-05-20 07:56:43.485467).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (34, null, null, SUV, /transportation/suv, null, fas, link, 1, _self, t, 2025-05-20 07:56:43.528992, 2025-05-20 07:56:43.528992).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (35, null, null, Van, /transportation/van, null, fas, link, 2, _self, t, 2025-05-20 07:56:43.567445, 2025-05-20 07:56:43.567445).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+Error importing item to menu_items: PostgresError: null value in column "menu_id" of relation "menu_items" violates not-null constraint
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '23502',
+  detail: 'Failing row contains (36, null, null, Luxury, /transportation/luxury, null, fas, link, 3, _self, t, 2025-05-20 07:56:43.597392, 2025-05-20 07:56:43.597392).',
+  schema_name: 'public',
+  table_name: 'menu_items',
+  column_name: 'menu_id',
+  file: 'execMain.c',
+  line: '2006',
+  routine: 'ExecConstraints'
+}
+7:56:43 AM [express] POST /api/admin/import/full-database 200 in 10334ms :: {"success":true,"results…
+7:56:58 AM [express] GET /api/admin/destinations 200 in 48ms
+7:56:58 AM [express] GET /api/admin/hotel-categories 200 in 54ms
+7:56:58 AM [express] GET /api/admin/hotels 304 in 53ms :: []

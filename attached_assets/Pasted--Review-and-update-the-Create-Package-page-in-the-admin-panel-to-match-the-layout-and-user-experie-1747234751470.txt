@@ -1,0 +1,54 @@
+ Review and update the "Create Package" page in the admin panel to match the layout and user experience of the /sailing-cruise page. Only make adjustments if a feature is missing.
+
+Review & Adjustment Checklist:
+Short Description:
+Check for a field to add a short description that displays in the package overview. If missing, add it in its designated spot.
+
+Duration:
+Ensure there's a field to set the tour duration (e.g., number of days/nights). Add if missing.
+
+Language:
+Check for a dropdown to select language; add it if not available.
+
+Group Size:
+Make sure there's a way to define max group size. Add the field if it's missing.
+
+Starting Price:
+There should be a visible field for the Base Price.
+
+Location:
+Check for input or selector for routes like “Cairo to Aswan.” Add if it doesn’t exist.
+
+Tour Overview:
+The overview field should be connected to a list of stored tours. The admin must be able to select from a Tours dropdown.
+
+Best Time to Visit:
+Add this field if not already present.
+
+Ideal For:
+There should be a selector for categories like families, couples, solo travelers. Add if needed.
+
+What to Pack:
+If missing, add the ability to input items with matching icons (Font Awesome) and tooltips for each.
+
+Itinerary Sample:
+The admin should be able to add itinerary entries per day, with text and optional images.
+
+Room Types & Prices:
+If not already linked to the rooms database, ensure prices and room types are fetched and shown dynamically.
+
+Hotel Option:
+Check for a hotel selection field in panel > package Creation > hotel. Include default examples like “Cairo Oasis Hotel or similar.”
+
+Included / Excluded:
+Verify the presence of input areas for what's included and excluded in the package.
+
+Travel Route:
+There should be a map element where the route can be pinned (same as in /sailing-cruise). Add if not present.
+
+Accommodation Highlights:
+Add this section separately using icons and styles similar to the /sailing-cruise page.
+
+Transportation:
+Check for a dropdown to choose transportation options from a predefined list.
+Each transport mode should have a price tied to it, and it must be calculated into the final package total automatically.
