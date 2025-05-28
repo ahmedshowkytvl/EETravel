@@ -55,10 +55,10 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
   useEffect(() => {
     // Check if the current location matches any of our menus
     const newExpandedState = {
-      tours: location.includes('/admin/tours'),
-      packages: location.includes('/admin/packages'),
-      hotels: location.includes('/admin/hotels'),
-      rooms: location.includes('/admin/rooms')
+      tours: location?.includes('/admin/tours') || false,
+      packages: location?.includes('/admin/packages') || false,
+      hotels: location?.includes('/admin/hotels') || false,
+      rooms: location?.includes('/admin/rooms') || false
     };
     
     setExpandedMenus(newExpandedState);
