@@ -286,7 +286,7 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
       href: "/admin/visas",
       hasSubmenu: true,
       menuKey: "visas",
-      isExpanded: location.includes('/admin/visas'),
+      isExpanded: location?.includes('/admin/visas') || false,
       toggle: () => toggleSubmenu("visas"),
       submenuItems: [
         { 
