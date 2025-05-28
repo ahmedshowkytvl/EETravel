@@ -189,12 +189,13 @@ export function setupAuth(app: Express) {
   app.post("/api/logout", (req, res, next) => {
     req.logout((err) => {
       if (err) return next(err);
-      // Destroy the session completely
+      // Clear the session cookie immediately for faster response
+      res.clearCookie('connect.sid');
+      res.json({ message: "Logged out successfully" });
+      
+      // Destroy session asynchronously to avoid blocking the response
       req.session.destroy((err) => {
-        if (err) return next(err);
-        // Clear the session cookie
-        res.clearCookie('connect.sid');
-        res.json({ message: "Logged out successfully" });
+        if (err) console.error('Session destruction error:', err);
       });
     });
   });
