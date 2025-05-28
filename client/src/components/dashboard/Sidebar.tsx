@@ -43,10 +43,10 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
   
   // Auto-expand the relevant menu based on the current location
   const initialExpandedState = {
-    tours: location.includes('/admin/tours'),
-    packages: location.includes('/admin/packages'),
-    hotels: location.includes('/admin/hotels'),
-    rooms: location.includes('/admin/rooms')
+    tours: location?.includes('/admin/tours') || false,
+    packages: location?.includes('/admin/packages') || false,
+    hotels: location?.includes('/admin/hotels') || false,
+    rooms: location?.includes('/admin/rooms') || false
   };
   
   const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>(initialExpandedState);
