@@ -157,6 +157,12 @@ export default function CountryCityManagement() {
   // AI-powered country and cities generation
   const generateCountryAndCities = useMutation({
     mutationFn: async (countryName: string) => {
+      // Show initial progress toast
+      toast({
+        title: "🤖 AI Generation Started",
+        description: `Generating comprehensive data for ${countryName} using Google Gemini...`,
+      });
+
       const response = await fetch('/api/admin/ai-generate-country-cities', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -171,13 +177,26 @@ export default function CountryCityManagement() {
       return response.json();
     },
     onSuccess: (data) => {
+      // Show detailed success information
+      toast({
+        title: "🎉 AI Generation Complete!",
+        description: `Successfully created ${data.country.name} (${data.country.code}) with ${data.cities.length} major cities including detailed tourism descriptions`,
+      });
+
+      // Show a follow-up toast with city details
+      setTimeout(() => {
+        const cityNames = data.cities.slice(0, 3).map(city => city.name).join(', ');
+        const additionalCount = data.cities.length - 3;
+        toast({
+          title: "📍 Cities Added",
+          description: `Added cities: ${cityNames}${additionalCount > 0 ? ` and ${additionalCount} more` : ''} - all with tourism-focused descriptions`,
+        });
+      }, 2000);
+
       queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
       queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
       setIsAiDialogOpen(false);
       setAiCountryInput("");
-      toast({
-        title: "AI Generation Complete! 🎉",
-        description: `Successfully added ${data.country.name} with ${data.cities.length} major cities using AI`,
       });
     },
     onError: (error: Error) => {
