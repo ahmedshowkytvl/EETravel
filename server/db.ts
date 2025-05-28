@@ -2,8 +2,8 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import * as schema from "@shared/schema";
 
-// Hardcoded database configuration
-const DATABASE_URL = 'postgresql://postgres:a@localhost:5432/postgres';
+// Use environment variable for database configuration
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://postgres:a@localhost:5432/postgres';
 
 // Create a postgres client connection with better error handling
 let client: postgres.Sql;
@@ -16,7 +16,7 @@ async function initializeDatabase() {
     
     // Create a postgres client connection with connection pool
     client = postgres(DATABASE_URL, {
-      ssl: false,
+      ssl: 'require',
       max: 5, // Limit connection pool size
       idle_timeout: 10, // Lower idle timeout
       connection: {
