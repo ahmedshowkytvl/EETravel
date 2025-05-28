@@ -1,0 +1,486 @@
+/* Import RTL styles */
+@import url('./styles/rtl.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar styles */
+@layer components {
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 20px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #9ca3af;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 100;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+  }
+  50% {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 1));
+  }
+}
+
+.input-icon-container:focus-within .input-icon {
+  color: white !important;
+  animation: glow 1.5s infinite;
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body {
+    @apply font-sans antialiased bg-background text-foreground;
+    overflow-x: hidden !important; /* Prevent horizontal scrollbar - use !important to ensure it's applied */
+    max-width: 100vw; /* Ensure content stays within viewport */
+    width: 100%; /* Force width to be 100% */
+  }
+  
+  /* Prevent overflow on #root and other top-level containers */
+  #root, .app, main, .app-container {
+    overflow-x: hidden !important;
+    max-width: 100vw;
+    width: 100%;
+  }
+  
+  /* Fix table overflow issues */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Ensure cards don't overflow */
+  .card {
+    max-width: 100%;
+  }
+
+  /* Add smooth transitions to inputs */
+  input, textarea, select, [data-radix-select-trigger] {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+    background-color: white !important;
+    color: hsl(var(--foreground)) !important;
+  }
+  
+  /* Give explicit background and text color to inputs on non-hover state */
+  input:not(:hover):not(:focus), 
+  textarea:not(:hover):not(:focus),
+  select:not(:hover):not(:focus),
+  [data-radix-select-trigger]:not(:hover) {
+    background-color: white !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  /* Directly target all input fields with !important to override styles */
+  input:hover {
+    background-color: #2f638f !important;
+    color: white !important;
+    border-color: #2f638f !important;
+    caret-color: white !important;
+  }
+
+  textarea:hover {
+    background-color: #2f638f !important;
+    color: white !important;
+    border-color: #2f638f !important;
+    caret-color: white !important;
+  }
+
+  select:hover {
+    background-color: #2f638f !important;
+    color: white !important;
+    border-color: #2f638f !important;
+  }
+
+  /* Add selection color styles */
+  input::selection,
+  textarea::selection,
+  *::selection {
+    background-color: #2f638f !important;
+    color: white !important;
+  }
+
+  /* Force text color for inputs when typing/focused */
+  input:hover,
+  input:focus-within,
+  textarea:hover,
+  textarea:focus-within {
+    color: white !important;
+  }
+
+  /* Change icon color to white on hover, but only for the direct icon */
+  input:hover ~ svg,
+  textarea:hover ~ svg {
+    color: white !important;
+  }
+
+  /* Target only the directly hovered input, not all inputs in a form */
+  input:hover,
+  textarea:hover,
+  [data-radix-select-trigger]:hover {
+    background-color: #2f638f !important;
+    color: white !important;
+    border-color: #2f638f !important;
+  }
+
+  /* Change icon color to white on select hover */
+  [data-radix-select-trigger]:hover svg {
+    color: white !important;
+  }
+
+  /* Make select value text white on hover */
+  [data-radix-select-trigger]:hover [data-value] {
+    color: white !important;
+  }
+
+  /* Make sure ONLY the hovered input's placeholder text turns white */
+  input:hover::placeholder,
+  textarea:hover::placeholder {
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: color 0.2s ease !important;
+  }
+  
+  /* Set explicit placeholder color for non-hover state */
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af !important; /* Tailwind gray-400 color */
+    transition: color 0.2s ease !important;
+  }
+
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222 85% 58%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 207 60% 37%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222 85% 58%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 222 85% 58%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 207 60% 37%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 222 85% 58%;
+  }
+}
+
+.hero-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1608546043931-6c9678ea9feb?q=80&w=2013&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.tab-active {
+  color: hsl(var(--primary));
+  border-bottom: 3px solid hsl(var(--primary));
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Enhanced Radix Tabs animations */
+[data-state="active"] {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+[data-state="inactive"] {
+  animation: fadeOut 0.3s ease-in-out;
+}
+
+/* Make sure content is visible during animation for smooth tab transitions */
+[data-radix-tabs-content] {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Add a subtle glow effect when changing tabs */
+[data-radix-tabs-content][data-state="active"] {
+  box-shadow: 0 0 0 transparent;
+  animation: glowFadeIn 0.4s ease forwards;
+}
+
+@keyframes glowFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+    box-shadow: 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(var(--primary), 0.15);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+/* RTL Support */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+.rtl .flex-row {
+  flex-direction: row-reverse;
+}
+
+.rtl .mr-1,
+.rtl .mr-2,
+.rtl .mr-3,
+.rtl .mr-4 {
+  margin-right: 0;
+}
+
+.rtl .mr-1 {
+  margin-left: 0.25rem;
+}
+
+.rtl .mr-2 {
+  margin-left: 0.5rem;
+}
+
+.rtl .mr-3 {
+  margin-left: 0.75rem;
+}
+
+.rtl .mr-4 {
+  margin-left: 1rem;
+}
+
+.rtl .ml-1,
+.rtl .ml-2,
+.rtl .ml-3,
+.rtl .ml-4 {
+  margin-left: 0;
+}
+
+.rtl .ml-1 {
+  margin-right: 0.25rem;
+}
+
+.rtl .ml-2 {
+  margin-right: 0.5rem;
+}
+
+.rtl .ml-3 {
+  margin-right: 0.75rem;
+}
+
+.rtl .ml-4 {
+  margin-right: 1rem;
+}
+
+.rtl .pl-3 {
+  padding-left: 0;
+  padding-right: 0.75rem;
+}
+
+.rtl .pr-3 {
+  padding-right: 0;
+  padding-left: 0.75rem;
+}
+
+.rtl .border-l-2 {
+  border-left: none;
+  border-right: 2px solid;
+}
+
+.rtl .border-r-2 {
+  border-right: none;
+  border-left: 2px solid;
+}
+
+@media (min-width: 768px) {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1200px) {
+  #BookingTabs-Container {
+    border-top-right-radius: 0.75rem !important;
+  }
+}
+
+/*footer waves*/
+.wave-pattern {
+  /* Ensure the container is properly constrained */
+  max-width: 100%;
+  overflow: hidden !important;
+}
+
+.wave {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,120 V73.71c47.79,-22.2,103.59,-32.17,158,-28,70.36,5.37,136.33,33.31,206.8,37.5C438.64,87.57,512.34,66.33,583,47.95c69.27,-18,138.3,-24.88,209.4,-13.08,36.15,6,69.85,17.84,104.45,29.34C989.49,95,1113,134.29,1200,67.53V120Z' fill='%23ffffff' opacity='.25'/%3E%3Cpath d='M0,120 V104.19C13,83.08,27.64,63.14,47.69,47.95,99.41,8.73,165,9,224.58,28.42c31.15,10.15,60.09,26.07,89.67,39.8,40.92,19,84.73,46,130.83,49.67,36.26,2.85,70.9,-9.42,98.6,-31.56,31.77,-25.39,62.32,-62,103.63,-73,40.44,-10.79,81.35,6.69,119.13,24.28s75.16,39,116.92,43.05c59.73,5.85,113.28,-22.88,168.9,-38.84,30.2,-8.66,59,-6.17,87.09,7.5,22.43,10.89,48,26.93,60.65,49.24V120Z' fill='%23ffffff' opacity='.5'/%3E%3Cpath d='M0,120 V114.37C149.93,61,314.09,48.68,475.83,77.43c43,7.64,84.23,20.12,127.61,26.46,59,8.63,112.48,-12.24,165.56,-35.4C827.93,42.78,886,24.76,951.2,30c86.53,7,172.46,45.71,248.8,84.81V120Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-size: 1200px 100%;
+  animation: wave 12s linear infinite;
+  width: 100%; /* Reduce from 200% to 100% to avoid overflow */
+  transform: rotate(180deg);
+  left: 0;
+  right: 0;
+  overflow: hidden !important;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0) rotate(180deg);
+  }
+  100% {
+    transform: translateX(-100%) rotate(180deg); /* Adjusted for the 100% width */
+  }
+}
+
+/* Fix dialog content on mobile */
+.dialog-content {
+  max-width: 95vw !important;
+  margin: 0 auto;
+}
+
+/* Fix long table cells from causing overflow */
+th, td {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Responsive styles for booking tabs on mobile and tablet */
+@media (max-width: 1023px) {
+  /* Ensure all containers stay within viewport */
+  .container, 
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-5xl,
+  .max-w-4xl {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Fix data tables on mobile */
+  .overflow-x-auto {
+    width: 100%;
+    max-width: calc(100vw - 2rem);
+    margin: 0 auto;
+  }
+
+  .booking-tabs .tab-content input,
+  .booking-tabs .tab-content select,
+  .booking-tabs .tab-content [type="date"],
+  .booking-tabs .tab-content [class*="SelectTrigger"],
+  .booking-tabs .tab-content button.w-full,
+  .booking-tabs .tab-content .popover button {
+    width: 80% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .booking-tabs .tab-content .grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .booking-tabs .tab-content .space-y-2,
+  .booking-tabs .tab-content .grid>div {
+    width: 100% !important;
+  }
+}

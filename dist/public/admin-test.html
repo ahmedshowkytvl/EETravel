@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin API Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .section {
+      margin-bottom: 30px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      overflow: auto;
+      max-height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Admin API Test</h1>
+  
+  <div class="section">
+    <h2>Login</h2>
+    <div>
+      <input type="text" id="username" placeholder="Username" value="EETADMIN">
+      <input type="password" id="password" placeholder="Password" value="passW0rd">
+      <button onclick="login()">Login</button>
+    </div>
+    <pre id="login-response"></pre>
+  </div>
+
+  <div class="section">
+    <h2>Current User</h2>
+    <button onclick="getCurrentUser()">Get Current User</button>
+    <pre id="user-response"></pre>
+  </div>
+
+  <div class="section">
+    <h2>Create Destination</h2>
+    <div>
+      <input type="text" id="dest-name" placeholder="Name" value="Dubai">
+      <input type="text" id="dest-country" placeholder="Country" value="UAE">
+      <textarea id="dest-desc" placeholder="Description">A luxury destination with amazing architecture</textarea>
+      <input type="text" id="dest-image" placeholder="Image URL" value="https://example.com/dubai.jpg">
+      <label>
+        <input type="checkbox" id="dest-featured" checked> Featured
+      </label>
+      <button onclick="createDestination()">Create Destination</button>
+    </div>
+    <pre id="create-dest-response"></pre>
+  </div>
+
+  <div class="section">
+    <h2>List Destinations</h2>
+    <button onclick="listDestinations()">Get All Destinations</button>
+    <pre id="list-dest-response"></pre>
+  </div>
+
+  <div class="section">
+    <h2>Create Package</h2>
+    <div>
+      <input type="text" id="pkg-title" placeholder="Title" value="Dubai Weekend Getaway">
+      <textarea id="pkg-desc" placeholder="Description">Experience the best of Dubai in a weekend</textarea>
+      <input type="number" id="pkg-price" placeholder="Price" value="1999">
+      <input type="number" id="pkg-discount" placeholder="Discounted Price" value="1799">
+      <input type="text" id="pkg-image" placeholder="Image URL" value="https://example.com/dubai-pkg.jpg">
+      <input type="text" id="pkg-duration" placeholder="Duration" value="3 days, 2 nights">
+      <input type="number" id="pkg-rating" placeholder="Rating (1-5)" value="5">
+      <input type="number" id="pkg-destid" placeholder="Destination ID" value="1">
+      <label>
+        <input type="checkbox" id="pkg-featured" checked> Featured
+      </label>
+      <input type="text" id="pkg-type" placeholder="Type" value="Weekend Trip">
+      <textarea id="pkg-inclusions" placeholder="Inclusions">Hotel, Breakfast, City Tour, Desert Safari</textarea>
+      <button onclick="createPackage()">Create Package</button>
+    </div>
+    <pre id="create-pkg-response"></pre>
+  </div>
+
+  <div class="section">
+    <h2>List Packages</h2>
+    <button onclick="listPackages()">Get All Packages</button>
+    <pre id="list-pkg-response"></pre>
+  </div>
+
+  <script>
+    async function makeRequest(url, method = 'GET', data = null) {
+      const options = {
+        method,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      };
+      
+      if (data) {
+        options.body = JSON.stringify(data);
+      }
+      
+      const response = await fetch(url, options);
+      return await response.json();
+    }
+    
+    async function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      try {
+        const response = await makeRequest('/api/login', 'POST', { username, password });
+        document.getElementById('login-response').textContent = JSON.stringify(response, null, 2);
+      } catch (error) {
+        document.getElementById('login-response').textContent = 'Error: ' + error.message;
+      }
+    }
+    
+    async function getCurrentUser() {
+      try {
+        const response = await makeRequest('/api/user');
+        document.getElementById('user-response').textContent = JSON.stringify(response, null, 2);
+      } catch (error) {
+        document.getElementById('user-response').textContent = 'Error: ' + error.message;
+      }
+    }
+    
+    async function createDestination() {
+      const destinationData = {
+        name: document.getElementById('dest-name').value,
+        country: document.getElementById('dest-country').value,
+        description: document.getElementById('dest-desc').value,
+        imageUrl: document.getElementById('dest-image').value,
+        featured: document.getElementById('dest-featured').checked
+      };
+      
+      try {
+        const response = await makeRequest('/api/admin/destinations', 'POST', destinationData);
+        document.getElementById('create-dest-response').textContent = JSON.stringify(response, null, 2);
+      } catch (error) {
+        document.getElementById('create-dest-response').textContent = 'Error: ' + error.message;
+      }
+    }
+    
+    async function listDestinations() {
+      try {
+        const response = await makeRequest('/api/destinations');
+        document.getElementById('list-dest-response').textContent = JSON.stringify(response, null, 2);
+      } catch (error) {
+        document.getElementById('list-dest-response').textContent = 'Error: ' + error.message;
+      }
+    }
+    
+    async function createPackage() {
+      const packageData = {
+        title: document.getElementById('pkg-title').value,
+        description: document.getElementById('pkg-desc').value,
+        price: parseInt(document.getElementById('pkg-price').value),
+        discountedPrice: parseInt(document.getElementById('pkg-discount').value),
+        imageUrl: document.getElementById('pkg-image').value,
+        duration: document.getElementById('pkg-duration').value,
+        rating: parseInt(document.getElementById('pkg-rating').value),
+        destinationId: parseInt(document.getElementById('pkg-destid').value),
+        featured: document.getElementById('pkg-featured').checked,
+        type: document.getElementById('pkg-type').value,
+        inclusions: document.getElementById('pkg-inclusions').value
+      };
+      
+      try {
+        const response = await makeRequest('/api/admin/packages', 'POST', packageData);
+        document.getElementById('create-pkg-response').textContent = JSON.stringify(response, null, 2);
+      } catch (error) {
+        document.getElementById('create-pkg-response').textContent = 'Error: ' + error.message;
+      }
+    }
+    
+    async function listPackages() {
+      try {
+        const response = await makeRequest('/api/packages');
+        document.getElementById('list-pkg-response').textContent = JSON.stringify(response, null, 2);
+      } catch (error) {
+        document.getElementById('list-pkg-response').textContent = 'Error: ' + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
