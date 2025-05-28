@@ -144,6 +144,7 @@ export default function DestinationsManagement() {
       imageUrl: "",
       featured: false,
     },
+    mode: 'onChange',
   });
 
   // Create Destination Mutation
@@ -358,16 +359,16 @@ export default function DestinationsManagement() {
   // Handle edit button click
   const handleEditClick = (destination: Destination) => {
     setSelectedDestination(destination);
-    setSelectedCountryId(destination.countryId);
+    setSelectedCountryId(destination.countryId || 0);
     
     destinationForm.reset({
-      name: destination.name,
-      country: destination.country,
-      countryId: destination.countryId,
-      cityId: destination.cityId,
+      name: destination.name || "",
+      country: destination.country || "",
+      countryId: destination.countryId || 0,
+      cityId: destination.cityId || 0,
       description: destination.description || "",
       imageUrl: destination.imageUrl || "",
-      featured: destination.featured,
+      featured: destination.featured || false,
     });
     
     setIsEditDialogOpen(true);
@@ -394,7 +395,7 @@ export default function DestinationsManagement() {
   };
 
   return (
-    <DashboardLayout>
+    <DashboardLayout location="/admin/destinations">
       <div className="container mx-auto py-6">
         <div className="flex flex-col space-y-8">
           <div className="flex items-center justify-between">

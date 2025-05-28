@@ -1,0 +1,45 @@
+App.tsx location type: string
+App.tsx location value: /admin/destinations
+App.tsx location type: string
+App.tsx location value: /admin/destinations
+App.tsx location type: string
+App.tsx location value: /admin/destinations
+Cannot read properties of null (reading 'toString')
+Cannot read properties of null (reading 'toString')
+The above error occurred in the <Controller> component:
+
+    at Controller (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-4BFJKWC4.js?v=915290ed:298:35)
+    at FormField (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/src/components/ui/form.tsx:33:6)
+    at form
+    at FormProvider (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-4BFJKWC4.js?v=915290ed:102:11)
+    at div
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=915290ed:42:13
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-G76BAGTM.js?v=915290ed:61:7
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=915290ed:79:13
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=915290ed:56:13
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=915290ed:42:13
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-DUCXC5SA.js?v=915290ed:29:5
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-ZPMKMY5X.js?v=915290ed:235:13
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-ZPMKMY5X.js?v=915290ed:158:58
+    at Presence (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-E4UC4BFD.js?v=915290ed:24:11)
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-ZPMKMY5X.js?v=915290ed:149:64
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=915290ed:79:13
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=915290ed:56:13
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=915290ed:42:13
+    at https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-G76BAGTM.js?v=915290ed:260:22
+    at Presence (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-E4UC4BFD.js?v=915290ed:24:11)
+    at Provider (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=915290ed:38:15)
+    at DialogPortal (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-ZPMKMY5X.js?v=915290ed:111:11)
+    at _c3 (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/src/components/ui/dialog.tsx:52:12)
+    at Provider (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=915290ed:38:15)
+    at Dialog (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-ZPMKMY5X.js?v=915290ed:52:5)
+    at div
+    at main
+    at div
+    at div
+    at DashboardLayout (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/src/components/dashboard/DashboardLayout.tsx?t=1748441935041:25:35)
+    at DestinationsManagement (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/src/pages/admin/DestinationsManagement.tsx?t=1748441772285:85:21)
+    at Route (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=915290ed:338:16)
+    at AdminRoute (https://e6da0450-9dd3-4459-b908-acfce815b05e-00-1e4hy4u0s58s8.worf.replit.dev:8080/src/lib/admin-route.tsx:22:3)
+    at Switch…
+Cannot read properties of null (reading 'toString')
