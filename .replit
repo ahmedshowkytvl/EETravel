@@ -5,4 +5,5 @@ channel = "stable-24_05"
 
 [[ports]]
 localPort = 8080
-externalPort = 80
+externalPort = 8080
+run = "npm run dev" # Replace this with your specific command if necessary
