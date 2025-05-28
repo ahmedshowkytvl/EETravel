@@ -42,7 +42,17 @@ const Header: React.FC = () => {
     rooms: false
   });
   const [location] = useLocation();
-  const { user, logoutMutation } = useAuth();
+  
+  // Add safety check for auth context
+  let authData;
+  try {
+    authData = useAuth();
+  } catch (error) {
+    // If auth context is not available, render header without user functionality
+    authData = { user: null, logoutMutation: { mutate: () => {} } };
+  }
+  
+  const { user, logoutMutation } = authData;
   const { t, isRTL } = useLanguage();
 
   const toggleMenu = () => {
