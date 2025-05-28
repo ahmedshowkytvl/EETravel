@@ -20,10 +20,10 @@ export function DashboardLayout({ children, location }: DashboardLayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 flex">
+    <div className="min-h-screen bg-zinc-50 flex fixed inset-0 overflow-hidden">
       <Sidebar collapsed={sidebarCollapsed} onToggle={toggleSidebar} location={location} />
-      <div className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? 'ml-[80px]' : 'ml-[250px]'}`}>
-        <header className="h-16 px-4 border-b flex items-center justify-between bg-white shadow-sm">
+      <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'ml-[80px]' : 'ml-[250px]'} overflow-hidden`}>
+        <header className="h-16 px-4 border-b flex items-center justify-between bg-white shadow-sm flex-shrink-0">
           <h1 className="text-xl font-semibold text-zinc-800">{t('admin.dashboard.title', 'Admin Dashboard')}</h1>
           <div className="flex items-center space-x-4">
             <LanguageSwitcher />
@@ -35,7 +35,7 @@ export function DashboardLayout({ children, location }: DashboardLayoutProps) {
             </Link>
           </div>
         </header>
-        <main className="p-6">
+        <main className="flex-1 p-6 overflow-auto">
           {children}
         </main>
       </div>
