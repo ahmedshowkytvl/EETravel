@@ -1,0 +1,70 @@
+Attempting to connect with URL: postgresql://neondb_owner:****@ep-rapid-dream-a5oem36c.us-east-2.aws.neon.tech/neondb?sslmode=require
+🔐 Setting up admin users...
+❌ Error setting up admin users: TypeError: Cannot read properties of undefined (reading 'select')
+    at setupAdmin (/home/runner/workspace/server/admin-setup.ts:20:36)
+    at <anonymous> (/home/runner/workspace/server/admin-setup.ts:67:1)
+    at ModuleJob.run (node:internal/modules/esm/module_job:234:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:473:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:122:5)
+⏳ Waiting for database initialization...
+Database connection established successfully
+✅ Database initialized.
+🔐 Setting up admin users...
+❌ Error setting up admin users: PostgresError: relation "users" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42P01',
+  position: '190',
+  file: 'parse_relation.c',
+  line: '1449',
+  routine: 'parserOpenTable'
+}
+🔧 Initializing database...
+📋 Creating database schema...
+✅ Database schema created successfully
+🔄 Checking database setup...
+❌ Error setting up database: PostgresError: relation "packages" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42P01',
+  file: 'namespace.c',
+  line: '434',
+  routine: 'RangeVarGetRelidExtended'
+}
+❌ Database initialization failed: TypeError: adminSetup.setupAdmin is not a function
+    at initializeDatabase (/home/runner/workspace/server/init-database.ts:24:22)
+    at async <anonymous> (/home/runner/workspace/server/index.ts:91:7)
+node:events:496
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at <anonymous> (/home/runner/workspace/server/index.ts:118:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 8080
+}
