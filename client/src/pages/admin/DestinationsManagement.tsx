@@ -554,7 +554,7 @@ export default function DestinationsManagement() {
                           field.onChange(parseInt(value));
                           handleCountryChange(parseInt(value));
                         }}
-                        value={field.value.toString()}
+                        value={field.value?.toString() || "0"}
                       >
                         <FormControl>
                           <SelectTrigger>
@@ -582,7 +582,7 @@ export default function DestinationsManagement() {
                       <FormLabel>City</FormLabel>
                       <Select
                         onValueChange={(value) => field.onChange(parseInt(value))}
-                        value={field.value.toString()}
+                        value={field.value?.toString() || "0"}
                         disabled={!selectedCountryId}
                       >
                         <FormControl>
@@ -727,7 +727,7 @@ export default function DestinationsManagement() {
                           field.onChange(parseInt(value));
                           handleCountryChange(parseInt(value));
                         }}
-                        value={field.value.toString()}
+                        value={field.value?.toString() || "0"}
                       >
                         <FormControl>
                           <SelectTrigger>
@@ -755,7 +755,7 @@ export default function DestinationsManagement() {
                       <FormLabel>City</FormLabel>
                       <Select
                         onValueChange={(value) => field.onChange(parseInt(value))}
-                        value={field.value.toString()}
+                        value={field.value?.toString() || "0"}
                         disabled={!selectedCountryId}
                       >
                         <FormControl>
