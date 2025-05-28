@@ -6,4 +6,17 @@ channel = "stable-24_05"
 [[ports]]
 localPort = 8080
 externalPort = 8080
-run = "npm run dev" # Replace this with your specific command if necessary
+
+run = "npm run dev"
+
+[workflows]
+runButton = "Development"
+
+[[workflows.workflow]]
+name = "Development"
+author = 43181827
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
