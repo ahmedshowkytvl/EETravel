@@ -368,7 +368,7 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
                     <div
                       className={cn(
                         "flex items-center justify-between w-full px-4 py-3 text-zinc-600 hover:bg-zinc-100 transition-colors cursor-pointer",
-                        location.startsWith(item.href) && "bg-zinc-100 text-primary font-medium",
+                        location?.startsWith(item.href) && "bg-zinc-100 text-primary font-medium",
                         collapsed ? "justify-center" : ""
                       )}
                     >
