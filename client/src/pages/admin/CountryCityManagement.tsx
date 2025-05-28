@@ -60,7 +60,7 @@ import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Plus, Search, Edit, Trash2, Loader2, GlobeIcon, Landmark, Plane, Check, X, AlertCircle } from "lucide-react";
+import { Plus, Search, Edit, Trash2, Loader2, GlobeIcon, Landmark, Plane, Check, X, AlertCircle, Sparkles, Brain } from "lucide-react";
 import { queryClient } from "@/lib/queryClient";
 import { validateForm, validateRequiredFields } from "@/lib/validateForm";
 import { FormRequiredFieldsNote, FormValidationAlert } from "@/components/dashboard/FormValidationAlert";
@@ -150,6 +150,58 @@ export default function CountryCityManagement() {
   const [deleteCountryConfirmOpen, setDeleteCountryConfirmOpen] = useState(false);
   const [deleteCityConfirmOpen, setDeleteCityConfirmOpen] = useState(false);
   const [deleteAirportConfirmOpen, setDeleteAirportConfirmOpen] = useState(false);
+  const [isAiDialogOpen, setIsAiDialogOpen] = useState(false);
+  const [isGeneratingAiData, setIsGeneratingAiData] = useState(false);
+  const [aiCountryInput, setAiCountryInput] = useState("");
+
+  // AI-powered country and cities generation
+  const generateCountryAndCities = useMutation({
+    mutationFn: async (countryName: string) => {
+      const response = await fetch('/api/admin/ai-generate-country-cities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ countryName }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to generate country and cities data');
+      }
+      
+      return response.json();
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
+      setIsAiDialogOpen(false);
+      setAiCountryInput("");
+      toast({
+        title: "AI Generation Complete! 🎉",
+        description: `Successfully added ${data.country.name} with ${data.cities.length} major cities using AI`,
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "AI Generation Failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleAiGeneration = () => {
+    if (!aiCountryInput.trim()) {
+      toast({
+        title: "Country Name Required",
+        description: "Please enter a country name to generate cities",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setIsGeneratingAiData(true);
+    generateCountryAndCities.mutate(aiCountryInput.trim());
+  };
 
   // Query countries
   const { data: countries = [], isLoading: isLoadingCountries } = useQuery<Country[]>({
@@ -921,6 +973,15 @@ export default function CountryCityManagement() {
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">Travel Locations Management</h1>
           <div className="flex space-x-2">
+            {/* AI Generate Button */}
+            <Button 
+              onClick={() => setIsAiDialogOpen(true)}
+              variant="outline"
+              className="bg-gradient-to-r from-purple-500 to-blue-500 text-white border-0 hover:from-purple-600 hover:to-blue-600"
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              AI Generate
+            </Button>
             <Button 
               onClick={() => setActiveTab('countries')}
               variant={activeTab === 'countries' ? 'default' : 'outline'}
@@ -2075,6 +2136,69 @@ export default function CountryCityManagement() {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+
+        {/* AI Generation Dialog */}
+        <Dialog open={isAiDialogOpen} onOpenChange={setIsAiDialogOpen}>
+          <DialogContent className="sm:max-w-[500px]">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <Brain className="w-5 h-5 text-purple-500" />
+                AI Country & Cities Generator
+              </DialogTitle>
+              <DialogDescription>
+                Enter a country name and AI will automatically generate the country entry with its major cities for your travel platform.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div className="space-y-2">
+                <label htmlFor="ai-country" className="text-sm font-medium">
+                  Country Name
+                </label>
+                <Input
+                  id="ai-country"
+                  placeholder="e.g., Japan, France, Morocco..."
+                  value={aiCountryInput}
+                  onChange={(e) => setAiCountryInput(e.target.value)}
+                  disabled={isGeneratingAiData}
+                />
+              </div>
+              <div className="bg-blue-50 p-3 rounded-lg">
+                <p className="text-sm text-blue-700">
+                  <Sparkles className="w-4 h-4 inline mr-1" />
+                  AI will generate the country with its ISO code, description, and automatically add 10-15 major cities with proper details.
+                </p>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsAiDialogOpen(false)}
+                disabled={isGeneratingAiData}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="button"
+                onClick={handleAiGeneration}
+                disabled={isGeneratingAiData || !aiCountryInput.trim()}
+                className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600"
+              >
+                {isGeneratingAiData ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    AI Generating...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    Generate with AI
+                  </>
+                )}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </DashboardLayout>
   );
