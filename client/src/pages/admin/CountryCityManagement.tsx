@@ -197,7 +197,6 @@ export default function CountryCityManagement() {
       queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
       setIsAiDialogOpen(false);
       setAiCountryInput("");
-      });
     },
     onError: (error: Error) => {
       toast({
