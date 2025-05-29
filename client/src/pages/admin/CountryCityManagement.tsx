@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { 
@@ -138,6 +138,10 @@ export default function CountryCityManagement() {
   const [countrySearchQuery, setCountrySearchQuery] = useState("");
   const [citySearchQuery, setCitySearchQuery] = useState("");
   const [airportSearchQuery, setAirportSearchQuery] = useState("");
+  const [countryStatusFilter, setCountryStatusFilter] = useState<"all" | "active" | "inactive">("all");
+  const [cityStatusFilter, setCityStatusFilter] = useState<"all" | "active" | "inactive">("all");
+  const [airportStatusFilter, setAirportStatusFilter] = useState<"all" | "active" | "inactive">("all");
+  const [selectedCountryFilter, setSelectedCountryFilter] = useState<string>("all");
   const [isCreateCountryDialogOpen, setIsCreateCountryDialogOpen] = useState(false);
   const [isCreateCityDialogOpen, setIsCreateCityDialogOpen] = useState(false);
   const [isCreateAirportDialogOpen, setIsCreateAirportDialogOpen] = useState(false);
@@ -185,7 +189,7 @@ export default function CountryCityManagement() {
 
       // Show a follow-up toast with city details
       setTimeout(() => {
-        const cityNames = data.cities.slice(0, 3).map(city => city.name).join(', ');
+        const cityNames = data.cities.slice(0, 3).map((city: any) => city.name).join(', ');
         const additionalCount = data.cities.length - 3;
         toast({
           title: "📍 Cities Added",
@@ -236,22 +240,58 @@ export default function CountryCityManagement() {
     queryKey: ['/api/admin/airports'],
   });
 
-  // Filter countries based on search
-  const filteredCountries = countries.filter(
-    country => country.name.toLowerCase().includes(countrySearchQuery.toLowerCase()) ||
-               country.code.toLowerCase().includes(countrySearchQuery.toLowerCase())
-  );
+  // Advanced filtering logic with professional search capabilities
+  const filteredCountries = useMemo(() => {
+    if (!countries) return [];
+    
+    return countries.filter((country: Country) => {
+      const matchesSearch = country.name.toLowerCase().includes(countrySearchQuery.toLowerCase()) ||
+                           country.code.toLowerCase().includes(countrySearchQuery.toLowerCase()) ||
+                           (country.description?.toLowerCase().includes(countrySearchQuery.toLowerCase()) || false);
+      
+      const matchesStatus = countryStatusFilter === "all" || 
+                           (countryStatusFilter === "active" && country.active) ||
+                           (countryStatusFilter === "inactive" && !country.active);
+      
+      return matchesSearch && matchesStatus;
+    });
+  }, [countries, countrySearchQuery, countryStatusFilter]);
 
-  // Filter cities based on search
-  const filteredCities = cities.filter(
-    city => city.name.toLowerCase().includes(citySearchQuery.toLowerCase())
-  );
-  
-  // Filter airports based on search
-  const filteredAirports = airports.filter(
-    airport => airport.name.toLowerCase().includes(airportSearchQuery.toLowerCase()) ||
-               airport.code.toLowerCase().includes(airportSearchQuery.toLowerCase())
-  );
+  const filteredCities = useMemo(() => {
+    if (!cities) return [];
+    
+    return cities.filter((city: City) => {
+      const matchesSearch = city.name.toLowerCase().includes(citySearchQuery.toLowerCase()) ||
+                           (city.description?.toLowerCase().includes(citySearchQuery.toLowerCase()) || false);
+      
+      const matchesStatus = cityStatusFilter === "all" || 
+                           (cityStatusFilter === "active" && city.active) ||
+                           (cityStatusFilter === "inactive" && !city.active);
+      
+      const matchesCountry = selectedCountryFilter === "all" || 
+                            city.countryId.toString() === selectedCountryFilter;
+      
+      return matchesSearch && matchesStatus && matchesCountry;
+    });
+  }, [cities, citySearchQuery, cityStatusFilter, selectedCountryFilter]);
+
+  const filteredAirports = useMemo(() => {
+    if (!airports) return [];
+    
+    return airports.filter((airport: Airport) => {
+      const matchesSearch = airport.name.toLowerCase().includes(airportSearchQuery.toLowerCase()) ||
+                           airport.code.toLowerCase().includes(airportSearchQuery.toLowerCase()) ||
+                           (airport.description?.toLowerCase().includes(airportSearchQuery.toLowerCase()) || false);
+      
+      const matchesStatus = airportStatusFilter === "all" || 
+                           (airportStatusFilter === "active" && airport.active) ||
+                           (airportStatusFilter === "inactive" && !airport.active);
+      
+      return matchesSearch && matchesStatus;
+    });
+  }, [airports, airportSearchQuery, airportStatusFilter]);
+
+
 
   // Country form
   const countryForm = useForm<CountryFormValues>({
