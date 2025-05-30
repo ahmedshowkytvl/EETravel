@@ -298,7 +298,7 @@ const HotelSearchComponent: React.FC<Props> = ({ onSelectionChange, initialSelec
                 <div className="flex items-center gap-3">
                   <Checkbox 
                     checked={selectedHotels.includes(hotel.id)}
-                    onChange={() => {}} // handled by parent div click
+                    onCheckedChange={() => {}} // handled by parent div click
                   />
                   <div className="flex-1">
                     <h3 className="font-medium">{hotel.name}</h3>
