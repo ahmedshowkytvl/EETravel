@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Search, Hotel, Users, Calendar, Plus, Minus, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -141,10 +141,17 @@ const HotelSearchComponent: React.FC<Props> = ({ onSelectionChange, initialSelec
     }));
   };
 
-  // Notify parent component of selection changes
+  // Use ref to track previous selection and prevent infinite loops
+  const prevSelectedRoomsRef = useRef<SelectedRoom[]>([]);
+
+  // Notify parent component of selection changes only when they actually change
   useEffect(() => {
-    onSelectionChange(selectedRooms);
-  }, [selectedRooms, onSelectionChange]);
+    const hasChanged = JSON.stringify(selectedRooms) !== JSON.stringify(prevSelectedRoomsRef.current);
+    if (hasChanged) {
+      prevSelectedRoomsRef.current = selectedRooms;
+      onSelectionChange(selectedRooms);
+    }
+  }, [selectedRooms]);
 
   const isRoomSelected = (roomId: number) => {
     return selectedRooms.some(r => r.roomId === roomId);
