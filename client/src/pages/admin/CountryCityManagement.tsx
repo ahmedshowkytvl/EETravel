@@ -60,7 +60,7 @@ import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Plus, Search, Edit, Trash2, Loader2, GlobeIcon, Landmark, Plane, Check, X, AlertCircle, Sparkles, Brain } from "lucide-react";
+import { Plus, Search, Edit, Trash2, Loader2, GlobeIcon, Landmark, Plane, Check, X, AlertCircle, Sparkles, Brain, BarChart3, TrendingUp, Users, Database, Filter, Download, Upload, Eye, MoreHorizontal, CheckSquare, Square } from "lucide-react";
 import { queryClient } from "@/lib/queryClient";
 import { validateForm, validateRequiredFields } from "@/lib/validateForm";
 import { FormRequiredFieldsNote, FormValidationAlert } from "@/components/dashboard/FormValidationAlert";
@@ -142,6 +142,10 @@ export default function CountryCityManagement() {
   const [cityStatusFilter, setCityStatusFilter] = useState<"all" | "active" | "inactive">("all");
   const [airportStatusFilter, setAirportStatusFilter] = useState<"all" | "active" | "inactive">("all");
   const [selectedCountryFilter, setSelectedCountryFilter] = useState<string>("all");
+  const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
+  const [bulkAction, setBulkAction] = useState<"activate" | "deactivate" | "delete" | null>(null);
+  const [showAnalytics, setShowAnalytics] = useState(false);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [isCreateCountryDialogOpen, setIsCreateCountryDialogOpen] = useState(false);
   const [isCreateCityDialogOpen, setIsCreateCityDialogOpen] = useState(false);
   const [isCreateAirportDialogOpen, setIsCreateAirportDialogOpen] = useState(false);
@@ -291,7 +295,94 @@ export default function CountryCityManagement() {
     });
   }, [airports, airportSearchQuery, airportStatusFilter]);
 
+  // Analytics calculations
+  const analytics = useMemo(() => {
+    const totalCountries = countries.length;
+    const activeCountries = countries.filter(c => c.active).length;
+    const totalCities = cities.length;
+    const activeCities = cities.filter(c => c.active).length;
+    const totalAirports = airports.length;
+    const activeAirports = airports.filter(a => a.active).length;
+    
+    return {
+      countries: { total: totalCountries, active: activeCountries, inactive: totalCountries - activeCountries },
+      cities: { total: totalCities, active: activeCities, inactive: totalCities - activeCities },
+      airports: { total: totalAirports, active: activeAirports, inactive: totalAirports - activeAirports },
+      coverage: Math.round((activeCities / Math.max(activeCountries, 1)) * 100) / 100
+    };
+  }, [countries, cities, airports]);
 
+  // Bulk operations
+  const handleSelectAll = (items: any[], currentTab: string) => {
+    const itemIds = items.map(item => item.id);
+    if (selectedItems.size === itemIds.length && itemIds.every(id => selectedItems.has(id))) {
+      setSelectedItems(new Set());
+    } else {
+      setSelectedItems(new Set(itemIds));
+    }
+  };
+
+  const handleSelectItem = (id: number) => {
+    const newSelected = new Set(selectedItems);
+    if (newSelected.has(id)) {
+      newSelected.delete(id);
+    } else {
+      newSelected.add(id);
+    }
+    setSelectedItems(newSelected);
+  };
+
+  const executeBulkAction = async () => {
+    if (!bulkAction || selectedItems.size === 0) return;
+    
+    try {
+      const itemIds = Array.from(selectedItems);
+      
+      for (const id of itemIds) {
+        if (bulkAction === "activate" || bulkAction === "deactivate") {
+          const isActive = bulkAction === "activate";
+          
+          if (activeTab === "countries") {
+            await fetch(`/api/admin/countries/${id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ active: isActive })
+            });
+          } else if (activeTab === "cities") {
+            await fetch(`/api/admin/cities/${id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ active: isActive })
+            });
+          } else if (activeTab === "airports") {
+            await fetch(`/api/admin/airports/${id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ active: isActive })
+            });
+          }
+        }
+      }
+      
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/airports'] });
+      
+      toast({
+        title: "Bulk Action Complete",
+        description: `Successfully ${bulkAction}d ${selectedItems.size} items`,
+      });
+      
+      setSelectedItems(new Set());
+      setBulkAction(null);
+    } catch (error) {
+      toast({
+        title: "Bulk Action Failed",
+        description: "Some items could not be updated",
+        variant: "destructive",
+      });
+    }
+  };
 
   // Country form
   const countryForm = useForm<CountryFormValues>({
@@ -1029,9 +1120,19 @@ export default function CountryCityManagement() {
     <DashboardLayout location="/admin/countries-cities">
       <div className="space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Travel Locations Management</h1>
+          <div>
+            <h1 className="text-2xl font-bold">Travel Locations Management</h1>
+            <p className="text-gray-600 mt-1">Manage countries, cities, and airports with advanced tools</p>
+          </div>
           <div className="flex space-x-2">
-            {/* AI Generate Button */}
+            <Button 
+              onClick={() => setShowAnalytics(!showAnalytics)}
+              variant="outline"
+              className="gap-2"
+            >
+              <BarChart3 className="w-4 h-4" />
+              Analytics
+            </Button>
             <Button 
               onClick={() => setIsAiDialogOpen(true)}
               variant="outline"
@@ -1040,6 +1141,68 @@ export default function CountryCityManagement() {
               <Sparkles className="w-4 h-4 mr-2" />
               AI Generate
             </Button>
+          </div>
+        </div>
+
+        {/* Analytics Dashboard */}
+        {showAnalytics && (
+          <Card className="border-2 border-blue-100 bg-gradient-to-r from-blue-50 to-purple-50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-blue-600" />
+                Analytics Dashboard
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="bg-white p-4 rounded-lg shadow-sm border">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600">Countries</p>
+                      <p className="text-2xl font-bold text-blue-600">{analytics.countries.total}</p>
+                      <p className="text-xs text-green-600">{analytics.countries.active} active</p>
+                    </div>
+                    <GlobeIcon className="w-8 h-8 text-blue-500" />
+                  </div>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-sm border">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600">Cities</p>
+                      <p className="text-2xl font-bold text-green-600">{analytics.cities.total}</p>
+                      <p className="text-xs text-green-600">{analytics.cities.active} active</p>
+                    </div>
+                    <Landmark className="w-8 h-8 text-green-500" />
+                  </div>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-sm border">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600">Airports</p>
+                      <p className="text-2xl font-bold text-purple-600">{analytics.airports.total}</p>
+                      <p className="text-xs text-green-600">{analytics.airports.active} active</p>
+                    </div>
+                    <Plane className="w-8 h-8 text-purple-500" />
+                  </div>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-sm border">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600">Coverage</p>
+                      <p className="text-2xl font-bold text-orange-600">{analytics.coverage}</p>
+                      <p className="text-xs text-gray-600">cities/country</p>
+                    </div>
+                    <Database className="w-8 h-8 text-orange-500" />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Navigation Tabs */}
+        <div className="flex justify-between items-center">
+          <div className="flex space-x-2">
             <Button 
               onClick={() => setActiveTab('countries')}
               variant={activeTab === 'countries' ? 'default' : 'outline'}
@@ -1062,14 +1225,88 @@ export default function CountryCityManagement() {
               Airports
             </Button>
           </div>
+          
+          {/* Bulk Actions */}
+          {selectedItems.size > 0 && (
+            <div className="flex items-center gap-2 bg-blue-50 p-2 rounded-lg border">
+              <span className="text-sm text-blue-700">{selectedItems.size} selected</span>
+              <Select value={bulkAction || ""} onValueChange={(value) => setBulkAction(value as any)}>
+                <SelectTrigger className="w-32 h-8">
+                  <SelectValue placeholder="Actions" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="activate">Activate</SelectItem>
+                  <SelectItem value="deactivate">Deactivate</SelectItem>
+                  <SelectItem value="delete">Delete</SelectItem>
+                </SelectContent>
+              </Select>
+              <Button 
+                size="sm" 
+                onClick={executeBulkAction}
+                disabled={!bulkAction}
+                className="h-8"
+              >
+                Apply
+              </Button>
+              <Button 
+                size="sm" 
+                variant="outline"
+                onClick={() => setSelectedItems(new Set())}
+                className="h-8"
+              >
+                Clear
+              </Button>
+            </div>
+          )}
         </div>
 
         {activeTab === 'countries' && (
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <div>
-                <CardTitle>Countries</CardTitle>
-                <CardDescription>Manage countries available in the system</CardDescription>
+            <CardHeader className="space-y-4">
+              <div className="flex flex-row items-center justify-between">
+                <div>
+                  <CardTitle>Countries ({filteredCountries.length})</CardTitle>
+                  <CardDescription>Manage countries available in the system</CardDescription>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleSelectAll(filteredCountries, 'countries')}
+                  >
+                    {selectedItems.size === filteredCountries.length && filteredCountries.length > 0 ? (
+                      <CheckSquare className="w-4 h-4" />
+                    ) : (
+                      <Square className="w-4 h-4" />
+                    )}
+                    Select All
+                  </Button>
+                </div>
+              </div>
+              
+              {/* Advanced Search and Filters */}
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1">
+                  <div className="relative">
+                    <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      placeholder="Search countries by name, code, or description..."
+                      value={countrySearchQuery}
+                      onChange={(e) => setCountrySearchQuery(e.target.value)}
+                      className="pl-8"
+                    />
+                  </div>
+                </div>
+                <Select value={countryStatusFilter} onValueChange={(value) => setCountryStatusFilter(value as any)}>
+                  <SelectTrigger className="w-32">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Status</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="inactive">Inactive</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <Dialog open={isCreateCountryDialogOpen} onOpenChange={handleCreateCountryDialogClose}>
                 <DialogTrigger asChild>
