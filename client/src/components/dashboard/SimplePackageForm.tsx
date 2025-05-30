@@ -1792,10 +1792,14 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
             <HotelSearchComponent 
               onSelectionChange={(selectedRooms) => {
                 setSelectedHotelRooms(selectedRooms);
-                // Update form data if needed
-                form.setValue('selectedHotelRooms', selectedRooms);
               }}
               initialSelection={selectedHotelRooms}
+              guestBreakdown={{
+                adults: form.watch("adultCount") || 2,
+                children: form.watch("childrenCount") || 0,
+                infants: form.watch("infantCount") || 0
+              }}
+              nights={3}
             />
 
 

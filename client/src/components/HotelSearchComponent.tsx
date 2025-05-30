@@ -54,18 +54,82 @@ interface SelectedRoom {
 interface Props {
   onSelectionChange: (selectedRooms: SelectedRoom[]) => void;
   initialSelection?: SelectedRoom[];
+  guestBreakdown?: {
+    adults: number;
+    children: number;
+    infants: number;
+  };
+  nights?: number;
 }
 
-const HotelSearchComponent: React.FC<Props> = ({ onSelectionChange, initialSelection = [] }) => {
+const HotelSearchComponent: React.FC<Props> = ({ 
+  onSelectionChange, 
+  initialSelection = [], 
+  guestBreakdown: propGuestBreakdown,
+  nights: propNights
+}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedHotels, setSelectedHotels] = useState<number[]>([]);
   const [selectedRooms, setSelectedRooms] = useState<SelectedRoom[]>(initialSelection);
-  const [guestBreakdown, setGuestBreakdown] = useState({
+  const [guestBreakdown, setGuestBreakdown] = useState(propGuestBreakdown || {
     adults: 2,
     children: 0,
     infants: 0
   });
-  const [nights, setNights] = useState(3);
+  const [nights, setNights] = useState(propNights || 3);
+
+  // Update internal state when props change and recalculate room allocations
+  useEffect(() => {
+    if (propGuestBreakdown) {
+      setGuestBreakdown(propGuestBreakdown);
+      
+      // Update existing room selections with new guest breakdown
+      setSelectedRooms(prevRooms => {
+        const updatedRooms = prevRooms.map(selectedRoom => {
+          const room = rooms.find(r => r.id === selectedRoom.roomId);
+          if (room) {
+            return {
+              ...selectedRoom,
+              adults: Math.min(propGuestBreakdown.adults, room.maxAdults),
+              children: Math.min(propGuestBreakdown.children, room.maxChildren),
+              infants: Math.min(propGuestBreakdown.infants, room.maxInfants),
+              totalPrice: (room.discountedPrice || room.price) * nights
+            };
+          }
+          return selectedRoom;
+        });
+        
+        // Notify parent of updated selections
+        setTimeout(() => onSelectionChange(updatedRooms), 0);
+        return updatedRooms;
+      });
+    }
+  }, [propGuestBreakdown, rooms, nights]);
+
+  useEffect(() => {
+    if (propNights) {
+      setNights(propNights);
+      
+      // Update existing room selections with new nights count
+      setSelectedRooms(prevRooms => {
+        const updatedRooms = prevRooms.map(selectedRoom => {
+          const room = rooms.find(r => r.id === selectedRoom.roomId);
+          if (room) {
+            return {
+              ...selectedRoom,
+              nights: propNights,
+              totalPrice: (room.discountedPrice || room.price) * propNights
+            };
+          }
+          return selectedRoom;
+        });
+        
+        // Notify parent of updated selections
+        setTimeout(() => onSelectionChange(updatedRooms), 0);
+        return updatedRooms;
+      });
+    }
+  }, [propNights, rooms]);
 
   // Fetch hotels
   const { data: hotels = [], isLoading: hotelsLoading } = useQuery<Hotel[]>({
