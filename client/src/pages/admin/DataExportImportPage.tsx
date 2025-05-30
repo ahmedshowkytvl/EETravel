@@ -282,7 +282,7 @@ export default function DataExportImportPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-sm">
                 <div className="bg-white p-3 rounded-lg border">
                   <div className="font-medium text-blue-600">Countries & Cities</div>
                   <div className="text-gray-600">8 countries, 15+ cities</div>
@@ -298,6 +298,14 @@ export default function DataExportImportPage() {
                 <div className="bg-white p-3 rounded-lg border">
                   <div className="font-medium text-orange-600">Transportation</div>
                   <div className="text-gray-600">6 vehicle types</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg border">
+                  <div className="font-medium text-red-600">Guided Tours</div>
+                  <div className="text-gray-600">5 cultural tours</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg border">
+                  <div className="font-medium text-indigo-600">Tour Durations</div>
+                  <div className="text-gray-600">6 duration options</div>
                 </div>
               </div>
               

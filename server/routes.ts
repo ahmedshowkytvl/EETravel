@@ -5346,7 +5346,9 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
         hotels: 0,
         rooms: 0,
         packages: 0,
-        transportation: 0
+        transportation: 0,
+        tours: 0,
+        durations: 0
       };
 
       // Seed Countries if needed
@@ -5556,6 +5558,118 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
           seedResults.transportation++;
         } catch (error) {
           // Type might already exist
+        }
+      }
+
+      // Seed Tour Durations
+      console.log('Seeding tour durations...');
+      const durations = [
+        { name: 'Half Day', hours: 4, description: 'Perfect for short explorations' },
+        { name: 'Full Day', hours: 8, description: 'Complete day experience' },
+        { name: '2 Days', hours: 48, description: 'Weekend adventure' },
+        { name: '3 Days', hours: 72, description: 'Extended exploration' },
+        { name: '1 Week', hours: 168, description: 'Comprehensive journey' },
+        { name: '2 Weeks', hours: 336, description: 'In-depth cultural immersion' }
+      ];
+
+      for (const duration of durations) {
+        try {
+          await storage.createTransportDuration({
+            name: duration.name,
+            hours: duration.hours,
+            description: duration.description,
+            status: 'active'
+          });
+          seedResults.durations++;
+        } catch (error) {
+          // Duration might already exist
+        }
+      }
+
+      // Seed Tours
+      console.log('Seeding tours...');
+      
+      if (allCountries.length > 0 && allCities.length > 0) {
+        const tourData = [
+          {
+            name: 'Pyramids of Giza Explorer',
+            description: 'Discover the ancient wonders of Egypt with expert guided tours of the Great Pyramid, Sphinx, and surrounding archaeological sites.',
+            price: 85,
+            duration: 8,
+            maxGroupSize: 15,
+            countryName: 'Egypt',
+            cityName: 'Cairo',
+            includes: ['Professional guide', 'Entry tickets', 'Transportation', 'Lunch'],
+            highlights: ['Great Pyramid interior visit', 'Sphinx photo session', 'Valley Temple exploration']
+          },
+          {
+            name: 'Dubai Desert Safari',
+            description: 'Thrilling desert adventure with dune bashing, camel riding, traditional dinner, and cultural entertainment under the stars.',
+            price: 95,
+            duration: 6,
+            maxGroupSize: 20,
+            countryName: 'United Arab Emirates',
+            cityName: 'Dubai',
+            includes: ['4WD desert drive', 'Camel ride', 'BBQ dinner', 'Cultural show'],
+            highlights: ['Sunset dune bashing', 'Traditional Bedouin camp', 'Falcon demonstration']
+          },
+          {
+            name: 'Petra by Night',
+            description: 'Magical evening experience walking through the ancient city of Petra illuminated by thousands of candles.',
+            price: 120,
+            duration: 3,
+            maxGroupSize: 12,
+            countryName: 'Jordan',
+            cityName: 'Amman',
+            includes: ['Candlelit pathway', 'Traditional music', 'Tea service', 'Expert guide'],
+            highlights: ['Treasury by candlelight', 'Nabataean stories', 'Star gazing']
+          },
+          {
+            name: 'Marrakech Medina Discovery',
+            description: 'Navigate the bustling souks and hidden palaces of Marrakech with a local guide who knows every secret corner.',
+            price: 65,
+            duration: 5,
+            maxGroupSize: 8,
+            countryName: 'Morocco',
+            cityName: 'Casablanca',
+            includes: ['Local guide', 'Traditional tea', 'Artisan workshops', 'Palace visits'],
+            highlights: ['Spice market exploration', 'Traditional crafts', 'Hidden riads']
+          },
+          {
+            name: 'Istanbul Historical Walk',
+            description: 'Journey through Byzantine and Ottoman history visiting iconic landmarks and learning about Istanbul\'s rich cultural heritage.',
+            price: 75,
+            duration: 6,
+            maxGroupSize: 18,
+            countryName: 'Turkey',
+            cityName: 'Istanbul',
+            includes: ['Historical guide', 'Museum entries', 'Traditional lunch', 'Bosphorus view'],
+            highlights: ['Hagia Sophia tour', 'Blue Mosque visit', 'Grand Bazaar shopping']
+          }
+        ];
+
+        for (const tour of tourData) {
+          const country = allCountries.find(c => c.name === tour.countryName);
+          const city = allCities.find(c => c.name === tour.cityName);
+          
+          if (country && city) {
+            try {
+              await storage.createTour({
+                name: tour.name,
+                description: tour.description,
+                price: tour.price,
+                duration: tour.duration,
+                maxGroupSize: tour.maxGroupSize,
+                destinationId: city.id,
+                imageUrl: `https://images.unsplash.com/800x600/?${tour.name.replace(' ', '+')}`,
+                status: 'active'
+              });
+              seedResults.tours++;
+            } catch (error) {
+              // Tour might already exist
+              console.log(`Skipped tour ${tour.name}: already exists`);
+            }
+          }
         }
       }
 
