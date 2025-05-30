@@ -5586,73 +5586,58 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
         }
       }
 
-      // Seed Tours
+      // Seed Tours (skip if tours already exist)
       console.log('Seeding tours...');
+      const existingTours = await storage.listTours();
       
-      if (allCountries.length > 0 && allCities.length > 0) {
-        const tourData = [
-          {
-            name: 'Pyramids of Giza Explorer',
-            description: 'Discover the ancient wonders of Egypt with expert guided tours of the Great Pyramid, Sphinx, and surrounding archaeological sites.',
-            price: 85,
-            duration: 8,
-            maxGroupSize: 15,
-            countryName: 'Egypt',
-            cityName: 'Cairo',
-            includes: ['Professional guide', 'Entry tickets', 'Transportation', 'Lunch'],
-            highlights: ['Great Pyramid interior visit', 'Sphinx photo session', 'Valley Temple exploration']
-          },
-          {
-            name: 'Dubai Desert Safari',
-            description: 'Thrilling desert adventure with dune bashing, camel riding, traditional dinner, and cultural entertainment under the stars.',
-            price: 95,
-            duration: 6,
-            maxGroupSize: 20,
-            countryName: 'United Arab Emirates',
-            cityName: 'Dubai',
-            includes: ['4WD desert drive', 'Camel ride', 'BBQ dinner', 'Cultural show'],
-            highlights: ['Sunset dune bashing', 'Traditional Bedouin camp', 'Falcon demonstration']
-          },
-          {
-            name: 'Petra by Night',
-            description: 'Magical evening experience walking through the ancient city of Petra illuminated by thousands of candles.',
-            price: 120,
-            duration: 3,
-            maxGroupSize: 12,
-            countryName: 'Jordan',
-            cityName: 'Amman',
-            includes: ['Candlelit pathway', 'Traditional music', 'Tea service', 'Expert guide'],
-            highlights: ['Treasury by candlelight', 'Nabataean stories', 'Star gazing']
-          },
-          {
-            name: 'Marrakech Medina Discovery',
-            description: 'Navigate the bustling souks and hidden palaces of Marrakech with a local guide who knows every secret corner.',
-            price: 65,
-            duration: 5,
-            maxGroupSize: 8,
-            countryName: 'Morocco',
-            cityName: 'Casablanca',
-            includes: ['Local guide', 'Traditional tea', 'Artisan workshops', 'Palace visits'],
-            highlights: ['Spice market exploration', 'Traditional crafts', 'Hidden riads']
-          },
-          {
-            name: 'Istanbul Historical Walk',
-            description: 'Journey through Byzantine and Ottoman history visiting iconic landmarks and learning about Istanbul\'s rich cultural heritage.',
-            price: 75,
-            duration: 6,
-            maxGroupSize: 18,
-            countryName: 'Turkey',
-            cityName: 'Istanbul',
-            includes: ['Historical guide', 'Museum entries', 'Traditional lunch', 'Bosphorus view'],
-            highlights: ['Hagia Sophia tour', 'Blue Mosque visit', 'Grand Bazaar shopping']
+      if (existingTours.length === 0 && allCountries.length > 0 && allCities.length > 0) {
+        // Create destinations first if they don't exist
+        const existingDestinations = await storage.listDestinations();
+        
+        const destinationData = [
+          { name: 'Dubai Desert', description: 'Vast desert landscapes perfect for adventure tours', countryName: 'United Arab Emirates', cityName: 'Dubai' },
+          { name: 'Marrakech Medina', description: 'Historic medina with traditional souks and palaces', countryName: 'Morocco', cityName: 'Casablanca' },
+          { name: 'Istanbul Historic Center', description: 'Byzantine and Ottoman historical landmarks', countryName: 'Turkey', cityName: 'Istanbul' }
+        ];
+
+        for (const dest of destinationData) {
+          const country = allCountries.find(c => c.name === dest.countryName);
+          const city = allCities.find(c => c.name === dest.cityName);
+          
+          if (country && city) {
+            const existing = existingDestinations.find(d => d.name === dest.name);
+            if (!existing) {
+              try {
+                await storage.createDestination({
+                  name: dest.name,
+                  description: dest.description,
+                  countryId: country.id,
+                  cityId: city.id,
+                  imageUrl: `https://images.unsplash.com/800x600/?${dest.name.replace(' ', '+')}`,
+                  active: true
+                });
+              } catch (error) {
+                console.log(`Skipped destination ${dest.name}: already exists`);
+              }
+            }
           }
+        }
+
+        // Get updated destinations list
+        const updatedDestinations = await storage.listDestinations();
+
+        const tourData = [
+          { name: 'Pyramids of Giza Explorer', description: 'Discover the ancient wonders of Egypt with expert guided tours of the Great Pyramid, Sphinx, and surrounding archaeological sites.', price: 85, duration: 8, maxGroupSize: 15, destinationName: 'Pyramids of Giza' },
+          { name: 'Dubai Desert Safari', description: 'Thrilling desert adventure with dune bashing, camel riding, traditional dinner, and cultural entertainment under the stars.', price: 95, duration: 6, maxGroupSize: 20, destinationName: 'Dubai Desert' },
+          { name: 'Petra by Night', description: 'Magical evening experience walking through the ancient city of Petra illuminated by thousands of candles.', price: 120, duration: 3, maxGroupSize: 12, destinationName: 'Petra Archaeological Site' },
+          { name: 'Marrakech Medina Discovery', description: 'Navigate the bustling souks and hidden palaces of Marrakech with a local guide who knows every secret corner.', price: 65, duration: 5, maxGroupSize: 8, destinationName: 'Marrakech Medina' },
+          { name: 'Istanbul Historical Walk', description: 'Journey through Byzantine and Ottoman history visiting iconic landmarks and learning about Istanbul rich cultural heritage.', price: 75, duration: 6, maxGroupSize: 18, destinationName: 'Istanbul Historic Center' }
         ];
 
         for (const tour of tourData) {
-          const country = allCountries.find(c => c.name === tour.countryName);
-          const city = allCities.find(c => c.name === tour.cityName);
+          const destination = updatedDestinations.find(d => d.name === tour.destinationName);
           
-          if (country && city) {
+          if (destination) {
             try {
               await storage.createTour({
                 name: tour.name,
@@ -5660,13 +5645,12 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
                 price: tour.price,
                 duration: tour.duration,
                 maxGroupSize: tour.maxGroupSize,
-                destinationId: city.id,
+                destinationId: destination.id,
                 imageUrl: `https://images.unsplash.com/800x600/?${tour.name.replace(' ', '+')}`,
                 status: 'active'
               });
               seedResults.tours++;
             } catch (error) {
-              // Tour might already exist
               console.log(`Skipped tour ${tour.name}: already exists`);
             }
           }
