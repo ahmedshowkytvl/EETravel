@@ -1,4 +1,4 @@
-import { db } from './server/db';
+import { db, dbPromise } from './server/db';
 import { 
   countries, cities, destinations, packages, tours, hotels, rooms, 
   transportation, transportTypes, transportLocations, transportDurations,
@@ -7,6 +7,9 @@ import {
 
 async function seedSampleData() {
   console.log('🌱 Seeding sample data...');
+
+  // Wait for database connection to be established
+  await dbPromise;
 
   try {
     // 1. Seed Countries
