@@ -5472,8 +5472,8 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
             phone: `+${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
             email: `info@${hotelNames[i].toLowerCase().replace(/\s+/g, '')}.com`,
             website: `https://${hotelNames[i].toLowerCase().replace(/\s+/g, '')}.com`,
-            starRating: Math.floor(Math.random() * 3) + 3, // 3-5 stars
-            pricePerNight: Math.floor(Math.random() * 30000) + 10000, // 100-400 USD in cents
+            rating: Math.floor(Math.random() * 3) + 3, // 3-5 stars
+            price: Math.floor(Math.random() * 30000) + 10000, // 100-400 USD in cents
             countryId: country?.id || randomCity.countryId,
             cityId: randomCity.id,
             imageUrl: `https://images.unsplash.com/400x300/?hotel+${randomCity.name}`,
@@ -5489,8 +5489,8 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
               description: `Comfortable ${roomTypes[j].toLowerCase()} accommodation with modern amenities`,
               price: Math.floor(Math.random() * 20000) + 5000, // 50-250 USD in cents
               capacity: j < 2 ? 2 : j < 4 ? 4 : 6,
-              size: Math.floor(Math.random() * 30) + 25, // 25-55 sqm
-              bedType: j === 0 ? 'Single' : j === 1 ? 'Double' : 'King',
+              size: `${Math.floor(Math.random() * 30) + 25} sqm`, // 25-55 sqm
+              bedType: j === 0 ? 'single' : j === 1 ? 'double' : 'king',
               amenities: ['WiFi', 'Air Conditioning', 'Minibar', 'TV', 'Safe'].slice(0, Math.floor(Math.random() * 3) + 3),
               hotelId: hotel.id,
               imageUrl: `https://images.unsplash.com/400x300/?hotel+room+${roomTypes[j]}`,
