@@ -1800,6 +1800,11 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
                 infants: form.watch("infantCount") || 0
               }}
               nights={3}
+              onGuestBreakdownChange={(guestBreakdown) => {
+                form.setValue("adultCount", guestBreakdown.adults);
+                form.setValue("childrenCount", guestBreakdown.children);
+                form.setValue("infantCount", guestBreakdown.infants);
+              }}
             />
 
 

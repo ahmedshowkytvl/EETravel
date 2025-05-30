@@ -60,13 +60,15 @@ interface Props {
     infants: number;
   };
   nights?: number;
+  onGuestBreakdownChange?: (guestBreakdown: { adults: number; children: number; infants: number }) => void;
 }
 
 const HotelSearchComponent: React.FC<Props> = ({ 
   onSelectionChange, 
   initialSelection = [], 
   guestBreakdown: propGuestBreakdown,
-  nights: propNights
+  nights: propNights,
+  onGuestBreakdownChange
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedHotels, setSelectedHotels] = useState<number[]>([]);
@@ -262,7 +264,12 @@ const HotelSearchComponent: React.FC<Props> = ({
                 <Button 
                   size="sm" 
                   variant="outline"
-                  onClick={() => setGuestBreakdown(prev => ({ ...prev, adults: Math.max(1, prev.adults - 1) }))}
+                  onClick={() => {
+                    const newAdults = Math.max(1, guestBreakdown.adults - 1);
+                    const newBreakdown = { ...guestBreakdown, adults: newAdults };
+                    setGuestBreakdown(newBreakdown);
+                    onGuestBreakdownChange?.(newBreakdown);
+                  }}
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
@@ -270,7 +277,12 @@ const HotelSearchComponent: React.FC<Props> = ({
                 <Button 
                   size="sm" 
                   variant="outline"
-                  onClick={() => setGuestBreakdown(prev => ({ ...prev, adults: prev.adults + 1 }))}
+                  onClick={() => {
+                    const newAdults = guestBreakdown.adults + 1;
+                    const newBreakdown = { ...guestBreakdown, adults: newAdults };
+                    setGuestBreakdown(newBreakdown);
+                    onGuestBreakdownChange?.(newBreakdown);
+                  }}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -282,7 +294,12 @@ const HotelSearchComponent: React.FC<Props> = ({
                 <Button 
                   size="sm" 
                   variant="outline"
-                  onClick={() => setGuestBreakdown(prev => ({ ...prev, children: Math.max(0, prev.children - 1) }))}
+                  onClick={() => {
+                    const newChildren = Math.max(0, guestBreakdown.children - 1);
+                    const newBreakdown = { ...guestBreakdown, children: newChildren };
+                    setGuestBreakdown(newBreakdown);
+                    onGuestBreakdownChange?.(newBreakdown);
+                  }}
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
@@ -290,7 +307,12 @@ const HotelSearchComponent: React.FC<Props> = ({
                 <Button 
                   size="sm" 
                   variant="outline"
-                  onClick={() => setGuestBreakdown(prev => ({ ...prev, children: prev.children + 1 }))}
+                  onClick={() => {
+                    const newChildren = guestBreakdown.children + 1;
+                    const newBreakdown = { ...guestBreakdown, children: newChildren };
+                    setGuestBreakdown(newBreakdown);
+                    onGuestBreakdownChange?.(newBreakdown);
+                  }}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -302,7 +324,12 @@ const HotelSearchComponent: React.FC<Props> = ({
                 <Button 
                   size="sm" 
                   variant="outline"
-                  onClick={() => setGuestBreakdown(prev => ({ ...prev, infants: Math.max(0, prev.infants - 1) }))}
+                  onClick={() => {
+                    const newInfants = Math.max(0, guestBreakdown.infants - 1);
+                    const newBreakdown = { ...guestBreakdown, infants: newInfants };
+                    setGuestBreakdown(newBreakdown);
+                    onGuestBreakdownChange?.(newBreakdown);
+                  }}
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
@@ -310,7 +337,12 @@ const HotelSearchComponent: React.FC<Props> = ({
                 <Button 
                   size="sm" 
                   variant="outline"
-                  onClick={() => setGuestBreakdown(prev => ({ ...prev, infants: prev.infants + 1 }))}
+                  onClick={() => {
+                    const newInfants = guestBreakdown.infants + 1;
+                    const newBreakdown = { ...guestBreakdown, infants: newInfants };
+                    setGuestBreakdown(newBreakdown);
+                    onGuestBreakdownChange?.(newBreakdown);
+                  }}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
