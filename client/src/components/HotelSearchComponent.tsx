@@ -78,6 +78,16 @@ const HotelSearchComponent: React.FC<Props> = ({
   });
   const [nights, setNights] = useState(propNights || 3);
 
+  // Fetch hotels
+  const { data: hotels = [], isLoading: hotelsLoading } = useQuery<Hotel[]>({
+    queryKey: ['/api/hotels'],
+  });
+
+  // Fetch rooms
+  const { data: rooms = [], isLoading: roomsLoading } = useQuery<Room[]>({
+    queryKey: ['/api/rooms'],
+  });
+
   // Update internal state when props change and recalculate room allocations
   useEffect(() => {
     if (propGuestBreakdown) {
@@ -130,18 +140,6 @@ const HotelSearchComponent: React.FC<Props> = ({
       });
     }
   }, [propNights, rooms]);
-
-  // Fetch hotels
-  const { data: hotels = [], isLoading: hotelsLoading } = useQuery<Hotel[]>({
-    queryKey: ['/api/hotels'],
-  });
-
-
-
-  // Fetch rooms
-  const { data: rooms = [], isLoading: roomsLoading } = useQuery<Room[]>({
-    queryKey: ['/api/rooms'],
-  });
 
   // Filter hotels based on search term (show all if no search term)
   const filteredHotels = hotels.filter((hotel: any) => 
@@ -387,87 +385,99 @@ const HotelSearchComponent: React.FC<Props> = ({
         </CardContent>
       </Card>
 
-      {/* Available Rooms */}
+      {/* Available Rooms - Grouped by Hotel */}
       {availableRooms.length > 0 && (
         <Card>
           <CardHeader>
             <CardTitle>Available Rooms</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4">
-              {availableRooms.map(room => {
-                const hotel = hotels.find(h => h.id === room.hotelId);
-                const isSelected = isRoomSelected(room.id);
+            <div className="space-y-6">
+              {selectedHotels.map(hotelId => {
+                const hotel = hotels.find(h => h.id === hotelId);
+                const hotelRooms = availableRooms.filter(room => room.hotelId === hotelId);
+                
+                if (hotelRooms.length === 0) return null;
                 
                 return (
-                  <div key={room.id} className="border rounded-lg p-4">
-                    <div className="flex items-start gap-3">
-                      <Checkbox 
-                        checked={isSelected}
-                        onCheckedChange={(checked) => handleRoomSelect(room, checked as boolean)}
-                      />
-                      <div className="flex-1">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h4 className="font-medium">{room.name}</h4>
-                            <p className="text-sm text-gray-600">{hotel?.name}</p>
-                            {room.description && (
-                              <p className="text-sm text-gray-500 mt-1">{room.description}</p>
-                            )}
-                          </div>
-                          <div className="text-right">
-                            <div className="font-semibold text-lg">
-                              ${room.discountedPrice || room.price}/night
-                            </div>
-                            {room.discountedPrice && room.discountedPrice < room.price && (
-                              <div className="text-sm text-gray-500 line-through">
-                                ${room.price}
-                              </div>
-                            )}
-                          </div>
-                        </div>
+                  <div key={hotelId} className="border rounded-lg p-4">
+                    <h3 className="font-semibold text-lg mb-4 text-blue-700">{hotel?.name}</h3>
+                    <div className="grid gap-3">
+                      {hotelRooms.map(room => {
+                        const isSelected = isRoomSelected(room.id);
                         
-                        <div className="flex gap-2 mt-2">
-                          <Badge variant="outline">{room.type}</Badge>
-                          <Badge variant="outline">{room.maxAdults} Adults</Badge>
-                          <Badge variant="outline">{room.maxChildren} Children</Badge>
-                          {room.bedType && <Badge variant="outline">{room.bedType}</Badge>}
-                          {room.size && <Badge variant="outline">{room.size}</Badge>}
-                        </div>
+                        return (
+                          <div key={room.id} className="border rounded-md p-3 bg-gray-50">
+                            <div className="flex items-start gap-3">
+                              <Checkbox 
+                                checked={isSelected}
+                                onCheckedChange={(checked) => handleRoomSelect(room, checked as boolean)}
+                              />
+                              <div className="flex-1">
+                                <div className="flex justify-between items-start">
+                                  <div>
+                                    <h4 className="font-medium">{room.name}</h4>
+                                    {room.description && (
+                                      <p className="text-sm text-gray-500 mt-1">{room.description}</p>
+                                    )}
+                                  </div>
+                                  <div className="text-right">
+                                    <div className="font-semibold text-lg">
+                                      ${room.discountedPrice || room.price}/night
+                                    </div>
+                                    {room.discountedPrice && room.discountedPrice < room.price && (
+                                      <div className="text-sm text-gray-500 line-through">
+                                        ${room.price}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                        
+                                <div className="flex gap-2 mt-2">
+                                  <Badge variant="outline">{room.type}</Badge>
+                                  <Badge variant="outline">{room.maxAdults} Adults</Badge>
+                                  <Badge variant="outline">{room.maxChildren} Children</Badge>
+                                  {room.bedType && <Badge variant="outline">{room.bedType}</Badge>}
+                                  {room.size && <Badge variant="outline">{room.size}</Badge>}
+                                </div>
 
-                        {/* Guest allocation for selected rooms */}
-                        {isSelected && (
-                          <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                            <h5 className="font-medium mb-2">Guest Allocation</h5>
-                            <div className="grid grid-cols-3 gap-4 text-sm">
-                              <div>
-                                <span>Adults: </span>
-                                <span className="font-medium">
-                                  {selectedRooms.find(r => r.roomId === room.id)?.adults || 0}
-                                </span>
+                                {/* Guest allocation for selected rooms */}
+                                {isSelected && (
+                                  <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                                    <h5 className="font-medium mb-2">Guest Allocation</h5>
+                                    <div className="grid grid-cols-3 gap-4 text-sm">
+                                      <div>
+                                        <span>Adults: </span>
+                                        <span className="font-medium">
+                                          {selectedRooms.find(r => r.roomId === room.id)?.adults || 0}
+                                        </span>
+                                      </div>
+                                      <div>
+                                        <span>Children: </span>
+                                        <span className="font-medium">
+                                          {selectedRooms.find(r => r.roomId === room.id)?.children || 0}
+                                        </span>
+                                      </div>
+                                      <div>
+                                        <span>Infants: </span>
+                                        <span className="font-medium">
+                                          {selectedRooms.find(r => r.roomId === room.id)?.infants || 0}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="mt-2 pt-2 border-t">
+                                      <span className="font-medium">
+                                        Total: ${selectedRooms.find(r => r.roomId === room.id)?.totalPrice || 0}
+                                        ({nights} nights)
+                                      </span>
+                                    </div>
+                                  </div>
+                                )}
                               </div>
-                              <div>
-                                <span>Children: </span>
-                                <span className="font-medium">
-                                  {selectedRooms.find(r => r.roomId === room.id)?.children || 0}
-                                </span>
-                              </div>
-                              <div>
-                                <span>Infants: </span>
-                                <span className="font-medium">
-                                  {selectedRooms.find(r => r.roomId === room.id)?.infants || 0}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="mt-2 pt-2 border-t">
-                              <span className="font-medium">
-                                Total: ${selectedRooms.find(r => r.roomId === room.id)?.totalPrice || 0}
-                                ({nights} nights)
-                              </span>
                             </div>
                           </div>
-                        )}
-                      </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );
