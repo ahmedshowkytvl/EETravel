@@ -395,7 +395,7 @@ export const visasData: Visa[] = [
     requirements: ['Passport with 6 months validity', 'CAS from UK institution', 'Financial documents', 'English language certification', 'Tuberculosis test certificate (if applicable)'],
     description: 'Student visa (Tier 4) for studying at a UK educational institution.',
     validity: 'Course duration + grace period',
-    stayLength: 'Course duration + 4 months (bachelor's/master's)',
+    stayLength: 'Course duration + 4 months (bachelors/masters)',
     documents: ['Application form', 'Passport', 'CAS letter', 'Financial proof', 'English test results', 'ATAS certificate (if required)'],
     additionalInfo: ['Biometric residence permit issued after arrival', 'Healthcare surcharge required', 'Limited work permission included'],
     rating: 4.2,
