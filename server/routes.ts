@@ -5327,15 +5327,244 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
     }
   });
 
-  // Simple Test Data Seeding Endpoint (temporarily simplified)
+  // Comprehensive Test Data Seeding Endpoint
   app.post('/api/admin/seed-test-data', isAdmin, async (req, res) => {
     try {
-      console.log('Starting test data seeding...');
-      
+      console.log('Starting comprehensive test data seeding...');
+
+      // Get existing data to check what we need to create
+      const existingCountries = await storage.listCountries();
+      const existingCities = await storage.listCities();
+      const existingHotels = await storage.listHotels();
+      const existingPackages = await storage.listPackages();
+
+      let seedResults = {
+        countries: 0,
+        cities: 0,
+        airports: 0,
+        hotels: 0,
+        rooms: 0,
+        packages: 0,
+        transportation: 0
+      };
+
+      // Seed Countries if needed
+      if (existingCountries.length < 5) {
+        console.log('Seeding countries...');
+        const countries = [
+          { name: 'Egypt', code: 'EG', description: 'Ancient civilization with pyramids and rich cultural heritage' },
+          { name: 'United Arab Emirates', code: 'AE', description: 'Modern Middle Eastern destination with luxury and innovation' },
+          { name: 'Jordan', code: 'JO', description: 'Historical kingdom with Petra and desert landscapes' },
+          { name: 'Morocco', code: 'MA', description: 'North African gem with vibrant souks and Atlas Mountains' },
+          { name: 'Turkey', code: 'TR', description: 'Transcontinental country bridging Europe and Asia' },
+          { name: 'Saudi Arabia', code: 'SA', description: 'Kingdom with holy sites and emerging tourism destinations' },
+          { name: 'Oman', code: 'OM', description: 'Sultanate known for stunning coastlines and mountain landscapes' },
+          { name: 'Lebanon', code: 'LB', description: 'Mediterranean country with rich history and cuisine' }
+        ];
+
+        for (const country of countries) {
+          const existing = existingCountries.find(c => c.code === country.code);
+          if (!existing) {
+            await storage.createCountry({
+              ...country,
+              imageUrl: `https://images.unsplash.com/400x300/?${country.name.replace(' ', '+')}`,
+              active: true
+            });
+            seedResults.countries++;
+          }
+        }
+      }
+
+      // Get updated countries list
+      const allCountries = await storage.listCountries();
+
+      // Seed Cities
+      if (existingCities.length < 15) {
+        console.log('Seeding cities...');
+        const cityData = [
+          { name: 'Cairo', countryCode: 'EG', description: 'Capital city with ancient pyramids and modern culture' },
+          { name: 'Alexandria', countryCode: 'EG', description: 'Mediterranean port city with historic significance' },
+          { name: 'Luxor', countryCode: 'EG', description: 'Ancient city with magnificent temples and tombs' },
+          { name: 'Dubai', countryCode: 'AE', description: 'Global city known for luxury and innovation' },
+          { name: 'Abu Dhabi', countryCode: 'AE', description: 'Capital emirate with cultural landmarks' },
+          { name: 'Amman', countryCode: 'JO', description: 'Modern capital with ancient Roman heritage' },
+          { name: 'Petra', countryCode: 'JO', description: 'Archaeological wonder and UNESCO World Heritage site' },
+          { name: 'Marrakech', countryCode: 'MA', description: 'Imperial city with vibrant souks and palaces' },
+          { name: 'Casablanca', countryCode: 'MA', description: 'Economic capital and largest city' },
+          { name: 'Istanbul', countryCode: 'TR', description: 'Historic city spanning two continents' },
+          { name: 'Riyadh', countryCode: 'SA', description: 'Modern capital and business center' },
+          { name: 'Muscat', countryCode: 'OM', description: 'Coastal capital with stunning architecture' },
+          { name: 'Beirut', countryCode: 'LB', description: 'Cosmopolitan capital known as Paris of the Middle East' }
+        ];
+
+        for (const city of cityData) {
+          const country = allCountries.find(c => c.code === city.countryCode);
+          if (country) {
+            const existing = existingCities.find(c => c.name === city.name);
+            if (!existing) {
+              await storage.createCity({
+                name: city.name,
+                countryId: country.id,
+                description: city.description,
+                imageUrl: `https://images.unsplash.com/400x300/?${city.name.replace(' ', '+')}`,
+                active: true
+              });
+              seedResults.cities++;
+            }
+          }
+        }
+      }
+
+      // Get updated cities
+      const allCities = await storage.listCities();
+
+      // Seed Airports
+      if (allCities.length > 0) {
+        console.log('Seeding airports...');
+        const airportData = [
+          { name: 'Cairo International Airport', code: 'CAI', cityName: 'Cairo' },
+          { name: 'Dubai International Airport', code: 'DXB', cityName: 'Dubai' },
+          { name: 'Queen Alia International Airport', code: 'AMM', cityName: 'Amman' },
+          { name: 'Mohammed V International Airport', code: 'CMN', cityName: 'Casablanca' },
+          { name: 'Istanbul Airport', code: 'IST', cityName: 'Istanbul' }
+        ];
+
+        for (const airport of airportData) {
+          const city = allCities.find(c => c.name === airport.cityName);
+          if (city) {
+            try {
+              await storage.createAirport({
+                name: airport.name,
+                code: airport.code,
+                cityId: city.id,
+                description: `Main international airport serving ${airport.cityName}`,
+                active: true
+              });
+              seedResults.airports++;
+            } catch (error) {
+              // Airport might already exist, continue
+            }
+          }
+        }
+      }
+
+      // Seed Hotels with realistic data
+      if (existingHotels.length < 10 && allCities.length > 0) {
+        console.log('Seeding hotels...');
+        const hotelNames = [
+          'Grand Palace Hotel', 'Luxury Resort & Spa', 'City Center Hotel', 'Desert Oasis Resort',
+          'Riverside Hotel', 'Mountain View Lodge', 'Business Hotel', 'Boutique Hotel',
+          'Royal Suites', 'Garden Hotel'
+        ];
+
+        for (let i = 0; i < Math.min(10, hotelNames.length); i++) {
+          const randomCity = allCities[Math.floor(Math.random() * allCities.length)];
+          const country = allCountries.find(c => c.id === randomCity.countryId);
+          
+          const hotel = await storage.createHotel({
+            name: hotelNames[i],
+            description: `Premium accommodation in the heart of ${randomCity.name}`,
+            address: `${Math.floor(Math.random() * 999) + 1} Main Street, ${randomCity.name}`,
+            phone: `+${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`,
+            email: `info@${hotelNames[i].toLowerCase().replace(/\s+/g, '')}.com`,
+            website: `https://${hotelNames[i].toLowerCase().replace(/\s+/g, '')}.com`,
+            stars: Math.floor(Math.random() * 3) + 3,
+            city: randomCity.name,
+            country: country?.name || 'Unknown',
+            imageUrl: `https://images.unsplash.com/400x300/?hotel+${randomCity.name.replace(' ', '+')}`,
+            status: 'active'
+          });
+          seedResults.hotels++;
+
+          // Add rooms for each hotel
+          const roomTypes = ['Standard', 'Deluxe', 'Suite'];
+          for (let j = 0; j < 3; j++) {
+            await storage.createRoom({
+              name: `${roomTypes[j]} Room`,
+              description: `Comfortable ${roomTypes[j].toLowerCase()} accommodation with modern amenities`,
+              price: Math.floor(Math.random() * 20000) + 5000,
+              type: roomTypes[j],
+              maxOccupancy: j < 2 ? 2 : 4,
+              maxAdults: j < 2 ? 2 : 4,
+              maxChildren: j === 0 ? 0 : 2,
+              size: `${Math.floor(Math.random() * 30) + 25} sqm`,
+              bedType: j === 0 ? 'single' : j === 1 ? 'double' : 'king',
+              amenities: ['WiFi', 'Air Conditioning', 'Minibar', 'TV', 'Safe'].slice(0, Math.floor(Math.random() * 3) + 3),
+              hotelId: hotel.id,
+              imageUrl: `https://images.unsplash.com/400x300/?hotel+room+${roomTypes[j].replace(' ', '+')}`,
+              status: 'active'
+            });
+            seedResults.rooms++;
+          }
+        }
+      }
+
+      // Seed Travel Packages
+      if (existingPackages.length < 8 && allCities.length > 0) {
+        console.log('Seeding travel packages...');
+        const packageTypes = [
+          { title: 'Cairo Explorer Package', duration: 5, type: 'Cultural' },
+          { title: 'Dubai Luxury Experience', duration: 7, type: 'Luxury' },
+          { title: 'Jordan Adventure Tour', duration: 10, type: 'Adventure' },
+          { title: 'Morocco Imperial Cities', duration: 8, type: 'Cultural' },
+          { title: 'Turkey Historical Journey', duration: 12, type: 'Historical' },
+          { title: 'Desert Safari Experience', duration: 3, type: 'Adventure' },
+          { title: 'Red Sea Diving Package', duration: 6, type: 'Water Sports' },
+          { title: 'Holy Land Pilgrimage', duration: 9, type: 'Religious' }
+        ];
+
+        for (const pkg of packageTypes) {
+          const randomCity = allCities[Math.floor(Math.random() * allCities.length)];
+          
+          await storage.createPackage({
+            title: pkg.title,
+            description: `Comprehensive ${pkg.duration}-day ${pkg.type.toLowerCase()} package exploring the best of the Middle East`,
+            price: Math.floor(Math.random() * 100000) + 50000,
+            duration: pkg.duration,
+            included: ['Accommodation', 'Meals', 'Transportation', 'Guide', 'Entrance Fees'],
+            excluded: ['Flights', 'Personal Expenses', 'Tips'],
+            itinerary: `Day-by-day ${pkg.duration}-day itinerary covering major attractions`,
+            cityId: randomCity.id,
+            imageUrl: `https://images.unsplash.com/400x300/?${pkg.title.replace(/\s+/g, '+')}`,
+            status: 'active'
+          });
+          seedResults.packages++;
+        }
+      }
+
+      // Seed Transportation Types
+      console.log('Seeding transportation...');
+      const transportTypes = [
+        { name: 'Private Car', description: 'Comfortable private vehicle with driver' },
+        { name: 'Luxury SUV', description: 'Premium SUV for small groups' },
+        { name: 'Minibus', description: 'Spacious minibus for medium groups' },
+        { name: 'Coach Bus', description: 'Large coach for big groups' },
+        { name: 'Airport Transfer', description: 'Direct airport pickup/dropoff service' },
+        { name: 'Desert 4WD', description: 'Specialized 4WD for desert adventures' }
+      ];
+
+      for (const transport of transportTypes) {
+        try {
+          await storage.createTransportType({
+            name: transport.name,
+            description: transport.description,
+            passengerCapacity: transport.name.includes('Bus') ? 45 : transport.name.includes('SUV') ? 7 : 4,
+            baggageCapacity: transport.name.includes('Bus') ? 20 : transport.name.includes('SUV') ? 5 : 3,
+            status: 'active'
+          });
+          seedResults.transportation++;
+        } catch (error) {
+          // Type might already exist
+        }
+      }
+
+      console.log('Test data seeding completed:', seedResults);
+
       res.json({
         success: true,
-        message: 'Test data seeding endpoint is ready',
-        summary: 'Server is running properly. Test data seeding will be implemented once schema issues are resolved.'
+        message: 'Comprehensive test data seeded successfully',
+        results: seedResults,
+        summary: `Created ${Object.values(seedResults).reduce((a, b) => a + b, 0)} total records across all entities`
       });
 
     } catch (error) {
