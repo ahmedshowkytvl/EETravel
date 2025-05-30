@@ -1797,38 +1797,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
               }}
               initialSelection={selectedHotelRooms}
             />
-            
-            {/* Hotel Selection */}
-            <div className="grid grid-cols-1 gap-6">
-              <h3 className="text-lg font-semibold">Select Hotels</h3>
-              <div className="grid grid-cols-1 gap-4">
-                {hotels.map((hotel) => (
-                  <FormItem 
-                    key={hotel.id}
-                    className="flex items-center space-x-3 space-y-0 rounded-md border p-4"
-                  >
-                    <FormControl>
-                      <Checkbox
-                        checked={Array.isArray(form.watch("selectedHotels")) && form.watch("selectedHotels").includes(hotel.id)}
-                        onCheckedChange={(checked) => {
-                          const currentHotels = form.watch("selectedHotels") || [];
-                          let newSelectedHotels;
-                          if (checked) {
-                            newSelectedHotels = [...currentHotels, hotel.id];
-                          } else {
-                            newSelectedHotels = currentHotels.filter(id => id !== hotel.id);
-                          }
-                          handleHotelSelectionChange(newSelectedHotels);
-                        }}
-                      />
-                    </FormControl>
-                    <FormLabel className="font-medium cursor-pointer">
-                      {hotel.name}
-                    </FormLabel>
-                  </FormItem>
-                ))}
-              </div>
-            </div>
+
 
             {/* Guest Breakdown */}
             <div className="space-y-4 border rounded-md p-4">
