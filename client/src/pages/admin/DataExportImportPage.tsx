@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "@/hooks/use-toast";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDistanceToNow } from "date-fns";
-import { Loader2, Download, Trash2, Upload, Database, FileUp, FileDown, Sprout, Play } from "lucide-react";
+import { Loader2, Download, Trash2, Upload, Database, FileUp, FileDown, Sprout, Play, AlertTriangle } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
@@ -29,6 +29,7 @@ export default function DataExportImportPage() {
   const [importProgress, setImportProgress] = useState(0);
   const [exportProgress, setExportProgress] = useState(0);
   const [isSeedingData, setIsSeedingData] = useState(false);
+  const [isClearingData, setIsClearingData] = useState(false);
   
   // Get list of export files
   const { data: exportsData, isLoading: isLoadingExports, refetch: refetchExports } = useQuery({
@@ -64,6 +65,40 @@ export default function DataExportImportPage() {
       toast({
         title: "Seeding Failed",
         description: error.message || "Failed to seed test data",
+        variant: "destructive",
+      });
+    }
+  });
+
+  // Clear all data mutation
+  const clearAllDataMutation = useMutation({
+    mutationFn: async () => {
+      setIsClearingData(true);
+      const response = await apiRequest('/api/admin/clear-all-data', {
+        method: 'POST'
+      });
+      return response;
+    },
+    onSuccess: (data) => {
+      setIsClearingData(false);
+      toast({
+        title: "All Data Cleared Successfully",
+        description: data.message || "All records have been removed from the database",
+      });
+      
+      // Refresh all relevant queries
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/hotels'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/packages'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/rooms'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/tours'] });
+    },
+    onError: (error: Error) => {
+      setIsClearingData(false);
+      toast({
+        title: "Clear Data Failed",
+        description: error.message || "Failed to clear all data",
         variant: "destructive",
       });
     }
@@ -266,24 +301,59 @@ export default function DataExportImportPage() {
                 </div>
               </div>
               
-              <Button 
-                onClick={() => seedTestDataMutation.mutate()}
-                disabled={isSeedingData}
-                className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
-                size="lg"
-              >
-                {isSeedingData ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Generating Test Data...
-                  </>
-                ) : (
-                  <>
-                    <Play className="mr-2 h-4 w-4" />
-                    Generate Comprehensive Test Data
-                  </>
-                )}
-              </Button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Button 
+                  onClick={() => seedTestDataMutation.mutate()}
+                  disabled={isSeedingData || isClearingData}
+                  className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                  size="lg"
+                >
+                  {isSeedingData ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Generating Test Data...
+                    </>
+                  ) : (
+                    <>
+                      <Play className="mr-2 h-4 w-4" />
+                      Generate Comprehensive Test Data
+                    </>
+                  )}
+                </Button>
+                
+                <Button 
+                  onClick={() => {
+                    const confirmed = window.confirm(
+                      "⚠️ WARNING: This will permanently delete ALL data from your database including:\n\n" +
+                      "• Countries and Cities\n" +
+                      "• Hotels and Rooms\n" +
+                      "• Travel Packages\n" +
+                      "• Tours and Transportation\n" +
+                      "• All user data and bookings\n\n" +
+                      "This action CANNOT be undone. Are you absolutely sure you want to proceed?"
+                    );
+                    if (confirmed) {
+                      clearAllDataMutation.mutate();
+                    }
+                  }}
+                  disabled={isSeedingData || isClearingData}
+                  className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700"
+                  size="lg"
+                  variant="destructive"
+                >
+                  {isClearingData ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Clearing All Data...
+                    </>
+                  ) : (
+                    <>
+                      <AlertTriangle className="mr-2 h-4 w-4" />
+                      Clear All Data
+                    </>
+                  )}
+                </Button>
+              </div>
               
               <div className="text-xs text-gray-600 bg-white p-3 rounded border">
                 <strong>What will be created:</strong> Countries (Egypt, UAE, Jordan, Morocco, Turkey, Saudi Arabia, Oman, Lebanon), 

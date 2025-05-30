@@ -5576,6 +5576,95 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
       });
     }
   });
+
+  // Clear All Data Endpoint
+  app.post('/api/admin/clear-all-data', isAdmin, async (req, res) => {
+    try {
+      console.log('Starting to clear all data from database...');
+
+      // List of all tables to clear (in dependency order)
+      const tablesToClear = [
+        'bookings',
+        'room_combinations', 
+        'rooms',
+        'hotels',
+        'tours',
+        'packages',
+        'destinations',
+        'cities',
+        'countries',
+        'transport_types',
+        'airports',
+        'visas',
+        'nationalities',
+        'nationality_visa_requirements',
+        'hotel_facilities',
+        'hotel_highlights',
+        'cleanliness_features',
+        'hotel_categories',
+        'tour_categories',
+        'favorites',
+        'translations',
+        'menu_items',
+        'menus',
+        'site_language_settings'
+      ];
+
+      let clearedTables = 0;
+      let totalRecordsCleared = 0;
+
+      for (const tableName of tablesToClear) {
+        try {
+          // Get count before deletion
+          const countResult = await db.execute(`SELECT COUNT(*) as count FROM ${tableName}`);
+          const recordCount = parseInt(countResult.rows[0].count);
+          
+          if (recordCount > 0) {
+            // Clear the table
+            await db.execute(`DELETE FROM ${tableName}`);
+            console.log(`Cleared ${recordCount} records from ${tableName}`);
+            totalRecordsCleared += recordCount;
+            clearedTables++;
+          }
+        } catch (error) {
+          // Table might not exist or might be empty, continue with next table
+          console.log(`Skipped table ${tableName}: ${error.message}`);
+        }
+      }
+
+      // Reset sequences for tables with auto-increment IDs
+      const sequenceResets = [
+        'countries', 'cities', 'hotels', 'rooms', 'packages', 'tours', 
+        'bookings', 'destinations', 'transport_types', 'users'
+      ];
+
+      for (const tableName of sequenceResets) {
+        try {
+          await db.execute(`SELECT setval(pg_get_serial_sequence('${tableName}', 'id'), 1, false)`);
+        } catch (error) {
+          // Sequence might not exist, continue
+        }
+      }
+
+      console.log(`Data clearing completed. Cleared ${totalRecordsCleared} total records from ${clearedTables} tables.`);
+
+      res.json({
+        success: true,
+        message: `Successfully cleared all data from the database`,
+        clearedTables,
+        totalRecordsCleared,
+        summary: `Removed ${totalRecordsCleared} records from ${clearedTables} tables`
+      });
+
+    } catch (error) {
+      console.error('Error clearing all data:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to clear all data',
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
   
   return httpServer;
 }
