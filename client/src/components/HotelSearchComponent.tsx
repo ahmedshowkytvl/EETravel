@@ -91,15 +91,27 @@ const HotelSearchComponent: React.FC<Props> = ({ onSelectionChange, initialSelec
     room.status === 'active'
   );
 
-  // Handle hotel selection
+  // Handle hotel selection with batched state updates
   const handleHotelSelect = (hotelId: number) => {
-    if (selectedHotels.includes(hotelId)) {
+    const isCurrentlySelected = selectedHotels.includes(hotelId);
+    
+    if (isCurrentlySelected) {
       // Remove hotel and its rooms from selection
-      setSelectedHotels(prev => prev.filter(id => id !== hotelId));
-      setSelectedRooms(prev => prev.filter(room => room.hotelId !== hotelId));
+      const newSelectedHotels = selectedHotels.filter(id => id !== hotelId);
+      const newSelectedRooms = selectedRooms.filter(room => room.hotelId !== hotelId);
+      
+      setSelectedHotels(newSelectedHotels);
+      setSelectedRooms(newSelectedRooms);
+      
+      // Notify parent of the updated selection
+      setTimeout(() => onSelectionChange(newSelectedRooms), 0);
     } else {
       // Add hotel to selection
-      setSelectedHotels(prev => [...prev, hotelId]);
+      const newSelectedHotels = [...selectedHotels, hotelId];
+      setSelectedHotels(newSelectedHotels);
+      
+      // Notify parent - no room changes when just selecting hotel
+      setTimeout(() => onSelectionChange(selectedRooms), 0);
     }
   };
 
@@ -141,17 +153,7 @@ const HotelSearchComponent: React.FC<Props> = ({ onSelectionChange, initialSelec
     }));
   };
 
-  // Use ref to track previous selection and prevent infinite loops
-  const prevSelectedRoomsRef = useRef<SelectedRoom[]>([]);
-
-  // Notify parent component of selection changes only when they actually change
-  useEffect(() => {
-    const hasChanged = JSON.stringify(selectedRooms) !== JSON.stringify(prevSelectedRoomsRef.current);
-    if (hasChanged) {
-      prevSelectedRoomsRef.current = selectedRooms;
-      onSelectionChange(selectedRooms);
-    }
-  }, [selectedRooms]);
+  // Handle parent notification manually in handlers to avoid useEffect loops
 
   const isRoomSelected = (roomId: number) => {
     return selectedRooms.some(r => r.roomId === roomId);
@@ -290,15 +292,14 @@ const HotelSearchComponent: React.FC<Props> = ({ onSelectionChange, initialSelec
             {filteredHotels.map(hotel => (
               <div 
                 key={hotel.id}
-                className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                className={`border rounded-lg p-4 transition-colors ${
                   selectedHotels.includes(hotel.id) ? 'bg-blue-50 border-blue-200' : 'hover:bg-gray-50'
                 }`}
-                onClick={() => handleHotelSelect(hotel.id)}
               >
                 <div className="flex items-center gap-3">
                   <Checkbox 
                     checked={selectedHotels.includes(hotel.id)}
-                    onCheckedChange={() => {}} // handled by parent div click
+                    onCheckedChange={() => handleHotelSelect(hotel.id)}
                   />
                   <div className="flex-1">
                     <h3 className="font-medium">{hotel.name}</h3>
