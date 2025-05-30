@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "@/hooks/use-toast";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDistanceToNow } from "date-fns";
-import { Loader2, Download, Trash2, Upload, Database, FileUp, FileDown } from "lucide-react";
+import { Loader2, Download, Trash2, Upload, Database, FileUp, FileDown, Sprout, Play } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
@@ -28,15 +28,42 @@ export default function DataExportImportPage() {
   const [activeTab, setActiveTab] = useState("export");
   const [importProgress, setImportProgress] = useState(0);
   const [exportProgress, setExportProgress] = useState(0);
+  const [isSeedingData, setIsSeedingData] = useState(false);
   
   // Get list of export files
   const { data: exportsData, isLoading: isLoadingExports, refetch: refetchExports } = useQuery({
     queryKey: ['/api/admin/exports'],
-    retry: 1,
-    onError: (error: Error) => {
+    retry: 1
+  });
+
+  // Test data seeding mutation
+  const seedTestDataMutation = useMutation({
+    mutationFn: async () => {
+      setIsSeedingData(true);
+      const response = await apiRequest('/api/admin/seed-test-data', {
+        method: 'POST'
+      });
+      return response;
+    },
+    onSuccess: (data) => {
+      setIsSeedingData(false);
       toast({
-        title: "Error",
-        description: `Failed to fetch exports: ${error.message}`,
+        title: "Test Data Seeded Successfully",
+        description: data.summary || "Comprehensive test data has been added to your platform",
+      });
+      
+      // Refresh all relevant queries
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/hotels'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/packages'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/rooms'] });
+    },
+    onError: (error: Error) => {
+      setIsSeedingData(false);
+      toast({
+        title: "Seeding Failed",
+        description: error.message || "Failed to seed test data",
         variant: "destructive",
       });
     }
