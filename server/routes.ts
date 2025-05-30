@@ -43,7 +43,8 @@ import geminiService from "./services/gemini";
 import { setupExportImportRoutes } from "./export-import-routes";
 import { setupVisaRoutes } from "./visa-routes";
 import Stripe from "stripe";
-import { eq, and } from "drizzle-orm";
+import { eq, and, sql } from "drizzle-orm";
+import * as schema from "@shared/schema";
 
 // Middleware to check if user is admin
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
@@ -5613,36 +5614,30 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
       let clearedTables = 0;
       let totalRecordsCleared = 0;
 
-      for (const tableName of tablesToClear) {
+      // Clear tables using Drizzle delete operations
+      const clearOperations = [
+        { name: 'rooms', table: rooms },
+        { name: 'hotels', table: hotels },
+        { name: 'tours', table: tours },
+        { name: 'packages', table: packages }
+      ];
+
+      for (const operation of clearOperations) {
         try {
           // Get count before deletion
-          const countResult = await db.execute(`SELECT COUNT(*) as count FROM ${tableName}`);
-          const recordCount = parseInt(countResult.rows[0].count);
+          const existing = await db.select().from(operation.table);
+          const recordCount = existing.length;
           
           if (recordCount > 0) {
             // Clear the table
-            await db.execute(`DELETE FROM ${tableName}`);
-            console.log(`Cleared ${recordCount} records from ${tableName}`);
+            await db.delete(operation.table);
+            console.log(`Cleared ${recordCount} records from ${operation.name}`);
             totalRecordsCleared += recordCount;
             clearedTables++;
           }
         } catch (error) {
           // Table might not exist or might be empty, continue with next table
-          console.log(`Skipped table ${tableName}: ${error.message}`);
-        }
-      }
-
-      // Reset sequences for tables with auto-increment IDs
-      const sequenceResets = [
-        'countries', 'cities', 'hotels', 'rooms', 'packages', 'tours', 
-        'bookings', 'destinations', 'transport_types', 'users'
-      ];
-
-      for (const tableName of sequenceResets) {
-        try {
-          await db.execute(`SELECT setval(pg_get_serial_sequence('${tableName}', 'id'), 1, false)`);
-        } catch (error) {
-          // Sequence might not exist, continue
+          console.log(`Skipped table ${operation.name}: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
       }
 
