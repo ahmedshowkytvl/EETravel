@@ -230,9 +230,69 @@ export default function DataExportImportPage() {
   };
   
   return (
-    <DashboardLayout>
+    <DashboardLayout location="/admin/data-export-import">
       <div className="container mx-auto py-10">
         <h1 className="text-3xl font-bold mb-6">Data Export & Import</h1>
+        
+        {/* Test Data Seeding Section */}
+        <Card className="border-2 border-green-200 bg-gradient-to-r from-green-50 to-blue-50 mb-6">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Sprout className="w-5 h-5 text-green-600" />
+              Generate Test Data
+            </CardTitle>
+            <CardDescription>
+              Populate your platform with comprehensive, realistic test data for development and testing purposes.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div className="bg-white p-3 rounded-lg border">
+                  <div className="font-medium text-blue-600">Countries & Cities</div>
+                  <div className="text-gray-600">8 countries, 15+ cities</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg border">
+                  <div className="font-medium text-green-600">Hotels & Rooms</div>
+                  <div className="text-gray-600">15 hotels, 45+ rooms</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg border">
+                  <div className="font-medium text-purple-600">Travel Packages</div>
+                  <div className="text-gray-600">10+ diverse packages</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg border">
+                  <div className="font-medium text-orange-600">Transportation</div>
+                  <div className="text-gray-600">6 vehicle types</div>
+                </div>
+              </div>
+              
+              <Button 
+                onClick={() => seedTestDataMutation.mutate()}
+                disabled={isSeedingData}
+                className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                size="lg"
+              >
+                {isSeedingData ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Generating Test Data...
+                  </>
+                ) : (
+                  <>
+                    <Play className="mr-2 h-4 w-4" />
+                    Generate Comprehensive Test Data
+                  </>
+                )}
+              </Button>
+              
+              <div className="text-xs text-gray-600 bg-white p-3 rounded border">
+                <strong>What will be created:</strong> Countries (Egypt, UAE, Jordan, Morocco, Turkey, Saudi Arabia, Oman, Lebanon), 
+                major cities with airports, luxury hotels with different room types, diverse travel packages, 
+                transportation options, and realistic pricing data - all optimized for Middle Eastern tourism.
+              </div>
+            </div>
+          </CardContent>
+        </Card>
         
         <Tabs defaultValue="export" value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-4">
