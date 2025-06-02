@@ -1908,12 +1908,12 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
               }}
               initialSelection={selectedHotelRooms}
               guestBreakdown={{
-                adults: form.watch("adultCount") || 2,
-                children: form.watch("childrenCount") || 0,
-                infants: form.watch("infantCount") || 0
+                adults: 2,
+                children: 0,
+                infants: 0
               }}
               nights={3}
-              // No guest breakdown sync - only for room filtering
+              // Completely isolated from main form
             />
 
 
