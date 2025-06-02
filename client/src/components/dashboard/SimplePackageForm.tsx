@@ -2170,6 +2170,51 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
                 </FormItem>
               )}
             />
+
+            {/* Excluded Features */}
+            <FormField
+              control={form.control}
+              name="excludedItems"
+              render={() => (
+                <FormItem>
+                  <div className="mb-4">
+                    <FormLabel>Excluded Features</FormLabel>
+                    <FormDescription>
+                      Select the features that are NOT included in this package
+                    </FormDescription>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {excludedItems.map((item) => (
+                      <FormItem
+                        key={item.id}
+                        className="flex items-center space-x-3 space-y-0 rounded-md border p-4 border-red-200 bg-red-50"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={Array.isArray(form.watch("excludedItems")) && form.watch("excludedItems").includes(item.id)}
+                            onCheckedChange={(checked) => {
+                              const currentItems = form.watch("excludedItems") || [];
+                              if (checked) {
+                                form.setValue("excludedItems", [...currentItems, item.id]);
+                              } else {
+                                form.setValue(
+                                  "excludedItems",
+                                  currentItems.filter((value) => value !== item.id)
+                                );
+                              }
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="font-normal cursor-pointer text-red-700">
+                          {item.label}
+                        </FormLabel>
+                      </FormItem>
+                    ))}
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </TabsContent>
 
           {/* Itinerary Tab */}
