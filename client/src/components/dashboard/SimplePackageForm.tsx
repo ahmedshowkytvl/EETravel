@@ -350,6 +350,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   // Initialize form with empty values (will be updated when editing)
   const form = useForm<PackageFormValues>({
     resolver: zodResolver(packageFormSchema),
+    mode: "onSubmit", // Only validate on submit, not on change
     defaultValues: {
       name: "",
       shortDescription: "",
