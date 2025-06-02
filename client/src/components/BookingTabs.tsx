@@ -253,9 +253,22 @@ const BookingTabs: React.FC = () => {
   const decrementAdults = () =>
     setAdults((prev) => (prev > 1 ? prev - 1 : prev));
 
-  const incrementChildren = () => setChildren((prev) => prev + 1);
-  const decrementChildren = () =>
-    setChildren((prev) => (prev > 0 ? prev - 1 : prev));
+  const incrementChildren = () => {
+    console.log("Children increment clicked - Current count:", children);
+    setChildren((prev) => {
+      const newCount = prev + 1;
+      console.log("Children count updated from", prev, "to", newCount);
+      return newCount;
+    });
+  };
+  const decrementChildren = () => {
+    console.log("Children decrement clicked - Current count:", children);
+    setChildren((prev) => {
+      const newCount = prev > 0 ? prev - 1 : prev;
+      console.log("Children count updated from", prev, "to", newCount);
+      return newCount;
+    });
+  };
 
   const incrementInfants = () => setInfants((prev) => prev + 1);
   const decrementInfants = () =>
