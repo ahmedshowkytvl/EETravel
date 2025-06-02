@@ -73,11 +73,11 @@ const HotelSearchComponent: React.FC<Props> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedHotels, setSelectedHotels] = useState<number[]>([]);
   const [selectedRooms, setSelectedRooms] = useState<SelectedRoom[]>(initialSelection);
-  const [guestBreakdown, setGuestBreakdown] = useState(propGuestBreakdown || {
-    adults: 2,
-    children: 0,
-    infants: 0
-  });
+  const [guestBreakdown, setGuestBreakdown] = useState(() => ({
+    adults: propGuestBreakdown?.adults ?? 2,
+    children: propGuestBreakdown?.children ?? 0,
+    infants: propGuestBreakdown?.infants ?? 0
+  }));
   const [nights, setNights] = useState(propNights || 3);
 
   // Fetch hotels
@@ -265,10 +265,13 @@ const HotelSearchComponent: React.FC<Props> = ({
                   size="sm" 
                   variant="outline"
                   onClick={() => {
-                    const newAdults = Math.max(1, guestBreakdown.adults - 1);
-                    const newBreakdown = { ...guestBreakdown, adults: newAdults };
-                    setGuestBreakdown(newBreakdown);
-                    // Only filter rooms, don't update main form
+                    setGuestBreakdown(prev => {
+                      const newBreakdown = { ...prev, adults: Math.max(1, prev.adults - 1) };
+                      if (onGuestBreakdownChange) {
+                        setTimeout(() => onGuestBreakdownChange(newBreakdown), 0);
+                      }
+                      return newBreakdown;
+                    });
                   }}
                 >
                   <Minus className="h-4 w-4" />
@@ -278,10 +281,13 @@ const HotelSearchComponent: React.FC<Props> = ({
                   size="sm" 
                   variant="outline"
                   onClick={() => {
-                    const newAdults = guestBreakdown.adults + 1;
-                    const newBreakdown = { ...guestBreakdown, adults: newAdults };
-                    setGuestBreakdown(newBreakdown);
-                    // Only filter rooms, don't update main form
+                    setGuestBreakdown(prev => {
+                      const newBreakdown = { ...prev, adults: prev.adults + 1 };
+                      if (onGuestBreakdownChange) {
+                        setTimeout(() => onGuestBreakdownChange(newBreakdown), 0);
+                      }
+                      return newBreakdown;
+                    });
                   }}
                 >
                   <Plus className="h-4 w-4" />
@@ -295,10 +301,14 @@ const HotelSearchComponent: React.FC<Props> = ({
                   size="sm" 
                   variant="outline"
                   onClick={() => {
-                    const newChildren = Math.max(0, guestBreakdown.children - 1);
-                    const newBreakdown = { ...guestBreakdown, children: newChildren };
-                    setGuestBreakdown(newBreakdown);
-                    // Only filter rooms, don't update main form
+                    setGuestBreakdown(prev => {
+                      const newBreakdown = { ...prev, children: Math.max(0, prev.children - 1) };
+                      // Notify parent component if callback exists
+                      if (onGuestBreakdownChange) {
+                        setTimeout(() => onGuestBreakdownChange(newBreakdown), 0);
+                      }
+                      return newBreakdown;
+                    });
                   }}
                 >
                   <Minus className="h-4 w-4" />
@@ -308,20 +318,14 @@ const HotelSearchComponent: React.FC<Props> = ({
                   size="sm" 
                   variant="outline"
                   onClick={() => {
-                    console.log("🔹 CHILDREN PLUS CLICKED");
-                    console.log("Current children count:", guestBreakdown.children);
-                    
-                    const newChildren = guestBreakdown.children + 1;
-                    const newBreakdown = { ...guestBreakdown, children: newChildren };
-                    
-                    console.log("New children count:", newChildren);
-                    console.log("New guest breakdown:", newBreakdown);
-                    console.log("Setting guest breakdown state...");
-                    
-                    setGuestBreakdown(newBreakdown);
-                    
-                    console.log("✅ Children count updated, filtering rooms only");
-                    console.log("No form submission should be triggered");
+                    setGuestBreakdown(prev => {
+                      const newBreakdown = { ...prev, children: prev.children + 1 };
+                      // Notify parent component if callback exists
+                      if (onGuestBreakdownChange) {
+                        setTimeout(() => onGuestBreakdownChange(newBreakdown), 0);
+                      }
+                      return newBreakdown;
+                    });
                   }}
                 >
                   <Plus className="h-4 w-4" />
@@ -335,10 +339,13 @@ const HotelSearchComponent: React.FC<Props> = ({
                   size="sm" 
                   variant="outline"
                   onClick={() => {
-                    const newInfants = Math.max(0, guestBreakdown.infants - 1);
-                    const newBreakdown = { ...guestBreakdown, infants: newInfants };
-                    setGuestBreakdown(newBreakdown);
-                    // Only filter rooms, don't update main form
+                    setGuestBreakdown(prev => {
+                      const newBreakdown = { ...prev, infants: Math.max(0, prev.infants - 1) };
+                      if (onGuestBreakdownChange) {
+                        setTimeout(() => onGuestBreakdownChange(newBreakdown), 0);
+                      }
+                      return newBreakdown;
+                    });
                   }}
                 >
                   <Minus className="h-4 w-4" />
@@ -348,10 +355,13 @@ const HotelSearchComponent: React.FC<Props> = ({
                   size="sm" 
                   variant="outline"
                   onClick={() => {
-                    const newInfants = guestBreakdown.infants + 1;
-                    const newBreakdown = { ...guestBreakdown, infants: newInfants };
-                    setGuestBreakdown(newBreakdown);
-                    // Only filter rooms, don't update main form
+                    setGuestBreakdown(prev => {
+                      const newBreakdown = { ...prev, infants: prev.infants + 1 };
+                      if (onGuestBreakdownChange) {
+                        setTimeout(() => onGuestBreakdownChange(newBreakdown), 0);
+                      }
+                      return newBreakdown;
+                    });
                   }}
                 >
                   <Plus className="h-4 w-4" />
