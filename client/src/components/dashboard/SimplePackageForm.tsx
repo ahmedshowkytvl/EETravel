@@ -1914,9 +1914,10 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
               }}
               nights={3}
               onGuestBreakdownChange={(guestBreakdown) => {
-                form.setValue("adultCount", guestBreakdown.adults);
-                form.setValue("childrenCount", guestBreakdown.children);
-                form.setValue("infantCount", guestBreakdown.infants);
+                // Update form values without triggering form submission
+                form.setValue("adultCount", guestBreakdown.adults, { shouldValidate: false, shouldTouch: false });
+                form.setValue("childrenCount", guestBreakdown.children, { shouldValidate: false, shouldTouch: false });
+                form.setValue("infantCount", guestBreakdown.infants, { shouldValidate: false, shouldTouch: false });
               }}
             />
 
