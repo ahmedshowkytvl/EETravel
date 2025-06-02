@@ -644,7 +644,10 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
       }
     ]);
 
-    if (!customValidationsValid) return;
+    if (!customValidationsValid) {
+      setAllowFormSubmission(false);
+      return;
+    }
 
     // All validations passed, proceed with submission
     packageMutation.mutate(data);
@@ -1065,7 +1068,14 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
 
   return (
     <Form {...form}>
-      <div className="space-y-8">
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        if (!allowFormSubmission) {
+          console.log("Form submission blocked - manual trigger required");
+          return;
+        }
+        onSubmit(form.getValues());
+      }} className="space-y-8">
         <div className="mb-6">
           <FormRequiredFieldsNote />
           {packageMutation.isError && (
@@ -2764,14 +2774,10 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
           <div className="flex justify-end space-x-4 pt-4 border-t">
             <Button type="button" variant="outline">Cancel</Button>
             <Button 
-              type="button" 
+              type="submit" 
               className="bg-blue-600 hover:bg-blue-700"
               disabled={packageMutation.isPending}
-              onClick={() => {
-                setAllowFormSubmission(true);
-                const formData = form.getValues();
-                onSubmit(formData);
-              }}
+              onClick={() => setAllowFormSubmission(true)}
             >
               {packageMutation.isPending ? (
                 <>
@@ -2789,7 +2795,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
             </div>
           )}
         </div>
-      </div>
+      </form>
     </Form>
   );
 }
