@@ -1065,11 +1065,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        form.handleSubmit(onSubmit)(e);
-      }} className="space-y-8">
+      <div className="space-y-8">
         <div className="mb-6">
           <FormRequiredFieldsNote />
           {packageMutation.isError && (
@@ -2768,10 +2764,14 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
           <div className="flex justify-end space-x-4 pt-4 border-t">
             <Button type="button" variant="outline">Cancel</Button>
             <Button 
-              type="submit" 
+              type="button" 
               className="bg-blue-600 hover:bg-blue-700"
               disabled={packageMutation.isPending}
-              onClick={() => setAllowFormSubmission(true)}
+              onClick={() => {
+                setAllowFormSubmission(true);
+                const formData = form.getValues();
+                onSubmit(formData);
+              }}
             >
               {packageMutation.isPending ? (
                 <>
@@ -2789,7 +2789,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
             </div>
           )}
         </div>
-      </form>
+      </div>
     </Form>
   );
 }
