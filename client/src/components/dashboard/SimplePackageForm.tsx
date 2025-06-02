@@ -967,6 +967,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   // Validation helper functions
   const validateFormFields = () => {
     const formData = form.getValues();
+    console.log("Validating form data:", formData);
     const errors: {[key: string]: string[]} = {};
 
     // Basic Info tab validation
@@ -977,13 +978,13 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
     if (!formData.shortDescription || formData.shortDescription.trim().length < 10) {
       basicErrors.push("Short Description");
     }
-    if (!formData.countryId) {
+    if (!formData.countryId || formData.countryId === null || formData.countryId === 0) {
       basicErrors.push("Country");
     }
-    if (!formData.cityId) {
+    if (!formData.cityId || formData.cityId === null || formData.cityId === 0) {
       basicErrors.push("City");
     }
-    if (!formData.categoryId) {
+    if (!formData.categoryId || formData.categoryId === null || formData.categoryId === 0) {
       basicErrors.push("Package Category");
     }
     if (!formData.overview || formData.overview.trim().length < 10) {
@@ -1008,6 +1009,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
       errors["Pricing Rules"] = pricingErrors;
     }
 
+    console.log("Validation errors found:", errors);
     return errors;
   };
 
