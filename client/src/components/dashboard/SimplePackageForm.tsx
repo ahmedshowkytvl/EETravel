@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { format } from "date-fns";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -310,13 +310,21 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   // Fetch countries for the dropdown
   const { data: countries = [] } = useQuery<any[]>({
     queryKey: ['/api/countries'],
+    staleTime: 5 * 60 * 1000, // 5 minutes cache
   });
 
   // Fetch cities based on selected country
   const [selectedCountryId, setSelectedCountryId] = useState<number | null>(null);
   const { data: cities = [] } = useQuery<any[]>({
-    queryKey: ['/api/cities'],  // Get all cities at once, we'll filter in the UI
+    queryKey: ['/api/cities'],
+    staleTime: 5 * 60 * 1000, // 5 minutes cache
   });
+
+  // Memoize filtered cities to prevent unnecessary re-calculations
+  const filteredCities = useMemo(() => {
+    if (!selectedCountryId) return cities;
+    return cities.filter(city => city.countryId === selectedCountryId);
+  }, [cities, selectedCountryId]);
 
   // Fetch the package data if in edit mode
   const { data: existingPackageData, isLoading: isLoadingPackage } = useQuery<any>({
@@ -531,7 +539,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
     },
   });
 
-  const onSubmit = (data: PackageFormValues) => {
+  const onSubmit = useCallback((data: PackageFormValues) => {
     console.log("=== FORM SUBMISSION STARTED ===");
     console.log("Form submitted", data);
     console.log("allowFormSubmission state:", allowFormSubmission);
@@ -661,7 +669,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
     
     // Reset the permission flag after submission
     setAllowFormSubmission(false);
-  };
+  }, [allowFormSubmission]);
 
   // Effect to load package data when in edit mode
   useEffect(() => {
@@ -988,9 +996,8 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   };
 
   // Validation helper functions
-  const validateFormFields = () => {
+  const validateFormFields = useCallback(() => {
     const formData = form.getValues();
-    console.log("Validating form data:", formData);
     const errors: {[key: string]: string[]} = {};
 
     // Basic Info tab validation
@@ -1032,9 +1039,8 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
       errors["Pricing Rules"] = pricingErrors;
     }
 
-    console.log("Validation errors found:", errors);
     return errors;
-  };
+  }, [form]);
 
   const getFirstTabWithErrors = (errors: {[key: string]: string[]}) => {
     const tabOrder = ["basic", "pricing", "accommodation", "features", "itinerary", "packing", "route"];
