@@ -277,6 +277,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   // For transportation options
   const [selectedTransport, setSelectedTransport] = useState("");
   const [transportPrice, setTransportPrice] = useState(0);
+  const [allowFormSubmission, setAllowFormSubmission] = useState(false);
 
   // Fetch destinations for the dropdown
   const { data: destinations = [] } = useQuery<any[]>({
@@ -530,6 +531,12 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   const onSubmit = (data: PackageFormValues) => {
     console.log("=== FORM SUBMISSION STARTED ===");
     console.log("Form submitted", data);
+    
+    // Prevent automatic submission unless explicitly allowed
+    if (!allowFormSubmission) {
+      console.log("Form submission blocked - not explicitly allowed");
+      return;
+    }
 
     // Check for missing required fields
     const errors = validateFormFields();
@@ -641,6 +648,9 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
 
     // All validations passed, proceed with submission
     packageMutation.mutate(data);
+    
+    // Reset the permission flag after submission
+    setAllowFormSubmission(false);
   };
 
   // Effect to load package data when in edit mode
@@ -1055,7 +1065,11 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        form.handleSubmit(onSubmit)(e);
+      }} className="space-y-8">
         <div className="mb-6">
           <FormRequiredFieldsNote />
           {packageMutation.isError && (
@@ -2757,6 +2771,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
               type="submit" 
               className="bg-blue-600 hover:bg-blue-700"
               disabled={packageMutation.isPending}
+              onClick={() => setAllowFormSubmission(true)}
             >
               {packageMutation.isPending ? (
                 <>
