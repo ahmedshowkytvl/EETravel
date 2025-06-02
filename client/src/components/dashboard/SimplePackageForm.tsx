@@ -253,6 +253,11 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   // Track whether we're submitting an update or create
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   
+  // For validation hints
+  const [validationErrors, setValidationErrors] = useState<{[key: string]: string[]}>({});
+  const [showValidationHints, setShowValidationHints] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string>("basic");
+  
   // For additional required fields
   const [excludedItemsList, setExcludedItemsList] = useState<string[]>([]);
   const [selectedTravellerTypes, setSelectedTravellerTypes] = useState<string[]>([]);
@@ -523,6 +528,28 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
 
   const onSubmit = (data: PackageFormValues) => {
     console.log("Form submitted", data);
+
+    // Check for missing required fields
+    const errors = validateFormFields();
+    
+    if (Object.keys(errors).length > 0) {
+      // Show validation hints
+      setValidationErrors(errors);
+      setShowValidationHints(true);
+      
+      // Switch to the first tab with errors
+      const firstErrorTab = getFirstTabWithErrors(errors);
+      setActiveTab(firstErrorTab);
+      
+      // Scroll to top of form
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      return;
+    }
+
+    // Hide validation hints if all fields are valid
+    setShowValidationHints(false);
+    setValidationErrors({});
 
     // Use our validation utilities for better error handling
 
@@ -937,6 +964,69 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
     }
   };
 
+  // Validation helper functions
+  const validateFormFields = () => {
+    const formData = form.getValues();
+    const errors: {[key: string]: string[]} = {};
+
+    // Basic Info tab validation
+    const basicErrors: string[] = [];
+    if (!formData.name || formData.name.trim().length < 3) {
+      basicErrors.push("Package Name");
+    }
+    if (!formData.shortDescription || formData.shortDescription.trim().length < 10) {
+      basicErrors.push("Short Description");
+    }
+    if (!formData.countryId) {
+      basicErrors.push("Country");
+    }
+    if (!formData.cityId) {
+      basicErrors.push("City");
+    }
+    if (!formData.categoryId) {
+      basicErrors.push("Package Category");
+    }
+    if (!formData.overview || formData.overview.trim().length < 10) {
+      basicErrors.push("Overview");
+    }
+    if (basicErrors.length > 0) {
+      errors["Basic Info"] = basicErrors;
+    }
+
+    // Pricing Rules tab validation
+    const pricingErrors: string[] = [];
+    if (!formData.basePrice || formData.basePrice <= 0) {
+      pricingErrors.push("Base Price");
+    }
+    if (!formData.startDate) {
+      pricingErrors.push("Start Date");
+    }
+    if (!formData.endDate) {
+      pricingErrors.push("End Date");
+    }
+    if (pricingErrors.length > 0) {
+      errors["Pricing Rules"] = pricingErrors;
+    }
+
+    return errors;
+  };
+
+  const getFirstTabWithErrors = (errors: {[key: string]: string[]}) => {
+    const tabOrder = ["basic", "pricing", "accommodation", "features", "itinerary", "packing", "route"];
+    const errorTabs = Object.keys(errors);
+    
+    for (const tab of tabOrder) {
+      if (tab === "basic" && errorTabs.includes("Basic Info")) return "basic";
+      if (tab === "pricing" && errorTabs.includes("Pricing Rules")) return "pricing";
+      if (tab === "accommodation" && errorTabs.includes("Hotel & Rooms")) return "accommodation";
+      if (tab === "features" && errorTabs.includes("Features")) return "features";
+      if (tab === "itinerary" && errorTabs.includes("Itinerary")) return "itinerary";
+      if (tab === "packing" && errorTabs.includes("What to Pack")) return "packing";
+      if (tab === "route" && errorTabs.includes("Travel Route")) return "route";
+    }
+    return "basic";
+  };
+
   const removeImage = (id: string) => {
     // Find the image to remove
     const imageToRemove = images.find(img => img.id === id);
@@ -971,8 +1061,27 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
               className="mt-3"
             />
           )}
+          
+          {/* Validation Hints Box */}
+          {showValidationHints && Object.keys(validationErrors).length > 0 && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
+              <h4 className="text-sm font-medium text-red-800 mb-2">You are missing info in:</h4>
+              <div className="space-y-2">
+                {Object.entries(validationErrors).map(([tabName, errors]) => (
+                  <div key={tabName} className="text-sm">
+                    <div className="font-medium text-red-700">• {tabName}:</div>
+                    <div className="ml-4 space-y-1">
+                      {errors.map((error, index) => (
+                        <div key={index} className="text-red-600">- {error}</div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-        <Tabs defaultValue="basic" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="basic">Basic Info</TabsTrigger>
             <TabsTrigger value="pricing">Pricing Rules</TabsTrigger>
