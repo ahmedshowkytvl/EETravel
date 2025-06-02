@@ -351,7 +351,10 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   // Initialize form with empty values (will be updated when editing)
   const form = useForm<PackageFormValues>({
     resolver: zodResolver(packageFormSchema),
-    mode: "onSubmit", // Only validate on submit, not on change
+    mode: "onSubmit",
+    reValidateMode: "onSubmit",
+    shouldFocusError: false,
+    shouldUseNativeValidation: false,
     defaultValues: {
       name: "",
       shortDescription: "",
@@ -531,12 +534,16 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   const onSubmit = (data: PackageFormValues) => {
     console.log("=== FORM SUBMISSION STARTED ===");
     console.log("Form submitted", data);
+    console.log("allowFormSubmission state:", allowFormSubmission);
     
-    // Prevent automatic submission unless explicitly allowed
+    // CRITICAL: Block all automatic submissions
     if (!allowFormSubmission) {
-      console.log("Form submission blocked - not explicitly allowed");
-      return;
+      console.log("🚫 FORM SUBMISSION BLOCKED - Manual trigger required");
+      setAllowFormSubmission(false); // Reset to ensure it stays false
+      return false;
     }
+    
+    console.log("✅ Form submission allowed - proceeding");
 
     // Check for missing required fields
     const errors = validateFormFields();
@@ -1070,10 +1077,14 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
     <Form {...form}>
       <form onSubmit={(e) => {
         e.preventDefault();
+        e.stopPropagation();
+        
         if (!allowFormSubmission) {
-          console.log("Form submission blocked - manual trigger required");
-          return;
+          console.log("🚫 BLOCKED: Form auto-submission prevented");
+          return false;
         }
+        
+        console.log("✅ ALLOWED: Manual form submission proceeding");
         onSubmit(form.getValues());
       }} className="space-y-8">
         <div className="mb-6">
