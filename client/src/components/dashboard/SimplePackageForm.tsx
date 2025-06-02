@@ -1913,12 +1913,7 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
                 infants: form.watch("infantCount") || 0
               }}
               nights={3}
-              onGuestBreakdownChange={(guestBreakdown) => {
-                // Update form values without triggering form submission
-                form.setValue("adultCount", guestBreakdown.adults, { shouldValidate: false, shouldTouch: false });
-                form.setValue("childrenCount", guestBreakdown.children, { shouldValidate: false, shouldTouch: false });
-                form.setValue("infantCount", guestBreakdown.infants, { shouldValidate: false, shouldTouch: false });
-              }}
+              // No guest breakdown sync - only for room filtering
             />
 
 
