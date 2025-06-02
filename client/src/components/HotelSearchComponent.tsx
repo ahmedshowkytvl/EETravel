@@ -268,7 +268,7 @@ const HotelSearchComponent: React.FC<Props> = ({
                     const newAdults = Math.max(1, guestBreakdown.adults - 1);
                     const newBreakdown = { ...guestBreakdown, adults: newAdults };
                     setGuestBreakdown(newBreakdown);
-                    onGuestBreakdownChange?.(newBreakdown);
+                    // Only filter rooms, don't update main form
                   }}
                 >
                   <Minus className="h-4 w-4" />
@@ -281,7 +281,7 @@ const HotelSearchComponent: React.FC<Props> = ({
                     const newAdults = guestBreakdown.adults + 1;
                     const newBreakdown = { ...guestBreakdown, adults: newAdults };
                     setGuestBreakdown(newBreakdown);
-                    onGuestBreakdownChange?.(newBreakdown);
+                    // Only filter rooms, don't update main form
                   }}
                 >
                   <Plus className="h-4 w-4" />
@@ -298,7 +298,7 @@ const HotelSearchComponent: React.FC<Props> = ({
                     const newChildren = Math.max(0, guestBreakdown.children - 1);
                     const newBreakdown = { ...guestBreakdown, children: newChildren };
                     setGuestBreakdown(newBreakdown);
-                    onGuestBreakdownChange?.(newBreakdown);
+                    // Only filter rooms, don't update main form
                   }}
                 >
                   <Minus className="h-4 w-4" />
@@ -311,7 +311,7 @@ const HotelSearchComponent: React.FC<Props> = ({
                     const newChildren = guestBreakdown.children + 1;
                     const newBreakdown = { ...guestBreakdown, children: newChildren };
                     setGuestBreakdown(newBreakdown);
-                    onGuestBreakdownChange?.(newBreakdown);
+                    // Only filter rooms, don't update main form
                   }}
                 >
                   <Plus className="h-4 w-4" />
@@ -328,7 +328,7 @@ const HotelSearchComponent: React.FC<Props> = ({
                     const newInfants = Math.max(0, guestBreakdown.infants - 1);
                     const newBreakdown = { ...guestBreakdown, infants: newInfants };
                     setGuestBreakdown(newBreakdown);
-                    onGuestBreakdownChange?.(newBreakdown);
+                    // Only filter rooms, don't update main form
                   }}
                 >
                   <Minus className="h-4 w-4" />
@@ -341,7 +341,7 @@ const HotelSearchComponent: React.FC<Props> = ({
                     const newInfants = guestBreakdown.infants + 1;
                     const newBreakdown = { ...guestBreakdown, infants: newInfants };
                     setGuestBreakdown(newBreakdown);
-                    onGuestBreakdownChange?.(newBreakdown);
+                    // Only filter rooms, don't update main form
                   }}
                 >
                   <Plus className="h-4 w-4" />
