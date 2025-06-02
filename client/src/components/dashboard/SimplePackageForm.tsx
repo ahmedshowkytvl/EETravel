@@ -82,18 +82,18 @@ import { queryClient } from "@/lib/queryClient";
 import { validateForm, validateRequiredFields, validateDateFields, validateNumericFields } from "@/lib/validateForm";
 import { FormRequiredFieldsNote, FormValidationAlert } from "@/components/dashboard/FormValidationAlert";
 
-// Validation schema
+// Validation schema - Made more permissive to allow custom validation logic
 const packageFormSchema = z.object({
-  name: z.string().min(3, { message: "Package name must be at least 3 characters" }),
-  shortDescription: z.string().min(10, { message: "Short description must be at least 10 characters" }).max(200, { message: "Short description must be at most 200 characters" }),
-  overview: z.string().min(10, { message: "Overview must be at least 10 characters" }),
-  basePrice: z.coerce.number().positive({ message: "Base price must be a positive number" }),
-  countryId: z.coerce.number({ required_error: "Please select a country" }),
-  cityId: z.coerce.number({ required_error: "Please select a city" }),
-  category: z.string({ required_error: "Please select a destination" }),
-  categoryId: z.coerce.number({ required_error: "Please select a package category" }),
-  startDate: z.date({ required_error: "Start date is required" }),
-  endDate: z.date({ required_error: "End date is required" }),
+  name: z.string().optional(),
+  shortDescription: z.string().optional(),
+  overview: z.string().optional(),
+  basePrice: z.coerce.number().optional(),
+  countryId: z.coerce.number().optional().nullable(),
+  cityId: z.coerce.number().optional().nullable(),
+  category: z.string().optional(),
+  categoryId: z.coerce.number().optional().nullable(),
+  startDate: z.date().optional(),
+  endDate: z.date().optional(),
   route: z.string().optional(),
   maxGroupSize: z.coerce.number().min(1, { message: "Group size must be at least 1" }).optional(),
   language: z.string().optional(),
@@ -527,10 +527,12 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   });
 
   const onSubmit = (data: PackageFormValues) => {
+    console.log("=== FORM SUBMISSION STARTED ===");
     console.log("Form submitted", data);
 
     // Check for missing required fields
     const errors = validateFormFields();
+    console.log("=== VALIDATION COMPLETE ===");
     
     if (Object.keys(errors).length > 0) {
       // Show validation hints
