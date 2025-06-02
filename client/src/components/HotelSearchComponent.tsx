@@ -427,9 +427,23 @@ const HotelSearchComponent: React.FC<Props> = ({
             <div className="space-y-6">
               {selectedHotels.map(hotelId => {
                 const hotel = hotels.find(h => h.id === hotelId);
-                const hotelRooms = availableRooms.filter(room => room.hotelId === hotelId);
+                const hotelRooms = availableRooms.filter(room => 
+                  room.hotelId === hotelId && 
+                  room.maxAdults >= guestBreakdown.adults &&
+                  room.maxChildren >= guestBreakdown.children &&
+                  room.maxInfants >= guestBreakdown.infants
+                );
                 
-                if (hotelRooms.length === 0) return null;
+                if (hotelRooms.length === 0) {
+                  return (
+                    <div key={hotelId} className="border rounded-lg p-4 bg-yellow-50 border-yellow-200">
+                      <h3 className="font-semibold text-lg mb-2 text-yellow-800">{hotel?.name}</h3>
+                      <p className="text-yellow-700 text-sm">
+                        No rooms available that can accommodate {guestBreakdown.adults} adults, {guestBreakdown.children} children, and {guestBreakdown.infants} infants.
+                      </p>
+                    </div>
+                  );
+                }
                 
                 return (
                   <div key={hotelId} className="border rounded-lg p-4">
