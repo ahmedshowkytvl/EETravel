@@ -308,10 +308,20 @@ const HotelSearchComponent: React.FC<Props> = ({
                   size="sm" 
                   variant="outline"
                   onClick={() => {
+                    console.log("🔹 CHILDREN PLUS CLICKED");
+                    console.log("Current children count:", guestBreakdown.children);
+                    
                     const newChildren = guestBreakdown.children + 1;
                     const newBreakdown = { ...guestBreakdown, children: newChildren };
+                    
+                    console.log("New children count:", newChildren);
+                    console.log("New guest breakdown:", newBreakdown);
+                    console.log("Setting guest breakdown state...");
+                    
                     setGuestBreakdown(newBreakdown);
-                    // Only filter rooms, don't update main form
+                    
+                    console.log("✅ Children count updated, filtering rooms only");
+                    console.log("No form submission should be triggered");
                   }}
                 >
                   <Plus className="h-4 w-4" />

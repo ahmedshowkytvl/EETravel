@@ -234,7 +234,7 @@ const HotelDetailsPage: React.FC = () => {
   const [selectedRoom, setSelectedRoom] = useState<any>(null);
   const [checkInDate, setCheckInDate] = useState<string>("2025-05-15");
   const [checkOutDate, setCheckOutDate] = useState<string>("2025-05-17");
-  const [guests, setGuests] = useState({ adults: 2, children: 4, infants: 0 });
+  const [guests, setGuests] = useState({ adults: 2, children: 0, infants: 0 });
 
   // Query to fetch hotel data
   const {
