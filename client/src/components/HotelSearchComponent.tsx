@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Search, Hotel, Users, Calendar, Plus, Minus, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -111,15 +111,17 @@ const HotelSearchComponent: React.FC<Props> = ({
           return selectedRoom;
         });
         
-        // Notify parent of updated selections
-        setTimeout(() => onSelectionChange(updatedRooms), 0);
+        // Only notify parent if there are actual changes to prevent infinite loops
+        if (JSON.stringify(updatedRooms) !== JSON.stringify(prevRooms)) {
+          setTimeout(() => onSelectionChange?.(updatedRooms), 0);
+        }
         return updatedRooms;
       });
     }
-  }, [propGuestBreakdown, rooms, nights]);
+  }, [propGuestBreakdown?.adults, propGuestBreakdown?.children, propGuestBreakdown?.infants, rooms.length, nights]);
 
   useEffect(() => {
-    if (propNights) {
+    if (propNights && propNights !== nights) {
       setNights(propNights);
       
       // Update existing room selections with new nights count
@@ -136,23 +138,29 @@ const HotelSearchComponent: React.FC<Props> = ({
           return selectedRoom;
         });
         
-        // Notify parent of updated selections
-        setTimeout(() => onSelectionChange(updatedRooms), 0);
+        // Only notify parent if there are actual changes
+        if (JSON.stringify(updatedRooms) !== JSON.stringify(prevRooms)) {
+          setTimeout(() => onSelectionChange?.(updatedRooms), 0);
+        }
         return updatedRooms;
       });
     }
-  }, [propNights, rooms]);
+  }, [propNights, rooms.length, nights]);
 
-  // Filter hotels based on search term (show all if no search term)
-  const filteredHotels = hotels.filter((hotel: any) => 
-    hotel.status === 'active' && (searchTerm === '' || hotel.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  // Memoized hotel filtering to prevent recalculation on every render
+  const filteredHotels = useMemo(() => 
+    hotels.filter((hotel: any) => 
+      hotel.status === 'active' && (searchTerm === '' || hotel.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    ), [hotels, searchTerm]
   );
 
-  // Get rooms for selected hotels
-  const availableRooms = rooms.filter(room => 
-    selectedHotels.includes(room.hotelId) && 
-    room.available && 
-    room.status === 'active'
+  // Memoized room filtering for selected hotels
+  const availableRooms = useMemo(() => 
+    rooms.filter(room => 
+      selectedHotels.includes(room.hotelId) && 
+      room.available && 
+      room.status === 'active'
+    ), [rooms, selectedHotels]
   );
 
   // Handle hotel selection with batched state updates
