@@ -7,7 +7,7 @@ import path from "path";
 import { dbPromise } from './db'; // استيراد dbPromise
 import session from 'express-session'; // استيراد session
 import { setupAdmin } from './admin-setup'; // استيراد setupAdmin
-import { setupSimpleAuth } from './simple-auth'; // استيراد setupSimpleAuth
+import { setupUnifiedAuth } from './unified-auth'; // استيراد setupUnifiedAuth
 
 // Load environment variables first
 dotenv.config();
@@ -84,8 +84,8 @@ app.use((req, res, next) => {
     // Setup admin users after database is initialized
     await setupAdmin();
 
-    // Setup simple authentication (including registration)
-    setupSimpleAuth(app);
+    // Setup unified authentication (including registration)
+    setupUnifiedAuth(app);
 
     // Start the server and register routes
     const server = await registerRoutes(app);
