@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import {
@@ -187,7 +186,7 @@ export default function PackagesManagement() {
   };
 
   return (
-    <DashboardLayout>
+    <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-zinc-900">Packages</h1>
         <div className="flex gap-2">
@@ -484,6 +483,6 @@ export default function PackagesManagement() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </DashboardLayout>
+    </div>
   );
 }

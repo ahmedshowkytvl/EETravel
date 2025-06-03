@@ -1,5 +1,4 @@
 import React from "react";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   BarChart3, 
@@ -13,7 +12,7 @@ import {
 
 export default function Dashboard() {
   return (
-    <DashboardLayout>
+    <div>
       <div className="mb-8">
         <h1 className="text-2xl font-bold mb-2 text-zinc-800">Dashboard</h1>
         <p className="text-zinc-500">Welcome to your admin dashboard.</p>
@@ -152,7 +151,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
-    </DashboardLayout>
+    </div>
   );
 }
 
