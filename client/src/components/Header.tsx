@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "wouter";
-import logo from "../assets/EgyptExpressTvl-logo.png";
+import logo from "@assets/487170662_9455781574491588_8002825460134509283_n (1).jpg";
 import { Button } from "@/components/ui/button";
 import {
   UmbrellaIcon,
