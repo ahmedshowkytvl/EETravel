@@ -45,12 +45,25 @@ export default function PackageCreatorPage() {
       <div className="bg-white rounded-lg shadow-sm border p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-zinc-800">{pageTitle}</h1>
-          <Button variant="outline" className="gap-1" onClick={() => setLocation("/admin/packages")}>
+          <Button 
+            variant="outline" 
+            className="gap-1" 
+            onClick={() => {
+              // The form component will handle the unsaved changes warning
+              const event = new CustomEvent('navigate-request', { 
+                detail: { destination: '/admin/packages' } 
+              });
+              window.dispatchEvent(event);
+            }}
+          >
             <ArrowLeft size={16} />
             <span>Back to Packages</span>
           </Button>
         </div>
-        <PackageCreatorForm packageId={packageId} />
+        <PackageCreatorForm 
+          packageId={packageId} 
+          onNavigateRequest={() => setLocation("/admin/packages")}
+        />
       </div>
     </div>
   );

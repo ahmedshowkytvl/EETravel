@@ -215,6 +215,7 @@ const categoryOptions = [
 
 export interface PackageCreatorFormProps {
   packageId?: string; // Optional package ID for edit mode
+  onNavigateRequest?: () => void; // Optional callback for navigation requests
 }
 
 // Export function with two names
@@ -229,7 +230,7 @@ interface Tour {
   destination_id?: number;
 }
 
-export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
+export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCreatorFormProps) {
   const isEditMode = !!packageId;
   const [, setLocation] = useLocation();
 
@@ -284,6 +285,28 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   // Track form changes for unsaved changes warning
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [initialFormData, setInitialFormData] = useState<PackageFormValues | null>(null);
+
+  // Function to check for unsaved changes and warn user
+  const handleNavigateWithWarning = (destination: string) => {
+    if (hasUnsavedChanges) {
+      const confirmLeave = window.confirm(
+        "You have unsaved changes. Are you sure you want to leave? Your changes will be lost."
+      );
+      if (confirmLeave) {
+        if (onNavigateRequest) {
+          onNavigateRequest();
+        } else {
+          setLocation(destination);
+        }
+      }
+    } else {
+      if (onNavigateRequest) {
+        onNavigateRequest();
+      } else {
+        setLocation(destination);
+      }
+    }
+  };
 
   // Fetch destinations for the dropdown
   const { data: destinations = [] } = useQuery<any[]>({
@@ -898,11 +921,40 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
         // Force update the form control values directly as a backup
         form.setValue('countryId', countryId);
         form.setValue('cityId', cityId);
+        form.setValue('categoryId', parsedCategoryId);
+        form.setValue('shortDescription', parsedShortDescription);
+        form.setValue('route', parsedRoute);
 
-        console.log('Form values set:', form.getValues());
+        // Set initial form data for change tracking
+        const currentFormData = form.getValues();
+        setInitialFormData(currentFormData);
+
+        console.log('Form values set:', currentFormData);
       }, 800); // Give a longer delay to ensure cities are loaded
     }
   }, [existingPackageData, isEditMode, form, isInitialized, destinations, countries, cities]);
+
+  // Watch form changes to track unsaved changes (after form is initialized)
+  const formValues = form.watch();
+  
+  useEffect(() => {
+    if (initialFormData) {
+      const hasChanges = JSON.stringify(formValues) !== JSON.stringify(initialFormData);
+      setHasUnsavedChanges(hasChanges);
+    }
+  }, [formValues, initialFormData]);
+
+  // Listen for navigate requests from the parent component
+  useEffect(() => {
+    const handleNavigateRequest = () => {
+      handleNavigateWithWarning("/admin/packages");
+    };
+
+    window.addEventListener('navigate-request', handleNavigateRequest);
+    return () => {
+      window.removeEventListener('navigate-request', handleNavigateRequest);
+    };
+  }, [hasUnsavedChanges]);
 
   // Effect to initialize rooms when component loads
   useEffect(() => {
@@ -2859,7 +2911,13 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
 
         <div className="flex flex-col gap-2">
           <div className="flex justify-end space-x-4 pt-4 border-t">
-            <Button type="button" variant="outline">Cancel</Button>
+            <Button 
+              type="button" 
+              variant="outline"
+              onClick={() => handleNavigateWithWarning("/admin/packages")}
+            >
+              Cancel
+            </Button>
             <Button 
               type="submit" 
               className="bg-blue-600 hover:bg-blue-700"
