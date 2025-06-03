@@ -111,11 +111,11 @@ app.use((req, res, next) => {
       serveStatic(app);
     }
 
-    // ALWAYS serve the app on port 3000
+    // ALWAYS serve the app on port 8080
     // this serves both the API and the client.
     // Using port 8080 as discussed previously
     const port = process.env.PORT || 8080; // Use PORT environment variable, fallback to 8080
-    server.listen(port, () => {
+    server.listen(port, "0.0.0.0", () => {
       log(`serving on port ${port}`);
     });
   } catch (error) {
