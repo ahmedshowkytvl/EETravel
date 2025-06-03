@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 
@@ -311,7 +311,7 @@ export default function ToursManagement() {
   };
 
   // Filter and sort tours
-  const filteredTours = tours.filter((tour: any) => {
+  const filteredTours = (tours as any[]).filter((tour: any) => {
     const matchesSearch = tour.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          tour.description?.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "all" || tour.categoryId?.toString() === selectedCategory;
@@ -399,7 +399,7 @@ export default function ToursManagement() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Categories</SelectItem>
-              {categories.map((category: any) => (
+              {(categories as any[]).map((category: any) => (
                 <SelectItem key={category.id} value={category.id.toString()}>
                   {category.name}
                 </SelectItem>
@@ -445,10 +445,10 @@ export default function ToursManagement() {
                     <TableRow key={tour.id}>
                       <TableCell className="font-medium">{tour.name}</TableCell>
                       <TableCell>
-                        {categories.find((cat: any) => cat.id === tour.categoryId)?.name || "Unknown"}
+                        {(categories as any[]).find((cat: any) => cat.id === tour.categoryId)?.name || "Unknown"}
                       </TableCell>
                       <TableCell>
-                        {locations.find((loc: any) => loc.id === tour.locationId)?.name || "Unknown"}
+                        {(locations as any[]).find((loc: any) => loc.id === tour.locationId)?.name || "Unknown"}
                       </TableCell>
                       <TableCell>${tour.price}</TableCell>
                       <TableCell>{tour.duration} days</TableCell>
