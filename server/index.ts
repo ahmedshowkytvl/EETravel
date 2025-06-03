@@ -7,7 +7,7 @@ import path from "path";
 import { dbPromise } from './db'; // استيراد dbPromise
 import session from 'express-session'; // استيراد session
 import { setupAdmin } from './admin-setup'; // استيراد setupAdmin
-import { setupUnifiedAuth } from './unified-auth'; // استيراد setupUnifiedAuth
+import { setupUnifiedAuth } from './unified-auth';
 
 // Load environment variables first
 dotenv.config();
