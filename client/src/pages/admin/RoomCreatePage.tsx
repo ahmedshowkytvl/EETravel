@@ -37,8 +37,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { ChevronRight, Save } from "lucide-react";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
-
 // Room form schema
 const roomFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -276,7 +274,7 @@ export default function RoomCreatePage() {
   };
 
   return (
-    <DashboardLayout>
+    <div>
       {/* Confirmation Dialog for Unsaved Changes */}
       <AlertDialog open={confirmDialogOpen} onOpenChange={setConfirmDialogOpen}>
         <AlertDialogContent className="max-w-md">
@@ -676,6 +674,6 @@ export default function RoomCreatePage() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </DashboardLayout>
+    </div>
   );
 }

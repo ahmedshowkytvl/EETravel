@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -117,7 +116,7 @@ export default function SystemMonitoring() {
   };
 
   return (
-    <DashboardLayout>
+    <div>
       <div className="space-y-6 p-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -482,6 +481,6 @@ export default function SystemMonitoring() {
           </TabsContent>
         </Tabs>
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

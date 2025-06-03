@@ -7,7 +7,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiRequest, getQueryFn } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useUnsavedChanges } from "@/hooks/useUnsavedChanges";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import {
   Card,
   CardHeader,
@@ -318,17 +317,17 @@ export default function HotelEditPage() {
 
   if (isLoadingHotel) {
     return (
-      <DashboardLayout>
+      <div>
         <div className="w-full h-screen flex items-center justify-center">
           <Loader2 className="h-12 w-12 animate-spin text-primary" />
         </div>
-      </DashboardLayout>
+      </div>
     );
   }
 
   if (hotelError) {
     return (
-      <DashboardLayout>
+      <div>
         <Card>
           <CardHeader>
             <CardTitle>Error</CardTitle>
@@ -344,13 +343,13 @@ export default function HotelEditPage() {
             </Button>
           </CardContent>
         </Card>
-      </DashboardLayout>
+      </div>
     );
   }
 
   if (!hotel && !isLoadingHotel) {
     return (
-      <DashboardLayout>
+      <div>
         <Card>
           <CardHeader>
             <CardTitle>Not Found</CardTitle>
@@ -366,12 +365,12 @@ export default function HotelEditPage() {
             </Button>
           </CardContent>
         </Card>
-      </DashboardLayout>
+      </div>
     );
   }
 
   return (
-    <DashboardLayout>
+    <div>
       {/* Alert Dialog for Unsaved Changes */}
       <AlertDialog
         open={showUnsavedChangesAlert}
@@ -1055,6 +1054,6 @@ export default function HotelEditPage() {
           </Card>
         </div>
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

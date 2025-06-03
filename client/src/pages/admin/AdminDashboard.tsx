@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -61,7 +60,7 @@ export default function AdminDashboard() {
 
   if (isLoading) {
     return (
-      <DashboardLayout>
+      <div>
         <div className="space-y-6 p-6">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {[...Array(4)].map((_, i) => (
@@ -78,7 +77,7 @@ export default function AdminDashboard() {
             ))}
           </div>
         </div>
-      </DashboardLayout>
+      </div>
     );
   }
 
@@ -102,7 +101,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <DashboardLayout>
+    <div>
       <div className="space-y-6 p-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -537,6 +536,6 @@ export default function AdminDashboard() {
           </TabsContent>
         </Tabs>
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

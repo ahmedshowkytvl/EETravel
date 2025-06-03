@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { apiRequest, getQueryFn } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -296,7 +295,7 @@ export default function HotelsManagement() {
 
   if (hotelsError) {
     return (
-      <DashboardLayout>
+      <div>
         <Card>
           <CardHeader>
             <CardTitle>Error</CardTitle>
@@ -305,12 +304,12 @@ export default function HotelsManagement() {
             <p>Failed to load hotels: {(hotelsError as Error).message}</p>
           </CardContent>
         </Card>
-      </DashboardLayout>
+      </div>
     );
   }
 
   return (
-    <DashboardLayout>
+    <div>
       <Card className="mb-6">
         <CardHeader>
           <CardTitle>Hotels Management</CardTitle>
@@ -800,6 +799,6 @@ export default function HotelsManagement() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </DashboardLayout>
+    </div>
   );
 }

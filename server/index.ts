@@ -6,7 +6,7 @@ import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
 import { dbPromise } from './db'; // استيراد dbPromise
 import session from 'express-session'; // استيراد session
-import setupAdmin from './admin-setup'; // استيراد setupAdmin
+import { setupAdmin } from './admin-setup'; // استيراد setupAdmin
 
 // Load environment variables first
 dotenv.config();

@@ -64,4 +64,4 @@ async function setupAdmin() {
   }
 }
 
-export default setupAdmin;
+export { setupAdmin };

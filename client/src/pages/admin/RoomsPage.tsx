@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useRoute, useSearch } from "wouter";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import {
   Table,
   TableBody,
@@ -188,7 +187,7 @@ export default function RoomsPage() {
   };
 
   return (
-    <DashboardLayout>
+    <div>
       <div className="space-y-4 p-4 sm:p-6 lg:p-8">
         <div className="mb-6">
           <div className="flex items-center gap-2">
@@ -452,6 +451,6 @@ export default function RoomsPage() {
           </DialogContent>
         </Dialog>
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

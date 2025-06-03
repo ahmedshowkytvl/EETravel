@@ -3,7 +3,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { DataTable, Column } from "@/components/dashboard/DataTable";
 import { DataModal } from "@/components/dashboard/DataModal";
 import { Button } from "@/components/ui/button";
@@ -275,7 +274,7 @@ export default function TransportLocationsManagement() {
   ];
   
   return (
-    <DashboardLayout>
+    <div>
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold mb-1">Transport Locations</h1>
@@ -732,6 +731,6 @@ export default function TransportLocationsManagement() {
           />
         </div>
       </DataModal>
-    </DashboardLayout>
+    </div>
   );
 }
