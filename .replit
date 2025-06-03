@@ -4,10 +4,12 @@ modules = ["nodejs-20", "postgresql-16"]
 channel = "stable-24_05"
 
 [[ports]]
+localPort = 3000
+externalPort = 80
+
+[[ports]]
 localPort = 8080
 externalPort = 8080
-
-run = "npm run dev"
 
 [workflows]
 runButton = "Development"
