@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, useParams } from "wouter";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { TourCreatorForm } from "../../components/dashboard/TourCreatorForm";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
@@ -15,7 +14,7 @@ export default function TourCreatorPage() {
   const pageTitle = isEditMode ? "Edit Tour" : "Create New Tour";
 
   return (
-    <DashboardLayout>
+    <div>
       <div className="mb-6">
         <Breadcrumb>
           <BreadcrumbItem>
@@ -46,6 +45,6 @@ export default function TourCreatorPage() {
         </div>
         <TourCreatorForm tourId={tourId} />
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

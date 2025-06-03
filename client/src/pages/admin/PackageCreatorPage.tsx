@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useLocation, useParams } from "wouter";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { PackageCreatorForm } from "@/components/dashboard/PackageCreatorForm";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
@@ -22,7 +21,7 @@ export default function PackageCreatorPage() {
   const pageTitle = isEditMode ? "Edit Package" : "Create New Package";
 
   return (
-    <DashboardLayout>
+    <div>
       <div className="mb-6">
         <Breadcrumb>
           <BreadcrumbItem>
@@ -53,6 +52,6 @@ export default function PackageCreatorPage() {
         </div>
         <PackageCreatorForm packageId={packageId} />
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

@@ -9,7 +9,6 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Link } from 'wouter';
-import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import {
   Dialog,
   DialogContent,
@@ -492,7 +491,7 @@ const MenuManager = () => {
   const organizedMenuItems = organizeMenuItems(menuItems);
   
   return (
-    <DashboardLayout>
+    <div>
       <div className="space-y-4 p-4 sm:p-6 lg:p-8">
         {/* Breadcrumbs */}
         <div className="mb-6">
@@ -818,7 +817,7 @@ const MenuManager = () => {
           </form>
         </DialogContent>
       </Dialog>
-    </DashboardLayout>
+    </div>
   );
 };
 

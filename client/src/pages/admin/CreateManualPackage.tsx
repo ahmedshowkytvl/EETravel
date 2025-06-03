@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation } from "wouter";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { MultiHotelManualPackageForm } from "@/components/dashboard/MultiHotelManualPackageForm";
@@ -10,7 +9,7 @@ export default function CreateManualPackage() {
   const [, setLocation] = useLocation();
   
   return (
-    <DashboardLayout>
+    <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <Breadcrumb>
           <BreadcrumbItem>
@@ -54,6 +53,6 @@ export default function CreateManualPackage() {
         </p>
         <MultiHotelManualPackageForm />
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

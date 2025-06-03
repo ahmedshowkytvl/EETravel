@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useLocation } from "wouter";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { FormDescription } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -204,7 +203,7 @@ export default function TransportationCreate() {
   };
   
   return (
-    <DashboardLayout>
+    <div>
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold mb-1">Add Transportation</h1>
@@ -658,6 +657,6 @@ export default function TransportationCreate() {
           </Card>
         </form>
       </Form>
-    </DashboardLayout>
+    </div>
   );
 }

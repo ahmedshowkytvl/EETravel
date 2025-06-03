@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { 
   Card, 
   CardContent, 
@@ -162,7 +161,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <DashboardLayout>
+    <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Settings</h1>
         <p className="text-zinc-500">Manage your account settings and preferences</p>
@@ -547,6 +546,6 @@ export default function SettingsPage() {
           </Card>
         </TabsContent>
       </Tabs>
-    </DashboardLayout>
+    </div>
   );
 }

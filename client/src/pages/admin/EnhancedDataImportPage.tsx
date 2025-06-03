@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -199,7 +198,7 @@ export default function EnhancedDataImportPage() {
   };
 
   return (
-    <DashboardLayout>
+    <div>
       <div className="space-y-6 p-6">
         <div className="flex items-center justify-between">
           <div>
@@ -395,6 +394,6 @@ export default function EnhancedDataImportPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

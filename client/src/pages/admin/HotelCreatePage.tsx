@@ -7,7 +7,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useUnsavedChanges } from "@/hooks/useUnsavedChanges";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import {
   Card,
   CardHeader,
@@ -349,7 +348,7 @@ export default function HotelCreatePage() {
   });
 
   return (
-    <DashboardLayout>
+    <div>
       {/* Confirmation Dialog for Unsaved Changes */}
       <AlertDialog open={confirmDialogOpen} onOpenChange={setConfirmDialogOpen}>
         <AlertDialogContent className="max-w-md">
@@ -964,6 +963,6 @@ export default function HotelCreatePage() {
           </CardContent>
         </Card>
       </div>
-    </DashboardLayout>
+    </div>
   );
 }

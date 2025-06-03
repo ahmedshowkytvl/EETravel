@@ -63,8 +63,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
-
 // Form schema for hotel facilities
 const facilitySchema = z.object({
   id: z.number().optional(),
@@ -261,7 +259,7 @@ export default function HotelFacilitiesPage() {
   // Render loading state
   if (isLoading) {
     return (
-      <DashboardLayout>
+      <div>
         <Card>
           <CardHeader>
             <CardTitle>
@@ -278,14 +276,14 @@ export default function HotelFacilitiesPage() {
             </div>
           </CardContent>
         </Card>
-      </DashboardLayout>
+      </div>
     );
   }
 
   // Render error state
   if (isError) {
     return (
-      <DashboardLayout>
+      <div>
         <Card>
           <CardHeader>
             <CardTitle>Error</CardTitle>
@@ -297,12 +295,12 @@ export default function HotelFacilitiesPage() {
             <p className="text-destructive">{(error as Error)?.message || "Unknown error occurred"}</p>
           </CardContent>
         </Card>
-      </DashboardLayout>
+      </div>
     );
   }
 
   return (
-    <DashboardLayout>
+    <div>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div>
@@ -615,6 +613,6 @@ export default function HotelFacilitiesPage() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </DashboardLayout>
+    </div>
   );
 }
