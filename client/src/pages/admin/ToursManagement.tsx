@@ -609,7 +609,7 @@ export default function ToursManagement() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {categories.map((category: any) => (
+                          {(categories as any[]).map((category: any) => (
                             <SelectItem key={category.id} value={category.id.toString()}>
                               {category.name}
                             </SelectItem>
@@ -634,7 +634,7 @@ export default function ToursManagement() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {locations.map((location: any) => (
+                          {(locations as any[]).map((location: any) => (
                             <SelectItem key={location.id} value={location.id.toString()}>
                               {location.name}
                             </SelectItem>
