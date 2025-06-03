@@ -141,30 +141,107 @@ export function setupAuth(app: Express) {
   // Register a new user
   app.post("/api/register", async (req, res, next) => {
     try {
-      // Check if user already exists
-      const existingUser = await storage.getUserByUsername(req.body.username);
+      const { username, email, password, fullName } = req.body;
+
+      // Validate required fields
+      if (!username || !email || !password) {
+        return res.status(400).json({ 
+          message: "Username, email, and password are required" 
+        });
+      }
+
+      // Validate username length
+      if (username.length < 3) {
+        return res.status(400).json({ 
+          message: "Username must be at least 3 characters long" 
+        });
+      }
+
+      // Validate password length
+      if (password.length < 6) {
+        return res.status(400).json({ 
+          message: "Password must be at least 6 characters long" 
+        });
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ 
+          message: "Please provide a valid email address" 
+        });
+      }
+
+      // Check if username already exists
+      const existingUser = await storage.getUserByUsername(username);
       if (existingUser) {
-        return res.status(400).json({ message: "Username already exists" });
+        return res.status(400).json({ 
+          message: "Username already exists. Please choose a different username." 
+        });
+      }
+
+      // Check if email already exists
+      try {
+        const existingEmail = await storage.getUserByEmail?.(email);
+        if (existingEmail) {
+          return res.status(400).json({ 
+            message: "An account with this email already exists" 
+          });
+        }
+      } catch (error) {
+        // If getUserByEmail doesn't exist, continue
+        console.log("Email check skipped - method not implemented");
       }
 
       // Hash the password
-      const hashedPassword = await hashPassword(req.body.password);
+      const hashedPassword = await hashPassword(password);
+
+      // Prepare user data with proper defaults
+      const userData = {
+        username: username.trim(),
+        email: email.trim().toLowerCase(),
+        password: hashedPassword,
+        fullName: fullName?.trim() || null,
+        role: 'user',
+        status: 'active',
+        displayName: username.trim(),
+        firstName: fullName?.trim().split(' ')[0] || null,
+        lastName: fullName?.trim().split(' ').slice(1).join(' ') || null,
+        phoneNumber: null,
+        bio: null,
+        avatarUrl: null
+      };
 
       // Create new user
-      const user = await storage.createUser({
-        ...req.body,
-        password: hashedPassword,
-      });
+      const user = await storage.createUser(userData);
 
-      // Log in the new user
+      // Log in the new user automatically
       req.login(user, (err) => {
-        if (err) return next(err);
+        if (err) {
+          console.error("Auto-login error:", err);
+          return next(err);
+        }
+        
         // Don't send password to client
         const { password, ...userWithoutPassword } = user;
-        res.status(201).json(userWithoutPassword);
+        res.status(201).json({
+          ...userWithoutPassword,
+          message: "Registration successful! Welcome to Sahara Travel."
+        });
       });
     } catch (error) {
-      next(error);
+      console.error("Registration error:", error);
+      
+      // Handle specific database errors
+      if (error.message?.includes('UNIQUE constraint failed')) {
+        return res.status(400).json({ 
+          message: "Username or email already exists" 
+        });
+      }
+      
+      res.status(500).json({ 
+        message: "Registration failed. Please try again." 
+      });
     }
   });
 
