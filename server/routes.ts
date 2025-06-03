@@ -69,7 +69,7 @@ const geminiApiKey = process.env.GEMINI_API_KEY;
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Set up authentication
-  setupAuth(app);
+  // setupAuth(app); // Disabled in favor of simple-auth.ts
   
   // Setup export/import routes
   setupExportImportRoutes(app);
