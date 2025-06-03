@@ -1,7 +1,5 @@
 import { Express, Request, Response } from "express";
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
-import * as schema from "@shared/schema";
+import { db } from "./db";
 import { users } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
@@ -19,12 +17,16 @@ export function setupSimpleAuth(app: Express) {
   // Simple registration endpoint
   app.post("/api/register", async (req: Request, res: Response) => {
     try {
-      // Create direct database connection for registration
-      const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://postgres:a@localhost:5432/postgres';
-      const client = postgres(DATABASE_URL, {
-        ssl: DATABASE_URL.includes('localhost') ? false : 'require',
-      });
-      const db = drizzle(client, { schema });
+      console.log('Registration attempt started');
+      
+      if (!db) {
+        console.error('Database connection not available');
+        return res.status(500).json({ 
+          message: "Database configuration error. Please contact support." 
+        });
+      }
+      
+      console.log('Using existing database connection for registration');
 
       const { username, email, password, fullName } = req.body;
 
@@ -95,9 +97,6 @@ export function setupSimpleAuth(app: Express) {
 
       // Don't send password to client
       const { password: _, ...userWithoutPassword } = newUser;
-      
-      // Close the database connection
-      await client.end();
       
       res.status(201).json({
         ...userWithoutPassword,
