@@ -1,7 +1,4 @@
 import { Express, Request, Response } from "express";
-import { db } from "./db";
-import { users } from "@shared/schema";
-import { eq } from "drizzle-orm";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 
@@ -14,19 +11,10 @@ async function hashPassword(password: string): Promise<string> {
 }
 
 export function setupSimpleAuth(app: Express) {
-  // Simple registration endpoint
+  // Simple registration endpoint using SQL execution
   app.post("/api/register", async (req: Request, res: Response) => {
     try {
       console.log('Registration attempt started');
-      
-      if (!db) {
-        console.error('Database connection not available');
-        return res.status(500).json({ 
-          message: "Database configuration error. Please contact support." 
-        });
-      }
-      
-      console.log('Using existing database connection for registration');
 
       const { username, email, password, fullName } = req.body;
 
