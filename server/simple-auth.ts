@@ -66,20 +66,20 @@ export function setupSimpleAuth(app: Express) {
       // Hash the password
       const hashedPassword = await hashPassword(password);
 
-      // Create new user (using correct column names)
+      // Create new user (using schema column names)
       const userData = {
         username: username.trim(),
         email: email.trim().toLowerCase(),
         password: hashedPassword,
-        full_name: fullName?.trim() || null,
+        fullName: fullName?.trim() || null,
         role: 'user',
         status: 'active',
-        display_name: username.trim(),
-        first_name: fullName?.trim().split(' ')[0] || null,
-        last_name: fullName?.trim().split(' ').slice(1).join(' ') || null,
-        phone_number: null,
+        displayName: username.trim(),
+        firstName: fullName?.trim().split(' ')[0] || null,
+        lastName: fullName?.trim().split(' ').slice(1).join(' ') || null,
+        phoneNumber: null,
         bio: null,
-        avatar_url: null
+        avatarUrl: null
       };
 
       const [newUser] = await db.insert(users).values(userData).returning();
