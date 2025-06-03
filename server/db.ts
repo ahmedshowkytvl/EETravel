@@ -9,23 +9,34 @@ const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://postgres:a@localh
 let client: postgres.Sql;
 let db: ReturnType<typeof drizzle>;
 
-// Initialize database connection
+// Initialize database connection with fallback handling
 async function initializeDatabase() {
   try {
     console.log('Attempting to connect with URL:', DATABASE_URL.replace(/:[^:@]*@/, ':****@'));
     
+    // Validate DATABASE_URL format
+    if (!DATABASE_URL || DATABASE_URL === 'postgresql://postgres:a@localhost:5432/postgres') {
+      console.warn('⚠️ Using default DATABASE_URL - connection may fail');
+    }
+    
     // Create a postgres client connection with connection pool
     client = postgres(DATABASE_URL, {
-      ssl: 'require',
+      ssl: DATABASE_URL.includes('localhost') ? false : 'require',
       max: 5, // Limit connection pool size
       idle_timeout: 10, // Lower idle timeout
+      connect_timeout: 5, // 5 second connection timeout
       connection: {
         application_name: 'travel-app'
       }
     });
     
-    // Test the connection
-    await client`SELECT 1`;
+    // Test the connection with timeout
+    await Promise.race([
+      client`SELECT 1`,
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Connection timeout')), 5000)
+      )
+    ]);
     
     // Create a drizzle instance with PostgreSQL
     db = drizzle(client, { schema });

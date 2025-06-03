@@ -63,16 +63,22 @@ app.use((req, res, next) => {
 
 (async () => {
   try {
-    // Wait for the database to initialize before starting the server and registering routes
+    // Try to initialize database, but continue with fallback if it fails
     console.log('⏳ Waiting for database initialization...');
-    const dbInitialized = await dbPromise;
-
-    if (!dbInitialized) {
-      console.error('❌ Database failed to initialize. Exiting.');
-      process.exit(1);
+    let dbInitialized = false;
+    
+    try {
+      dbInitialized = await dbPromise;
+    } catch (error: any) {
+      console.warn('⚠️ Database connection failed, continuing with fallback storage:', error?.message || 'Unknown error');
+      dbInitialized = false;
     }
 
-    console.log('✅ Database initialized.');
+    if (dbInitialized) {
+      console.log('✅ Database initialized.');
+    } else {
+      console.log('📦 Using fallback storage due to database connection issues.');
+    }
 
     // Setup admin users after database is initialized
     await setupAdmin();

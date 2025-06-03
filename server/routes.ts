@@ -2040,7 +2040,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error('Error creating package:', error);
       console.error('Error details:', error?.message || 'Unknown error');
       console.error('Error stack:', error?.stack);
-      console.error('Processed data that caused error:', JSON.stringify(processedData, null, 2));
+      
+      // Log the processed data in a scoped way
+      try {
+        console.error('Processed data that caused error:', JSON.stringify(req.body, null, 2));
+      } catch (logError) {
+        console.error('Failed to log processed data:', logError);
+      }
+      
       res.status(500).json({ message: 'Failed to create package', error: error?.message || 'Unknown error' });
     }
   });
