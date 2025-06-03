@@ -81,6 +81,7 @@ import { useToast } from "@/hooks/use-toast";
 import { queryClient } from "@/lib/queryClient";
 import { validateForm, validateRequiredFields, validateDateFields, validateNumericFields } from "@/lib/validateForm";
 import { FormRequiredFieldsNote, FormValidationAlert } from "@/components/dashboard/FormValidationAlert";
+import { useLocation } from "wouter";
 
 // Validation schema - Made more permissive to allow custom validation logic
 const packageFormSchema = z.object({
@@ -230,6 +231,7 @@ interface Tour {
 
 export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   const isEditMode = !!packageId;
+  const [, setLocation] = useLocation();
 
   const { toast } = useToast();
   const [pricingRules, setPricingRules] = useState([
@@ -278,6 +280,10 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
   const [selectedTransport, setSelectedTransport] = useState("");
   const [transportPrice, setTransportPrice] = useState(0);
   const [allowFormSubmission, setAllowFormSubmission] = useState(false);
+  
+  // Track form changes for unsaved changes warning
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [initialFormData, setInitialFormData] = useState<PackageFormValues | null>(null);
 
   // Fetch destinations for the dropdown
   const { data: destinations = [] } = useQuery<any[]>({
@@ -461,22 +467,32 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
 
       const packagePayload = {
         title: formData.name,
+        shortDescription: formData.shortDescription || "",
         description: formData.overview,
-        price: formData.basePrice,
-        discountedPrice: Math.round(formData.basePrice * 0.9), // 10% discount as example
+        price: formData.basePrice || 0,
+        discountedPrice: Math.round((formData.basePrice || 0) * 0.9), // 10% discount as example
         imageUrl: mainImageUrl,
         galleryUrls: galleryUrls,
-        duration: Math.ceil((formData.endDate.getTime() - formData.startDate.getTime()) / (1000 * 3600 * 24)), // Calculate days
+        duration: formData.startDate && formData.endDate 
+          ? Math.ceil((formData.endDate.getTime() - formData.startDate.getTime()) / (1000 * 3600 * 24)) 
+          : 7, // Default 7 days
         rating: 45, // Default 4.5 stars (stored as 45 in DB)
-        destinationId: parseInt(formData.category), // Using the selected destination ID
-        categoryId: formData.categoryId, // New field for package category
+        destinationId: formData.category ? parseInt(formData.category) : null, // Using the selected destination ID
+        categoryId: formData.categoryId, // Package category field
         featured: true,
         type: categoryOptions.find(c => c.value === formData.category)?.label || "Tour Package",
         inclusions: formData.includedFeatures || ["Accommodation", "Breakfast", "Tour Guide"],
+        excludedItems: excludedItemsList,
+        idealFor: selectedTravellerTypes,
+        route: formData.route || "",
+        whatToPack: packItems,
+        itinerary: itineraryItems,
+        accommodationHighlights: accommodationHighlights,
+        selectedTourId: selectedTour?.id || formData.selectedTourId,
         countryId: countryId,
         cityId: cityId,
-        startDate: formData.startDate.toISOString(),
-        endDate: formData.endDate.toISOString(),
+        startDate: formData.startDate?.toISOString() || new Date().toISOString(),
+        endDate: formData.endDate?.toISOString() || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
         adultCount: formData.adultCount,
         childrenCount: formData.childrenCount,
         infantCount: formData.infantCount
@@ -807,19 +823,73 @@ export function PackageCreatorForm({ packageId }: PackageCreatorFormProps) {
         // Log the available cities for the selected country
         console.log('Available cities for country ID', countryId, ':', cities);
 
+        // Parse additional field data
+        const parsedShortDescription = existingPackageData.shortDescription || "";
+        const parsedCategoryId = existingPackageData.categoryId || null;
+        const parsedIdealFor = existingPackageData.idealFor 
+          ? (typeof existingPackageData.idealFor === 'string' 
+              ? JSON.parse(existingPackageData.idealFor) 
+              : existingPackageData.idealFor)
+          : [];
+        const parsedRoute = existingPackageData.route || "";
+        const parsedWhatToPack = existingPackageData.whatToPack 
+          ? (typeof existingPackageData.whatToPack === 'string' 
+              ? JSON.parse(existingPackageData.whatToPack) 
+              : existingPackageData.whatToPack)
+          : [];
+        const parsedItinerary = existingPackageData.itinerary 
+          ? (typeof existingPackageData.itinerary === 'string' 
+              ? JSON.parse(existingPackageData.itinerary) 
+              : existingPackageData.itinerary)
+          : [];
+        const parsedExcludedItems = existingPackageData.excludedItems 
+          ? (typeof existingPackageData.excludedItems === 'string' 
+              ? JSON.parse(existingPackageData.excludedItems) 
+              : existingPackageData.excludedItems)
+          : [];
+        const parsedAccommodationHighlights = existingPackageData.accommodationHighlights 
+          ? (typeof existingPackageData.accommodationHighlights === 'string' 
+              ? JSON.parse(existingPackageData.accommodationHighlights) 
+              : existingPackageData.accommodationHighlights)
+          : [];
+
+        // Set component state for complex fields
+        setSelectedTravellerTypes(parsedIdealFor);
+        setPackItems(parsedWhatToPack);
+        setItineraryItems(parsedItinerary);
+        setExcludedItemsList(parsedExcludedItems);
+        setAccommodationHighlights(parsedAccommodationHighlights);
+        
+        // Set selected tour if exists
+        if (existingPackageData.selectedTourId) {
+          const tour = tours.find(t => t.id === existingPackageData.selectedTourId);
+          if (tour) {
+            setSelectedTour(tour);
+          }
+        }
+
         // Set form values
         form.reset({
           name: existingPackageData.title || "",
+          shortDescription: parsedShortDescription,
           overview: existingPackageData.description || "",
           basePrice: existingPackageData.price || 0,
           countryId: countryId,
           cityId: cityId,
           category: existingPackageData.destinationId?.toString() || undefined,
+          categoryId: parsedCategoryId,
+          route: parsedRoute,
           // Set dates with sensible defaults
           startDate: startDate,
           endDate: endDate,
           pricingMode: "per_booking", // Default if not available
           includedFeatures: inclusions,
+          excludedItems: parsedExcludedItems,
+          idealFor: parsedIdealFor,
+          whatToPack: parsedWhatToPack,
+          itinerary: parsedItinerary,
+          accommodationHighlights: parsedAccommodationHighlights,
+          selectedTourId: existingPackageData.selectedTourId,
           adultCount: 2,
           childrenCount: 0,
           infantCount: 0,
