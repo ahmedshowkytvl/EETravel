@@ -2032,16 +2032,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
+      console.log('About to create package with data:', JSON.stringify(processedData, null, 2));
       const newPackage = await storage.createPackage(processedData);
       console.log('Package created successfully:', JSON.stringify(newPackage));
       res.status(201).json(newPackage);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        console.error('Validation error:', JSON.stringify(error.errors));
-        return res.status(400).json({ message: 'Invalid package data', errors: error.errors });
-      }
+    } catch (error: any) {
       console.error('Error creating package:', error);
-      res.status(500).json({ message: 'Failed to create package' });
+      console.error('Error details:', error?.message || 'Unknown error');
+      console.error('Error stack:', error?.stack);
+      console.error('Processed data that caused error:', JSON.stringify(processedData, null, 2));
+      res.status(500).json({ message: 'Failed to create package', error: error?.message || 'Unknown error' });
     }
   });
 
@@ -2183,12 +2183,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json(updatedPackage);
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        console.error('Validation error:', JSON.stringify(error.errors));
-        return res.status(400).json({ message: 'Invalid package data', errors: error.errors });
-      }
       console.error('Error updating package:', error);
-      res.status(500).json({ message: 'Failed to update package' });
+      console.error('Error details:', error.message);
+      console.error('Processed data that caused error:', JSON.stringify(processedData));
+      res.status(500).json({ message: 'Failed to update package', error: error.message });
     }
   });
 
