@@ -1,6 +1,7 @@
 import { Express, Request, Response } from "express";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
+import postgres from 'postgres';
 
 const scryptAsync = promisify(scrypt);
 
@@ -46,50 +47,64 @@ export function setupSimpleAuth(app: Express) {
         });
       }
 
-      // Check if username already exists (case-insensitive)
-      const existingUser = await db.select().from(users).where(eq(users.username, username.toLowerCase())).limit(1);
-      if (existingUser.length > 0) {
-        return res.status(400).json({ 
-          message: "Username already exists. Please choose a different username." 
-        });
-      }
-
-      // Check if email already exists (case-insensitive)
-      const existingEmail = await db.select().from(users).where(eq(users.email, email.toLowerCase())).limit(1);
-      if (existingEmail.length > 0) {
-        return res.status(400).json({ 
-          message: "An account with this email already exists" 
-        });
-      }
-
       // Hash the password
       const hashedPassword = await hashPassword(password);
 
-      // Create new user (using schema column names)
-      const userData = {
-        username: username.trim().toLowerCase(),
-        email: email.trim().toLowerCase(),
-        password: hashedPassword,
-        fullName: fullName?.trim() || null,
-        role: 'user',
-        status: 'active',
-        displayName: fullName?.trim() || username.trim(),
-        firstName: fullName?.trim().split(' ')[0] || null,
-        lastName: fullName?.trim().split(' ').slice(1).join(' ') || null,
-        phoneNumber: null,
-        bio: null,
-        avatarUrl: null
-      };
+      // Prepare user data for database insertion
+      const cleanUsername = username.trim().toLowerCase();
+      const cleanEmail = email.trim().toLowerCase();
+      const cleanFullName = fullName?.trim() || null;
 
-      const [newUser] = await db.insert(users).values(userData).returning();
+      // Create direct database connection
+      const DATABASE_URL = process.env.DATABASE_URL;
+      if (!DATABASE_URL) {
+        throw new Error('Database configuration missing');
+      }
 
-      // Don't send password to client
-      const { password: _, ...userWithoutPassword } = newUser;
-      
-      res.status(201).json({
-        ...userWithoutPassword,
-        message: "Registration successful! Welcome to Sahara Travel."
-      });
+      const client = postgres(DATABASE_URL, { ssl: 'require' });
+
+      try {
+        // Check if username or email already exists
+        const existingUsers = await client`
+          SELECT username, email FROM users 
+          WHERE username = ${cleanUsername} OR email = ${cleanEmail}
+        `;
+
+        if (existingUsers.length > 0) {
+          const existing = existingUsers[0];
+          if (existing.username === cleanUsername) {
+            return res.status(400).json({ 
+              message: "Username already exists. Please choose a different username." 
+            });
+          }
+          if (existing.email === cleanEmail) {
+            return res.status(400).json({ 
+              message: "An account with this email already exists" 
+            });
+          }
+        }
+
+        // Insert new user
+        const [newUser] = await client`
+          INSERT INTO users (username, email, password, full_name) 
+          VALUES (${cleanUsername}, ${cleanEmail}, ${hashedPassword}, ${cleanFullName})
+          RETURNING id, username, email, full_name
+        `;
+
+        await client.end();
+
+        res.status(201).json({
+          id: newUser.id,
+          username: newUser.username,
+          email: newUser.email,
+          fullName: newUser.full_name,
+          message: "Registration successful! Welcome to Sahara Travel."
+        });
+
+      } catch (dbError) {
+        await client.end();
+        throw dbError;
+      }
 
     } catch (error) {
       console.error("Registration error details:", {
