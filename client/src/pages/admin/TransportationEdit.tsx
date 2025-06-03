@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useLocation, useParams } from "wouter";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { FormDescription } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -281,17 +282,17 @@ export default function TransportationEdit() {
   
   if (isLoadingDetails) {
     return (
-      <div>
+      <DashboardLayout>
         <div className="flex items-center justify-center h-full py-20">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
           <span className="ml-2">Loading transportation details...</span>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
   
   return (
-    <div>
+    <DashboardLayout>
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold mb-1">Edit Transportation</h1>
@@ -750,6 +751,6 @@ export default function TransportationEdit() {
           </Card>
         </form>
       </Form>
-    </div>
+    </DashboardLayout>
   );
 }

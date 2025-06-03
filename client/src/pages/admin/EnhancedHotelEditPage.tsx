@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { apiRequest, getQueryFn } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import {
   Card,
   CardHeader,
@@ -444,7 +445,7 @@ export default function EnhancedHotelEditPage() {
   };
 
   return (
-    <div>
+    <DashboardLayout>
       <AlertDialog open={showUnsavedChangesAlert} onOpenChange={setShowUnsavedChangesAlert}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -1339,6 +1340,6 @@ export default function EnhancedHotelEditPage() {
           </Form>
         )}
       </div>
-    </div>
+    </DashboardLayout>
   );
 }

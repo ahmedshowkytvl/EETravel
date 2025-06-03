@@ -1,14 +1,20 @@
 import React, { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+import { 
+  Card, 
+  CardContent, 
+  CardDescription, 
+  CardFooter, 
+  CardHeader, 
+  CardTitle 
 } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent
+} from "@/components/ui/tabs";
 import {
   Dialog,
   DialogContent,
@@ -54,38 +60,10 @@ import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import {
-  Plus,
-  Search,
-  Edit,
-  Trash2,
-  Loader2,
-  GlobeIcon,
-  Landmark,
-  Plane,
-  Check,
-  X,
-  AlertCircle,
-  Sparkles,
-  Brain,
-  BarChart3,
-  TrendingUp,
-  Users,
-  Database,
-  Filter,
-  Download,
-  Upload,
-  Eye,
-  MoreHorizontal,
-  CheckSquare,
-  Square,
-} from "lucide-react";
+import { Plus, Search, Edit, Trash2, Loader2, GlobeIcon, Landmark, Plane, Check, X, AlertCircle, Sparkles, Brain, BarChart3, TrendingUp, Users, Database, Filter, Download, Upload, Eye, MoreHorizontal, CheckSquare, Square } from "lucide-react";
 import { queryClient } from "@/lib/queryClient";
 import { validateForm, validateRequiredFields } from "@/lib/validateForm";
-import {
-  FormRequiredFieldsNote,
-  FormValidationAlert,
-} from "@/components/dashboard/FormValidationAlert";
+import { FormRequiredFieldsNote, FormValidationAlert } from "@/components/dashboard/FormValidationAlert";
 
 // Interfaces matching our schema
 interface Country {
@@ -125,16 +103,9 @@ interface Airport {
 // Country validation schema
 const countrySchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  code: z
-    .string()
-    .min(2, { message: "Code must be at least 2 characters" })
-    .max(3),
+  code: z.string().min(2, { message: "Code must be at least 2 characters" }).max(3),
   description: z.string().optional(),
-  imageUrl: z
-    .string()
-    .url({ message: "Must be a valid URL" })
-    .optional()
-    .or(z.literal("")),
+  imageUrl: z.string().url({ message: "Must be a valid URL" }).optional().or(z.literal("")),
   active: z.boolean().default(true),
 });
 
@@ -143,28 +114,17 @@ const citySchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   countryId: z.number({ message: "Country is required" }),
   description: z.string().optional(),
-  imageUrl: z
-    .string()
-    .url({ message: "Must be a valid URL" })
-    .optional()
-    .or(z.literal("")),
+  imageUrl: z.string().url({ message: "Must be a valid URL" }).optional().or(z.literal("")),
   active: z.boolean().default(true),
 });
 
 // Airport validation schema
 const airportSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  code: z
-    .string()
-    .min(2, { message: "Code must be at least 2 characters" })
-    .max(4),
+  code: z.string().min(2, { message: "Code must be at least 2 characters" }).max(4),
   cityId: z.number({ message: "City is required" }),
   description: z.string().optional(),
-  imageUrl: z
-    .string()
-    .url({ message: "Must be a valid URL" })
-    .optional()
-    .or(z.literal("")),
+  imageUrl: z.string().url({ message: "Must be a valid URL" }).optional().or(z.literal("")),
   active: z.boolean().default(true),
 });
 
@@ -178,39 +138,26 @@ export default function CountryCityManagement() {
   const [countrySearchQuery, setCountrySearchQuery] = useState("");
   const [citySearchQuery, setCitySearchQuery] = useState("");
   const [airportSearchQuery, setAirportSearchQuery] = useState("");
-  const [countryStatusFilter, setCountryStatusFilter] = useState<
-    "all" | "active" | "inactive"
-  >("all");
-  const [cityStatusFilter, setCityStatusFilter] = useState<
-    "all" | "active" | "inactive"
-  >("all");
-  const [airportStatusFilter, setAirportStatusFilter] = useState<
-    "all" | "active" | "inactive"
-  >("all");
-  const [selectedCountryFilter, setSelectedCountryFilter] =
-    useState<string>("all");
+  const [countryStatusFilter, setCountryStatusFilter] = useState<"all" | "active" | "inactive">("all");
+  const [cityStatusFilter, setCityStatusFilter] = useState<"all" | "active" | "inactive">("all");
+  const [airportStatusFilter, setAirportStatusFilter] = useState<"all" | "active" | "inactive">("all");
+  const [selectedCountryFilter, setSelectedCountryFilter] = useState<string>("all");
   const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
-  const [bulkAction, setBulkAction] = useState<
-    "activate" | "deactivate" | "delete" | null
-  >(null);
+  const [bulkAction, setBulkAction] = useState<"activate" | "deactivate" | "delete" | null>(null);
   const [showAnalytics, setShowAnalytics] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [isCreateCountryDialogOpen, setIsCreateCountryDialogOpen] =
-    useState(false);
+  const [isCreateCountryDialogOpen, setIsCreateCountryDialogOpen] = useState(false);
   const [isCreateCityDialogOpen, setIsCreateCityDialogOpen] = useState(false);
-  const [isCreateAirportDialogOpen, setIsCreateAirportDialogOpen] =
-    useState(false);
+  const [isCreateAirportDialogOpen, setIsCreateAirportDialogOpen] = useState(false);
   const [isEditCountryDialogOpen, setIsEditCountryDialogOpen] = useState(false);
   const [isEditCityDialogOpen, setIsEditCityDialogOpen] = useState(false);
   const [isEditAirportDialogOpen, setIsEditAirportDialogOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
   const [selectedAirport, setSelectedAirport] = useState<Airport | null>(null);
-  const [deleteCountryConfirmOpen, setDeleteCountryConfirmOpen] =
-    useState(false);
+  const [deleteCountryConfirmOpen, setDeleteCountryConfirmOpen] = useState(false);
   const [deleteCityConfirmOpen, setDeleteCityConfirmOpen] = useState(false);
-  const [deleteAirportConfirmOpen, setDeleteAirportConfirmOpen] =
-    useState(false);
+  const [deleteAirportConfirmOpen, setDeleteAirportConfirmOpen] = useState(false);
   const [isAiDialogOpen, setIsAiDialogOpen] = useState(false);
   const [isGeneratingAiData, setIsGeneratingAiData] = useState(false);
   const [aiCountryInput, setAiCountryInput] = useState("");
@@ -224,19 +171,17 @@ export default function CountryCityManagement() {
         description: `Generating comprehensive data for ${countryName} using Google Gemini...`,
       });
 
-      const response = await fetch("/api/admin/ai-generate-country-cities", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/admin/ai-generate-country-cities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ countryName }),
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(
-          errorData.message || "Failed to generate country and cities data",
-        );
+        throw new Error(errorData.message || 'Failed to generate country and cities data');
       }
-
+      
       return response.json();
     },
     onSuccess: (data) => {
@@ -248,19 +193,16 @@ export default function CountryCityManagement() {
 
       // Show a follow-up toast with city details
       setTimeout(() => {
-        const cityNames = data.cities
-          .slice(0, 3)
-          .map((city: any) => city.name)
-          .join(", ");
+        const cityNames = data.cities.slice(0, 3).map((city: any) => city.name).join(', ');
         const additionalCount = data.cities.length - 3;
         toast({
           title: "📍 Cities Added",
-          description: `Added cities: ${cityNames}${additionalCount > 0 ? ` and ${additionalCount} more` : ""} - all with tourism-focused descriptions`,
+          description: `Added cities: ${cityNames}${additionalCount > 0 ? ` and ${additionalCount} more` : ''} - all with tourism-focused descriptions`,
         });
       }, 2000);
 
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/countries"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/cities"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
       setIsAiDialogOpen(false);
       setAiCountryInput("");
     },
@@ -282,93 +224,73 @@ export default function CountryCityManagement() {
       });
       return;
     }
-
+    
     setIsGeneratingAiData(true);
     generateCountryAndCities.mutate(aiCountryInput.trim());
   };
 
   // Query countries
-  const { data: countries = [], isLoading: isLoadingCountries } = useQuery<
-    Country[]
-  >({
-    queryKey: ["/api/admin/countries"],
+  const { data: countries = [], isLoading: isLoadingCountries } = useQuery<Country[]>({
+    queryKey: ['/api/admin/countries'],
   });
 
   // Query cities
   const { data: cities = [], isLoading: isLoadingCities } = useQuery<City[]>({
-    queryKey: ["/api/admin/cities"],
+    queryKey: ['/api/admin/cities'],
   });
-
+  
   // Query airports
-  const { data: airports = [], isLoading: isLoadingAirports } = useQuery<
-    Airport[]
-  >({
-    queryKey: ["/api/admin/airports"],
+  const { data: airports = [], isLoading: isLoadingAirports } = useQuery<Airport[]>({
+    queryKey: ['/api/admin/airports'],
   });
 
   // Advanced filtering logic with professional search capabilities
   const filteredCountries = useMemo(() => {
     if (!countries) return [];
-
+    
     return countries.filter((country: Country) => {
-      const matchesSearch =
-        country.name.toLowerCase().includes(countrySearchQuery.toLowerCase()) ||
-        country.code.toLowerCase().includes(countrySearchQuery.toLowerCase()) ||
-        country.description
-          ?.toLowerCase()
-          .includes(countrySearchQuery.toLowerCase()) ||
-        false;
-
-      const matchesStatus =
-        countryStatusFilter === "all" ||
-        (countryStatusFilter === "active" && country.active) ||
-        (countryStatusFilter === "inactive" && !country.active);
-
+      const matchesSearch = country.name.toLowerCase().includes(countrySearchQuery.toLowerCase()) ||
+                           country.code.toLowerCase().includes(countrySearchQuery.toLowerCase()) ||
+                           (country.description?.toLowerCase().includes(countrySearchQuery.toLowerCase()) || false);
+      
+      const matchesStatus = countryStatusFilter === "all" || 
+                           (countryStatusFilter === "active" && country.active) ||
+                           (countryStatusFilter === "inactive" && !country.active);
+      
       return matchesSearch && matchesStatus;
     });
   }, [countries, countrySearchQuery, countryStatusFilter]);
 
   const filteredCities = useMemo(() => {
     if (!cities) return [];
-
+    
     return cities.filter((city: City) => {
-      const matchesSearch =
-        city.name.toLowerCase().includes(citySearchQuery.toLowerCase()) ||
-        city.description
-          ?.toLowerCase()
-          .includes(citySearchQuery.toLowerCase()) ||
-        false;
-
-      const matchesStatus =
-        cityStatusFilter === "all" ||
-        (cityStatusFilter === "active" && city.active) ||
-        (cityStatusFilter === "inactive" && !city.active);
-
-      const matchesCountry =
-        selectedCountryFilter === "all" ||
-        city.countryId.toString() === selectedCountryFilter;
-
+      const matchesSearch = city.name.toLowerCase().includes(citySearchQuery.toLowerCase()) ||
+                           (city.description?.toLowerCase().includes(citySearchQuery.toLowerCase()) || false);
+      
+      const matchesStatus = cityStatusFilter === "all" || 
+                           (cityStatusFilter === "active" && city.active) ||
+                           (cityStatusFilter === "inactive" && !city.active);
+      
+      const matchesCountry = selectedCountryFilter === "all" || 
+                            city.countryId.toString() === selectedCountryFilter;
+      
       return matchesSearch && matchesStatus && matchesCountry;
     });
   }, [cities, citySearchQuery, cityStatusFilter, selectedCountryFilter]);
 
   const filteredAirports = useMemo(() => {
     if (!airports) return [];
-
+    
     return airports.filter((airport: Airport) => {
-      const matchesSearch =
-        airport.name.toLowerCase().includes(airportSearchQuery.toLowerCase()) ||
-        airport.code.toLowerCase().includes(airportSearchQuery.toLowerCase()) ||
-        airport.description
-          ?.toLowerCase()
-          .includes(airportSearchQuery.toLowerCase()) ||
-        false;
-
-      const matchesStatus =
-        airportStatusFilter === "all" ||
-        (airportStatusFilter === "active" && airport.active) ||
-        (airportStatusFilter === "inactive" && !airport.active);
-
+      const matchesSearch = airport.name.toLowerCase().includes(airportSearchQuery.toLowerCase()) ||
+                           airport.code.toLowerCase().includes(airportSearchQuery.toLowerCase()) ||
+                           (airport.description?.toLowerCase().includes(airportSearchQuery.toLowerCase()) || false);
+      
+      const matchesStatus = airportStatusFilter === "all" || 
+                           (airportStatusFilter === "active" && airport.active) ||
+                           (airportStatusFilter === "inactive" && !airport.active);
+      
       return matchesSearch && matchesStatus;
     });
   }, [airports, airportSearchQuery, airportStatusFilter]);
@@ -376,40 +298,24 @@ export default function CountryCityManagement() {
   // Analytics calculations
   const analytics = useMemo(() => {
     const totalCountries = countries.length;
-    const activeCountries = countries.filter((c) => c.active).length;
+    const activeCountries = countries.filter(c => c.active).length;
     const totalCities = cities.length;
-    const activeCities = cities.filter((c) => c.active).length;
+    const activeCities = cities.filter(c => c.active).length;
     const totalAirports = airports.length;
-    const activeAirports = airports.filter((a) => a.active).length;
-
+    const activeAirports = airports.filter(a => a.active).length;
+    
     return {
-      countries: {
-        total: totalCountries,
-        active: activeCountries,
-        inactive: totalCountries - activeCountries,
-      },
-      cities: {
-        total: totalCities,
-        active: activeCities,
-        inactive: totalCities - activeCities,
-      },
-      airports: {
-        total: totalAirports,
-        active: activeAirports,
-        inactive: totalAirports - activeAirports,
-      },
-      coverage:
-        Math.round((activeCities / Math.max(activeCountries, 1)) * 100) / 100,
+      countries: { total: totalCountries, active: activeCountries, inactive: totalCountries - activeCountries },
+      cities: { total: totalCities, active: activeCities, inactive: totalCities - activeCities },
+      airports: { total: totalAirports, active: activeAirports, inactive: totalAirports - activeAirports },
+      coverage: Math.round((activeCities / Math.max(activeCountries, 1)) * 100) / 100
     };
   }, [countries, cities, airports]);
 
   // Bulk operations
   const handleSelectAll = (items: any[], currentTab: string) => {
-    const itemIds = items.map((item) => item.id);
-    if (
-      selectedItems.size === itemIds.length &&
-      itemIds.every((id) => selectedItems.has(id))
-    ) {
+    const itemIds = items.map(item => item.id);
+    if (selectedItems.size === itemIds.length && itemIds.every(id => selectedItems.has(id))) {
       setSelectedItems(new Set());
     } else {
       setSelectedItems(new Set(itemIds));
@@ -428,45 +334,45 @@ export default function CountryCityManagement() {
 
   const executeBulkAction = async () => {
     if (!bulkAction || selectedItems.size === 0) return;
-
+    
     try {
       const itemIds = Array.from(selectedItems);
-
+      
       for (const id of itemIds) {
         if (bulkAction === "activate" || bulkAction === "deactivate") {
           const isActive = bulkAction === "activate";
-
+          
           if (activeTab === "countries") {
             await fetch(`/api/admin/countries/${id}`, {
-              method: "PATCH",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ active: isActive }),
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ active: isActive })
             });
           } else if (activeTab === "cities") {
             await fetch(`/api/admin/cities/${id}`, {
-              method: "PATCH",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ active: isActive }),
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ active: isActive })
             });
           } else if (activeTab === "airports") {
             await fetch(`/api/admin/airports/${id}`, {
-              method: "PATCH",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ active: isActive }),
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ active: isActive })
             });
           }
         }
       }
-
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/countries"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/cities"] });
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/airports"] });
-
+      
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/airports'] });
+      
       toast({
         title: "Bulk Action Complete",
         description: `Successfully ${bulkAction}d ${selectedItems.size} items`,
       });
-
+      
       setSelectedItems(new Set());
       setBulkAction(null);
     } catch (error) {
@@ -501,7 +407,7 @@ export default function CountryCityManagement() {
       active: true,
     },
   });
-
+  
   // Airport form
   const airportForm = useForm<AirportFormValues>({
     resolver: zodResolver(airportSchema),
@@ -518,21 +424,21 @@ export default function CountryCityManagement() {
   // Create Country Mutation
   const createCountryMutation = useMutation({
     mutationFn: async (country: CountryFormValues) => {
-      const response = await fetch("/api/admin/countries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/admin/countries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(country),
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to create country");
+        throw new Error(errorData.message || 'Failed to create country');
       }
-
+      
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/countries"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
       setIsCreateCountryDialogOpen(false);
       countryForm.reset();
       toast({
@@ -552,21 +458,21 @@ export default function CountryCityManagement() {
   // Create City Mutation
   const createCityMutation = useMutation({
     mutationFn: async (city: CityFormValues) => {
-      const response = await fetch("/api/admin/cities", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/admin/cities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(city),
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to create city");
+        throw new Error(errorData.message || 'Failed to create city');
       }
-
+      
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/cities"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
       setIsCreateCityDialogOpen(false);
       cityForm.reset();
       toast({
@@ -585,28 +491,22 @@ export default function CountryCityManagement() {
 
   // Update Country Mutation
   const updateCountryMutation = useMutation({
-    mutationFn: async ({
-      id,
-      data,
-    }: {
-      id: number;
-      data: CountryFormValues;
-    }) => {
+    mutationFn: async ({ id, data }: { id: number; data: CountryFormValues }) => {
       const response = await fetch(`/api/admin/countries/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to update country");
+        throw new Error(errorData.message || 'Failed to update country');
       }
-
+      
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/countries"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
       setIsEditCountryDialogOpen(false);
       setSelectedCountry(null);
       toast({
@@ -627,20 +527,20 @@ export default function CountryCityManagement() {
   const updateCityMutation = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: CityFormValues }) => {
       const response = await fetch(`/api/admin/cities/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to update city");
+        throw new Error(errorData.message || 'Failed to update city');
       }
-
+      
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/cities"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
       setIsEditCityDialogOpen(false);
       setSelectedCity(null);
       toast({
@@ -661,18 +561,18 @@ export default function CountryCityManagement() {
   const deleteCountryMutation = useMutation({
     mutationFn: async (id: number) => {
       const response = await fetch(`/api/admin/countries/${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to delete country");
+        throw new Error(errorData.message || 'Failed to delete country');
       }
-
+      
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/countries"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/countries'] });
       setDeleteCountryConfirmOpen(false);
       setSelectedCountry(null);
       toast({
@@ -693,18 +593,18 @@ export default function CountryCityManagement() {
   const deleteCityMutation = useMutation({
     mutationFn: async (id: number) => {
       const response = await fetch(`/api/admin/cities/${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to delete city");
+        throw new Error(errorData.message || 'Failed to delete city');
       }
-
+      
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/cities"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/cities'] });
       setDeleteCityConfirmOpen(false);
       setSelectedCity(null);
       toast({
@@ -720,25 +620,25 @@ export default function CountryCityManagement() {
       });
     },
   });
-
+  
   // Create Airport Mutation
   const createAirportMutation = useMutation({
     mutationFn: async (airport: AirportFormValues) => {
-      const response = await fetch("/api/admin/airports", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/admin/airports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(airport),
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to create airport");
+        throw new Error(errorData.message || 'Failed to create airport');
       }
-
+      
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/airports"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/airports'] });
       setIsCreateAirportDialogOpen(false);
       airportForm.reset();
       toast({
@@ -754,31 +654,25 @@ export default function CountryCityManagement() {
       });
     },
   });
-
+  
   // Update Airport Mutation
   const updateAirportMutation = useMutation({
-    mutationFn: async ({
-      id,
-      data,
-    }: {
-      id: number;
-      data: AirportFormValues;
-    }) => {
+    mutationFn: async ({ id, data }: { id: number; data: AirportFormValues }) => {
       const response = await fetch(`/api/admin/airports/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to update airport");
+        throw new Error(errorData.message || 'Failed to update airport');
       }
-
+      
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/airports"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/airports'] });
       setIsEditAirportDialogOpen(false);
       setSelectedAirport(null);
       toast({
@@ -794,23 +688,23 @@ export default function CountryCityManagement() {
       });
     },
   });
-
+  
   // Delete Airport Mutation
   const deleteAirportMutation = useMutation({
     mutationFn: async (id: number) => {
       const response = await fetch(`/api/admin/airports/${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to delete airport");
+        throw new Error(errorData.message || 'Failed to delete airport');
       }
-
+      
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/admin/airports"] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/airports'] });
       setDeleteAirportConfirmOpen(false);
       setSelectedAirport(null);
       toast({
@@ -832,39 +726,37 @@ export default function CountryCityManagement() {
     // Validate required fields
     const requiredFieldsValid = validateRequiredFields(
       values,
-      ["name", "code"],
+      ['name', 'code'],
       {
-        name: "Country Name",
-        code: "Country Code",
-      },
+        name: 'Country Name',
+        code: 'Country Code'
+      }
     );
-
+    
     if (!requiredFieldsValid) return;
-
+    
     // Additional validation for image URL
     const customValidationsValid = validateForm(values, [
       {
-        condition: !!values.imageUrl && !values.imageUrl.startsWith("http"),
+        condition: !!values.imageUrl && !values.imageUrl.startsWith('http'),
         errorMessage: {
           title: "Invalid Image URL",
-          description:
-            "Please provide a valid URL starting with http:// or https://",
+          description: "Please provide a valid URL starting with http:// or https://"
         },
-        variant: "destructive",
+        variant: "destructive"
       },
       {
         condition: values.code.length < 2 || values.code.length > 3,
         errorMessage: {
           title: "Invalid Country Code",
-          description:
-            "Country code should be 2-3 characters (e.g., US, EG, UAE)",
+          description: "Country code should be 2-3 characters (e.g., US, EG, UAE)"
         },
-        variant: "destructive",
-      },
+        variant: "destructive"
+      }
     ]);
-
+    
     if (!customValidationsValid) return;
-
+    
     // All validations passed, proceed with submission
     createCountryMutation.mutate(values);
   };
@@ -873,88 +765,85 @@ export default function CountryCityManagement() {
     // Validate required fields
     const requiredFieldsValid = validateRequiredFields(
       values,
-      ["name", "countryId"],
+      ['name', 'countryId'],
       {
-        name: "City Name",
-        countryId: "Country",
-      },
+        name: 'City Name',
+        countryId: 'Country'
+      }
     );
-
+    
     if (!requiredFieldsValid) return;
-
+    
     // Additional validation for country selection and image URL
     const customValidationsValid = validateForm(values, [
       {
         condition: values.countryId === 0,
         errorMessage: {
           title: "Country Required",
-          description: "Please select a country for this city",
+          description: "Please select a country for this city"
         },
-        variant: "destructive",
+        variant: "destructive"
       },
       {
-        condition: !!values.imageUrl && !values.imageUrl.startsWith("http"),
+        condition: !!values.imageUrl && !values.imageUrl.startsWith('http'),
         errorMessage: {
           title: "Invalid Image URL",
-          description:
-            "Please provide a valid URL starting with http:// or https://",
+          description: "Please provide a valid URL starting with http:// or https://"
         },
-        variant: "destructive",
-      },
+        variant: "destructive"
+      }
     ]);
-
+    
     if (!customValidationsValid) return;
-
+    
     // All validations passed, proceed with submission
     createCityMutation.mutate(values);
   };
-
+  
   const onCreateAirportSubmit = (values: AirportFormValues) => {
     // Validate required fields
     const requiredFieldsValid = validateRequiredFields(
       values,
-      ["name", "code", "cityId"],
+      ['name', 'code', 'cityId'],
       {
-        name: "Airport Name",
-        code: "Airport Code",
-        cityId: "City",
-      },
+        name: 'Airport Name',
+        code: 'Airport Code',
+        cityId: 'City'
+      }
     );
-
+    
     if (!requiredFieldsValid) return;
-
+    
     // Additional validation for city selection, code format, and image URL
     const customValidationsValid = validateForm(values, [
       {
         condition: values.cityId === 0,
         errorMessage: {
           title: "City Required",
-          description: "Please select a city for this airport",
+          description: "Please select a city for this airport"
         },
-        variant: "destructive",
+        variant: "destructive"
       },
       {
         condition: values.code.length < 2 || values.code.length > 4,
         errorMessage: {
           title: "Invalid Airport Code",
-          description:
-            "Airport code should be 2-4 characters (e.g., CAI, JFK, DXB)",
+          description: "Airport code should be 2-4 characters (e.g., CAI, JFK, DXB)"
         },
-        variant: "destructive",
+        variant: "destructive"
       },
       {
-        condition: !!values.imageUrl && !values.imageUrl.startsWith("http"),
+        condition: !!values.imageUrl && !values.imageUrl.startsWith('http'),
         errorMessage: {
           title: "Invalid Image URL",
-          description:
-            "Please provide a valid URL starting with http:// or https://",
+          description: "Please provide a valid URL starting with http:// or https://"
         },
-        variant: "destructive",
-      },
+        variant: "destructive"
+      }
     ]);
-
+    
     if (!customValidationsValid) return;
-
+    
     // All validations passed, proceed with submission
     createAirportMutation.mutate(values);
   };
@@ -968,43 +857,41 @@ export default function CountryCityManagement() {
       });
       return;
     }
-
+    
     // Validate required fields
     const requiredFieldsValid = validateRequiredFields(
       values,
-      ["name", "code"],
+      ['name', 'code'],
       {
-        name: "Country Name",
-        code: "Country Code",
-      },
+        name: 'Country Name',
+        code: 'Country Code'
+      }
     );
-
+    
     if (!requiredFieldsValid) return;
-
+    
     // Additional validation for image URL
     const customValidationsValid = validateForm(values, [
       {
-        condition: !!values.imageUrl && !values.imageUrl.startsWith("http"),
+        condition: !!values.imageUrl && !values.imageUrl.startsWith('http'),
         errorMessage: {
           title: "Invalid Image URL",
-          description:
-            "Please provide a valid URL starting with http:// or https://",
+          description: "Please provide a valid URL starting with http:// or https://"
         },
-        variant: "destructive",
+        variant: "destructive"
       },
       {
         condition: values.code.length < 2 || values.code.length > 3,
         errorMessage: {
           title: "Invalid Country Code",
-          description:
-            "Country code should be 2-3 characters (e.g., US, EG, UAE)",
+          description: "Country code should be 2-3 characters (e.g., US, EG, UAE)"
         },
-        variant: "destructive",
-      },
+        variant: "destructive"
+      }
     ]);
-
+    
     if (!customValidationsValid) return;
-
+    
     // All validations passed, proceed with submission
     updateCountryMutation.mutate({ id: selectedCountry.id, data: values });
   };
@@ -1018,46 +905,45 @@ export default function CountryCityManagement() {
       });
       return;
     }
-
+    
     // Validate required fields
     const requiredFieldsValid = validateRequiredFields(
       values,
-      ["name", "countryId"],
+      ['name', 'countryId'],
       {
-        name: "City Name",
-        countryId: "Country",
-      },
+        name: 'City Name',
+        countryId: 'Country'
+      }
     );
-
+    
     if (!requiredFieldsValid) return;
-
+    
     // Additional validation for country selection and image URL
     const customValidationsValid = validateForm(values, [
       {
         condition: values.countryId === 0,
         errorMessage: {
           title: "Country Required",
-          description: "Please select a country for this city",
+          description: "Please select a country for this city"
         },
-        variant: "destructive",
+        variant: "destructive"
       },
       {
-        condition: !!values.imageUrl && !values.imageUrl.startsWith("http"),
+        condition: !!values.imageUrl && !values.imageUrl.startsWith('http'),
         errorMessage: {
           title: "Invalid Image URL",
-          description:
-            "Please provide a valid URL starting with http:// or https://",
+          description: "Please provide a valid URL starting with http:// or https://"
         },
-        variant: "destructive",
-      },
+        variant: "destructive"
+      }
     ]);
-
+    
     if (!customValidationsValid) return;
-
+    
     // All validations passed, proceed with submission
     updateCityMutation.mutate({ id: selectedCity.id, data: values });
   };
-
+  
   const onUpdateAirportSubmit = (values: AirportFormValues) => {
     if (!selectedAirport) {
       toast({
@@ -1067,52 +953,50 @@ export default function CountryCityManagement() {
       });
       return;
     }
-
+    
     // Validate required fields
     const requiredFieldsValid = validateRequiredFields(
       values,
-      ["name", "code", "cityId"],
+      ['name', 'code', 'cityId'],
       {
-        name: "Airport Name",
-        code: "Airport Code",
-        cityId: "City",
-      },
+        name: 'Airport Name',
+        code: 'Airport Code',
+        cityId: 'City'
+      }
     );
-
+    
     if (!requiredFieldsValid) return;
-
+    
     // Additional validation for city selection, code format, and image URL
     const customValidationsValid = validateForm(values, [
       {
         condition: values.cityId === 0,
         errorMessage: {
           title: "City Required",
-          description: "Please select a city for this airport",
+          description: "Please select a city for this airport"
         },
-        variant: "destructive",
+        variant: "destructive"
       },
       {
         condition: values.code.length < 2 || values.code.length > 4,
         errorMessage: {
           title: "Invalid Airport Code",
-          description:
-            "Airport code should be 2-4 characters (e.g., CAI, JFK, DXB)",
+          description: "Airport code should be 2-4 characters (e.g., CAI, JFK, DXB)"
         },
-        variant: "destructive",
+        variant: "destructive"
       },
       {
-        condition: !!values.imageUrl && !values.imageUrl.startsWith("http"),
+        condition: !!values.imageUrl && !values.imageUrl.startsWith('http'),
         errorMessage: {
           title: "Invalid Image URL",
-          description:
-            "Please provide a valid URL starting with http:// or https://",
+          description: "Please provide a valid URL starting with http:// or https://"
         },
-        variant: "destructive",
-      },
+        variant: "destructive"
+      }
     ]);
-
+    
     if (!customValidationsValid) return;
-
+    
     // All validations passed, proceed with submission
     updateAirportMutation.mutate({ id: selectedAirport.id, data: values });
   };
@@ -1141,7 +1025,7 @@ export default function CountryCityManagement() {
     });
     setIsEditCityDialogOpen(true);
   };
-
+  
   const handleEditAirport = (airport: Airport) => {
     setSelectedAirport(airport);
     airportForm.reset({
@@ -1165,7 +1049,7 @@ export default function CountryCityManagement() {
     setSelectedCity(city);
     setDeleteCityConfirmOpen(true);
   };
-
+  
   const handleDeleteAirport = (airport: Airport) => {
     setSelectedAirport(airport);
     setDeleteAirportConfirmOpen(true);
@@ -1182,7 +1066,7 @@ export default function CountryCityManagement() {
       deleteCityMutation.mutate(selectedCity.id);
     }
   };
-
+  
   const confirmDeleteAirport = () => {
     if (selectedAirport) {
       deleteAirportMutation.mutate(selectedAirport.id);
@@ -1217,14 +1101,14 @@ export default function CountryCityManagement() {
       setSelectedCity(null);
     }
   };
-
+  
   const handleCreateAirportDialogClose = (open: boolean) => {
     setIsCreateAirportDialogOpen(open);
     if (!open) {
       airportForm.reset();
     }
   };
-
+  
   const handleEditAirportDialogClose = (open: boolean) => {
     setIsEditAirportDialogOpen(open);
     if (!open) {
@@ -1238,12 +1122,10 @@ export default function CountryCityManagement() {
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold">Travel Locations Management</h1>
-            <p className="text-gray-600 mt-1">
-              Manage countries, cities, and airports with advanced tools
-            </p>
+            <p className="text-gray-600 mt-1">Manage countries, cities, and airports with advanced tools</p>
           </div>
           <div className="flex space-x-2">
-            <Button
+            <Button 
               onClick={() => setShowAnalytics(!showAnalytics)}
               variant="outline"
               className="gap-2"
@@ -1251,7 +1133,7 @@ export default function CountryCityManagement() {
               <BarChart3 className="w-4 h-4" />
               Analytics
             </Button>
-            <Button
+            <Button 
               onClick={() => setIsAiDialogOpen(true)}
               variant="outline"
               className="bg-gradient-to-r from-purple-500 to-blue-500 text-white border-0 hover:from-purple-600 hover:to-blue-600"
@@ -1277,12 +1159,8 @@ export default function CountryCityManagement() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-600">Countries</p>
-                      <p className="text-2xl font-bold text-blue-600">
-                        {analytics.countries.total}
-                      </p>
-                      <p className="text-xs text-green-600">
-                        {analytics.countries.active} active
-                      </p>
+                      <p className="text-2xl font-bold text-blue-600">{analytics.countries.total}</p>
+                      <p className="text-xs text-green-600">{analytics.countries.active} active</p>
                     </div>
                     <GlobeIcon className="w-8 h-8 text-blue-500" />
                   </div>
@@ -1291,12 +1169,8 @@ export default function CountryCityManagement() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-600">Cities</p>
-                      <p className="text-2xl font-bold text-green-600">
-                        {analytics.cities.total}
-                      </p>
-                      <p className="text-xs text-green-600">
-                        {analytics.cities.active} active
-                      </p>
+                      <p className="text-2xl font-bold text-green-600">{analytics.cities.total}</p>
+                      <p className="text-xs text-green-600">{analytics.cities.active} active</p>
                     </div>
                     <Landmark className="w-8 h-8 text-green-500" />
                   </div>
@@ -1305,12 +1179,8 @@ export default function CountryCityManagement() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-600">Airports</p>
-                      <p className="text-2xl font-bold text-purple-600">
-                        {analytics.airports.total}
-                      </p>
-                      <p className="text-xs text-green-600">
-                        {analytics.airports.active} active
-                      </p>
+                      <p className="text-2xl font-bold text-purple-600">{analytics.airports.total}</p>
+                      <p className="text-xs text-green-600">{analytics.airports.active} active</p>
                     </div>
                     <Plane className="w-8 h-8 text-purple-500" />
                   </div>
@@ -1319,9 +1189,7 @@ export default function CountryCityManagement() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-600">Coverage</p>
-                      <p className="text-2xl font-bold text-orange-600">
-                        {analytics.coverage}
-                      </p>
+                      <p className="text-2xl font-bold text-orange-600">{analytics.coverage}</p>
                       <p className="text-xs text-gray-600">cities/country</p>
                     </div>
                     <Database className="w-8 h-8 text-orange-500" />
@@ -1335,39 +1203,34 @@ export default function CountryCityManagement() {
         {/* Navigation Tabs */}
         <div className="flex justify-between items-center">
           <div className="flex space-x-2">
-            <Button
-              onClick={() => setActiveTab("countries")}
-              variant={activeTab === "countries" ? "default" : "outline"}
+            <Button 
+              onClick={() => setActiveTab('countries')}
+              variant={activeTab === 'countries' ? 'default' : 'outline'}
             >
               <GlobeIcon className="w-4 h-4 mr-2" />
               Countries
             </Button>
-            <Button
-              onClick={() => setActiveTab("cities")}
-              variant={activeTab === "cities" ? "default" : "outline"}
+            <Button 
+              onClick={() => setActiveTab('cities')}
+              variant={activeTab === 'cities' ? 'default' : 'outline'}
             >
               <Landmark className="w-4 h-4 mr-2" />
               Cities
             </Button>
-            <Button
-              onClick={() => setActiveTab("airports")}
-              variant={activeTab === "airports" ? "default" : "outline"}
+            <Button 
+              onClick={() => setActiveTab('airports')}
+              variant={activeTab === 'airports' ? 'default' : 'outline'}
             >
               <Plane className="w-4 h-4 mr-2" />
               Airports
             </Button>
           </div>
-
+          
           {/* Bulk Actions */}
           {selectedItems.size > 0 && (
             <div className="flex items-center gap-2 bg-blue-50 p-2 rounded-lg border">
-              <span className="text-sm text-blue-700">
-                {selectedItems.size} selected
-              </span>
-              <Select
-                value={bulkAction || ""}
-                onValueChange={(value) => setBulkAction(value as any)}
-              >
+              <span className="text-sm text-blue-700">{selectedItems.size} selected</span>
+              <Select value={bulkAction || ""} onValueChange={(value) => setBulkAction(value as any)}>
                 <SelectTrigger className="w-32 h-8">
                   <SelectValue placeholder="Actions" />
                 </SelectTrigger>
@@ -1377,16 +1240,16 @@ export default function CountryCityManagement() {
                   <SelectItem value="delete">Delete</SelectItem>
                 </SelectContent>
               </Select>
-              <Button
-                size="sm"
+              <Button 
+                size="sm" 
                 onClick={executeBulkAction}
                 disabled={!bulkAction}
                 className="h-8"
               >
                 Apply
               </Button>
-              <Button
-                size="sm"
+              <Button 
+                size="sm" 
                 variant="outline"
                 onClick={() => setSelectedItems(new Set())}
                 className="h-8"
@@ -1397,26 +1260,21 @@ export default function CountryCityManagement() {
           )}
         </div>
 
-        {activeTab === "countries" && (
+        {activeTab === 'countries' && (
           <Card>
             <CardHeader className="space-y-4">
               <div className="flex flex-row items-center justify-between">
                 <div>
                   <CardTitle>Countries ({filteredCountries.length})</CardTitle>
-                  <CardDescription>
-                    Manage countries available in the system
-                  </CardDescription>
+                  <CardDescription>Manage countries available in the system</CardDescription>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() =>
-                      handleSelectAll(filteredCountries, "countries")
-                    }
+                    onClick={() => handleSelectAll(filteredCountries, 'countries')}
                   >
-                    {selectedItems.size === filteredCountries.length &&
-                    filteredCountries.length > 0 ? (
+                    {selectedItems.size === filteredCountries.length && filteredCountries.length > 0 ? (
                       <CheckSquare className="w-4 h-4" />
                     ) : (
                       <Square className="w-4 h-4" />
@@ -1425,7 +1283,7 @@ export default function CountryCityManagement() {
                   </Button>
                 </div>
               </div>
-
+              
               {/* Advanced Search and Filters */}
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
@@ -1439,12 +1297,7 @@ export default function CountryCityManagement() {
                     />
                   </div>
                 </div>
-                <Select
-                  value={countryStatusFilter}
-                  onValueChange={(value) =>
-                    setCountryStatusFilter(value as any)
-                  }
-                >
+                <Select value={countryStatusFilter} onValueChange={(value) => setCountryStatusFilter(value as any)}>
                   <SelectTrigger className="w-32">
                     <SelectValue />
                   </SelectTrigger>
@@ -1455,10 +1308,7 @@ export default function CountryCityManagement() {
                   </SelectContent>
                 </Select>
               </div>
-              <Dialog
-                open={isCreateCountryDialogOpen}
-                onOpenChange={handleCreateCountryDialogClose}
-              >
+              <Dialog open={isCreateCountryDialogOpen} onOpenChange={handleCreateCountryDialogClose}>
                 <DialogTrigger asChild>
                   <Button variant="default">
                     <Plus className="mr-2 h-4 w-4" /> Add Country
@@ -1473,21 +1323,15 @@ export default function CountryCityManagement() {
                   </DialogHeader>
                   <FormRequiredFieldsNote />
                   {createCountryMutation.isError && (
-                    <FormValidationAlert
-                      status="error"
-                      title="Failed to Create Country"
-                      message={
-                        createCountryMutation.error?.message ||
-                        "An error occurred while creating the country."
-                      }
-                      className="mt-3"
+                    <FormValidationAlert 
+                      status="error" 
+                      title="Failed to Create Country" 
+                      message={createCountryMutation.error?.message || "An error occurred while creating the country."}
+                      className="mt-3" 
                     />
                   )}
                   <Form {...countryForm}>
-                    <form
-                      onSubmit={countryForm.handleSubmit(onCreateCountrySubmit)}
-                      className="space-y-6"
-                    >
+                    <form onSubmit={countryForm.handleSubmit(onCreateCountrySubmit)} className="space-y-6">
                       <div className="grid grid-cols-2 gap-4">
                         <FormField
                           control={countryForm.control}
@@ -1511,9 +1355,7 @@ export default function CountryCityManagement() {
                               <FormControl>
                                 <Input placeholder="e.g. EG" {...field} />
                               </FormControl>
-                              <FormDescription>
-                                2-3 letter ISO code
-                              </FormDescription>
+                              <FormDescription>2-3 letter ISO code</FormDescription>
                               <FormMessage />
                             </FormItem>
                           )}
@@ -1526,10 +1368,7 @@ export default function CountryCityManagement() {
                           <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                              <Textarea
-                                placeholder="Brief description of the country"
-                                {...field}
-                              />
+                              <Textarea placeholder="Brief description of the country" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -1542,14 +1381,9 @@ export default function CountryCityManagement() {
                           <FormItem>
                             <FormLabel>Image URL</FormLabel>
                             <FormControl>
-                              <Input
-                                placeholder="https://example.com/image.jpg"
-                                {...field}
-                              />
+                              <Input placeholder="https://example.com/image.jpg" {...field} />
                             </FormControl>
-                            <FormDescription>
-                              URL to an image representing the country
-                            </FormDescription>
+                            <FormDescription>URL to an image representing the country</FormDescription>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -1562,8 +1396,7 @@ export default function CountryCityManagement() {
                             <div className="space-y-0.5">
                               <FormLabel>Active Status</FormLabel>
                               <FormDescription>
-                                When a country is inactive, it will not be
-                                visible to users on the site.
+                                When a country is inactive, it will not be visible to users on the site.
                               </FormDescription>
                             </div>
                             <FormControl>
@@ -1576,17 +1409,10 @@ export default function CountryCityManagement() {
                         )}
                       />
                       <DialogFooter>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => setIsCreateCountryDialogOpen(false)}
-                        >
+                        <Button type="button" variant="outline" onClick={() => setIsCreateCountryDialogOpen(false)}>
                           Cancel
                         </Button>
-                        <Button
-                          type="submit"
-                          disabled={createCountryMutation.isPending}
-                        >
+                        <Button type="submit" disabled={createCountryMutation.isPending}>
                           {createCountryMutation.isPending ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1630,15 +1456,10 @@ export default function CountryCityManagement() {
                     </div>
                   ) : filteredCountries.length > 0 ? (
                     filteredCountries.map((country) => (
-                      <div
-                        key={country.id}
-                        className="grid grid-cols-5 p-3 hover:bg-neutral-50"
-                      >
+                      <div key={country.id} className="grid grid-cols-5 p-3 hover:bg-neutral-50">
                         <div className="font-medium">{country.name}</div>
                         <div>{country.code}</div>
-                        <div className="truncate">
-                          {country.description || "—"}
-                        </div>
+                        <div className="truncate">{country.description || "—"}</div>
                         <div className="text-center">
                           {country.active ? (
                             <span className="inline-flex items-center text-xs font-medium text-green-600 bg-green-100 rounded-full px-2.5 py-1">
@@ -1670,8 +1491,7 @@ export default function CountryCityManagement() {
                     ))
                   ) : (
                     <div className="p-4 text-center text-muted-foreground">
-                      No countries found. Try adjusting your search or add a new
-                      country.
+                      No countries found. Try adjusting your search or add a new country.
                     </div>
                   )}
                 </div>
@@ -1680,19 +1500,14 @@ export default function CountryCityManagement() {
           </Card>
         )}
 
-        {activeTab === "cities" && (
+        {activeTab === 'cities' && (
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
                 <CardTitle>Cities</CardTitle>
-                <CardDescription>
-                  Manage cities available in the system
-                </CardDescription>
+                <CardDescription>Manage cities available in the system</CardDescription>
               </div>
-              <Dialog
-                open={isCreateCityDialogOpen}
-                onOpenChange={handleCreateCityDialogClose}
-              >
+              <Dialog open={isCreateCityDialogOpen} onOpenChange={handleCreateCityDialogClose}>
                 <DialogTrigger asChild>
                   <Button variant="default">
                     <Plus className="mr-2 h-4 w-4" /> Add City
@@ -1707,21 +1522,15 @@ export default function CountryCityManagement() {
                   </DialogHeader>
                   <FormRequiredFieldsNote />
                   {createCityMutation.isError && (
-                    <FormValidationAlert
-                      status="error"
-                      title="Failed to Create City"
-                      message={
-                        createCityMutation.error?.message ||
-                        "An error occurred while creating the city."
-                      }
-                      className="mt-3"
+                    <FormValidationAlert 
+                      status="error" 
+                      title="Failed to Create City" 
+                      message={createCityMutation.error?.message || "An error occurred while creating the city."}
+                      className="mt-3" 
                     />
                   )}
                   <Form {...cityForm}>
-                    <form
-                      onSubmit={cityForm.handleSubmit(onCreateCitySubmit)}
-                      className="space-y-6"
-                    >
+                    <form onSubmit={cityForm.handleSubmit(onCreateCitySubmit)} className="space-y-6">
                       <div className="grid grid-cols-2 gap-4">
                         <FormField
                           control={cityForm.control}
@@ -1743,9 +1552,7 @@ export default function CountryCityManagement() {
                             <FormItem>
                               <FormLabel>Country</FormLabel>
                               <Select
-                                onValueChange={(value) =>
-                                  field.onChange(parseInt(value))
-                                }
+                                onValueChange={(value) => field.onChange(parseInt(value))}
                                 defaultValue={field.value?.toString()}
                               >
                                 <FormControl>
@@ -1755,10 +1562,7 @@ export default function CountryCityManagement() {
                                 </FormControl>
                                 <SelectContent>
                                   {countries.map((country) => (
-                                    <SelectItem
-                                      key={country.id}
-                                      value={country.id.toString()}
-                                    >
+                                    <SelectItem key={country.id} value={country.id.toString()}>
                                       {country.name}
                                     </SelectItem>
                                   ))}
@@ -1776,10 +1580,7 @@ export default function CountryCityManagement() {
                           <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                              <Textarea
-                                placeholder="Brief description of the city"
-                                {...field}
-                              />
+                              <Textarea placeholder="Brief description of the city" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -1792,14 +1593,9 @@ export default function CountryCityManagement() {
                           <FormItem>
                             <FormLabel>Image URL</FormLabel>
                             <FormControl>
-                              <Input
-                                placeholder="https://example.com/image.jpg"
-                                {...field}
-                              />
+                              <Input placeholder="https://example.com/image.jpg" {...field} />
                             </FormControl>
-                            <FormDescription>
-                              URL to an image representing the city
-                            </FormDescription>
+                            <FormDescription>URL to an image representing the city</FormDescription>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -1812,8 +1608,7 @@ export default function CountryCityManagement() {
                             <div className="space-y-0.5">
                               <FormLabel>Active Status</FormLabel>
                               <FormDescription>
-                                When a city is inactive, it will not be visible
-                                to users on the site.
+                                When a city is inactive, it will not be visible to users on the site.
                               </FormDescription>
                             </div>
                             <FormControl>
@@ -1826,17 +1621,10 @@ export default function CountryCityManagement() {
                         )}
                       />
                       <DialogFooter>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => setIsCreateCityDialogOpen(false)}
-                        >
+                        <Button type="button" variant="outline" onClick={() => setIsCreateCityDialogOpen(false)}>
                           Cancel
                         </Button>
-                        <Button
-                          type="submit"
-                          disabled={createCityMutation.isPending}
-                        >
+                        <Button type="submit" disabled={createCityMutation.isPending}>
                           {createCityMutation.isPending ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -1880,19 +1668,12 @@ export default function CountryCityManagement() {
                     </div>
                   ) : filteredCities.length > 0 ? (
                     filteredCities.map((city) => {
-                      const country = countries.find(
-                        (c) => c.id === city.countryId,
-                      );
+                      const country = countries.find((c) => c.id === city.countryId);
                       return (
-                        <div
-                          key={city.id}
-                          className="grid grid-cols-5 p-3 hover:bg-neutral-50"
-                        >
+                        <div key={city.id} className="grid grid-cols-5 p-3 hover:bg-neutral-50">
                           <div className="font-medium">{city.name}</div>
                           <div>{country?.name || "—"}</div>
-                          <div className="truncate">
-                            {city.description || "—"}
-                          </div>
+                          <div className="truncate">{city.description || "—"}</div>
                           <div className="text-center">
                             {city.active ? (
                               <span className="inline-flex items-center text-xs font-medium text-green-600 bg-green-100 rounded-full px-2.5 py-1">
@@ -1925,8 +1706,7 @@ export default function CountryCityManagement() {
                     })
                   ) : (
                     <div className="p-4 text-center text-muted-foreground">
-                      No cities found. Try adjusting your search or add a new
-                      city.
+                      No cities found. Try adjusting your search or add a new city.
                     </div>
                   )}
                 </div>
@@ -1936,32 +1716,25 @@ export default function CountryCityManagement() {
         )}
 
         {/* Edit Country Dialog */}
-        <Dialog
-          open={isEditCountryDialogOpen}
-          onOpenChange={handleEditCountryDialogClose}
-        >
+        <Dialog open={isEditCountryDialogOpen} onOpenChange={handleEditCountryDialogClose}>
           <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
               <DialogTitle>Edit Country</DialogTitle>
-              <DialogDescription>Update country information.</DialogDescription>
+              <DialogDescription>
+                Update country information.
+              </DialogDescription>
             </DialogHeader>
             <FormRequiredFieldsNote />
             {updateCountryMutation.isError && (
-              <FormValidationAlert
-                status="error"
-                title="Failed to Update Country"
-                message={
-                  updateCountryMutation.error?.message ||
-                  "An error occurred while updating the country."
-                }
-                className="mt-3"
+              <FormValidationAlert 
+                status="error" 
+                title="Failed to Update Country" 
+                message={updateCountryMutation.error?.message || "An error occurred while updating the country."}
+                className="mt-3" 
               />
             )}
             <Form {...countryForm}>
-              <form
-                onSubmit={countryForm.handleSubmit(onUpdateCountrySubmit)}
-                className="space-y-6"
-              >
+              <form onSubmit={countryForm.handleSubmit(onUpdateCountrySubmit)} className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={countryForm.control}
@@ -1998,10 +1771,7 @@ export default function CountryCityManagement() {
                     <FormItem>
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <Textarea
-                          placeholder="Brief description of the country"
-                          {...field}
-                        />
+                        <Textarea placeholder="Brief description of the country" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -2014,14 +1784,9 @@ export default function CountryCityManagement() {
                     <FormItem>
                       <FormLabel>Image URL</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="https://example.com/image.jpg"
-                          {...field}
-                        />
+                        <Input placeholder="https://example.com/image.jpg" {...field} />
                       </FormControl>
-                      <FormDescription>
-                        URL to an image representing the country
-                      </FormDescription>
+                      <FormDescription>URL to an image representing the country</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -2034,8 +1799,7 @@ export default function CountryCityManagement() {
                       <div className="space-y-0.5">
                         <FormLabel>Active Status</FormLabel>
                         <FormDescription>
-                          When a country is inactive, it will not be visible to
-                          users on the site.
+                          When a country is inactive, it will not be visible to users on the site.
                         </FormDescription>
                       </div>
                       <FormControl>
@@ -2048,17 +1812,10 @@ export default function CountryCityManagement() {
                   )}
                 />
                 <DialogFooter>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setIsEditCountryDialogOpen(false)}
-                  >
+                  <Button type="button" variant="outline" onClick={() => setIsEditCountryDialogOpen(false)}>
                     Cancel
                   </Button>
-                  <Button
-                    type="submit"
-                    disabled={updateCountryMutation.isPending}
-                  >
+                  <Button type="submit" disabled={updateCountryMutation.isPending}>
                     {updateCountryMutation.isPending ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -2075,32 +1832,25 @@ export default function CountryCityManagement() {
         </Dialog>
 
         {/* Edit City Dialog */}
-        <Dialog
-          open={isEditCityDialogOpen}
-          onOpenChange={handleEditCityDialogClose}
-        >
+        <Dialog open={isEditCityDialogOpen} onOpenChange={handleEditCityDialogClose}>
           <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
               <DialogTitle>Edit City</DialogTitle>
-              <DialogDescription>Update city information.</DialogDescription>
+              <DialogDescription>
+                Update city information.
+              </DialogDescription>
             </DialogHeader>
             <FormRequiredFieldsNote />
             {updateCityMutation.isError && (
-              <FormValidationAlert
-                status="error"
-                title="Failed to Update City"
-                message={
-                  updateCityMutation.error?.message ||
-                  "An error occurred while updating the city."
-                }
-                className="mt-3"
+              <FormValidationAlert 
+                status="error" 
+                title="Failed to Update City" 
+                message={updateCityMutation.error?.message || "An error occurred while updating the city."}
+                className="mt-3" 
               />
             )}
             <Form {...cityForm}>
-              <form
-                onSubmit={cityForm.handleSubmit(onUpdateCitySubmit)}
-                className="space-y-6"
-              >
+              <form onSubmit={cityForm.handleSubmit(onUpdateCitySubmit)} className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={cityForm.control}
@@ -2122,9 +1872,7 @@ export default function CountryCityManagement() {
                       <FormItem>
                         <FormLabel>Country</FormLabel>
                         <Select
-                          onValueChange={(value) =>
-                            field.onChange(parseInt(value))
-                          }
+                          onValueChange={(value) => field.onChange(parseInt(value))}
                           defaultValue={field.value?.toString()}
                           value={field.value?.toString()}
                         >
@@ -2135,10 +1883,7 @@ export default function CountryCityManagement() {
                           </FormControl>
                           <SelectContent>
                             {countries.map((country) => (
-                              <SelectItem
-                                key={country.id}
-                                value={country.id.toString()}
-                              >
+                              <SelectItem key={country.id} value={country.id.toString()}>
                                 {country.name}
                               </SelectItem>
                             ))}
@@ -2156,10 +1901,7 @@ export default function CountryCityManagement() {
                     <FormItem>
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <Textarea
-                          placeholder="Brief description of the city"
-                          {...field}
-                        />
+                        <Textarea placeholder="Brief description of the city" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -2172,14 +1914,9 @@ export default function CountryCityManagement() {
                     <FormItem>
                       <FormLabel>Image URL</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="https://example.com/image.jpg"
-                          {...field}
-                        />
+                        <Input placeholder="https://example.com/image.jpg" {...field} />
                       </FormControl>
-                      <FormDescription>
-                        URL to an image representing the city
-                      </FormDescription>
+                      <FormDescription>URL to an image representing the city</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -2192,8 +1929,7 @@ export default function CountryCityManagement() {
                       <div className="space-y-0.5">
                         <FormLabel>Active Status</FormLabel>
                         <FormDescription>
-                          When a city is inactive, it will not be visible to
-                          users on the site.
+                          When a city is inactive, it will not be visible to users on the site.
                         </FormDescription>
                       </div>
                       <FormControl>
@@ -2206,11 +1942,7 @@ export default function CountryCityManagement() {
                   )}
                 />
                 <DialogFooter>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setIsEditCityDialogOpen(false)}
-                  >
+                  <Button type="button" variant="outline" onClick={() => setIsEditCityDialogOpen(false)}>
                     Cancel
                   </Button>
                   <Button type="submit" disabled={updateCityMutation.isPending}>
@@ -2230,34 +1962,22 @@ export default function CountryCityManagement() {
         </Dialog>
 
         {/* Delete Country Confirmation Dialog */}
-        <Dialog
-          open={deleteCountryConfirmOpen}
-          onOpenChange={setDeleteCountryConfirmOpen}
-        >
+        <Dialog open={deleteCountryConfirmOpen} onOpenChange={setDeleteCountryConfirmOpen}>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>Confirm Deletion</DialogTitle>
               <DialogDescription>
-                Are you sure you want to delete {selectedCountry?.name}? This
-                action cannot be undone.
-                <br />
-                <br />
-                <span className="font-semibold text-red-600">
-                  Warning:
-                </span>{" "}
-                Deleting a country will fail if there are cities associated with
-                it. You must delete or reassign those cities first.
+                Are you sure you want to delete {selectedCountry?.name}? This action cannot be undone.
+                <br /><br />
+                <span className="font-semibold text-red-600">Warning:</span> Deleting a country will fail if there are cities associated with it. You must delete or reassign those cities first.
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
-              <Button
-                variant="outline"
-                onClick={() => setDeleteCountryConfirmOpen(false)}
-              >
+              <Button variant="outline" onClick={() => setDeleteCountryConfirmOpen(false)}>
                 Cancel
               </Button>
-              <Button
-                variant="destructive"
+              <Button 
+                variant="destructive" 
                 onClick={confirmDeleteCountry}
                 disabled={deleteCountryMutation.isPending}
               >
@@ -2275,27 +1995,20 @@ export default function CountryCityManagement() {
         </Dialog>
 
         {/* Delete City Confirmation Dialog */}
-        <Dialog
-          open={deleteCityConfirmOpen}
-          onOpenChange={setDeleteCityConfirmOpen}
-        >
+        <Dialog open={deleteCityConfirmOpen} onOpenChange={setDeleteCityConfirmOpen}>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>Confirm Deletion</DialogTitle>
               <DialogDescription>
-                Are you sure you want to delete {selectedCity?.name}? This
-                action cannot be undone.
+                Are you sure you want to delete {selectedCity?.name}? This action cannot be undone.
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
-              <Button
-                variant="outline"
-                onClick={() => setDeleteCityConfirmOpen(false)}
-              >
+              <Button variant="outline" onClick={() => setDeleteCityConfirmOpen(false)}>
                 Cancel
               </Button>
-              <Button
-                variant="destructive"
+              <Button 
+                variant="destructive" 
                 onClick={confirmDeleteCity}
                 disabled={deleteCityMutation.isPending}
               >
@@ -2311,21 +2024,16 @@ export default function CountryCityManagement() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-
+        
         {/* Airports Tab */}
-        {activeTab === "airports" && (
+        {activeTab === 'airports' && (
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
                 <CardTitle>Airports</CardTitle>
-                <CardDescription>
-                  Manage airports available in the system
-                </CardDescription>
+                <CardDescription>Manage airports available in the system</CardDescription>
               </div>
-              <Dialog
-                open={isCreateAirportDialogOpen}
-                onOpenChange={handleCreateAirportDialogClose}
-              >
+              <Dialog open={isCreateAirportDialogOpen} onOpenChange={handleCreateAirportDialogClose}>
                 <DialogTrigger asChild>
                   <Button variant="default">
                     <Plus className="mr-2 h-4 w-4" /> Add Airport
@@ -2340,21 +2048,15 @@ export default function CountryCityManagement() {
                   </DialogHeader>
                   <FormRequiredFieldsNote />
                   {createAirportMutation.isError && (
-                    <FormValidationAlert
-                      status="error"
-                      title="Failed to Create Airport"
-                      message={
-                        createAirportMutation.error?.message ||
-                        "An error occurred while creating the airport."
-                      }
-                      className="mt-3"
+                    <FormValidationAlert 
+                      status="error" 
+                      title="Failed to Create Airport" 
+                      message={createAirportMutation.error?.message || "An error occurred while creating the airport."}
+                      className="mt-3" 
                     />
                   )}
                   <Form {...airportForm}>
-                    <form
-                      onSubmit={airportForm.handleSubmit(onCreateAirportSubmit)}
-                      className="space-y-6"
-                    >
+                    <form onSubmit={airportForm.handleSubmit(onCreateAirportSubmit)} className="space-y-6">
                       <div className="grid grid-cols-2 gap-4">
                         <FormField
                           control={airportForm.control}
@@ -2363,10 +2065,7 @@ export default function CountryCityManagement() {
                             <FormItem>
                               <FormLabel>Airport Name</FormLabel>
                               <FormControl>
-                                <Input
-                                  placeholder="e.g. Cairo International Airport"
-                                  {...field}
-                                />
+                                <Input placeholder="e.g. Cairo International Airport" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -2381,9 +2080,7 @@ export default function CountryCityManagement() {
                               <FormControl>
                                 <Input placeholder="e.g. CAI" {...field} />
                               </FormControl>
-                              <FormDescription>
-                                3-4 letter IATA/ICAO code
-                              </FormDescription>
+                              <FormDescription>3-4 letter IATA/ICAO code</FormDescription>
                               <FormMessage />
                             </FormItem>
                           )}
@@ -2395,13 +2092,9 @@ export default function CountryCityManagement() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>City</FormLabel>
-                            <Select
-                              onValueChange={(value) =>
-                                field.onChange(parseInt(value))
-                              }
-                              defaultValue={
-                                field.value ? String(field.value) : undefined
-                              }
+                            <Select 
+                              onValueChange={(value) => field.onChange(parseInt(value))}
+                              defaultValue={field.value ? String(field.value) : undefined}
                             >
                               <FormControl>
                                 <SelectTrigger>
@@ -2410,15 +2103,8 @@ export default function CountryCityManagement() {
                               </FormControl>
                               <SelectContent>
                                 {cities.map((city) => (
-                                  <SelectItem
-                                    key={city.id}
-                                    value={String(city.id)}
-                                  >
-                                    {city.name} (
-                                    {countries.find(
-                                      (c) => c.id === city.countryId,
-                                    )?.name || "Unknown Country"}
-                                    )
+                                  <SelectItem key={city.id} value={String(city.id)}>
+                                    {city.name} ({countries.find(c => c.id === city.countryId)?.name || 'Unknown Country'})
                                   </SelectItem>
                                 ))}
                               </SelectContent>
@@ -2434,10 +2120,7 @@ export default function CountryCityManagement() {
                           <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                              <Textarea
-                                placeholder="Brief description of the airport"
-                                {...field}
-                              />
+                              <Textarea placeholder="Brief description of the airport" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -2450,14 +2133,9 @@ export default function CountryCityManagement() {
                           <FormItem>
                             <FormLabel>Image URL</FormLabel>
                             <FormControl>
-                              <Input
-                                placeholder="https://example.com/image.jpg"
-                                {...field}
-                              />
+                              <Input placeholder="https://example.com/image.jpg" {...field} />
                             </FormControl>
-                            <FormDescription>
-                              URL to an image representing the airport
-                            </FormDescription>
+                            <FormDescription>URL to an image representing the airport</FormDescription>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -2470,8 +2148,7 @@ export default function CountryCityManagement() {
                             <div className="space-y-0.5">
                               <FormLabel>Active Status</FormLabel>
                               <FormDescription>
-                                When an airport is inactive, it will not be
-                                visible to users on the site.
+                                When an airport is inactive, it will not be visible to users on the site.
                               </FormDescription>
                             </div>
                             <FormControl>
@@ -2484,17 +2161,10 @@ export default function CountryCityManagement() {
                         )}
                       />
                       <DialogFooter>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => setIsCreateAirportDialogOpen(false)}
-                        >
+                        <Button type="button" variant="outline" onClick={() => setIsCreateAirportDialogOpen(false)}>
                           Cancel
                         </Button>
-                        <Button
-                          type="submit"
-                          disabled={createAirportMutation.isPending}
-                        >
+                        <Button type="submit" disabled={createAirportMutation.isPending}>
                           {createAirportMutation.isPending ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -2539,23 +2209,14 @@ export default function CountryCityManagement() {
                     </div>
                   ) : filteredAirports.length > 0 ? (
                     filteredAirports.map((airport) => {
-                      const city = cities.find((c) => c.id === airport.cityId);
-                      const country = countries.find(
-                        (c) => c.id === city?.countryId,
-                      );
+                      const city = cities.find(c => c.id === airport.cityId);
+                      const country = countries.find(c => c.id === city?.countryId);
                       return (
-                        <div
-                          key={airport.id}
-                          className="grid grid-cols-6 p-3 hover:bg-neutral-50"
-                        >
+                        <div key={airport.id} className="grid grid-cols-6 p-3 hover:bg-neutral-50">
                           <div className="font-medium">{airport.name}</div>
                           <div>{airport.code}</div>
-                          <div>
-                            {city?.name || "—"} ({country?.name || "—"})
-                          </div>
-                          <div className="truncate">
-                            {airport.description || "—"}
-                          </div>
+                          <div>{city?.name || "—"} ({country?.name || "—"})</div>
+                          <div className="truncate">{airport.description || "—"}</div>
                           <div className="text-center">
                             {airport.active ? (
                               <span className="inline-flex items-center text-xs font-medium text-green-600 bg-green-100 rounded-full px-2.5 py-1">
@@ -2588,8 +2249,7 @@ export default function CountryCityManagement() {
                     })
                   ) : (
                     <div className="p-4 text-center text-muted-foreground">
-                      No airports found. Try adjusting your search or add a new
-                      airport.
+                      No airports found. Try adjusting your search or add a new airport.
                     </div>
                   )}
                 </div>
@@ -2597,34 +2257,27 @@ export default function CountryCityManagement() {
             </CardContent>
           </Card>
         )}
-
+        
         {/* Edit Airport Dialog */}
-        <Dialog
-          open={isEditAirportDialogOpen}
-          onOpenChange={handleEditAirportDialogClose}
-        >
+        <Dialog open={isEditAirportDialogOpen} onOpenChange={handleEditAirportDialogClose}>
           <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
               <DialogTitle>Edit Airport</DialogTitle>
-              <DialogDescription>Update the airport details.</DialogDescription>
+              <DialogDescription>
+                Update the airport details.
+              </DialogDescription>
             </DialogHeader>
             <FormRequiredFieldsNote />
             {updateAirportMutation.isError && (
-              <FormValidationAlert
-                status="error"
-                title="Failed to Update Airport"
-                message={
-                  updateAirportMutation.error?.message ||
-                  "An error occurred while updating the airport."
-                }
-                className="mt-3"
+              <FormValidationAlert 
+                status="error" 
+                title="Failed to Update Airport" 
+                message={updateAirportMutation.error?.message || "An error occurred while updating the airport."}
+                className="mt-3" 
               />
             )}
             <Form {...airportForm}>
-              <form
-                onSubmit={airportForm.handleSubmit(onUpdateAirportSubmit)}
-                className="space-y-6"
-              >
+              <form onSubmit={airportForm.handleSubmit(onUpdateAirportSubmit)} className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={airportForm.control}
@@ -2633,10 +2286,7 @@ export default function CountryCityManagement() {
                       <FormItem>
                         <FormLabel>Airport Name</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="e.g. Cairo International Airport"
-                            {...field}
-                          />
+                          <Input placeholder="e.g. Cairo International Airport" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -2651,9 +2301,7 @@ export default function CountryCityManagement() {
                         <FormControl>
                           <Input placeholder="e.g. CAI" {...field} />
                         </FormControl>
-                        <FormDescription>
-                          3-4 letter IATA/ICAO code
-                        </FormDescription>
+                        <FormDescription>3-4 letter IATA/ICAO code</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -2665,13 +2313,9 @@ export default function CountryCityManagement() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>City</FormLabel>
-                      <Select
-                        onValueChange={(value) =>
-                          field.onChange(parseInt(value))
-                        }
-                        defaultValue={
-                          field.value ? String(field.value) : undefined
-                        }
+                      <Select 
+                        onValueChange={(value) => field.onChange(parseInt(value))}
+                        defaultValue={field.value ? String(field.value) : undefined}
                         value={field.value ? String(field.value) : undefined}
                       >
                         <FormControl>
@@ -2682,10 +2326,7 @@ export default function CountryCityManagement() {
                         <SelectContent>
                           {cities.map((city) => (
                             <SelectItem key={city.id} value={String(city.id)}>
-                              {city.name} (
-                              {countries.find((c) => c.id === city.countryId)
-                                ?.name || "Unknown Country"}
-                              )
+                              {city.name} ({countries.find(c => c.id === city.countryId)?.name || 'Unknown Country'})
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -2701,10 +2342,7 @@ export default function CountryCityManagement() {
                     <FormItem>
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <Textarea
-                          placeholder="Brief description of the airport"
-                          {...field}
-                        />
+                        <Textarea placeholder="Brief description of the airport" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -2717,14 +2355,9 @@ export default function CountryCityManagement() {
                     <FormItem>
                       <FormLabel>Image URL</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="https://example.com/image.jpg"
-                          {...field}
-                        />
+                        <Input placeholder="https://example.com/image.jpg" {...field} />
                       </FormControl>
-                      <FormDescription>
-                        URL to an image representing the airport
-                      </FormDescription>
+                      <FormDescription>URL to an image representing the airport</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -2737,8 +2370,7 @@ export default function CountryCityManagement() {
                       <div className="space-y-0.5">
                         <FormLabel>Active Status</FormLabel>
                         <FormDescription>
-                          When an airport is inactive, it will not be visible to
-                          users on the site.
+                          When an airport is inactive, it will not be visible to users on the site.
                         </FormDescription>
                       </div>
                       <FormControl>
@@ -2751,17 +2383,10 @@ export default function CountryCityManagement() {
                   )}
                 />
                 <DialogFooter>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setIsEditAirportDialogOpen(false)}
-                  >
+                  <Button type="button" variant="outline" onClick={() => setIsEditAirportDialogOpen(false)}>
                     Cancel
                   </Button>
-                  <Button
-                    type="submit"
-                    disabled={updateAirportMutation.isPending}
-                  >
+                  <Button type="submit" disabled={updateAirportMutation.isPending}>
                     {updateAirportMutation.isPending ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -2776,22 +2401,15 @@ export default function CountryCityManagement() {
             </Form>
           </DialogContent>
         </Dialog>
-
+        
         {/* Delete Airport Confirmation Dialog */}
-        <AlertDialog
-          open={deleteAirportConfirmOpen}
-          onOpenChange={setDeleteAirportConfirmOpen}
-        >
+        <AlertDialog open={deleteAirportConfirmOpen} onOpenChange={setDeleteAirportConfirmOpen}>
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete the
-                airport
-                {selectedAirport && (
-                  <strong> {selectedAirport.name}</strong>
-                )}{" "}
-                from the system.
+                This action cannot be undone. This will permanently delete the airport
+                {selectedAirport && <strong> {selectedAirport.name}</strong>} from the system.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
@@ -2823,8 +2441,7 @@ export default function CountryCityManagement() {
                 AI Country & Cities Generator
               </DialogTitle>
               <DialogDescription>
-                Enter a country name and AI will automatically generate the
-                country entry with its major cities for your travel platform.
+                Enter a country name and AI will automatically generate the country entry with its major cities for your travel platform.
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-4">
@@ -2843,8 +2460,7 @@ export default function CountryCityManagement() {
               <div className="bg-blue-50 p-3 rounded-lg">
                 <p className="text-sm text-blue-700">
                   <Sparkles className="w-4 h-4 inline mr-1" />
-                  AI will generate the country with its ISO code, description,
-                  and automatically add 10-15 major cities with proper details.
+                  AI will generate the country with its ISO code, description, and automatically add 10-15 major cities with proper details.
                 </p>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { ScrollButton } from "@/components/ScrollButton";
 import {
   Card,
@@ -412,7 +413,7 @@ export default function TranslationManagement() {
   });
 
   return (
-    <div>
+    <DashboardLayout>
       {/* Add scroll button */}
       <ScrollButton threshold={300} variant="secondary" />
 
@@ -1298,6 +1299,6 @@ export default function TranslationManagement() {
           </Form>
         </DialogContent>
       </Dialog>
-    </div>
+    </DashboardLayout>
   );
 }

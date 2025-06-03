@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { apiRequest, getQueryFn } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import {
   Card,
   CardHeader,
@@ -471,7 +472,7 @@ export default function EnhancedHotelCreatePage() {
   };
   
   return (
-    <div>
+    <DashboardLayout>
       <div className="space-y-4 p-4 sm:p-6 lg:p-8">
         <div className="mb-6">
           <div className="flex items-center gap-2">
@@ -1861,6 +1862,6 @@ export default function EnhancedHotelCreatePage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </DashboardLayout>
   );
 }

@@ -1,11 +1,12 @@
 import React from "react";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { PackageCreatorForm } from "@/components/dashboard/PackageCreatorForm";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { Home, Package } from "lucide-react";
 
 export default function PackagesPage() {
   return (
-    <div>
+    <DashboardLayout>
       <div className="mb-6">
         <Breadcrumb>
           <BreadcrumbItem>
@@ -30,6 +31,6 @@ export default function PackagesPage() {
         <h1 className="text-2xl font-bold mb-6 text-zinc-800">Create New Package</h1>
         <PackageCreatorForm />
       </div>
-    </div>
+    </DashboardLayout>
   );
 }

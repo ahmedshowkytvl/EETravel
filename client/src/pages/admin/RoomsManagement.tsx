@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { apiRequest, getQueryFn } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { RoomCombinationsForm } from "@/components/rooms/RoomCombinationsForm";
@@ -320,17 +321,17 @@ export default function RoomsManagement() {
 
   if (isLoadingRooms || isLoadingHotels) {
     return (
-      <div>
+      <DashboardLayout>
         <div className="flex justify-center items-center min-h-screen">
           <Loader2 className="h-8 w-8 animate-spin" />
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   if (roomsError || hotelsError) {
     return (
-      <div>
+      <DashboardLayout>
         <div className="p-4">
           <h1 className="text-2xl font-bold mb-4">Error</h1>
           <p className="text-red-500">
@@ -339,12 +340,12 @@ export default function RoomsManagement() {
               : `Error loading hotels: ${(hotelsError as Error).message}`}
           </p>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   return (
-    <div>
+    <DashboardLayout>
       <div className="space-y-4 p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <h1 className="text-2xl font-bold tracking-tight">Room Management</h1>
@@ -1156,6 +1157,6 @@ export default function RoomsManagement() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </DashboardLayout>
   );
 }

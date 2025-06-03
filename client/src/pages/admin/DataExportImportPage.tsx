@@ -10,6 +10,7 @@ import { formatDistanceToNow } from "date-fns";
 import { Loader2, Download, Trash2, Upload, Database, FileUp, FileDown, Sprout, Play, AlertTriangle } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Progress } from "@/components/ui/progress";
 import { formatBytes } from "@/lib/formatUtils";
 
@@ -587,6 +588,6 @@ export default function DataExportImportPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </DashboardLayout>
   );
 }

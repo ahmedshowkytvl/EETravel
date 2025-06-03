@@ -3,6 +3,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/use-auth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -271,7 +272,7 @@ export default function UsersManagement() {
   );
 
   return (
-    <div>
+    <DashboardLayout>
       <div className="p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">User Management</h1>
@@ -866,6 +867,6 @@ export default function UsersManagement() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </DashboardLayout>
   );
 }
