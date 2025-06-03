@@ -1953,37 +1953,66 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Process JSON fields before validation
       const processedData = { ...req.body };
       
-      // Convert arrays to JSON strings for SQLite storage
-      if (Array.isArray(processedData.galleryUrls)) {
-        processedData.galleryUrls = JSON.stringify(processedData.galleryUrls);
+      // Handle JSON fields - convert arrays to JSON strings for storage
+      const jsonFields = [
+        'galleryUrls', 'inclusions', 'idealFor', 'tourSelection', 
+        'includedFeatures', 'optionalExcursions', 'excludedFeatures', 
+        'itinerary', 'whatToPack', 'travelRoute', 'accommodationHighlights',
+        'transportationDetails'
+      ];
+      
+      for (const field of jsonFields) {
+        if (processedData[field] && Array.isArray(processedData[field])) {
+          processedData[field] = JSON.stringify(processedData[field]);
+        }
+      }
+
+      // Handle date fields
+      if (processedData.startDate) {
+        processedData.startDate = new Date(processedData.startDate);
+      }
+      if (processedData.endDate) {
+        processedData.endDate = new Date(processedData.endDate);
+      }
+
+      // Map form field names to database field names
+      if (processedData.name) {
+        processedData.title = processedData.name;
+        delete processedData.name;
+      }
+      if (processedData.overview) {
+        processedData.description = processedData.overview;
+        delete processedData.overview;
+      }
+      if (processedData.basePrice) {
+        processedData.price = processedData.basePrice;
+        delete processedData.basePrice;
+      }
+      if (processedData.category) {
+        processedData.categoryId = parseInt(processedData.category);
+        delete processedData.category;
       }
       
-      if (Array.isArray(processedData.inclusions)) {
-        processedData.inclusions = JSON.stringify(processedData.inclusions);
-      }
-      
-      // Validate with schema
-      const packageData = insertPackageSchema.parse(processedData);
-      console.log('Validated package data:', JSON.stringify(packageData));
+      console.log('Processed package data:', JSON.stringify(processedData));
       
       // If destinationId is provided, verify it exists
-      if (packageData.destinationId) {
-        const destination = await storage.getDestination(packageData.destinationId);
+      if (processedData.destinationId) {
+        const destination = await storage.getDestination(processedData.destinationId);
         if (!destination) {
           return res.status(404).json({ message: 'Destination not found' });
         }
       }
       
       // Check for required fields based on database schema
-      if (!packageData.title || !packageData.description || !packageData.price || !packageData.duration) {
+      if (!processedData.title || !processedData.description || !processedData.price || !processedData.duration) {
         return res.status(400).json({ 
           message: 'Missing required fields',
           requiredFields: ['title', 'description', 'price', 'duration'],
-          receivedData: Object.keys(packageData)
+          receivedData: Object.keys(processedData)
         });
       }
       
-      const newPackage = await storage.createPackage(packageData);
+      const newPackage = await storage.createPackage(processedData);
       console.log('Package created successfully:', JSON.stringify(newPackage));
       res.status(201).json(newPackage);
     } catch (error) {
@@ -2055,29 +2084,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log('Existing package data:', JSON.stringify(existingPackage));
 
-      // Parse and validate the update data
-      const updateData = insertPackageSchema.parse(req.body);
-      console.log('Parsed update data:', JSON.stringify(updateData));
+      // Process the update data to handle complex fields
+      const processedData = { ...req.body };
+      
+      // Handle JSON fields - convert arrays to JSON strings for storage
+      const jsonFields = [
+        'galleryUrls', 'inclusions', 'idealFor', 'tourSelection', 
+        'includedFeatures', 'optionalExcursions', 'excludedFeatures', 
+        'itinerary', 'whatToPack', 'travelRoute', 'accommodationHighlights',
+        'transportationDetails'
+      ];
+      
+      for (const field of jsonFields) {
+        if (processedData[field] && Array.isArray(processedData[field])) {
+          processedData[field] = JSON.stringify(processedData[field]);
+        }
+      }
+
+      // Handle date fields
+      if (processedData.startDate) {
+        processedData.startDate = new Date(processedData.startDate);
+      }
+      if (processedData.endDate) {
+        processedData.endDate = new Date(processedData.endDate);
+      }
+
+      // Map form field names to database field names
+      if (processedData.name) {
+        processedData.title = processedData.name;
+        delete processedData.name;
+      }
+      if (processedData.overview) {
+        processedData.description = processedData.overview;
+        delete processedData.overview;
+      }
+      if (processedData.basePrice) {
+        processedData.price = processedData.basePrice;
+        delete processedData.basePrice;
+      }
+      if (processedData.category) {
+        processedData.categoryId = parseInt(processedData.category);
+        delete processedData.category;
+      }
+
+      console.log('Processed update data:', JSON.stringify(processedData));
       
       // If destinationId is being updated, verify the new destination exists
-      if (updateData.destinationId && updateData.destinationId !== existingPackage.destinationId) {
-        const destination = await storage.getDestination(updateData.destinationId);
+      if (processedData.destinationId && processedData.destinationId !== existingPackage.destinationId) {
+        const destination = await storage.getDestination(processedData.destinationId);
         if (!destination) {
           return res.status(404).json({ message: 'Destination not found' });
         }
       }
       
-      // Log explicitly if countryId and cityId are present
-      console.log('Update includes countryId:', updateData.countryId !== undefined);
-      console.log('Update includes cityId:', updateData.cityId !== undefined);
-      
-      // Perform the update operation
-      const updatedPackage = await storage.updatePackage(id, updateData);
+      // Perform the update operation with processed data
+      const updatedPackage = await storage.updatePackage(id, processedData);
       console.log('Updated package result:', JSON.stringify(updatedPackage));
       
       res.json(updatedPackage);
     } catch (error) {
       if (error instanceof z.ZodError) {
+        console.error('Validation error:', JSON.stringify(error.errors));
         return res.status(400).json({ message: 'Invalid package data', errors: error.errors });
       }
       console.error('Error updating package:', error);

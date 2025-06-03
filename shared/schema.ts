@@ -95,6 +95,7 @@ export const packages = pgTable("packages", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   description: text("description").notNull(),
+  shortDescription: text("short_description"),
   price: integer("price").notNull(),
   discountedPrice: integer("discounted_price"),
   imageUrl: text("image_url"),
@@ -105,10 +106,39 @@ export const packages = pgTable("packages", {
   destinationId: integer("destination_id").references(() => destinations.id),
   countryId: integer("country_id").references(() => countries.id),
   cityId: integer("city_id").references(() => cities.id),
+  categoryId: integer("category_id"), // Package category reference
   featured: boolean("featured").default(false),
   type: text("type"),
   inclusions: json("inclusions"), // Using native JSON in PostgreSQL
   slug: text("slug").unique(), // Friendly URL slug
+  
+  // New complex fields for comprehensive package management
+  route: text("route"), // Route/Location information
+  idealFor: json("ideal_for"), // Array of ideal traveler types
+  tourSelection: json("tour_selection"), // Selected tours
+  includedFeatures: json("included_features"), // Array of included features
+  optionalExcursions: json("optional_excursions"), // Array of optional add-ons
+  excludedFeatures: json("excluded_features"), // Array of excluded items
+  itinerary: json("itinerary"), // Day-by-day itinerary
+  whatToPack: json("what_to_pack"), // Packing list items
+  travelRoute: json("travel_route"), // Travel route items
+  accommodationHighlights: json("accommodation_highlights"), // Hotel highlights
+  transportationDetails: json("transportation_details"), // Transportation info
+  pricingMode: text("pricing_mode").default("per_booking"), // Pricing structure
+  
+  // Date fields
+  startDate: timestamp("start_date"),
+  endDate: timestamp("end_date"),
+  
+  // Traveler counts
+  adultCount: integer("adult_count").default(2),
+  childrenCount: integer("children_count").default(0),
+  infantCount: integer("infant_count").default(0),
+  
+  // Additional metadata
+  maxGroupSize: integer("max_group_size").default(15),
+  language: text("language").default("english"),
+  bestTimeToVisit: text("best_time_to_visit"),
 });
 
 export const bookings = pgTable("bookings", {
