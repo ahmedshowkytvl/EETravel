@@ -93,12 +93,35 @@ export function setupSimpleAuth(app: Express) {
       });
 
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error("Registration error details:", {
+        message: error.message,
+        stack: error.stack,
+        code: error.code,
+        detail: error.detail,
+        constraint: error.constraint,
+        userData: {
+          username: username?.trim(),
+          email: email?.trim(),
+          hasFullName: !!fullName,
+          role: 'user',
+          status: 'active'
+        }
+      });
       
       // Handle specific database errors
-      if (error.message?.includes('UNIQUE constraint failed')) {
+      if (error.message?.includes('UNIQUE constraint failed') || 
+          error.message?.includes('duplicate key') ||
+          error.code === '23505') {
         return res.status(400).json({ 
           message: "Username or email already exists" 
+        });
+      }
+
+      // Handle missing column errors
+      if (error.message?.includes('column') && error.message?.includes('does not exist')) {
+        console.error("Database schema mismatch detected:", error.message);
+        return res.status(500).json({ 
+          message: "Database configuration error. Please contact support." 
         });
       }
       
