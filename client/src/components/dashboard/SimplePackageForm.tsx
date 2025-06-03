@@ -489,36 +489,70 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
       console.log('Parsed countryId:', countryId, 'cityId:', cityId);
 
       const packagePayload = {
+        // Basic package information
+        name: formData.name, // Map to title on server
         title: formData.name,
         shortDescription: formData.shortDescription || "",
+        overview: formData.overview, // Map to description on server  
         description: formData.overview,
+        basePrice: formData.basePrice || 0, // Map to price on server
         price: formData.basePrice || 0,
-        discountedPrice: Math.round((formData.basePrice || 0) * 0.9), // 10% discount as example
+        discountedPrice: Math.round((formData.basePrice || 0) * 0.9),
+        
+        // Media
         imageUrl: mainImageUrl,
         galleryUrls: galleryUrls,
-        duration: formData.startDate && formData.endDate 
-          ? Math.ceil((formData.endDate.getTime() - formData.startDate.getTime()) / (1000 * 3600 * 24)) 
-          : 7, // Default 7 days
-        rating: 45, // Default 4.5 stars (stored as 45 in DB)
-        destinationId: formData.category ? parseInt(formData.category) : null, // Using the selected destination ID
-        categoryId: formData.categoryId, // Package category field
-        featured: true,
-        type: categoryOptions.find(c => c.value === formData.category)?.label || "Tour Package",
-        inclusions: formData.includedFeatures || ["Accommodation", "Breakfast", "Tour Guide"],
-        excludedItems: excludedItemsList,
-        idealFor: selectedTravellerTypes,
-        route: formData.route || "",
-        whatToPack: packItems,
-        itinerary: itineraryItems,
-        accommodationHighlights: accommodationHighlights,
-        selectedTourId: selectedTour?.id || formData.selectedTourId,
+        
+        // Location and categorization
+        destinationId: formData.category ? parseInt(formData.category) : null,
+        category: formData.category, // Map to categoryId on server
+        categoryId: formData.categoryId,
         countryId: countryId,
         cityId: cityId,
+        
+        // Route and itinerary information
+        route: formData.route || "",
+        itinerary: itineraryItems,
+        
+        // Travel details
+        duration: formData.startDate && formData.endDate 
+          ? Math.ceil((formData.endDate.getTime() - formData.startDate.getTime()) / (1000 * 3600 * 24)) 
+          : 7,
         startDate: formData.startDate?.toISOString() || new Date().toISOString(),
         endDate: formData.endDate?.toISOString() || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+        
+        // Traveler information
+        idealFor: selectedTravellerTypes,
         adultCount: formData.adultCount,
         childrenCount: formData.childrenCount,
-        infantCount: formData.infantCount
+        infantCount: formData.infantCount,
+        maxGroupSize: formData.maxGroupSize || 15,
+        
+        // Package features and inclusions
+        includedFeatures: formData.includedFeatures || [],
+        inclusions: formData.includedFeatures || [],
+        excludedFeatures: excludedItemsList,
+        excludedItems: excludedItemsList,
+        optionalExcursions: optionalExcursions,
+        
+        // Accommodation and packing
+        accommodationHighlights: accommodationHighlights,
+        whatToPack: packItems,
+        travelRoute: travelRouteItems,
+        
+        // Tour selection
+        tourSelection: selectedTour?.id || formData.selectedTourId,
+        selectedTourId: selectedTour?.id || formData.selectedTourId,
+        
+        // Pricing and metadata
+        pricingMode: formData.pricingMode || "per_booking",
+        language: formData.language || "english",
+        bestTimeToVisit: formData.bestTimeToVisit || "",
+        
+        // Additional metadata
+        rating: 45,
+        featured: true,
+        type: categoryOptions.find(c => c.value === formData.category)?.label || "Tour Package"
       };
 
       // Log final payload for debugging
