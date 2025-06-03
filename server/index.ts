@@ -84,8 +84,7 @@ app.use((req, res, next) => {
     // Setup admin users after database is initialized
     await setupAdmin();
 
-    // Setup unified authentication (including registration)
-    setupUnifiedAuth(app);
+    // Authentication is now handled in routes.ts via setupUnifiedAuth
 
     // Start the server and register routes
     const server = await registerRoutes(app);

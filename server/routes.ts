@@ -38,6 +38,7 @@ import {
   visas,
 } from "@shared/schema";
 import { setupAuth } from "./auth";
+import { setupUnifiedAuth } from "./unified-auth";
 import { z } from "zod";
 import geminiService from "./services/gemini";
 import { setupExportImportRoutes } from "./export-import-routes";
@@ -68,8 +69,8 @@ const geminiApiKey = process.env.GEMINI_API_KEY;
 // ... use geminiApiKey when initializing the Gemini client
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Set up authentication
-  // setupAuth(app); // Disabled in favor of simple-auth.ts
+  // Set up unified authentication system
+  setupUnifiedAuth(app);
   
   // Setup export/import routes
   setupExportImportRoutes(app);
