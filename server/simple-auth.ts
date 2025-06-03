@@ -99,13 +99,7 @@ export function setupSimpleAuth(app: Express) {
         code: error.code,
         detail: error.detail,
         constraint: error.constraint,
-        userData: {
-          username: username?.trim(),
-          email: email?.trim(),
-          hasFullName: !!fullName,
-          role: 'user',
-          status: 'active'
-        }
+        requestBody: req.body
       });
       
       // Handle specific database errors

@@ -3825,24 +3825,29 @@ export class PostgresDatabaseStorage implements IStorage {
   }
   
   async listMenuItems(menuId: number, active?: boolean): Promise<MenuItem[]> {
-    if (active !== undefined) {
-      return db
+    try {
+      if (active !== undefined) {
+        return await db
+          .select()
+          .from(menuItems)
+          .where(
+            and(
+              eq(menuItems.menuId, menuId),
+              eq(menuItems.active, active)
+            )
+          )
+          .orderBy(menuItems.order);
+      }
+      
+      return await db
         .select()
         .from(menuItems)
-        .where(
-          and(
-            eq(menuItems.menuId, menuId),
-            eq(menuItems.active, active)
-          )
-        )
+        .where(eq(menuItems.menuId, menuId))
         .orderBy(menuItems.order);
+    } catch (error) {
+      console.error('Error listing menu items:', error);
+      return [];
     }
-    
-    return db
-      .select()
-      .from(menuItems)
-      .where(eq(menuItems.menuId, menuId))
-      .orderBy(menuItems.order);
   }
   
   async createMenuItem(item: InsertMenuItem): Promise<MenuItem> {
