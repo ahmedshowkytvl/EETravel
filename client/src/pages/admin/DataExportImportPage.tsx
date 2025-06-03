@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { formatBytes } from "@/lib/formatUtils";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 
 interface ExportFile {
   name: string;
@@ -538,7 +539,7 @@ export default function DataExportImportPage() {
                   <div className="flex justify-center items-center py-8">
                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
                   </div>
-                ) : exportsData?.exports?.length > 0 ? (
+                ) : (exportsData as any)?.exports?.length > 0 ? (
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -549,7 +550,7 @@ export default function DataExportImportPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {exportsData.exports.map((file: ExportFile) => (
+                      {(exportsData as any).exports.map((file: ExportFile) => (
                         <TableRow key={file.name}>
                           <TableCell className="font-medium">{file.name}</TableCell>
                           <TableCell>{formatBytes(file.size)}</TableCell>
@@ -587,6 +588,6 @@ export default function DataExportImportPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </DashboardLayout>
   );
 }
