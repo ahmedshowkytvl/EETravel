@@ -1975,7 +1975,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         processedData.endDate = new Date(processedData.endDate);
       }
 
-      // Map form field names to database field names
+      // Map form field names to database field names and handle type conversions
       if (processedData.name) {
         processedData.title = processedData.name;
         delete processedData.name;
@@ -1985,13 +1985,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
         delete processedData.overview;
       }
       if (processedData.basePrice) {
-        processedData.price = processedData.basePrice;
+        processedData.price = parseInt(processedData.basePrice) || 0;
         delete processedData.basePrice;
       }
       if (processedData.category) {
         processedData.categoryId = parseInt(processedData.category);
         delete processedData.category;
       }
+
+      // Handle numeric field conversions
+      if (processedData.maxGroupSize) {
+        processedData.maxGroupSize = parseInt(processedData.maxGroupSize) || 15;
+      }
+      if (processedData.adultCount) {
+        processedData.adultCount = parseInt(processedData.adultCount) || 2;
+      }
+      if (processedData.childrenCount) {
+        processedData.childrenCount = parseInt(processedData.childrenCount) || 0;
+      }
+      if (processedData.infantCount) {
+        processedData.infantCount = parseInt(processedData.infantCount) || 0;
+      }
+      if (processedData.duration) {
+        processedData.duration = parseInt(processedData.duration) || 7;
+      }
+
+      // Remove validation-only fields that shouldn't be stored
+      delete processedData.allowFormSubmission;
       
       console.log('Processed package data:', JSON.stringify(processedData));
       
@@ -2109,7 +2129,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         processedData.endDate = new Date(processedData.endDate);
       }
 
-      // Map form field names to database field names
+      // Map form field names to database field names and handle type conversions
       if (processedData.name) {
         processedData.title = processedData.name;
         delete processedData.name;
@@ -2119,13 +2139,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
         delete processedData.overview;
       }
       if (processedData.basePrice) {
-        processedData.price = processedData.basePrice;
+        processedData.price = parseInt(processedData.basePrice) || 0;
         delete processedData.basePrice;
       }
       if (processedData.category) {
         processedData.categoryId = parseInt(processedData.category);
         delete processedData.category;
       }
+
+      // Handle numeric field conversions
+      if (processedData.maxGroupSize) {
+        processedData.maxGroupSize = parseInt(processedData.maxGroupSize) || 15;
+      }
+      if (processedData.adultCount) {
+        processedData.adultCount = parseInt(processedData.adultCount) || 2;
+      }
+      if (processedData.childrenCount) {
+        processedData.childrenCount = parseInt(processedData.childrenCount) || 0;
+      }
+      if (processedData.infantCount) {
+        processedData.infantCount = parseInt(processedData.infantCount) || 0;
+      }
+      if (processedData.duration) {
+        processedData.duration = parseInt(processedData.duration) || 7;
+      }
+
+      // Remove validation-only fields that shouldn't be stored
+      delete processedData.allowFormSubmission;
 
       console.log('Processed update data:', JSON.stringify(processedData));
       
