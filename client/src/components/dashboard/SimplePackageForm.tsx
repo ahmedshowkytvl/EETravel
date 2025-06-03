@@ -82,6 +82,7 @@ import { queryClient } from "@/lib/queryClient";
 import { validateForm, validateRequiredFields, validateDateFields, validateNumericFields } from "@/lib/validateForm";
 import { FormRequiredFieldsNote, FormValidationAlert } from "@/components/dashboard/FormValidationAlert";
 import { useLocation } from "wouter";
+import { IconSelector } from "@/components/ui/IconSelector";
 
 // Validation schema - Made more permissive to allow custom validation logic
 const packageFormSchema = z.object({
@@ -261,21 +262,23 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
   const [showValidationHints, setShowValidationHints] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("basic");
   
-  // For additional required fields
+  // Package feature states with user-friendly names
   const [excludedItemsList, setExcludedItemsList] = useState<string[]>([]);
   const [selectedTravellerTypes, setSelectedTravellerTypes] = useState<string[]>([]);
+  const [optionalExcursions, setOptionalExcursions] = useState<string[]>([]);
+  const [travelRouteItems, setTravelRouteItems] = useState<string[]>([]);
   
-  // For what to pack section
+  // Packing list section
   const [packItems, setPackItems] = useState<{ item: string, icon: string, tooltip: string }[]>([]);
-  const [newPackItem, setNewPackItem] = useState({ item: "", icon: "suitcase", tooltip: "" });
+  const [newPackItem, setNewPackItem] = useState({ item: "", icon: "Luggage", tooltip: "" });
   
-  // For itinerary
+  // Day-by-day itinerary
   const [itineraryItems, setItineraryItems] = useState<{ day: number, title: string, description: string, image: string }[]>([]);
   const [newItineraryDay, setNewItineraryDay] = useState({ day: 1, title: "", description: "", image: "" });
   
-  // For accommodation highlights
+  // Hotel and accommodation features
   const [accommodationHighlights, setAccommodationHighlights] = useState<{ title: string, description: string, icon: string }[]>([]);
-  const [newHighlight, setNewHighlight] = useState({ title: "", description: "", icon: "home" });
+  const [newHighlight, setNewHighlight] = useState({ title: "", description: "", icon: "Hotel" });
   
   // For transportation options
   const [selectedTransport, setSelectedTransport] = useState("");
