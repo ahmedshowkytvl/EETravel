@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { 
   Card, 
   CardContent, 
@@ -883,7 +884,9 @@ export default function DestinationsManagement() {
           </AlertDialogContent>
         </AlertDialog>
 
+          </div>
+        </div>
       </div>
-    </div>
+    </DashboardLayout>
   );
 }
