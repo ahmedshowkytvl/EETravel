@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
+
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -377,32 +377,27 @@ export default function ToursManagement() {
 
   if (isLoadingTours || isLoadingDestinations) {
     return (
-      <DashboardLayout>
-        <div className="flex justify-center items-center min-h-screen">
-          <Loader2 className="h-8 w-8 animate-spin" />
-        </div>
-      </DashboardLayout>
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
     );
   }
 
   if (toursError || destinationsError) {
     return (
-      <DashboardLayout>
-        <div className="p-4">
-          <h1 className="text-2xl font-bold mb-4">Error</h1>
-          <p className="text-red-500">
-            {toursError
-              ? `Error loading tours: ${toursError.message}`
-              : `Error loading destinations: ${(destinationsError as Error).message}`}
-          </p>
-        </div>
-      </DashboardLayout>
+      <div className="p-4">
+        <h1 className="text-2xl font-bold mb-4">Error</h1>
+        <p className="text-red-500">
+          {toursError
+            ? `Error loading tours: ${toursError.message}`
+            : `Error loading destinations: ${(destinationsError as Error).message}`}
+        </p>
+      </div>
     );
   }
 
   return (
-    <DashboardLayout>
-      <div className="space-y-4 p-4 sm:p-6 lg:p-8">
+    <div className="space-y-4 p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <h1 className="text-2xl font-bold tracking-tight">Tour Management</h1>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -1260,6 +1255,6 @@ export default function ToursManagement() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </DashboardLayout>
+    </div>
   );
 }
