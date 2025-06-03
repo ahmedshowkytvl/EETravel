@@ -47,16 +47,16 @@ export function setupSimpleAuth(app: Express) {
         });
       }
 
-      // Check if username already exists
-      const existingUser = await db.select().from(users).where(eq(users.username, username)).limit(1);
+      // Check if username already exists (case-insensitive)
+      const existingUser = await db.select().from(users).where(eq(users.username, username.toLowerCase())).limit(1);
       if (existingUser.length > 0) {
         return res.status(400).json({ 
           message: "Username already exists. Please choose a different username." 
         });
       }
 
-      // Check if email already exists
-      const existingEmail = await db.select().from(users).where(eq(users.email, email)).limit(1);
+      // Check if email already exists (case-insensitive)
+      const existingEmail = await db.select().from(users).where(eq(users.email, email.toLowerCase())).limit(1);
       if (existingEmail.length > 0) {
         return res.status(400).json({ 
           message: "An account with this email already exists" 
@@ -68,13 +68,13 @@ export function setupSimpleAuth(app: Express) {
 
       // Create new user (using schema column names)
       const userData = {
-        username: username.trim(),
+        username: username.trim().toLowerCase(),
         email: email.trim().toLowerCase(),
         password: hashedPassword,
         fullName: fullName?.trim() || null,
         role: 'user',
         status: 'active',
-        displayName: username.trim(),
+        displayName: fullName?.trim() || username.trim(),
         firstName: fullName?.trim().split(' ')[0] || null,
         lastName: fullName?.trim().split(' ').slice(1).join(' ') || null,
         phoneNumber: null,
