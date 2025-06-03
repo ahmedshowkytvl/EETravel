@@ -883,9 +883,6 @@ export default function DestinationsManagement() {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-
-          </div>
-        </div>
       </div>
     </DashboardLayout>
   );

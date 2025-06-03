@@ -85,13 +85,16 @@ app.use((req, res, next) => {
       res.sendFile(path.join(process.cwd(), 'client', 'public', 'admin-test.html'));
     });
 
-    // Run first-time setup and seeding in background after database is connected
-    try {
-      const { initializeDatabase } = await import('./init-database');
-      await initializeDatabase();
-    } catch (error) {
-      console.error('Failed to run initial database setup and seeding:', error);
-    }
+    // Run first-time setup and seeding in background after server starts
+    // Don't await this to prevent blocking server startup
+    (async () => {
+      try {
+        const { initializeDatabase } = await import('./init-database');
+        await initializeDatabase();
+      } catch (error) {
+        console.error('Failed to run initial database setup and seeding:', error);
+      }
+    })();
 
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       const status = err.status || err.statusCode || 500;
