@@ -43,6 +43,7 @@ import { z } from "zod";
 import geminiService from "./services/gemini";
 import { setupExportImportRoutes } from "./export-import-routes";
 import { setupVisaRoutes } from "./visa-routes";
+import { setupHeroSlidesRoutes } from "./hero-slides-routes";
 import Stripe from "stripe";
 import { eq, and, sql } from "drizzle-orm";
 import * as schema from "@shared/schema";
