@@ -194,15 +194,17 @@ const Header: React.FC = () => {
                       <span>{t('nav.favorites', 'Favorites')}</span>
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/admin"
-                      className="cursor-pointer"
-                    >
-                      <UmbrellaIcon className={`${isRTL ? 'ml-2' : 'mr-2'} h-4 w-4`} />
-                      <span>{t('nav.admin', 'Admin Dashboard')}</span>
-                    </Link>
-                  </DropdownMenuItem>
+                  {user.role === 'admin' && (
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href="/admin"
+                        className="cursor-pointer"
+                      >
+                        <UmbrellaIcon className={`${isRTL ? 'ml-2' : 'mr-2'} h-4 w-4`} />
+                        <span>{t('nav.admin', 'Admin Dashboard')}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleLogout}
@@ -326,16 +328,18 @@ const Header: React.FC = () => {
                     {t('nav.favorites', 'Favorites')}
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/admin"
-                    className="block font-medium hover:text-primary transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <UmbrellaIcon className={`inline ${isRTL ? 'ml-1' : 'mr-1'} h-4 w-4`} />
-                    {t('nav.admin', 'Admin Dashboard')}
-                  </Link>
-                </li>
+                {user.role === 'admin' && (
+                  <li>
+                    <Link
+                      href="/admin"
+                      className="block font-medium hover:text-primary transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <UmbrellaIcon className={`inline ${isRTL ? 'ml-1' : 'mr-1'} h-4 w-4`} />
+                      {t('nav.admin', 'Admin Dashboard')}
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <button
                     onClick={() => {
