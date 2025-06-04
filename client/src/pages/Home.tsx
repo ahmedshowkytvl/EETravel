@@ -1,5 +1,5 @@
 import React from "react";
-import HeroSection from "@/components/HeroSection";
+import { HeroSlider } from "@/components/HeroSlider";
 import BookingTabs from "@/components/BookingTabs";
 import FeaturedOffers from "@/components/FeaturedOffers";
 import ExploreSection from "@/components/ExploreSection";
@@ -13,7 +13,7 @@ const Home: React.FC = () => {
   
   return (
     <>
-      <HeroSection />
+      <HeroSlider />
       <BookingTabs />
       <FeaturedOffers />
       <ExploreSection />

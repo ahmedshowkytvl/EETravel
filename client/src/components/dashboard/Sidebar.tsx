@@ -25,7 +25,8 @@ import {
   Star,
   ShieldCheck,
   Database,
-  FileCheck
+  FileCheck,
+  ImageIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -85,6 +86,11 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
       icon: <Users size={20} />, 
       label: "User Management", 
       href: "/admin/users" 
+    },
+    { 
+      icon: <ImageIcon size={20} />, 
+      label: "Hero Slider", 
+      href: "/admin/slider" 
     },
     { 
       icon: <GlobeIcon size={20} />, 
