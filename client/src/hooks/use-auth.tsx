@@ -41,6 +41,16 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
   
+  // Get user from localStorage on initial load
+  const getStoredUser = (): User | null => {
+    try {
+      const storedUser = localStorage.getItem('user');
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch {
+      return null;
+    }
+  };
+
   // Fetch current user data
   const {
     data: user,
@@ -49,6 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   } = useQuery<User | null>({
     queryKey: ["/api/user"],
     queryFn: getQueryFn({ on401: "returnNull" }),
+    initialData: getStoredUser(),
   });
 
   // Login mutation
@@ -67,6 +78,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     },
     onSuccess: (userData: User) => {
+      // Store user data in localStorage
+      localStorage.setItem('user', JSON.stringify(userData));
       queryClient.setQueryData(["/api/user"], userData);
       toast({
         title: "Logged in successfully",
@@ -98,6 +111,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     },
     onSuccess: (userData: User) => {
+      // Store user data in localStorage
+      localStorage.setItem('user', JSON.stringify(userData));
       queryClient.setQueryData(["/api/user"], userData);
       toast({
         title: "Registration successful",
@@ -129,6 +144,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     },
     onSuccess: () => {
+      // Clear user data from localStorage
+      localStorage.removeItem('user');
       // Clear all user-related data from cache immediately
       queryClient.setQueryData(["/api/user"], null);
       queryClient.clear(); // Clear all cache for faster logout
