@@ -19,12 +19,16 @@ app.use(cors()); // استخدام cors
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ extended: false, limit: '25mb' }));
 
-// Session setup (example using default settings, configure as needed)
+// Session setup with proper configuration
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'your-default-secret', // Replace with a strong secret
+  secret: process.env.SESSION_SECRET || 'sahara-journeys-session-secret',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: process.env.NODE_ENV === 'production' } // Use secure cookies in production
+  cookie: { 
+    secure: false, // Set to false for development
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
 }));
 
 // Serve static files from the public directory

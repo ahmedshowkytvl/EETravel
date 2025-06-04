@@ -86,18 +86,28 @@ export function setupUnifiedAuth(app: Express) {
 
       // Insert new user
       const [newUser] = await client`
-        INSERT INTO users (username, email, password, full_name) 
-        VALUES (${username.toLowerCase()}, ${email.toLowerCase()}, ${hashedPassword}, ${fullName || null})
-        RETURNING id, username, email, full_name
+        INSERT INTO users (username, email, password, full_name, role) 
+        VALUES (${username.toLowerCase()}, ${email.toLowerCase()}, ${hashedPassword}, ${fullName || null}, 'user')
+        RETURNING id, username, email, full_name, role
       `;
 
       await client.end();
+
+      // Store user data in session
+      (req as any).session.user = {
+        id: newUser.id,
+        username: newUser.username,
+        email: newUser.email,
+        fullName: newUser.full_name,
+        role: newUser.role
+      };
 
       res.status(201).json({
         id: newUser.id,
         username: newUser.username,
         email: newUser.email,
         fullName: newUser.full_name,
+        role: newUser.role,
         message: "Registration successful! Welcome to Sahara Travel."
       });
 
@@ -146,7 +156,7 @@ export function setupUnifiedAuth(app: Express) {
 
       // Find user by username or email
       const users = await client`
-        SELECT id, username, email, password, full_name 
+        SELECT id, username, email, password, full_name, role 
         FROM users 
         WHERE username = ${username.toLowerCase()} OR email = ${username.toLowerCase()}
         LIMIT 1
@@ -171,11 +181,21 @@ export function setupUnifiedAuth(app: Express) {
 
       await client.end();
 
+      // Store user data in session
+      (req as any).session.user = {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        fullName: user.full_name,
+        role: user.role
+      };
+
       res.status(200).json({
         id: user.id,
         username: user.username,
         email: user.email,
         fullName: user.full_name,
+        role: user.role,
         message: "Login successful"
       });
 
@@ -198,11 +218,41 @@ export function setupUnifiedAuth(app: Express) {
 
   // Get current user endpoint
   app.get("/api/user", async (req: Request, res: Response) => {
-    res.status(200).json(null);
+    try {
+      const sessionUser = (req as any).session?.user;
+      
+      if (!sessionUser) {
+        return res.status(200).json(null);
+      }
+
+      res.status(200).json({
+        id: sessionUser.id,
+        username: sessionUser.username,
+        email: sessionUser.email,
+        fullName: sessionUser.fullName,
+        role: sessionUser.role
+      });
+    } catch (error) {
+      console.error("Get user error:", error);
+      res.status(200).json(null);
+    }
   });
 
   // Logout endpoint
   app.post("/api/logout", async (req: Request, res: Response) => {
-    res.status(200).json({ message: "Logout successful" });
+    try {
+      // Destroy the session
+      (req as any).session.destroy((err: any) => {
+        if (err) {
+          console.error("Session destruction error:", err);
+          return res.status(500).json({ message: "Logout failed" });
+        }
+        
+        res.status(200).json({ message: "Logout successful" });
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+      res.status(500).json({ message: "Logout failed" });
+    }
   });
 }
