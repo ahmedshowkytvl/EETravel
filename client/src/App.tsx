@@ -64,6 +64,7 @@ import CountryCityManagement from "@/pages/admin/CountryCityManagement";
 import DestinationsManagement from "@/pages/admin/DestinationsManagement";
 import MenuManager from "@/pages/admin/MenuManager";
 import SettingsPage from "@/pages/admin/SettingsPage";
+import SliderManagement from "@/pages/admin/SliderManagement";
 import TranslationManagement from "@/pages/admin/TranslationManagement";
 import Dashboard from "@/pages/admin/Dashboard";
 import Layout from "@/components/Layout";
@@ -134,6 +135,7 @@ function Router() {
           <AdminRoute path="/admin/analytics" component={AnalyticsDashboard} />
           <AdminRoute path="/admin/system-monitoring" component={SystemMonitoring} />
           <AdminRoute path="/admin/settings" component={SettingsPage} />
+          <AdminRoute path="/admin/slider" component={SliderManagement} />
           <AdminRoute path="/admin" component={AdminDashboard} />
           <AdminRoute path="/admin/visas" component={VisasManagement} />
           <Route component={NotFound} />

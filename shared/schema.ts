@@ -78,6 +78,23 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// Hero slides table for homepage slider management
+export const heroSlides = pgTable("hero_slides", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  subtitle: text("subtitle"),
+  description: text("description"),
+  imageUrl: text("image_url").notNull(),
+  buttonText: text("button_text"),
+  buttonLink: text("button_link"),
+  secondaryButtonText: text("secondary_button_text"),
+  secondaryButtonLink: text("secondary_button_link"),
+  order: integer("order").default(0),
+  active: boolean("active").default(true),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const destinations = pgTable("destinations", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -980,6 +997,23 @@ export const insertHotelSchema = createInsertSchema(hotels).pick({
   rating: true,
   status: true,
 });
+
+// Hero slide schema types
+export const insertHeroSlideSchema = createInsertSchema(heroSlides).pick({
+  title: true,
+  subtitle: true,
+  description: true,
+  imageUrl: true,
+  buttonText: true,
+  buttonLink: true,
+  secondaryButtonText: true,
+  secondaryButtonLink: true,
+  order: true,
+  active: true,
+});
+
+export type HeroSlide = typeof heroSlides.$inferSelect;
+export type InsertHeroSlide = z.infer<typeof insertHeroSlideSchema>;
 
 export const insertRoomSchema = createInsertSchema(rooms).pick({
   name: true,

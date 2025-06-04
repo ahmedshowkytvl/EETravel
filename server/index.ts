@@ -8,6 +8,7 @@ import { dbPromise } from './db'; // استيراد dbPromise
 import session from 'express-session'; // استيراد session
 import { setupAdmin } from './admin-setup'; // استيراد setupAdmin
 import { setupUnifiedAuth } from './unified-auth';
+import { setupHeroSlidesRoutes } from './hero-slides-routes';
 
 // Load environment variables first
 dotenv.config();
@@ -91,7 +92,9 @@ app.use((req, res, next) => {
     // Setup admin users after database is initialized
     await setupAdmin();
 
-    // Authentication is now handled in routes.ts via setupUnifiedAuth
+    // Setup authentication and hero slides routes
+    setupUnifiedAuth(app);
+    setupHeroSlidesRoutes(app);
 
     // Start the server and register routes
     const server = await registerRoutes(app);
