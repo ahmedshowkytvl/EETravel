@@ -76,6 +76,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Setup export/import routes
   setupExportImportRoutes(app);
   
+  // Setup hero slides routes
+  setupHeroSlidesRoutes(app);
+  
   // The setupHotelFeatureRoutes isn't implemented yet, so we'll comment it out
   // setupHotelFeatureRoutes(app, storage, isAdmin);
   
