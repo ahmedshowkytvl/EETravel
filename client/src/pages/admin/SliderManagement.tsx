@@ -130,27 +130,25 @@ export default function SliderManagement() {
     },
   });
 
-  // Handle file upload
+  // Handle file upload using base64 conversion
   const handleFileUpload = async (file: File) => {
-    const formData = new FormData();
-    formData.append('image', file);
-    
     try {
-      const response = await fetch('/api/upload/image', {
-        method: 'POST',
-        body: formData,
+      // Convert file to base64
+      const base64 = await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.readAsDataURL(file);
       });
       
-      if (response.ok) {
-        const result = await response.json();
-        setUploadedImage(result.url);
-        form.setValue('imageUrl', result.url);
-        toast({ title: "Image uploaded successfully" });
-      } else {
-        toast({ title: "Upload failed", variant: "destructive" });
-      }
+      // For now, use the base64 data URL directly
+      // In production, you'd want to upload to a cloud service
+      const imageUrl = `data:${file.type};base64,${base64.split(',')[1]}`;
+      
+      setUploadedImage(imageUrl);
+      form.setValue('imageUrl', imageUrl);
+      toast({ title: "Image loaded successfully" });
     } catch (error) {
-      toast({ title: "Upload error", variant: "destructive" });
+      toast({ title: "Failed to load image", variant: "destructive" });
     }
   };
 
