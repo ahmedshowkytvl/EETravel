@@ -52,14 +52,18 @@ import * as schema from "@shared/schema";
 // Middleware to check if user is admin
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
   // Check if user is authenticated (session-based)
-  if (!req.user) {
+  const sessionUser = (req as any).session?.user;
+  
+  if (!sessionUser) {
     return res.status(401).json({ message: 'You must be logged in to access this resource' });
   }
   
-  if (req.user.role !== 'admin') {
+  if (sessionUser.role !== 'admin') {
     return res.status(403).json({ message: 'You do not have permission to access this resource' });
   }
   
+  // Set req.user for backward compatibility
+  (req as any).user = sessionUser;
   return next();
 };
 
