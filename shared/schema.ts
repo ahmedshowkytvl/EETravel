@@ -74,6 +74,24 @@ export const users = pgTable("users", {
   bio: text("bio"),
   avatarUrl: text("avatar_url"),
   status: text("status").default("active"),
+  // Travel preferences and profile data
+  nationality: text("nationality"),
+  dateOfBirth: timestamp("date_of_birth"),
+  passportNumber: text("passport_number"),
+  passportExpiry: timestamp("passport_expiry"),
+  emergencyContact: text("emergency_contact"),
+  emergencyPhone: text("emergency_phone"),
+  dietaryRequirements: text("dietary_requirements"),
+  medicalConditions: text("medical_conditions"),
+  preferredLanguage: text("preferred_language").default("en"),
+  // Marketing preferences
+  emailNotifications: boolean("email_notifications").default(true),
+  smsNotifications: boolean("sms_notifications").default(false),
+  marketingEmails: boolean("marketing_emails").default(true),
+  // Verification
+  emailVerified: boolean("email_verified").default(false),
+  phoneVerified: boolean("phone_verified").default(false),
+  lastLoginAt: timestamp("last_login_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -160,13 +178,34 @@ export const packages = pgTable("packages", {
 
 export const bookings = pgTable("bookings", {
   id: serial("id").primaryKey(),
+  bookingReference: text("booking_reference").notNull().unique(),
   userId: integer("user_id").references(() => users.id),
   packageId: integer("package_id").references(() => packages.id),
+  tourId: integer("tour_id").references(() => tours.id),
+  hotelId: integer("hotel_id").references(() => hotels.id),
   bookingDate: timestamp("booking_date").notNull().defaultNow(),
   travelDate: timestamp("travel_date").notNull(),
+  returnDate: timestamp("return_date"),
   numberOfTravelers: integer("number_of_travelers").notNull(),
+  adultCount: integer("adult_count").notNull(),
+  childCount: integer("child_count").default(0),
+  infantCount: integer("infant_count").default(0),
   totalPrice: integer("total_price").notNull(),
+  basePrice: integer("base_price").notNull(),
+  taxAmount: integer("tax_amount").default(0),
+  discountAmount: integer("discount_amount").default(0),
+  currency: text("currency").default("USD").notNull(),
   status: text("status").default("pending").notNull(),
+  paymentStatus: text("payment_status").default("pending").notNull(),
+  paymentMethod: text("payment_method"),
+  paymentReference: text("payment_reference"),
+  specialRequests: text("special_requests"),
+  notes: text("notes"),
+  confirmedAt: timestamp("confirmed_at"),
+  cancelledAt: timestamp("cancelled_at"),
+  cancellationReason: text("cancellation_reason"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 // User favorites
@@ -211,7 +250,11 @@ export const hotels = pgTable("hotels", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   description: text("description"),
+  shortDescription: text("short_description"),
   destinationId: integer("destination_id").references(() => destinations.id),
+  countryId: integer("country_id").references(() => countries.id),
+  cityId: integer("city_id").references(() => cities.id),
+  categoryId: integer("category_id").references(() => hotelCategories.id),
   address: text("address"),
   city: text("city"),
   country: text("country"),
@@ -220,21 +263,43 @@ export const hotels = pgTable("hotels", {
   email: text("email"),
   website: text("website"),
   imageUrl: text("image_url"),
+  galleryUrls: json("gallery_urls"),
   stars: integer("stars"),
   amenities: json("amenities"), // Using native JSON in PostgreSQL (legacy, moving to relation-based)
-  checkInTime: text("check_in_time"),
-  checkOutTime: text("check_out_time"),
+  checkInTime: text("check_in_time").default("15:00"),
+  checkOutTime: text("check_out_time").default("11:00"),
   longitude: doublePrecision("longitude"),
   latitude: doublePrecision("latitude"),
   featured: boolean("featured").default(false),
   rating: doublePrecision("rating"),
   reviewCount: integer("review_count").default(0),
-  guestRating: doublePrecision("guest_rating"), // Added guest rating
+  guestRating: doublePrecision("guest_rating"),
+  // Booking and availability
+  minStay: integer("min_stay").default(1),
+  maxStay: integer("max_stay"),
+  bookingLeadTime: integer("booking_lead_time").default(0),
+  cancellationPolicy: text("cancellation_policy"),
+  // Services and facilities
   parkingAvailable: boolean("parking_available").default(false),
   airportTransferAvailable: boolean("airport_transfer_available").default(false),
   carRentalAvailable: boolean("car_rental_available").default(false),
   shuttleAvailable: boolean("shuttle_available").default(false),
+  wifiAvailable: boolean("wifi_available").default(true),
+  petFriendly: boolean("pet_friendly").default(false),
+  accessibleFacilities: boolean("accessible_facilities").default(false),
+  // Pricing
+  basePrice: integer("base_price"),
+  currency: text("currency").default("USD"),
+  taxIncluded: boolean("tax_included").default(false),
+  serviceChargeIncluded: boolean("service_charge_included").default(false),
+  // Additional info
+  languages: json("languages").default(["en"]),
+  establishedYear: integer("established_year"),
+  lastRenovatedYear: integer("last_renovated_year"),
+  totalRooms: integer("total_rooms"),
+  totalFloors: integer("total_floors"),
   status: text("status").default("active"),
+  verificationStatus: text("verification_status").default("pending"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -1182,6 +1247,130 @@ export type Package = typeof packages.$inferSelect;
 
 export type InsertBooking = z.infer<typeof insertBookingSchema>;
 export type Booking = typeof bookings.$inferSelect;
+
+// Reviews table for user feedback
+export const reviews = pgTable("reviews", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id).notNull(),
+  bookingId: integer("booking_id").references(() => bookings.id),
+  packageId: integer("package_id").references(() => packages.id),
+  tourId: integer("tour_id").references(() => tours.id),
+  hotelId: integer("hotel_id").references(() => hotels.id),
+  rating: integer("rating").notNull(), // 1-5 stars
+  title: text("title"),
+  comment: text("comment"),
+  pros: json("pros"), // Array of positive points
+  cons: json("cons"), // Array of negative points
+  wouldRecommend: boolean("would_recommend").default(true),
+  travelDate: timestamp("travel_date"),
+  verified: boolean("verified").default(false),
+  helpful: integer("helpful").default(0),
+  notHelpful: integer("not_helpful").default(0),
+  status: text("status").default("pending"), // pending, approved, rejected
+  moderatorNotes: text("moderator_notes"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Payments table for financial transactions
+export const payments = pgTable("payments", {
+  id: serial("id").primaryKey(),
+  paymentReference: text("payment_reference").notNull().unique(),
+  bookingId: integer("booking_id").references(() => bookings.id).notNull(),
+  userId: integer("user_id").references(() => users.id).notNull(),
+  amount: integer("amount").notNull(),
+  currency: text("currency").default("USD").notNull(),
+  paymentMethod: text("payment_method").notNull(), // card, paypal, bank_transfer
+  paymentProvider: text("payment_provider"), // stripe, paypal, etc.
+  providerTransactionId: text("provider_transaction_id"),
+  status: text("status").default("pending").notNull(), // pending, completed, failed, refunded
+  failureReason: text("failure_reason"),
+  refundAmount: integer("refund_amount").default(0),
+  refundReason: text("refund_reason"),
+  processingFee: integer("processing_fee").default(0),
+  netAmount: integer("net_amount").notNull(),
+  paidAt: timestamp("paid_at"),
+  refundedAt: timestamp("refunded_at"),
+  metadata: json("metadata"), // Additional payment data
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Notifications table for user communications
+export const notifications = pgTable("notifications", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id).notNull(),
+  type: text("type").notNull(), // booking_confirmation, payment_received, etc.
+  title: text("title").notNull(),
+  message: text("message").notNull(),
+  relatedBookingId: integer("related_booking_id").references(() => bookings.id),
+  relatedPaymentId: integer("related_payment_id").references(() => payments.id),
+  read: boolean("read").default(false),
+  actionUrl: text("action_url"),
+  actionText: text("action_text"),
+  priority: text("priority").default("normal"), // low, normal, high, urgent
+  channel: text("channel").default("in_app"), // in_app, email, sms
+  sentAt: timestamp("sent_at"),
+  expiresAt: timestamp("expires_at"),
+  metadata: json("metadata"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Traveler details for bookings
+export const travelers = pgTable("travelers", {
+  id: serial("id").primaryKey(),
+  bookingId: integer("booking_id").references(() => bookings.id).notNull(),
+  type: text("type").notNull(), // adult, child, infant
+  title: text("title"), // Mr, Mrs, Ms, Dr
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  dateOfBirth: timestamp("date_of_birth"),
+  nationality: text("nationality"),
+  passportNumber: text("passport_number"),
+  passportExpiry: timestamp("passport_expiry"),
+  passportIssueCountry: text("passport_issue_country"),
+  dietaryRequirements: text("dietary_requirements"),
+  medicalConditions: text("medical_conditions"),
+  specialRequests: text("special_requests"),
+  emergencyContact: text("emergency_contact"),
+  emergencyPhone: text("emergency_phone"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Coupons and discounts
+export const coupons = pgTable("coupons", {
+  id: serial("id").primaryKey(),
+  code: text("code").notNull().unique(),
+  name: text("name").notNull(),
+  description: text("description"),
+  type: text("type").notNull(), // percentage, fixed_amount
+  value: integer("value").notNull(), // percentage or amount in cents
+  minOrderAmount: integer("min_order_amount").default(0),
+  maxDiscountAmount: integer("max_discount_amount"),
+  usageLimit: integer("usage_limit"),
+  usageCount: integer("usage_count").default(0),
+  userLimit: integer("user_limit").default(1), // per user usage limit
+  validFrom: timestamp("valid_from").notNull(),
+  validUntil: timestamp("valid_until").notNull(),
+  applicableToPackages: boolean("applicable_to_packages").default(true),
+  applicableToTours: boolean("applicable_to_tours").default(true),
+  applicableToHotels: boolean("applicable_to_hotels").default(true),
+  active: boolean("active").default(true),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Coupon usage tracking
+export const couponUsages = pgTable("coupon_usages", {
+  id: serial("id").primaryKey(),
+  couponId: integer("coupon_id").references(() => coupons.id).notNull(),
+  userId: integer("user_id").references(() => users.id).notNull(),
+  bookingId: integer("booking_id").references(() => bookings.id).notNull(),
+  discountAmount: integer("discount_amount").notNull(),
+  usedAt: timestamp("used_at").notNull().defaultNow(),
+});
 
 export type InsertFavorite = z.infer<typeof insertFavoriteSchema>;
 export type Favorite = typeof favorites.$inferSelect;
