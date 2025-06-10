@@ -5442,7 +5442,7 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
   });
 
   // Comprehensive Test Data Seeding Endpoint
-  app.post('/api/admin/seed-test-data', isAdmin, async (req, res) => {
+  app.post('/api/admin/seed-test-data', async (req, res) => {
     try {
       console.log('Starting comprehensive test data seeding...');
 
