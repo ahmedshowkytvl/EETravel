@@ -67,13 +67,21 @@ export function HeroSlider() {
 
   return (
     <div className="relative h-[600px] overflow-hidden">
-      {/* Slide Image Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000"
-        style={{ 
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${currentSlideData.imageUrl})` 
-        }}
-      />
+      {/* Slide Images with Animation */}
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out ${
+            index === currentSlide 
+              ? 'opacity-100 transform translate-y-0' 
+              : 'opacity-0 transform translate-y-8'
+          }`}
+          style={{ 
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${slide.imageUrl})`,
+            transitionProperty: 'opacity, transform'
+          }}
+        />
+      ))}
 
       {/* Navigation Arrows */}
       {slides.length > 1 && (
@@ -97,26 +105,29 @@ export function HeroSlider() {
         </>
       )}
 
-      {/* Slide Content */}
+      {/* Slide Content with Animation */}
       <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div 
+            key={currentSlide}
+            className="max-w-4xl mx-auto text-center text-white transform transition-all duration-1000 ease-out animate-slide-up"
+          >
             {currentSlideData.subtitle && (
-              <p className="text-lg md:text-xl text-white/90 mb-4 animate-fade-in">
+              <p className="text-lg md:text-xl text-white/90 mb-4 opacity-0 animate-slide-up-delayed-1">
                 {currentSlideData.subtitle}
               </p>
             )}
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 opacity-0 animate-slide-up-delayed-2">
               {currentSlideData.title}
             </h1>
             {currentSlideData.description && (
-              <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto animate-fade-in">
+              <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto opacity-0 animate-slide-up-delayed-3">
                 {currentSlideData.description}
               </p>
             )}
             
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 justify-center animate-fade-in">
+            <div className="flex flex-wrap gap-4 justify-center opacity-0 animate-slide-up-delayed-4">
               {currentSlideData.buttonText && currentSlideData.buttonLink && (
                 <Link href={currentSlideData.buttonLink}>
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">

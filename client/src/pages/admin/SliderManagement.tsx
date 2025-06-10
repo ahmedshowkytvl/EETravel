@@ -133,22 +133,31 @@ export default function SliderManagement() {
   // Handle file upload using base64 conversion
   const handleFileUpload = async (file: File) => {
     try {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        toast({ title: "Please select an image file", variant: "destructive" });
+        return;
+      }
+      
+      // Validate file size (5MB limit)
+      if (file.size > 5 * 1024 * 1024) {
+        toast({ title: "Image too large. Please select a file under 5MB", variant: "destructive" });
+        return;
+      }
+      
       // Convert file to base64
-      const base64 = await new Promise<string>((resolve) => {
+      const base64 = await new Promise<string>((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
         reader.readAsDataURL(file);
       });
       
-      // For now, use the base64 data URL directly
-      // In production, you'd want to upload to a cloud service
-      const imageUrl = `data:${file.type};base64,${base64.split(',')[1]}`;
-      
-      setUploadedImage(imageUrl);
-      form.setValue('imageUrl', imageUrl);
-      toast({ title: "Image loaded successfully" });
+      setUploadedImage(base64);
+      form.setValue('imageUrl', base64);
+      toast({ title: "Image uploaded successfully" });
     } catch (error) {
-      toast({ title: "Failed to load image", variant: "destructive" });
+      toast({ title: "Failed to upload image", variant: "destructive" });
     }
   };
 
