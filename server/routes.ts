@@ -2203,10 +2203,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log('Updated package result:', JSON.stringify(updatedPackage));
       
       res.json(updatedPackage);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error updating package:', error);
       console.error('Error details:', error.message);
-      console.error('Processed data that caused error:', JSON.stringify(processedData));
+      console.error('Processed data that caused error:', JSON.stringify(req.body));
       res.status(500).json({ message: 'Failed to update package', error: error.message });
     }
   });
@@ -2730,8 +2730,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         status: 'draft'
       };
 
-      // Insert into hotel_drafts table using SQLite
-      const result = await db.run(
+      // Insert into hotel_drafts table using PostgreSQL
+      const result = await db.execute(sql
         `INSERT INTO hotel_drafts (
           name, description, destination_id, address, city, country, postal_code, 
           phone, email, website, image_url, stars, amenities, check_in_time, check_out_time,
