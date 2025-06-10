@@ -908,6 +908,7 @@ export const insertDestinationSchema = createInsertSchema(destinations).pick({
 export const insertPackageSchema = createInsertSchema(packages).pick({
   title: true,
   description: true,
+  shortDescription: true,
   price: true,
   discountedPrice: true,
   imageUrl: true,
