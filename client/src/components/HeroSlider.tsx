@@ -68,7 +68,7 @@ export function HeroSlider() {
   const currentSlideData = slides[currentSlide];
 
   return (
-    <div className="relative h-[600px] overflow-hidden">
+    <div className="relative h-[600px] overflow-hidden group">
       {/* Slide Images with Animation */}
       {slides.map((slide, index) => (
         <div
@@ -85,11 +85,11 @@ export function HeroSlider() {
         />
       ))}
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows - Show on Hover */}
       {slides.length > 1 && (
         <>
           <button
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white border border-white/30 flex items-center justify-center transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0"
             onClick={prevSlide}
             type="button"
             aria-label="Previous slide"
@@ -97,7 +97,7 @@ export function HeroSlider() {
             <ChevronLeft className="h-6 w-6" />
           </button>
           <button
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white border border-white/30 flex items-center justify-center transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 group-hover:opacity-100 translate-x-[10px] group-hover:translate-x-0"
             onClick={nextSlide}
             type="button"
             aria-label="Next slide"
