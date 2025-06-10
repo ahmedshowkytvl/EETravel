@@ -5587,27 +5587,11 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
             stars: Math.floor(Math.random() * 3) + 3,
             city: randomCity.name,
             country: country?.name || 'Unknown',
-            // cityId: randomCity.id,
-            // countryId: country?.id,
             imageUrl: `https://images.unsplash.com/400x300/?hotel+${randomCity.name.replace(' ', '+')}`,
-            rating: Math.round((Math.random() * 2 + 3) * 10) / 10, // 3.0 to 5.0
-            guestRating: Math.round((Math.random() * 2 + 3) * 10) / 10, // 3.0 to 5.0
-            reviewCount: Math.floor(Math.random() * 500) + 50,
-            amenities: JSON.stringify(['WiFi', 'Pool', 'Restaurant', 'Spa', 'Gym', 'Parking'].slice(0, Math.floor(Math.random() * 4) + 3)),
+            amenities: ['WiFi', 'Pool', 'Restaurant', 'Spa', 'Gym', 'Parking'].slice(0, Math.floor(Math.random() * 4) + 3),
             checkInTime: '15:00',
             checkOutTime: '11:00',
             featured: Math.random() > 0.7,
-            basePrice: Math.floor(Math.random() * 30000) + 10000,
-            currency: 'USD',
-            totalRooms: Math.floor(Math.random() * 200) + 50,
-            totalFloors: Math.floor(Math.random() * 20) + 3,
-            wifiAvailable: true,
-            parkingAvailable: Math.random() > 0.3,
-            airportTransferAvailable: Math.random() > 0.5,
-            carRentalAvailable: Math.random() > 0.6,
-            shuttleAvailable: Math.random() > 0.4,
-            petFriendly: Math.random() > 0.7,
-            accessibleFacilities: Math.random() > 0.5,
             status: 'active'
           });
           seedResults.hotels++;
