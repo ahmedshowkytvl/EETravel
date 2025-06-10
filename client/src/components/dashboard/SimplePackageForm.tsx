@@ -718,7 +718,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
     // 4. Custom validations
     const customValidationsValid = validateForm(data, [
       {
-        condition: data.endDate.getTime() === data.startDate.getTime(),
+        condition: (data.endDate && data.startDate) ? data.endDate.getTime() === data.startDate.getTime() : false,
         errorMessage: {
           title: "Invalid Duration",
           description: "The package must have at least 1 day duration"
@@ -2094,13 +2094,14 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
                     type="button"
                     variant="outline"
                     size="sm"
-                    disabled={filteredRooms.length > 0 && form.getValues("rooms")?.length > 0}
+                    disabled={filteredRooms?.length > 0 && form.getValues("rooms")?.length > 0}
                     onClick={() => {
                       // In a real app, you would add a new pricing rule here
                       const newRule = { 
                         id: "infant", 
                         value: 50, 
-                        percentage: true 
+                        percentage: true,
+                        name: "Infant Discount"
                       };
                       setPricingRules(prev => [...prev, newRule]);
                     }}
@@ -2109,7 +2110,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
                     Add Pricing Rule
                   </Button>
                   
-                  {filteredRooms.length > 0 && form.getValues("rooms")?.length > 0 && (
+                  {filteredRooms?.length > 0 && form.getValues("rooms")?.length > 0 && (
                     <p className="text-xs text-amber-600 mt-2">
                       Adding new pricing rules is disabled when room pricing is configured
                     </p>
@@ -2222,7 +2223,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
             </div>
 
             {/* Available Rooms */}
-            {Array.isArray(form.watch("selectedHotels")) && form.watch("selectedHotels").length > 0 && (
+            {Array.isArray(form.watch("selectedHotels")) && form.watch("selectedHotels")?.length > 0 && (
               <FormField
                 control={form.control}
                 name="rooms"

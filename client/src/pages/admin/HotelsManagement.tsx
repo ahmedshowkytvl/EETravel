@@ -206,8 +206,7 @@ export default function HotelsManagement() {
   // Delete hotel mutation
   const deleteHotelMutation = useMutation({
     mutationFn: async (id: number) => {
-      return await apiRequest({
-        path: `/api/admin/hotels/${id}`,
+      return await apiRequest(`/api/admin/hotels/${id}`, {
         method: "DELETE",
       });
     },
@@ -395,8 +394,8 @@ export default function HotelsManagement() {
                               <SelectContent>
                                 {isLoadingHotelCategories ? (
                                   <SelectItem value="loading" disabled>Loading categories...</SelectItem>
-                                ) : hotelCategories.length > 0 ? (
-                                  hotelCategories.map((category: any) => (
+                                ) : (hotelCategories as any[])?.length > 0 ? (
+                                  (hotelCategories as any[]).map((category: any) => (
                                     <SelectItem
                                       key={category.value}
                                       value={category.value}
@@ -658,8 +657,8 @@ export default function HotelsManagement() {
                       <SelectContent>
                         {isLoadingHotelCategories ? (
                           <SelectItem value="loading" disabled>Loading categories...</SelectItem>
-                        ) : hotelCategories.length > 0 ? (
-                          hotelCategories.map((category: any) => (
+                        ) : (hotelCategories as any[])?.length > 0 ? (
+                          (hotelCategories as any[]).map((category: any) => (
                             <SelectItem
                               key={category.value}
                               value={category.value}
