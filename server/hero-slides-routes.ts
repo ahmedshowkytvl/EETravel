@@ -40,33 +40,18 @@ export function setupHeroSlidesRoutes(app: Express) {
 
   // Get active hero slides (public)
   app.get('/api/hero-slides/active', async (req: Request, res: Response) => {
-    let client: any = null;
-    
     try {
-      const DATABASE_URL = process.env.DATABASE_URL;
-      if (!DATABASE_URL) {
-        return res.status(500).json({ message: 'Database configuration missing' });
-      }
-
-      client = postgres(DATABASE_URL, { ssl: 'require' });
-      const db = drizzle(client);
-
+      const { db } = await import('../server/storage');
+      
       const slides = await db
         .select()
         .from(heroSlides)
         .where(eq(heroSlides.active, true))
         .orderBy(asc(heroSlides.order), asc(heroSlides.id));
 
-      await client.end();
+      console.log('Found active slides:', slides.length);
       res.json(slides);
     } catch (error) {
-      if (client) {
-        try {
-          await client.end();
-        } catch (closeError) {
-          console.error('Error closing database connection:', closeError);
-        }
-      }
       console.error('Error fetching active hero slides:', error);
       res.status(500).json({ message: 'Failed to fetch slides' });
     }

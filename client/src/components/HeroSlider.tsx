@@ -38,7 +38,18 @@ export function HeroSlider() {
     setCurrentSlide(index);
   };
 
-  if (isLoading || slides.length === 0) {
+  if (isLoading) {
+    return (
+      <div className="relative h-[600px] bg-gradient-to-r from-blue-900 to-purple-900 flex items-center justify-center">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+          <p className="text-white text-lg">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (slides.length === 0) {
     return (
       <div className="relative h-[600px] bg-gradient-to-r from-amber-50 to-orange-50 flex items-center justify-center">
         <div className="container mx-auto px-4 text-center">
