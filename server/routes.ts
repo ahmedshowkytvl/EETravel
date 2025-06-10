@@ -2730,31 +2730,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         status: 'draft'
       };
 
-      // Insert into hotel_drafts table using PostgreSQL
-      const result = await db.execute(sql
-        `INSERT INTO hotel_drafts (
-          name, description, destination_id, address, city, country, postal_code, 
-          phone, email, website, image_url, stars, amenities, check_in_time, check_out_time,
-          longitude, latitude, featured, rating, guest_rating, parking_available,
-          airport_transfer_available, car_rental_available, shuttle_available,
-          draft_data, status
-        ) VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15,
-          $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26
-        ) RETURNING *`,
-        [
-          draftData.name, draftData.description, draftData.destination_id, draftData.address,
-          draftData.city, draftData.country, draftData.postal_code, draftData.phone,
-          draftData.email, draftData.website, draftData.image_url, draftData.stars,
-          draftData.amenities, draftData.check_in_time, draftData.check_out_time,
-          draftData.longitude, draftData.latitude, draftData.featured, draftData.rating,
-          draftData.guest_rating, draftData.parking_available, draftData.airport_transfer_available,
-          draftData.car_rental_available, draftData.shuttle_available, draftData.draft_data,
-          draftData.status
-        ]
-      );
+      // Save as draft hotel using storage interface
+      const draftHotel = await storage.createHotel({
+        name: hotelData.name,
+        description: hotelData.description,
+        destinationId: hotelData.destinationId,
+        status: 'draft'
+      });
       
-      return res.status(201).json({ message: 'Hotel draft saved successfully', hotel: result.rows[0] });
+      return res.status(201).json({ message: 'Hotel draft saved successfully', hotel: draftHotel });
     } catch (error) {
       console.error('Error saving hotel draft:', error);
       res.status(500).json({ message: 'Failed to save hotel draft' });
@@ -4178,13 +4162,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }).returning();
         const newTranslation = inserted[0];
         if (newTranslation && newTranslation.id) {
-          // Successfully added the translation
-          results.newTranslations.push(newTranslation);
-          existingKeys.set(translationData.key, newTranslation.id);
-          results.newKeysAdded++;
           console.log(`✓ Added: "${translationData.key}" with ID: ${newTranslation.id}`);
+          res.json(newTranslation);
         } else {
           console.log(`✗ Failed to add: "${translationData.key}" - No ID returned`);
+          res.status(500).json({ message: 'Failed to create translation' });
         }
       } catch (dbError: any) {
         // Check for duplicate key error
@@ -4547,7 +4529,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             
             try {
               // Use Drizzle ORM's insert method for translations
-              await db.insert(translations).values({
+              const inserted = await db.insert(translations).values({
                 key: key,
                 enText: defaultText || key,
                 arText: null,
@@ -4557,12 +4539,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 updatedAt: new Date()
               }).returning();
               
-              if (newTranslation && newTranslation.id) {
-                // Successfully added the translation
-                results.newTranslations.push(newTranslation);
-                existingKeys.set(key, newTranslation.id);
-                results.newKeysAdded++;
-                console.log(`✓ Added: "${key}" with ID: ${newTranslation.id}`);
+              const insertedTranslation = inserted[0];
+              if (insertedTranslation && insertedTranslation.id) {
+                console.log(`✓ Added: "${key}" with ID: ${insertedTranslation.id}`);
               } else {
                 console.log(`✗ Failed to add: "${key}" - No ID returned`);
               }
@@ -4575,7 +4554,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 try {
                   const existingEntry = await storage.getTranslationByKey(key);
                   if (existingEntry && existingEntry.id) {
-                    existingKeys.set(key, existingEntry.id);
+                    console.log(`Found existing key: ${key}`);
                   }
                 } catch (finalErr) {
                   // At this point, we'll just skip this key and continue
@@ -5650,7 +5629,7 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
             price: Math.floor(Math.random() * 100000) + 50000,
             duration: pkg.duration,
             inclusions: ['Accommodation', 'Meals', 'Transportation', 'Guide', 'Entrance Fees'],
-            itinerary: `Day-by-day ${pkg.duration}-day itinerary covering major attractions`,
+
             cityId: randomCity.id,
             imageUrl: `https://images.unsplash.com/400x300/?${pkg.title.replace(/\s+/g, '+')}`,
             status: 'active'
