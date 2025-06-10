@@ -5587,8 +5587,8 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
             stars: Math.floor(Math.random() * 3) + 3,
             city: randomCity.name,
             country: country?.name || 'Unknown',
-            cityId: randomCity.id,
-            countryId: country?.id,
+            // cityId: randomCity.id,
+            // countryId: country?.id,
             imageUrl: `https://images.unsplash.com/400x300/?hotel+${randomCity.name.replace(' ', '+')}`,
             rating: Math.round((Math.random() * 2 + 3) * 10) / 10, // 3.0 to 5.0
             guestRating: Math.round((Math.random() * 2 + 3) * 10) / 10, // 3.0 to 5.0
