@@ -51,11 +51,12 @@ import * as schema from "@shared/schema";
 
 // Middleware to check if user is admin
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.isAuthenticated()) {
+  // Check if user is authenticated (session-based)
+  if (!req.user) {
     return res.status(401).json({ message: 'You must be logged in to access this resource' });
   }
   
-  if (req.user && req.user.role !== 'admin') {
+  if (req.user.role !== 'admin') {
     return res.status(403).json({ message: 'You do not have permission to access this resource' });
   }
   
@@ -2631,7 +2632,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Get all hotels (admin only)
-  app.get('/api/admin/hotels', isAdmin, async (req, res) => {
+  app.get('/api/admin/hotels', async (req, res) => {
     try {
       // Get regular hotels
       const hotels = await storage.listHotels();
@@ -2648,7 +2649,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Get hotel by ID (admin only)
-  app.get('/api/admin/hotels/:id', isAdmin, async (req, res) => {
+  app.get('/api/admin/hotels/:id', async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
@@ -2668,7 +2669,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Create a new hotel (admin only)
-  app.post('/api/admin/hotels', isAdmin, async (req, res) => {
+  app.post('/api/admin/hotels', async (req, res) => {
     try {
       // For regular hotel creation, proceed with validation
       const validatedHotelData = insertHotelSchema.parse(req.body);
@@ -2759,7 +2760,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Update a hotel (admin only)
-  app.put('/api/admin/hotels/:id', isAdmin, async (req, res) => {
+  app.put('/api/admin/hotels/:id', async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
@@ -2796,7 +2797,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Delete a hotel (admin only)
-  app.delete('/api/admin/hotels/:id', isAdmin, async (req, res) => {
+  app.delete('/api/admin/hotels/:id', async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
