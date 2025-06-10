@@ -54,13 +54,34 @@ const isAdmin = (req: Request, res: Response, next: NextFunction) => {
   // Check if user is authenticated (session-based)
   const sessionUser = (req as any).session?.user;
   
+  // Debug logging for session issues
+  console.log('Admin check - Session ID:', (req as any).sessionID);
+  console.log('Admin check - Session user:', sessionUser);
+  console.log('Admin check - Session exists:', !!(req as any).session);
+  
   if (!sessionUser) {
-    return res.status(401).json({ message: 'You must be logged in to access this resource' });
+    console.log('Admin check failed: No session user found');
+    return res.status(401).json({ 
+      message: 'You must be logged in to access this resource',
+      debug: {
+        hasSession: !!(req as any).session,
+        sessionID: (req as any).sessionID
+      }
+    });
   }
   
   if (sessionUser.role !== 'admin') {
-    return res.status(403).json({ message: 'You do not have permission to access this resource' });
+    console.log(`Admin check failed: User role is '${sessionUser.role}', not 'admin'`);
+    return res.status(403).json({ 
+      message: 'You do not have permission to access this resource',
+      debug: {
+        userRole: sessionUser.role,
+        userId: sessionUser.id
+      }
+    });
   }
+  
+  console.log(`Admin check passed for user: ${sessionUser.username} (ID: ${sessionUser.id})`);
   
   // Set req.user for backward compatibility
   (req as any).user = sessionUser;
@@ -91,6 +112,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // The setupHotelFeatureRoutes isn't implemented yet, so we'll comment it out
   // setupHotelFeatureRoutes(app, storage, isAdmin);
   
+  // Debug endpoint to check session status
+  app.get('/api/debug/session', (req, res) => {
+    const sessionUser = (req as any).session?.user;
+    res.json({
+      hasSession: !!(req as any).session,
+      sessionID: (req as any).sessionID,
+      user: sessionUser || null,
+      isAdmin: sessionUser?.role === 'admin'
+    });
+  });
+
   // Cart and Checkout API Routes
   
   // Get cart items
@@ -5442,7 +5474,7 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
   });
 
   // Comprehensive Test Data Seeding Endpoint
-  app.post('/api/admin/seed-test-data', async (req, res) => {
+  app.post('/api/admin/seed-test-data', isAdmin, async (req, res) => {
     try {
       console.log('Starting comprehensive test data seeding...');
 
@@ -5752,10 +5784,67 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
           { name: 'Istanbul Historical Walk', description: 'Journey through Byzantine and Ottoman history visiting iconic landmarks and learning about Istanbul rich cultural heritage.', price: 75, duration: 6, maxGroupSize: 18, destinationName: 'Istanbul Historic Center' }
         ];
 
+        // Create tour categories first
+        console.log('Creating tour categories...');
+        const tourCategories = [
+          { name: 'Cultural Heritage', description: 'Explore historical sites and cultural landmarks' },
+          { name: 'Adventure Tours', description: 'Thrilling outdoor activities and adventures' },
+          { name: 'Desert Expeditions', description: 'Desert safaris and unique landscapes' },
+          { name: 'City Tours', description: 'Urban exploration and city highlights' },
+          { name: 'Religious Pilgrimages', description: 'Spiritual journeys to sacred sites' },
+          { name: 'Archaeological Sites', description: 'Ancient ruins and archaeological wonders' }
+        ];
+
+        const createdCategories = [];
+        for (const category of tourCategories) {
+          try {
+            const newCategory = await storage.createTourCategory({
+              name: category.name,
+              description: category.description,
+              active: true
+            });
+            createdCategories.push(newCategory);
+          } catch (error) {
+            // Category might already exist
+            const existing = await storage.listTourCategories();
+            const found = existing.find(c => c.name === category.name);
+            if (found) createdCategories.push(found);
+          }
+        }
+
+        // Create transportation locations
+        console.log('Creating transportation locations...');
+        const transportLocations = [
+          { name: 'Airport Pickup', description: 'Hotel to airport transfer service' },
+          { name: 'Hotel Lobby', description: 'Central meeting point at hotel lobby' },
+          { name: 'City Center', description: 'Downtown central location' },
+          { name: 'Tourist Information Center', description: 'Official tourist center meeting point' }
+        ];
+
+        for (const location of transportLocations) {
+          try {
+            await storage.createTransportLocation({
+              name: location.name,
+              description: location.description,
+              address: `${location.name} - Various Cities`,
+              status: 'active'
+            });
+          } catch (error) {
+            // Location might already exist
+          }
+        }
+
         for (const tour of tourData) {
           const destination = updatedDestinations.find(d => d.name === tour.destinationName);
+          const randomCategory = createdCategories[Math.floor(Math.random() * createdCategories.length)];
           
-          if (destination) {
+          // Generate realistic start and end dates
+          const startDate = new Date();
+          startDate.setDate(startDate.getDate() + Math.floor(Math.random() * 30) + 7); // 7-37 days from now
+          const endDate = new Date(startDate);
+          endDate.setHours(endDate.getHours() + tour.duration);
+          
+          if (destination && randomCategory) {
             try {
               await storage.createTour({
                 name: tour.name,
@@ -5764,6 +5853,13 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
                 duration: tour.duration,
                 maxGroupSize: tour.maxGroupSize,
                 destinationId: destination.id,
+                categoryId: randomCategory.id,
+                startDate: startDate,
+                endDate: endDate,
+                meetingPoint: transportLocations[Math.floor(Math.random() * transportLocations.length)].name,
+                difficulty: ['Easy', 'Moderate', 'Challenging'][Math.floor(Math.random() * 3)],
+                inclusions: ['Professional Guide', 'Transportation', 'Entrance Fees', 'Refreshments'],
+                exclusions: ['Personal Expenses', 'Tips', 'Travel Insurance'],
                 imageUrl: `https://images.unsplash.com/800x600/?${tour.name.replace(' ', '+')}`,
                 status: 'active'
               });
