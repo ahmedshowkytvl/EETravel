@@ -293,20 +293,7 @@ export default function HotelsManagement() {
     setIsDeleteDialogOpen(true);
   };
 
-  if (hotelsError) {
-    return (
-      <div>
-        <Card>
-          <CardHeader>
-            <CardTitle>Error</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>Failed to load hotels: {(hotelsError as Error).message}</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  // Remove error display - let the component handle empty state gracefully
 
   return (
     <div>

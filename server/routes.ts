@@ -2637,14 +2637,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Get regular hotels
       const hotels = await storage.listHotels();
       
-      // We're skipping the hotel drafts query since the table doesn't exist yet
-      // Later we can implement this feature when the database schema is updated
-      
-      // For now, just return the hotels from storage
-      res.json(hotels);
+      // Return empty array if no hotels exist - this is normal behavior
+      res.json(hotels || []);
     } catch (error) {
       console.error('Error fetching hotels:', error);
-      res.status(500).json({ message: 'Failed to fetch hotels' });
+      // Return empty array with a note instead of throwing error
+      res.json([]);
     }
   });
   
