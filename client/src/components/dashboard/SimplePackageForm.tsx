@@ -2094,7 +2094,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
                     type="button"
                     variant="outline"
                     size="sm"
-                    disabled={filteredRooms?.length > 0 && form.getValues("rooms")?.length > 0}
+                    disabled={(filteredRooms?.length || 0) > 0 && (form.getValues("rooms")?.length || 0) > 0}
                     onClick={() => {
                       // In a real app, you would add a new pricing rule here
                       const newRule = { 
@@ -2110,7 +2110,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
                     Add Pricing Rule
                   </Button>
                   
-                  {filteredRooms?.length > 0 && form.getValues("rooms")?.length > 0 && (
+                  {(filteredRooms?.length || 0) > 0 && (form.getValues("rooms")?.length || 0) > 0 && (
                     <p className="text-xs text-amber-600 mt-2">
                       Adding new pricing rules is disabled when room pricing is configured
                     </p>
@@ -2223,7 +2223,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
             </div>
 
             {/* Available Rooms */}
-            {Array.isArray(form.watch("selectedHotels")) && form.watch("selectedHotels")?.length > 0 && (
+            {Array.isArray(form.watch("selectedHotels")) && (form.watch("selectedHotels")?.length || 0) > 0 && (
               <FormField
                 control={form.control}
                 name="rooms"
@@ -2243,7 +2243,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
                     ) : (
                       <div className="space-y-6">
                         {hotels
-                          .filter(hotel => Array.isArray(form.watch("selectedHotels")) && form.watch("selectedHotels").includes(hotel.id))
+                          .filter(hotel => Array.isArray(form.watch("selectedHotels")) && form.watch("selectedHotels")?.includes(hotel.id))
                           .map(hotel => (
                             <div key={hotel.id} className="border rounded-md p-4">
                               <h4 className="font-medium text-md mb-3">{hotel.name}</h4>
@@ -2258,7 +2258,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
                                       <div className="flex items-center space-x-3">
                                         <FormControl>
                                           <Checkbox
-                                            checked={Array.isArray(form.watch("rooms")) && form.watch("rooms").some(r => r.id === room.id)}
+                                            checked={Array.isArray(form.watch("rooms")) && form.watch("rooms")?.some(r => r.id === room.id)}
                                             onCheckedChange={(checked) => {
                                               const currentRooms = form.watch("rooms") || [];
                                               if (checked) {
@@ -2476,7 +2476,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
                       >
                         <FormControl>
                           <Checkbox
-                            checked={Array.isArray(form.watch("includedFeatures")) && form.watch("includedFeatures").includes(feature.id)}
+                            checked={Array.isArray(form.watch("includedFeatures")) && form.watch("includedFeatures")?.includes(feature.id)}
                             onCheckedChange={(checked) => {
                               const currentFeatures = form.watch("includedFeatures") || [];
                               if (checked) {
@@ -2521,7 +2521,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
                       >
                         <FormControl>
                           <Checkbox
-                            checked={Array.isArray(form.watch("excludedItems")) && form.watch("excludedItems").includes(item.id)}
+                            checked={Array.isArray(form.watch("excludedItems")) && form.watch("excludedItems")?.includes(item.id)}
                             onCheckedChange={(checked) => {
                               const currentItems = form.watch("excludedItems") || [];
                               if (checked) {
@@ -2822,7 +2822,7 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
                             // Update price based on selection
                             const option = transportOptions.find(opt => opt.id === value);
                             if (option) {
-                              const basePrice = form.getValues('basePrice');
+                              const basePrice = form.getValues('basePrice') || 0;
                               const newPrice = basePrice * (option.priceMultiplier - 1);
                               form.setValue('transportationPrice', Math.round(newPrice));
                               setTransportPrice(Math.round(newPrice));
