@@ -5644,10 +5644,10 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
           await storage.createPackage({
             title: pkg.title,
             description: `Comprehensive ${pkg.duration}-day ${pkg.type.toLowerCase()} package exploring the best of the Middle East`,
+            shortDescription: `${pkg.duration}-day ${pkg.type.toLowerCase()} adventure through Middle Eastern wonders`,
             price: Math.floor(Math.random() * 100000) + 50000,
             duration: pkg.duration,
             inclusions: ['Accommodation', 'Meals', 'Transportation', 'Guide', 'Entrance Fees'],
-            exclusions: ['Flights', 'Personal Expenses', 'Tips'],
             itinerary: `Day-by-day ${pkg.duration}-day itinerary covering major attractions`,
             cityId: randomCity.id,
             imageUrl: `https://images.unsplash.com/400x300/?${pkg.title.replace(/\s+/g, '+')}`,

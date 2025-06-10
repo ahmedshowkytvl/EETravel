@@ -1489,6 +1489,29 @@ export function PackageCreatorForm({ packageId, onNavigateRequest }: PackageCrea
 
             <FormField
               control={form.control}
+              name="shortDescription"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Short Description</FormLabel>
+                  <FormControl>
+                    <Textarea 
+                      id="package-short-description"
+                      className="min-h-[80px] package-short-description-input admin-textarea"
+                      placeholder="Enter a brief description (max 200 characters)" 
+                      maxLength={200}
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    A brief summary that appears in package listings
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="overview"
               render={({ field }) => (
                 <FormItem>
