@@ -25,10 +25,12 @@ export function HeroSlider() {
   }, [slides.length]);
 
   const nextSlide = () => {
+    console.log('Next slide clicked, current:', currentSlide, 'total slides:', slides.length);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
   const prevSlide = () => {
+    console.log('Previous slide clicked, current:', currentSlide, 'total slides:', slides.length);
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
@@ -86,22 +88,22 @@ export function HeroSlider() {
       {/* Navigation Arrows */}
       {slides.length > 1 && (
         <>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 text-white border-white/30"
+          <button
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white border border-white/30 flex items-center justify-center transition-all duration-200 hover:scale-110 backdrop-blur-sm"
             onClick={prevSlide}
+            type="button"
+            aria-label="Previous slide"
           >
             <ChevronLeft className="h-6 w-6" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 text-white border-white/30"
+          </button>
+          <button
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white border border-white/30 flex items-center justify-center transition-all duration-200 hover:scale-110 backdrop-blur-sm"
             onClick={nextSlide}
+            type="button"
+            aria-label="Next slide"
           >
             <ChevronRight className="h-6 w-6" />
-          </Button>
+          </button>
         </>
       )}
 
