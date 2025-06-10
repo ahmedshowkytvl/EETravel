@@ -8,30 +8,51 @@ import { HeroSlide } from "@shared/schema";
 export function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Fetch active slides
-  const { data: slides = [], isLoading } = useQuery<HeroSlide[]>({
+  // Fetch active slides with error handling and fallback
+  const { data: slides = [], isLoading, error } = useQuery<HeroSlide[]>({
     queryKey: ["/api/hero-slides/active"],
+    retry: 2,
+    retryDelay: 1000,
   });
+
+  // Use fallback slides if API fails or returns empty data
+  const fallbackSlides = [
+    {
+      id: 1,
+      title: "Discover the Magic of the Middle East",
+      subtitle: "Premium Travel Experiences",
+      description: "Explore ancient civilizations, breathtaking landscapes, and rich culture with our curated travel experiences.",
+      imageUrl: "https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      buttonText: "Explore Destinations",
+      buttonLink: "/destinations",
+      secondaryButtonText: "View Special Offers",
+      secondaryButtonLink: "/packages",
+      order: 1,
+      active: true,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+  ];
+
+  const activeSlides = slides.length > 0 ? slides : (error || !isLoading ? fallbackSlides : []);
 
   // Auto-advance slides
   useEffect(() => {
-    if (slides.length <= 1) return;
+    if (activeSlides.length <= 1) return;
 
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      setCurrentSlide((prev) => (prev + 1) % activeSlides.length);
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [activeSlides.length]);
 
   const nextSlide = () => {
-    console.log('Next slide clicked, current:', currentSlide, 'total slides:', slides.length);
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % activeSlides.length);
   };
 
   const prevSlide = () => {
-    console.log('Previous slide clicked, current:', currentSlide, 'total slides:', slides.length);
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + activeSlides.length) % activeSlides.length);
   };
 
   const goToSlide = (index: number) => {
