@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,8 +10,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Edit, Trash2, MoveUp, MoveDown, Image, Eye, EyeOff } from "lucide-react";
+import { Plus, Edit, Trash2, MoveUp, MoveDown, Image, Eye, EyeOff, Upload, Link2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { HeroSlide, insertHeroSlideSchema } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
@@ -20,6 +21,9 @@ export default function SliderManagement() {
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingSlide, setEditingSlide] = useState<HeroSlide | null>(null);
+  const [imageTab, setImageTab] = useState<"upload" | "url">("url");
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch slides
   const { data: slides = [], isLoading } = useQuery<HeroSlide[]>({
@@ -126,12 +130,45 @@ export default function SliderManagement() {
     },
   });
 
+  // Handle file upload
+  const handleFileUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    
+    try {
+      const response = await fetch('/api/upload/image', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        setUploadedImage(result.url);
+        form.setValue('imageUrl', result.url);
+        toast({ title: "Image uploaded successfully" });
+      } else {
+        toast({ title: "Upload failed", variant: "destructive" });
+      }
+    } catch (error) {
+      toast({ title: "Upload error", variant: "destructive" });
+    }
+  };
+
+  // Handle preset image selection
+  const handlePresetImage = (imageUrl: string) => {
+    form.setValue('imageUrl', imageUrl);
+    setUploadedImage(imageUrl);
+  };
+
   const onSubmit = (data: any) => {
     if (editingSlide) {
       updateSlideMutation.mutate({ id: editingSlide.id, data });
     } else {
       createSlideMutation.mutate(data);
     }
+    setIsDialogOpen(false);
+    setUploadedImage(null);
+    setImageTab("url");
   };
 
   const handleEdit = (slide: HeroSlide) => {
@@ -237,10 +274,113 @@ export default function SliderManagement() {
                   name="imageUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Image URL *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter image URL" {...field} />
-                      </FormControl>
+                      <FormLabel>Slide Image *</FormLabel>
+                      <div className="space-y-3">
+                        <Tabs value={imageTab} onValueChange={(value) => setImageTab(value as "upload" | "url")}>
+                          <TabsList className="grid w-full grid-cols-3">
+                            <TabsTrigger value="url" className="flex items-center gap-2">
+                              <Link2 className="h-4 w-4" />
+                              URL
+                            </TabsTrigger>
+                            <TabsTrigger value="upload" className="flex items-center gap-2">
+                              <Upload className="h-4 w-4" />
+                              Upload
+                            </TabsTrigger>
+                            <TabsTrigger value="preset" className="flex items-center gap-2">
+                              <Image className="h-4 w-4" />
+                              Gallery
+                            </TabsTrigger>
+                          </TabsList>
+                          
+                          <TabsContent value="url" className="space-y-2">
+                            <FormControl>
+                              <Input placeholder="Enter image URL or @assets/filename.png" {...field} />
+                            </FormControl>
+                          </TabsContent>
+                          
+                          <TabsContent value="upload" className="space-y-2">
+                            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                              <input
+                                type="file"
+                                accept="image/*"
+                                ref={fileInputRef}
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0];
+                                  if (file) handleFileUpload(file);
+                                }}
+                                className="hidden"
+                              />
+                              <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => fileInputRef.current?.click()}
+                                className="flex items-center gap-2"
+                              >
+                                <Upload className="h-4 w-4" />
+                                Choose Image File
+                              </Button>
+                              <p className="text-sm text-gray-500 mt-2">
+                                Upload JPG, PNG, or WebP images
+                              </p>
+                            </div>
+                          </TabsContent>
+                          
+                          <TabsContent value="preset" className="space-y-2">
+                            <div className="grid grid-cols-2 gap-3">
+                              <div 
+                                className="border rounded-lg p-2 cursor-pointer hover:bg-gray-50 transition-colors"
+                                onClick={() => handlePresetImage("@assets/image_1749538801049.png")}
+                              >
+                                <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 rounded mb-2"></div>
+                                <p className="text-xs text-center">New Desert Scene</p>
+                              </div>
+                              <div 
+                                className="border rounded-lg p-2 cursor-pointer hover:bg-gray-50 transition-colors"
+                                onClick={() => handlePresetImage("@assets/image_1749021857355.png")}
+                              >
+                                <div className="aspect-video bg-gradient-to-r from-amber-500 to-orange-600 rounded mb-2"></div>
+                                <p className="text-xs text-center">Middle East Adventure</p>
+                              </div>
+                              <div 
+                                className="border rounded-lg p-2 cursor-pointer hover:bg-gray-50 transition-colors"
+                                onClick={() => handlePresetImage("@assets/image_1748956434230.png")}
+                              >
+                                <div className="aspect-video bg-gradient-to-r from-green-500 to-teal-600 rounded mb-2"></div>
+                                <p className="text-xs text-center">Cultural Heritage</p>
+                              </div>
+                              <div 
+                                className="border rounded-lg p-2 cursor-pointer hover:bg-gray-50 transition-colors"
+                                onClick={() => handlePresetImage("@assets/image_1748956880136.png")}
+                              >
+                                <div className="aspect-video bg-gradient-to-r from-red-500 to-pink-600 rounded mb-2"></div>
+                                <p className="text-xs text-center">Ancient Wonders</p>
+                              </div>
+                            </div>
+                          </TabsContent>
+                        </Tabs>
+                        
+                        {field.value && (
+                          <div className="mt-3">
+                            <p className="text-sm text-gray-600 mb-2">Preview:</p>
+                            <div className="relative aspect-video w-full max-w-md border rounded-lg overflow-hidden">
+                              {field.value.startsWith('@assets/') ? (
+                                <div className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
+                                  <p className="text-sm">Asset: {field.value.split('/').pop()}</p>
+                                </div>
+                              ) : (
+                                <img 
+                                  src={field.value} 
+                                  alt="Preview" 
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).style.display = 'none';
+                                  }}
+                                />
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
