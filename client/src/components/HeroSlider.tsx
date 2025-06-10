@@ -59,7 +59,7 @@ export function HeroSlider() {
     setCurrentSlide(index);
   };
 
-  if (isLoading) {
+  if (isLoading && activeSlides.length === 0) {
     return (
       <div className="relative h-[600px] bg-gradient-to-r from-blue-900 to-purple-900 flex items-center justify-center">
         <div className="flex flex-col items-center space-y-4">
@@ -70,7 +70,7 @@ export function HeroSlider() {
     );
   }
 
-  if (slides.length === 0) {
+  if (activeSlides.length === 0) {
     return (
       <div className="relative h-[600px] bg-gradient-to-r from-amber-50 to-orange-50 flex items-center justify-center">
         <div className="container mx-auto px-4 text-center">
@@ -97,12 +97,12 @@ export function HeroSlider() {
     );
   }
 
-  const currentSlideData = slides[currentSlide];
+  const currentSlideData = activeSlides[currentSlide];
 
   return (
     <div className="relative h-[600px] overflow-hidden group">
       {/* Slide Images with Animation */}
-      {slides.map((slide, index) => (
+      {activeSlides.map((slide, index) => (
         <div
           key={slide.id}
           className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out ${
@@ -118,7 +118,7 @@ export function HeroSlider() {
       ))}
 
       {/* Navigation Arrows - Show on Hover */}
-      {slides.length > 1 && (
+      {activeSlides.length > 1 && (
         <>
           <button
             className="absolute left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-110 backdrop-blur-sm opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0"
