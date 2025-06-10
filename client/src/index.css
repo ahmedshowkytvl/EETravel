@@ -99,8 +99,6 @@
 .animate-slide-up-delayed-4 {
   animation: slide-up-delayed 1.2s ease-out forwards;
   animation-delay: 0.4s;
-  transform: scale(1.05);
-  transition: transform 0.2s ease;
 }
 
 @layer base {
