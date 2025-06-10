@@ -143,19 +143,19 @@ export default function HotelsManagement() {
 
   // Filter hotels based on search query
   const filteredHotels = searchQuery
-    ? hotels.filter((hotel: any) =>
-        hotel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    ? (hotels as any[])?.filter((hotel: any) =>
+        hotel.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         hotel.description?.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : hotels;
+      ) || []
+    : (hotels as any[]) || [];
 
   // Create hotel mutation
   const createHotelMutation = useMutation({
     mutationFn: async (data: HotelFormValues) => {
-      return await apiRequest({
-        path: "/api/admin/hotels",
+      return await apiRequest("/api/admin/hotels", {
         method: "POST",
-        data,
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
       });
     },
     onSuccess: () => {
@@ -179,10 +179,10 @@ export default function HotelsManagement() {
   // Update hotel mutation
   const updateHotelMutation = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: HotelFormValues }) => {
-      return await apiRequest({
-        path: `/api/admin/hotels/${id}`,
+      return await apiRequest(`/api/admin/hotels/${id}`, {
         method: "PATCH",
-        data,
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
       });
     },
     onSuccess: () => {
