@@ -4498,10 +4498,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const translationResults = await geminiService.batchTranslateToArabic(translationItems);
         console.log('Translation results:', translationResults);
         
+        // Update each translation in the database
+        const updatedTranslations = [];
+        for (const result of translationResults) {
+          if (result.translation && result.translation.trim() !== '') {
+            const updatedTranslation = await storage.updateTranslation(result.id, {
+              arText: result.translation
+            });
+            if (updatedTranslation) {
+              updatedTranslations.push(updatedTranslation);
+            }
+          }
+        }
+        
         res.json({
           success: true,
-          message: `Successfully translated ${translationResults.length} items`,
-          processed: translationResults.length,
+          message: `Successfully translated ${updatedTranslations.length} items`,
+          processed: updatedTranslations.length,
           results: translationResults
         });
       } catch (batchError) {
