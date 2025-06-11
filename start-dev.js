@@ -1,4 +1,4 @@
-const { spawn } = require('child_process');
+import { spawn } from 'child_process';
 
 process.env.NODE_ENV = 'development';
 process.env.PORT = '8080';
