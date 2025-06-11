@@ -735,6 +735,8 @@ export const transportLocations = pgTable("transport_locations", {
   status: text("status").default("active"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Transportation Duration Options
@@ -746,6 +748,8 @@ export const transportDurations = pgTable("transport_durations", {
   status: text("status").default("active"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Car Types/Transportation Types
@@ -760,6 +764,8 @@ export const transportTypes = pgTable("transport_types", {
   status: text("status").default("active"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Transportation table
@@ -788,6 +794,8 @@ export const transportation = pgTable("transportation", {
   status: text("status").default("active"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Tour Categories
@@ -798,6 +806,8 @@ export const tourCategories = pgTable("tour_categories", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Tour to Category Relationship
@@ -818,6 +828,8 @@ export const hotelCategories = pgTable("hotel_categories", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Hotel to Category Relationship
@@ -840,6 +852,8 @@ export const hotelFacilities = pgTable("hotel_facilities", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Hotel to Facilities Relationship
@@ -861,6 +875,8 @@ export const cleanlinessFeatures = pgTable("cleanliness_features", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Hotel to Cleanliness Features Relationship
@@ -889,6 +905,8 @@ export const hotelLandmarks = pgTable("hotel_landmarks", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Hotel General Highlights
@@ -900,6 +918,8 @@ export const hotelHighlights = pgTable("hotel_highlights", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Hotel to Highlights Relationship
@@ -922,6 +942,8 @@ export const hotelFaqs = pgTable("hotel_faqs", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Hotel Restaurants
@@ -937,6 +959,8 @@ export const hotelRestaurants = pgTable("hotel_restaurants", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Room Categories
