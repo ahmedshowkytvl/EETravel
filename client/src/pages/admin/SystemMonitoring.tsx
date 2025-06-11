@@ -72,6 +72,7 @@ interface SystemHealth {
 }
 
 export default function SystemMonitoring() {
+  const { t } = useLanguage();
   const { data: systemHealth, isLoading, refetch } = useQuery<SystemHealth>({
     queryKey: ['/api/admin/system-health'],
     refetchInterval: 30000, // Refresh every 30 seconds

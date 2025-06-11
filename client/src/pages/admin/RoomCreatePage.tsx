@@ -67,6 +67,7 @@ const amenitiesOptions = [
 ];
 
 export default function RoomCreatePage() {
+  const { t } = useLanguage();
   const [_, navigate] = useLocation();
   const params = useParams();
   const roomId = params.id; // Get room ID from URL if in edit mode

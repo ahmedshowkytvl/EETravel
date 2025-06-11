@@ -22,6 +22,7 @@ interface ExportFile {
 }
 
 export default function DataExportImportPage() {
+  const { t } = useLanguage();
   const queryClient = useQueryClient();
   const [selectedEntityType, setSelectedEntityType] = useState<string>("");
   const [uploadFile, setUploadFile] = useState<File | null>(null);

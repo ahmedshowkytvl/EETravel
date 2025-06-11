@@ -46,6 +46,7 @@ const transportDurationSchema = z.object({
 });
 
 export default function TransportDurationsManagement() {
+  const { t } = useLanguage();
   const queryClient = useQueryClient();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

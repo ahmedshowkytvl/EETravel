@@ -70,6 +70,7 @@ interface Room {
 }
 
 export default function RoomsPage() {
+  const { t } = useLanguage();
   const [location, navigate] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();

@@ -58,6 +58,7 @@ const transportTypeSchema = z.object({
 });
 
 export default function TransportTypesManagement() {
+  const { t } = useLanguage();
   const queryClient = useQueryClient();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

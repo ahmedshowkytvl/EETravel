@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Home, Map, ArrowLeft } from "lucide-react";
 
 export default function TourCreatorPage() {
+  const { t } = useLanguage();
   const [, setLocation] = useLocation();
   const params = useParams();
   const tourId = params?.id; // Get tour ID from URL if it exists

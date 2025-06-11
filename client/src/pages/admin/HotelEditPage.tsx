@@ -128,6 +128,7 @@ const hotelAmenitiesOptions = [
 ];
 
 export default function HotelEditPage() {
+  const { t } = useLanguage();
   const [_, navigate] = useLocation();
   const [match, params] = useRoute("/admin/hotels/edit/:id");
   const { toast } = useToast();

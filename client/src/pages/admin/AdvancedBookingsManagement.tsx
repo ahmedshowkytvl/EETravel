@@ -17,6 +17,7 @@ import {
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/use-language";
 
 interface Booking {
   id: number;
@@ -57,6 +58,7 @@ const paymentStatusColors: Record<string, string> = {
 };
 
 export default function AdvancedBookingsManagement() {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [dateFilter, setDateFilter] = useState("all");
@@ -125,7 +127,7 @@ export default function AdvancedBookingsManagement() {
       document.body.appendChild(link);
       link.click();
       link.remove();
-      toast({ title: "تم تصدير البيانات بنجاح" });
+      toast({ title: t("admin.export_success", "Data exported successfully") });
     }
   });
 
@@ -150,9 +152,9 @@ export default function AdvancedBookingsManagement() {
   const handleSendNotification = (type: string) => {
     if (selectedBooking) {
       const messages = {
-        confirmation: `تم تأكيد حجزك رقم ${selectedBooking.bookingReference}. نتطلع لخدمتك!`,
+        confirmation: `تم t("admin.confirm", "Confirm") حجزك رقم ${selectedBooking.bookingReference}. نتطلع لخدمتك!`,
         reminder: `تذكير: رحلتك ${selectedBooking.packageName} ستبدأ قريباً في ${selectedBooking.checkInDate}`,
-        cancellation: `نأسف لإلغاء حجزك رقم ${selectedBooking.bookingReference}. سيتم معالجة استرداد المبلغ قريباً.`
+        cancellation: `نأسف لt("admin.cancel", "Cancel") حجزك رقم ${selectedBooking.bookingReference}. سيتم معالجة استرداد المبلغ قريباً.`
       };
       
       sendNotificationMutation.mutate({
@@ -184,7 +186,7 @@ export default function AdvancedBookingsManagement() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">إدارة الحجوزات المتقدمة</h1>
+          <h1 className="text-3xl font-bold text-gray-900">t("admin.advanced_bookings", "Advanced Bookings Management")</h1>
           <p className="text-gray-600 mt-1">إدارة شاملة لجميع الحجوزات والمدفوعات</p>
         </div>
         <div className="flex gap-3">
@@ -194,7 +196,7 @@ export default function AdvancedBookingsManagement() {
             disabled={exportBookingsMutation.isPending}
           >
             <Download className="w-4 h-4 mr-2" />
-            تصدير البيانات
+            t("admin.export_data", "Export Data")
           </Button>
         </div>
       </div>
@@ -208,7 +210,7 @@ export default function AdvancedBookingsManagement() {
                 <Calendar className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">إجمالي الحجوزات</p>
+                <p className="text-sm text-gray-600">t("admin.total_bookings", "Total Bookings")</p>
                 <p className="text-2xl font-bold">{bookingStats?.totalBookings || 0}</p>
               </div>
             </div>
@@ -222,7 +224,7 @@ export default function AdvancedBookingsManagement() {
                 <CheckCircle className="w-6 h-6 text-green-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">الحجوزات المؤكدة</p>
+                <p className="text-sm text-gray-600">t("admin.confirmed_bookings", "Confirmed Bookings")</p>
                 <p className="text-2xl font-bold">{bookingStats?.confirmedBookings || 0}</p>
               </div>
             </div>
@@ -250,7 +252,7 @@ export default function AdvancedBookingsManagement() {
                 <DollarSign className="w-6 h-6 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">إجمالي الإيرادات</p>
+                <p className="text-sm text-gray-600">t("admin.total_revenue", "Total Revenue")</p>
                 <p className="text-2xl font-bold">${bookingStats?.totalRevenue?.toLocaleString() || 0}</p>
               </div>
             </div>
@@ -264,7 +266,7 @@ export default function AdvancedBookingsManagement() {
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1">
               <Input
-                placeholder="البحث بالاسم، رقم الحجز، أو اسم الباقة..."
+                placeholder="الt("admin.search", "Search") بالاسم، رقم الحجز، أو اسم الباقة..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full"
@@ -275,12 +277,12 @@ export default function AdvancedBookingsManagement() {
                 <SelectValue placeholder="فلترة حسب الحالة" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">جميع الحالات</SelectItem>
+                <SelectItem value="all">t("admin.all_statuses", "All Statuses")</SelectItem>
                 <SelectItem value="pending">قيد الانتظار</SelectItem>
-                <SelectItem value="confirmed">مؤكد</SelectItem>
+                <SelectItem value="confirmed">t("admin.confirmed", "Confirmed")</SelectItem>
                 <SelectItem value="in_progress">جاري التنفيذ</SelectItem>
                 <SelectItem value="completed">مكتمل</SelectItem>
-                <SelectItem value="cancelled">ملغي</SelectItem>
+                <SelectItem value="cancelled">t("admin.cancelled", "Cancelled")</SelectItem>
               </SelectContent>
             </Select>
             <Select value={dateFilter} onValueChange={setDateFilter}>
@@ -490,7 +492,7 @@ export default function AdvancedBookingsManagement() {
                       className="flex items-center gap-2"
                     >
                       <Send className="w-4 h-4" />
-                      إرسال تأكيد
+                      إرسال t("admin.confirm", "Confirm")
                     </Button>
                     <Button
                       onClick={() => handleSendNotification('reminder')}
@@ -518,7 +520,7 @@ export default function AdvancedBookingsManagement() {
                       className="flex items-center gap-2"
                     >
                       <FileText className="w-4 h-4" />
-                      عرض الفاتورة
+                      t("admin.view", "View") الفاتورة
                     </Button>
                   </div>
                 </TabsContent>
@@ -543,10 +545,10 @@ export default function AdvancedBookingsManagement() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="pending">قيد الانتظار</SelectItem>
-                  <SelectItem value="confirmed">مؤكد</SelectItem>
+                  <SelectItem value="confirmed">t("admin.confirmed", "Confirmed")</SelectItem>
                   <SelectItem value="in_progress">جاري التنفيذ</SelectItem>
                   <SelectItem value="completed">مكتمل</SelectItem>
-                  <SelectItem value="cancelled">ملغي</SelectItem>
+                  <SelectItem value="cancelled">t("admin.cancelled", "Cancelled")</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -560,7 +562,7 @@ export default function AdvancedBookingsManagement() {
             </div>
             <div className="flex gap-2 justify-end">
               <Button variant="outline" onClick={() => setShowStatusUpdateDialog(false)}>
-                إلغاء
+                t("admin.cancel", "Cancel")
               </Button>
               <Button
                 onClick={handleStatusUpdate}

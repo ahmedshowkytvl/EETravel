@@ -101,6 +101,7 @@ const hotelAmenitiesOptions = [
 ];
 
 export default function HotelCreatePage() {
+  const { t } = useLanguage();
   const [_, navigate] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();

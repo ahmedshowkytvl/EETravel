@@ -172,6 +172,7 @@ const roomAmenityOptions = [
 ];
 
 export default function EnhancedHotelEditPage() {
+  const { t } = useLanguage();
   const [_, navigate] = useLocation();
   const [match, params] = useRoute("/admin/hotels/edit/:id");
   const { toast } = useToast();

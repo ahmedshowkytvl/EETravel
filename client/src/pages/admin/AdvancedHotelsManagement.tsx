@@ -119,6 +119,7 @@ const hotelSchema = z.object({
 type HotelFormValues = z.infer<typeof hotelSchema>;
 
 export default function AdvancedHotelsManagement() {
+  const { t } = useLanguage();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [, navigate] = useLocation();

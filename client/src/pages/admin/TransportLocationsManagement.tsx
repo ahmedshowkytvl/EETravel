@@ -73,6 +73,7 @@ const transportLocationSchema = z.object({
 });
 
 export default function TransportLocationsManagement() {
+  const { t } = useLanguage();
   const queryClient = useQueryClient();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

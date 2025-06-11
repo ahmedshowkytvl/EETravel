@@ -66,6 +66,7 @@ interface AnalyticsData {
 }
 
 export default function AnalyticsDashboard() {
+  const { t } = useLanguage();
   const [dateRange, setDateRange] = useState<{from: Date | undefined, to: Date | undefined}>({
     from: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
     to: new Date()

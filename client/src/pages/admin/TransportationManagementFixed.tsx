@@ -132,6 +132,7 @@ const formatPrice = (price: number): string => {
 };
 
 export default function TransportationManagement() {
+  const { t } = useLanguage();
   const queryClient = useQueryClient();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);

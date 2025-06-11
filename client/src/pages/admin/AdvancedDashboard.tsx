@@ -159,12 +159,12 @@ export default function AdvancedDashboard() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
               <DollarSign className="w-4 h-4" />
-              إجمالي الإيرادات
+              {t("admin.total_revenue", "Total Revenue")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">${stats?.totalRevenue.toLocaleString()}</div>
-            <p className="text-purple-100 text-sm">+15% من الشهر الماضي</p>
+            <p className="text-purple-100 text-sm">{t("admin.revenue_change", "+15% from last month")}</p>
           </CardContent>
         </Card>
 
@@ -172,7 +172,7 @@ export default function AdvancedDashboard() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
               <Package className="w-4 h-4" />
-              الباقات النشطة
+              t("admin.active_packages", "Active Packages")
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -273,7 +273,7 @@ export default function AdvancedDashboard() {
               <CardTitle className="flex items-center justify-between">
                 الحجوزات الحديثة
                 <Button size="sm" variant="outline">
-                  عرض الكل
+                  t("admin.view", "View") الكل
                 </Button>
               </CardTitle>
             </CardHeader>
@@ -339,7 +339,7 @@ export default function AdvancedDashboard() {
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-purple-600">$1,245,000</div>
-                  <p className="text-sm text-gray-600">إجمالي الإيرادات السنوية</p>
+                  <p className="text-sm text-gray-600">t("admin.total_revenue", "Total Revenue") السنوية</p>
                 </div>
               </div>
             </CardContent>

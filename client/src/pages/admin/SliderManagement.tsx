@@ -18,6 +18,7 @@ import { HeroSlide, insertHeroSlideSchema } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 
 export default function SliderManagement() {
+  const { t } = useLanguage();
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingSlide, setEditingSlide] = useState<HeroSlide | null>(null);

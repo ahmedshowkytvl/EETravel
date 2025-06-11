@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Home, Package, ArrowLeft } from "lucide-react";
 
 export default function PackageCreatorPage() {
+  const { t } = useLanguage();
   const [, setLocation] = useLocation();
   const params = useParams();
   const packageId = params?.id; // Get package ID from URL if it exists

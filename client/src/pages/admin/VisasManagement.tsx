@@ -95,6 +95,7 @@ type NationalityVisaRequirement = {
 };
 
 export default function VisasManagement() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("visas");
   const [searchQuery, setSearchQuery] = useState("");
   const [countryFilter, setCountryFilter] = useState<number | null>(null);

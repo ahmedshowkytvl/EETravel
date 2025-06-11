@@ -19,6 +19,7 @@ import {
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/use-language";
 
 interface User {
   id: number;
@@ -62,6 +63,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default function AdvancedUserManagement() {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -165,13 +167,13 @@ export default function AdvancedUserManagement() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">إدارة المستخدمين المتقدمة</h1>
+          <h1 className="text-3xl font-bold text-gray-900">t("admin.manage_users", "Manage Users") المتقدمة</h1>
           <p className="text-gray-600 mt-1">إدارة شاملة للمستخدمين والأدوار والصلاحيات</p>
         </div>
         <div className="flex gap-3">
           <Button onClick={() => setShowCreateDialog(true)}>
             <UserPlus className="w-4 h-4 mr-2" />
-            إضافة مستخدم جديد
+            t("admin.add_new_user", "Add New User")
           </Button>
         </div>
       </div>
@@ -185,7 +187,7 @@ export default function AdvancedUserManagement() {
                 <Users className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">إجمالي المستخدمين</p>
+                <p className="text-sm text-gray-600">t("admin.total_users", "Total Users")</p>
                 <p className="text-2xl font-bold">{userStats?.totalUsers || 0}</p>
               </div>
             </div>
@@ -199,7 +201,7 @@ export default function AdvancedUserManagement() {
                 <CheckCircle className="w-6 h-6 text-green-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">المستخدمون النشطون</p>
+                <p className="text-sm text-gray-600">t("admin.active_users", "Active Users")</p>
                 <p className="text-2xl font-bold">{userStats?.activeUsers || 0}</p>
               </div>
             </div>
@@ -241,7 +243,7 @@ export default function AdvancedUserManagement() {
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1">
               <Input
-                placeholder="البحث بالاسم، البريد الإلكتروني، أو اسم المستخدم..."
+                placeholder="الt("admin.search", "Search") بالاسم، البريد الإلكتروني، أو اسم المستخدم..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full"
@@ -265,10 +267,10 @@ export default function AdvancedUserManagement() {
                 <SelectValue placeholder="فلترة حسب الحالة" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">جميع الحالات</SelectItem>
+                <SelectItem value="all">t("admin.all_statuses", "All Statuses")</SelectItem>
                 <SelectItem value="active">نشط</SelectItem>
                 <SelectItem value="inactive">غير نشط</SelectItem>
-                <SelectItem value="suspended">معلق</SelectItem>
+                <SelectItem value="suspended">t("admin.pending", "Pending")</SelectItem>
                 <SelectItem value="pending">قيد المراجعة</SelectItem>
               </SelectContent>
             </Select>
@@ -453,7 +455,7 @@ export default function AdvancedUserManagement() {
                 <div className="grid grid-cols-3 gap-4 mt-6">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">{selectedUser.totalBookings}</div>
-                    <p className="text-sm text-gray-600">إجمالي الحجوزات</p>
+                    <p className="text-sm text-gray-600">t("admin.total_bookings", "Total Bookings")</p>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-600">${selectedUser.totalSpent?.toLocaleString()}</div>
@@ -500,7 +502,7 @@ export default function AdvancedUserManagement() {
                     <CardTitle>تاريخ الحجوزات</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-500">لا توجد حجوزات لعرضها</p>
+                    <p className="text-gray-500">لا توجد حجوزات لt("admin.view", "View")ها</p>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -539,7 +541,7 @@ export default function AdvancedUserManagement() {
       <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>إضافة مستخدم جديد</DialogTitle>
+            <DialogTitle>t("admin.add_new_user", "Add New User")</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
@@ -597,7 +599,7 @@ export default function AdvancedUserManagement() {
             </div>
             <div className="flex gap-2 justify-end">
               <Button variant="outline" onClick={() => setShowCreateDialog(false)}>
-                إلغاء
+                t("admin.cancel", "Cancel")
               </Button>
               <Button onClick={() => createUserMutation.mutate({})}>
                 إنشاء المستخدم

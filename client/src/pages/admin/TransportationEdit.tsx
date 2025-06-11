@@ -129,6 +129,7 @@ const transportationSchema = z.object({
 });
 
 export default function TransportationEdit() {
+  const { t } = useLanguage();
   const queryClient = useQueryClient();
   const [_, setLocation] = useLocation();
   const params = useParams();

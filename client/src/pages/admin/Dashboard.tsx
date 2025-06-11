@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 export default function Dashboard() {
+  const { t } = useLanguage();
   return (
     <div>
       <div className="mb-8">

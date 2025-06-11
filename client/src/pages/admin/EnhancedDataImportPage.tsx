@@ -41,6 +41,7 @@ interface ImportResult {
 }
 
 export default function EnhancedDataImportPage() {
+  const { t } = useLanguage();
   const [importProgress, setImportProgress] = useState<{[key: string]: ImportResult}>({});
   const [isImporting, setIsImporting] = useState<{[key: string]: boolean}>({});
   const { toast } = useToast();

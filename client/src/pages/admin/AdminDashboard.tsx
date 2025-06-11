@@ -54,6 +54,7 @@ interface DashboardStats {
 }
 
 export default function AdminDashboard() {
+  const { t } = useLanguage();
   const { data: stats, isLoading } = useQuery<DashboardStats>({
     queryKey: ['/api/admin/dashboard-stats'],
   });

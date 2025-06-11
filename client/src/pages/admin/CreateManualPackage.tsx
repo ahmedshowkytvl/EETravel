@@ -6,6 +6,7 @@ import { MultiHotelManualPackageForm } from "@/components/dashboard/MultiHotelMa
 import { ArrowLeft, Home, Package, Plus, Hotel } from "lucide-react";
 
 export default function CreateManualPackage() {
+  const { t } = useLanguage();
   const [, setLocation] = useLocation();
   
   return (

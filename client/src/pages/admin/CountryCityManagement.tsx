@@ -174,6 +174,7 @@ type CityFormValues = z.infer<typeof citySchema>;
 type AirportFormValues = z.infer<typeof airportSchema>;
 
 export default function CountryCityManagement() {
+  const { t } = useLanguage();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("countries");
   const [countrySearchQuery, setCountrySearchQuery] = useState("");

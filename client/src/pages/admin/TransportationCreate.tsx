@@ -97,6 +97,7 @@ const transportationSchema = z.object({
 });
 
 export default function TransportationCreate() {
+  const { t } = useLanguage();
   const queryClient = useQueryClient();
   const [_, setLocation] = useLocation();
   

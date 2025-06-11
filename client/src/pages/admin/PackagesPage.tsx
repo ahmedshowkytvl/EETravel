@@ -4,6 +4,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/brea
 import { Home, Package } from "lucide-react";
 
 export default function PackagesPage() {
+  const { t } = useLanguage();
   return (
     <div>
       <div className="mb-6">

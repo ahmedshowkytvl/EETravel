@@ -84,6 +84,7 @@ type NotificationsFormValues = z.infer<typeof notificationsSchema>;
 type AppearanceFormValues = z.infer<typeof appearanceSchema>;
 
 export default function SettingsPage() {
+  const { t } = useLanguage();
   const { toast } = useToast();
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("profile");

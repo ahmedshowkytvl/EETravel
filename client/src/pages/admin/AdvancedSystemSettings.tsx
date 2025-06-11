@@ -17,6 +17,7 @@ import {
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/use-language";
 
 interface SystemSettings {
   general: {
@@ -89,6 +90,7 @@ interface SystemHealth {
 }
 
 export default function AdvancedSystemSettings() {
+  const { t } = useLanguage();
   const [activeSection, setActiveSection] = useState("general");
   const [settings, setSettings] = useState<SystemSettings | null>(null);
   
@@ -189,7 +191,7 @@ export default function AdvancedSystemSettings() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">إعدادات النظام المتقدمة</h1>
+          <h1 className="text-3xl font-bold text-gray-900">t("admin.system_settings", "System Settings") المتقدمة</h1>
           <p className="text-gray-600 mt-1">إدارة شاملة لإعدادات وتكوين النظام</p>
         </div>
         <div className="flex gap-3">
@@ -199,7 +201,7 @@ export default function AdvancedSystemSettings() {
             className="bg-green-600 hover:bg-green-700"
           >
             <Save className="w-4 h-4 mr-2" />
-            حفظ التغييرات
+            t("admin.save_changes", "Save Changes")
           </Button>
         </div>
       </div>
@@ -288,7 +290,7 @@ export default function AdvancedSystemSettings() {
           </TabsTrigger>
           <TabsTrigger value="backup" className="flex items-center gap-2">
             <Database className="w-4 h-4" />
-            النسخ الاحتياطية
+            t("admin.backups", "Backups")
           </TabsTrigger>
           <TabsTrigger value="monitoring" className="flex items-center gap-2">
             <Activity className="w-4 h-4" />
@@ -300,7 +302,7 @@ export default function AdvancedSystemSettings() {
         <TabsContent value="general">
           <Card>
             <CardHeader>
-              <CardTitle>الإعدادات العامة</CardTitle>
+              <CardTitle>t("admin.general_settings", "General Settings")</CardTitle>
               <CardDescription>إعدادات الموقع الأساسية والتكوين العام</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -397,8 +399,8 @@ export default function AdvancedSystemSettings() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label>تأكيد البريد الإلكتروني مطلوب</Label>
-                    <p className="text-sm text-gray-600">يجب على المستخدمين تأكيد بريدهم الإلكتروني</p>
+                    <Label>t("admin.confirm", "Confirm") البريد الإلكتروني مطلوب</Label>
+                    <p className="text-sm text-gray-600">يجب على المستخدمين t("admin.confirm", "Confirm") بريدهم الإلكتروني</p>
                   </div>
                   <Switch 
                     checked={settings.general.emailVerificationRequired}
@@ -414,7 +416,7 @@ export default function AdvancedSystemSettings() {
         <TabsContent value="email">
           <Card>
             <CardHeader>
-              <CardTitle>إعدادات البريد الإلكتروني</CardTitle>
+              <CardTitle>t("admin.email_settings", "Email Settings")</CardTitle>
               <CardDescription>تكوين خدمة البريد الإلكتروني وSMTP</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -503,7 +505,7 @@ export default function AdvancedSystemSettings() {
         <TabsContent value="payment">
           <Card>
             <CardHeader>
-              <CardTitle>إعدادات الدفع</CardTitle>
+              <CardTitle>t("admin.payment_settings", "Payment Settings")</CardTitle>
               <CardDescription>تكوين بوابات الدفع والعملات</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -601,7 +603,7 @@ export default function AdvancedSystemSettings() {
         <TabsContent value="security">
           <Card>
             <CardHeader>
-              <CardTitle>إعدادات الأمان</CardTitle>
+              <CardTitle>t("admin.security_settings", "Security Settings")</CardTitle>
               <CardDescription>تكوين الأمان وسياسات كلمات المرور</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -690,8 +692,8 @@ export default function AdvancedSystemSettings() {
         <TabsContent value="backup">
           <Card>
             <CardHeader>
-              <CardTitle>إدارة النسخ الاحتياطية</CardTitle>
-              <CardDescription>تكوين وإدارة النسخ الاحتياطية للنظام</CardDescription>
+              <CardTitle>إدارة t("admin.backups", "Backups")</CardTitle>
+              <CardDescription>تكوين وإدارة t("admin.backups", "Backups") للنظام</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="flex items-center justify-between">
@@ -707,7 +709,7 @@ export default function AdvancedSystemSettings() {
 
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <Label>تكرار النسخ الاحتياطية</Label>
+                  <Label>تكرار t("admin.backups", "Backups")</Label>
                   <Select 
                     value={settings.backup.backupFrequency}
                     onValueChange={(value) => updateSetting('backup', 'backupFrequency', value)}
@@ -733,7 +735,7 @@ export default function AdvancedSystemSettings() {
               </div>
 
               <div className="border rounded-lg p-4">
-                <h3 className="font-semibold mb-4">معلومات النسخ الاحتياطية</h3>
+                <h3 className="font-semibold mb-4">معلومات t("admin.backups", "Backups")</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-gray-600">آخر نسخة احتياطية:</span>
@@ -762,7 +764,7 @@ export default function AdvancedSystemSettings() {
 
               {backupHistory && Array.isArray(backupHistory) && backupHistory.length > 0 && (
                 <div className="space-y-3">
-                  <h3 className="font-semibold">تاريخ النسخ الاحتياطية</h3>
+                  <h3 className="font-semibold">تاريخ t("admin.backups", "Backups")</h3>
                   {backupHistory.slice(0, 5).map((backup: any) => (
                     <div key={backup.id} className="flex items-center justify-between p-3 border rounded">
                       <div>
@@ -791,7 +793,7 @@ export default function AdvancedSystemSettings() {
         <TabsContent value="monitoring">
           <Card>
             <CardHeader>
-              <CardTitle>مراقبة النظام</CardTitle>
+              <CardTitle>t("admin.system_monitoring", "System Monitoring")</CardTitle>
               <CardDescription>مراقبة أداء النظام والخدمات</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">

@@ -239,6 +239,7 @@ const roomAmenityOptions = [
 ];
 
 export default function EnhancedHotelCreatePage() {
+  const { t } = useLanguage();
   const [_, navigate] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();

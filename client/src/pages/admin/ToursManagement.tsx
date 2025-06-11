@@ -943,7 +943,7 @@ function ArabicVersionForm({ tour, onClose, onSuccess }: ArabicVersionFormProps)
 
         <DialogFooter>
           <Button type="button" variant="outline" onClick={onClose}>
-            {t('admin.tours.cancel', 'إلغاء')}
+            {t('admin.tours.cancel', 't("admin.cancel", "Cancel")')}
           </Button>
           <Button type="submit" disabled={updateArabicMutation.isPending}>
             {updateArabicMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
