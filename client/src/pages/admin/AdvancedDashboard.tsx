@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
+import { useLanguage } from "@/hooks/use-language";
 
 interface DashboardStats {
   totalUsers: number;
@@ -37,6 +38,7 @@ interface DashboardStats {
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 
 export default function AdvancedDashboard() {
+  const { t } = useLanguage();
   const [dateRange, setDateRange] = useState("30");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -77,12 +79,12 @@ export default function AdvancedDashboard() {
   }
 
   const quickActions = [
-    { icon: Plus, label: "إضافة جولة", href: "/admin/tours/create", color: "bg-blue-500" },
-    { icon: Hotel, label: "إضافة فندق", href: "/admin/hotels/create", color: "bg-green-500" },
-    { icon: Package, label: "إضافة باقة", href: "/admin/packages/create", color: "bg-purple-500" },
-    { icon: Users, label: "إدارة المستخدمين", href: "/admin/users", color: "bg-orange-500" },
-    { icon: MapPin, label: "إدارة الوجهات", href: "/admin/destinations", color: "bg-red-500" },
-    { icon: Settings, label: "إعدادات النظام", href: "/admin/settings", color: "bg-gray-500" },
+    { icon: Plus, label: t("admin.add_tour", "Add Tour"), href: "/admin/tours/create", color: "bg-blue-500" },
+    { icon: Hotel, label: t("admin.add_hotel", "Add Hotel"), href: "/admin/hotels/create", color: "bg-green-500" },
+    { icon: Package, label: t("admin.add_package", "Add Package"), href: "/admin/packages/create", color: "bg-purple-500" },
+    { icon: Users, label: t("admin.manage_users", "Manage Users"), href: "/admin/users", color: "bg-orange-500" },
+    { icon: MapPin, label: t("admin.manage_destinations", "Manage Destinations"), href: "/admin/destinations", color: "bg-red-500" },
+    { icon: Settings, label: t("admin.system_settings", "System Settings"), href: "/admin/settings", color: "bg-gray-500" },
   ];
 
   return (
@@ -90,19 +92,19 @@ export default function AdvancedDashboard() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">لوحة التحكم المتقدمة</h1>
-          <p className="text-gray-600 mt-1">نظرة شاملة على منصة رحلات الصحراء</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t("admin.advanced_dashboard", "Advanced Dashboard")}</h1>
+          <p className="text-gray-600 mt-1">{t("admin.dashboard_overview", "Comprehensive overview of Sahara Journeys platform")}</p>
         </div>
         <div className="flex gap-3">
           <Input
-            placeholder="البحث في النظام..."
+            placeholder={t("admin.search_system", "Search in system...")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-64"
           />
           <Button variant="outline">
             <Download className="w-4 h-4 mr-2" />
-            تصدير البيانات
+            {t("admin.export_data", "Export Data")}
           </Button>
         </div>
       </div>
@@ -114,11 +116,11 @@ export default function AdvancedDashboard() {
             <div className="flex items-center gap-3">
               <AlertCircle className="w-5 h-5 text-orange-600" />
               <div>
-                <p className="font-medium text-orange-800">تحذير النظام</p>
-                <p className="text-sm text-orange-600">يوجد مشاكل في الأداء تحتاج إلى مراجعة</p>
+                <p className="font-medium text-orange-800">{t("admin.system_warning", "System Warning")}</p>
+                <p className="text-sm text-orange-600">{t("admin.performance_issues", "Performance issues need attention")}</p>
               </div>
               <Button size="sm" variant="outline" className="mr-auto">
-                عرض التفاصيل
+                {t("admin.view_details", "View Details")}
               </Button>
             </div>
           </CardContent>
@@ -131,12 +133,12 @@ export default function AdvancedDashboard() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
               <Users className="w-4 h-4" />
-              إجمالي المستخدمين
+              {t("admin.total_users", "Total Users")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats?.totalUsers.toLocaleString()}</div>
-            <p className="text-blue-100 text-sm">+12% من الشهر الماضي</p>
+            <p className="text-blue-100 text-sm">{t("admin.change_from_last_month", "+12% from last month")}</p>
           </CardContent>
         </Card>
 
@@ -144,12 +146,12 @@ export default function AdvancedDashboard() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
               <Calendar className="w-4 h-4" />
-              إجمالي الحجوزات
+              {t("admin.total_bookings", "Total Bookings")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats?.totalBookings.toLocaleString()}</div>
-            <p className="text-green-100 text-sm">+8% من الشهر الماضي</p>
+            <p className="text-green-100 text-sm">{t("admin.bookings_change", "+8% from last month")}</p>
           </CardContent>
         </Card>
 
