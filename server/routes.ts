@@ -45,6 +45,7 @@ import { setupExportImportRoutes } from "./export-import-routes";
 import { setupVisaRoutes } from "./visa-routes";
 import { setupHeroSlidesRoutes } from "./hero-slides-routes";
 import { setupUploadRoutes } from "./upload-routes";
+import { setupAdvancedAdminRoutes } from "./admin-api-routes";
 import Stripe from "stripe";
 import { eq, and, sql } from "drizzle-orm";
 import * as schema from "@shared/schema";
@@ -5164,6 +5165,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: 'Failed to fetch package categories' });
     }
   });
+
+  // Setup advanced admin routes
+  setupAdvancedAdminRoutes(app);
 
   const httpServer = createServer(app);
   return httpServer;

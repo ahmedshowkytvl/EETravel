@@ -44,11 +44,16 @@ export default function AdvancedDashboard() {
     queryKey: ['/api/admin/dashboard/stats', dateRange],
   });
 
-  const { data: recentBookings } = useQuery({
+  const { data: recentBookings = [] } = useQuery({
     queryKey: ['/api/admin/bookings/recent'],
   });
 
-  const { data: systemHealth } = useQuery({
+  const { data: systemHealth = { 
+    status: 'healthy', 
+    database: { status: 'connected', connectionCount: 0, responseTime: 0 }, 
+    server: { uptime: '0h 0m', cpuUsage: 0, memoryUsage: 0, diskUsage: 0 }, 
+    services: [] 
+  } } = useQuery({
     queryKey: ['/api/admin/system/health'],
   });
 

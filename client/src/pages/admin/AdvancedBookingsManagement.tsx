@@ -73,7 +73,12 @@ export default function AdvancedBookingsManagement() {
     queryKey: ['/api/admin/bookings', { search: searchTerm, status: statusFilter, date: dateFilter }],
   });
 
-  const { data: bookingStats } = useQuery({
+  const { data: bookingStats = { 
+    totalBookings: 0, 
+    confirmedBookings: 0, 
+    pendingBookings: 0, 
+    totalRevenue: 0 
+  } } = useQuery({
     queryKey: ['/api/admin/bookings/stats'],
   });
 
