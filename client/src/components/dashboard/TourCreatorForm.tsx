@@ -63,11 +63,24 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
     queryFn: getQueryFn({ on401: "throw" }),
   });
   
-  const { data: tourCategories = [], isLoading: categoriesLoading } = useQuery<any[]>({
+  const { data: tourCategories = [], isLoading: categoriesLoading, error: categoriesError } = useQuery<any[]>({
     queryKey: ['/api/tour-categories'],
-    queryFn: getQueryFn({ on401: "throw" }),
+    queryFn: async () => {
+      try {
+        const response = await apiRequest('/api/tour-categories');
+        console.log('Raw tour categories response:', response);
+        return response;
+      } catch (error) {
+        console.error('Error fetching tour categories:', error);
+        throw error;
+      }
+    },
     select: (data) => {
-      console.log('Tour categories data:', data);
+      console.log('Processing tour categories data:', data);
+      if (!Array.isArray(data)) {
+        console.warn('Tour categories data is not an array:', data);
+        return [];
+      }
       return data
         .filter((category) => category.active)
         .map((category) => ({

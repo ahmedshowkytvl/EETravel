@@ -4952,7 +4952,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  const httpServer = createServer(app);
   // Tour Categories API Routes
   app.get('/api/tour-categories', async (req, res) => {
     try {
@@ -5144,6 +5143,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: 'Failed to delete hotel category' });
     }
   });
+
+  const httpServer = createServer(app);
 
   // Room Categories API Routes
   app.get('/api/room-categories', async (req, res) => {
