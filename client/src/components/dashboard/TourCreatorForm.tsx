@@ -63,16 +63,19 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
     queryFn: getQueryFn({ on401: "throw" }),
   });
   
-  const { data: tourCategories = [] } = useQuery<any[]>({
+  const { data: tourCategories = [], isLoading: categoriesLoading } = useQuery<any[]>({
     queryKey: ['/api/tour-categories'],
     queryFn: getQueryFn({ on401: "throw" }),
-    select: (data) => 
-      data
+    select: (data) => {
+      console.log('Tour categories data:', data);
+      return data
         .filter((category) => category.active)
         .map((category) => ({
           value: category.name,
-          label: category.name
-        }))
+          label: category.name,
+          id: category.id
+        }));
+    }
   });
 
   const { data: existingTour, isLoading: tourLoading } = useQuery({
@@ -437,16 +440,22 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                       <Label htmlFor="tripType" className="text-sm font-medium">
                         نوع الرحلة <span className="text-red-500">*</span>
                       </Label>
-                      <Select onValueChange={field.onChange} value={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value} disabled={categoriesLoading}>
                         <SelectTrigger className={error ? "border-red-500" : ""}>
-                          <SelectValue placeholder="اختر نوع الرحلة" />
+                          <SelectValue placeholder={categoriesLoading ? "جاري التحميل..." : "اختر نوع الرحلة"} />
                         </SelectTrigger>
                         <SelectContent>
-                          {tourCategories.map((category) => (
-                            <SelectItem key={category.value} value={category.value}>
-                              {category.label}
-                            </SelectItem>
-                          ))}
+                          {categoriesLoading ? (
+                            <SelectItem value="loading" disabled>جاري تحميل الفئات...</SelectItem>
+                          ) : tourCategories.length > 0 ? (
+                            tourCategories.map((category) => (
+                              <SelectItem key={category.id} value={category.value}>
+                                {category.label}
+                              </SelectItem>
+                            ))
+                          ) : (
+                            <SelectItem value="no-categories" disabled>لا توجد فئات متاحة</SelectItem>
+                          )}
                         </SelectContent>
                       </Select>
                       {error && (
