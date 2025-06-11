@@ -375,6 +375,8 @@ export const roomCombinations = pgTable("room_combinations", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Menus table for storing navigation menus
@@ -386,6 +388,8 @@ export const menus = pgTable("menus", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Menu Items table for storing menu items
@@ -403,6 +407,8 @@ export const menuItems = pgTable("menu_items", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Define relations for rooms and room combinations
@@ -443,6 +449,8 @@ export const translations = pgTable("translations", {
   category: text("category"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 export const siteLanguageSettings = pgTable("site_language_settings", {
@@ -452,6 +460,8 @@ export const siteLanguageSettings = pgTable("site_language_settings", {
   rtlLanguages: json("rtl_languages").default(["ar"]), // Using native JSON in PostgreSQL
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Nationalities table
@@ -464,6 +474,8 @@ export const nationalities = pgTable("nationalities", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Visas table
@@ -481,6 +493,8 @@ export const visas = pgTable("visas", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Nationality-specific visa requirements
@@ -496,6 +510,8 @@ export const nationalityVisaRequirements = pgTable("nationality_visa_requirement
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Define relations for visas and nationalities
@@ -571,6 +587,8 @@ export const cartItems = pgTable("cart_items", {
   notes: text("notes"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 export const orders = pgTable("orders", {
@@ -590,6 +608,8 @@ export const orders = pgTable("orders", {
   specialRequests: text("special_requests"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 export const orderItems = pgTable("order_items", {
@@ -611,6 +631,9 @@ export const orderItems = pgTable("order_items", {
   totalPrice: integer("total_price").notNull(),
   notes: text("notes"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Define relations for cart and orders
@@ -693,6 +716,8 @@ export const dictionaryEntries = pgTable("dictionary_entries", {
   notes: text("notes"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Transportation Locations
