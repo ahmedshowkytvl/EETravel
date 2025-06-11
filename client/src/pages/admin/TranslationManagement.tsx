@@ -288,6 +288,36 @@ export default function TranslationManagement() {
     },
   });
   
+  // Batch translate multiple items
+  const batchTranslateMutation = useMutation({
+    mutationFn: async ({ filter, category, limit, force = false }: { 
+      filter: 'all' | 'untranslated' | 'category'; 
+      category?: string; 
+      limit: number; 
+      force?: boolean 
+    }) => {
+      return await apiRequest('/api/admin/translations/batch-translate', {
+        method: 'POST',
+        body: JSON.stringify({ filter, category, limit, force }),
+      } as RequestInit);
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['translations'] });
+      toast({
+        title: "Batch translation completed",
+        description: data.message || "Batch translation has been completed successfully.",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Batch translation error",
+        description: "Failed to complete batch translation.",
+        variant: "destructive",
+      });
+      console.error("Batch translation error:", error);
+    },
+  });
+
   // Machine translate a single item
   const machineTranslateMutation = useMutation({
     mutationFn: async ({ id, force = false }: { id: number; force?: boolean }) => {
@@ -310,36 +340,6 @@ export default function TranslationManagement() {
         variant: "destructive",
       });
       console.error("Machine translation error:", error);
-    },
-  });
-  
-  // Batch translate multiple items
-  const batchTranslateMutation = useMutation({
-    mutationFn: async (params: { 
-      filter: 'all' | 'untranslated' | 'category';
-      category?: string;
-      limit: number;
-      force?: boolean;
-    }) => {
-      return await apiRequest('/api/admin/translations/batch-translate', {
-        method: 'POST',
-        body: JSON.stringify(params),
-      } as RequestInit);
-    },
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['translations'] });
-      toast({
-        title: "Batch translation complete",
-        description: data.message || `Processed ${data.processed} translations.`,
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: "Batch Translation Error",
-        description: "Failed to process batch translation.",
-        variant: "destructive",
-      });
-      console.error("Batch translation error:", error);
     },
   });
 
