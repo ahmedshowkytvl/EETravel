@@ -190,15 +190,15 @@ export default function PackagesManagement() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-zinc-900">Packages</h1>
+        <h1 className="text-2xl font-bold text-zinc-900">{t('admin.packages.title', 'Packages')}</h1>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" className="gap-1" onClick={() => setLocation("/admin/packages/create-manual")}>
             <Plus size={16} />
-            <span>Manual Package</span>
+            <span>{t('admin.packages.manualPackage', 'Manual Package')}</span>
           </Button>
           <Button size="sm" className="gap-1" onClick={() => setLocation("/admin/packages/create")}>
             <Plus size={16} />
-            <span>Create Package</span>
+            <span>{t('admin.packages.createPackage', 'Create Package')}</span>
           </Button>
         </div>
       </div>
@@ -224,14 +224,14 @@ export default function PackagesManagement() {
             }}>
             <TabsList className="mb-4">
               <TabsTrigger value="all" className="text-sm">
-                All Packages
+                {t('admin.packages.allPackages', 'All Packages')}
               </TabsTrigger>
               <TabsTrigger value="featured" className="text-sm">
-                Featured
+                {t('admin.packages.featured', 'Featured')}
               </TabsTrigger>
               {packageTypes.map(type => (
                 <TabsTrigger key={type} value={type} className="text-sm capitalize">
-                  {type}
+                  {t(`admin.packages.types.${type}`, type)}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -240,11 +240,11 @@ export default function PackagesManagement() {
               {filteredPackages.length === 0 ? (
                 <div className="bg-white border rounded-md p-8 text-center">
                   <Package className="h-12 w-12 mx-auto text-zinc-300 mb-3" />
-                  <h3 className="text-lg font-medium text-zinc-800 mb-1">No Packages Found</h3>
-                  <p className="text-zinc-500 mb-4">There are no packages in this category yet.</p>
+                  <h3 className="text-lg font-medium text-zinc-800 mb-1">{t('admin.packages.noPackages', 'No Packages Found')}</h3>
+                  <p className="text-zinc-500 mb-4">{t('admin.packages.noPackagesDescription', 'There are no packages in this category yet.')}</p>
                   <Button onClick={() => setLocation("/admin/packages/create")}>
                     <Plus size={16} className="mr-2" />
-                    Create Package
+                    {t('admin.packages.createPackage', 'Create Package')}
                   </Button>
                 </div>
               ) : (

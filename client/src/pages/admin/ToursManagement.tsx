@@ -4,6 +4,7 @@ import { useLocation } from "wouter";
 
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/use-language";
 import {
   Table,
   TableBody,
@@ -86,6 +87,7 @@ export default function ToursManagement() {
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { t } = useLanguage();
 
   // Fetch tours
   const {
@@ -359,13 +361,13 @@ export default function ToursManagement() {
   return (
     <div className="space-y-4 p-4 sm:p-6 lg:p-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-2xl font-bold tracking-tight">Tour Management</h1>
+        <h1 className="text-2xl font-bold tracking-tight">{t('admin.tours.title', 'Tour Management')}</h1>
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search tours..."
+              placeholder={t('admin.tours.searchPlaceholder', 'Search tours...')}
               className="pl-8 w-full md:w-[300px]"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -377,12 +379,12 @@ export default function ToursManagement() {
               onValueChange={(value) => setSortBy(value as "name" | "updatedAt" | "createdAt")}
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Sort by" />
+                <SelectValue placeholder={t('admin.tours.sortBy', 'Sort by')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="name">Name</SelectItem>
-                <SelectItem value="updatedAt">Last Updated</SelectItem>
-                <SelectItem value="createdAt">Date Created</SelectItem>
+                <SelectItem value="name">{t('admin.tours.sortByName', 'Name')}</SelectItem>
+                <SelectItem value="updatedAt">{t('admin.tours.sortByUpdated', 'Last Updated')}</SelectItem>
+                <SelectItem value="createdAt">{t('admin.tours.sortByCreated', 'Date Created')}</SelectItem>
               </SelectContent>
             </Select>
             <Button
