@@ -117,6 +117,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // The setupHotelFeatureRoutes isn't implemented yet, so we'll comment it out
   // setupHotelFeatureRoutes(app, storage, isAdmin);
   
+  // Logout endpoint
+  app.post('/api/logout', (req, res) => {
+    try {
+      (req as any).session.destroy((err: any) => {
+        if (err) {
+          console.error('Session destruction error:', err);
+          return res.status(500).json({ message: 'Logout failed' });
+        }
+        res.clearCookie('connect.sid');
+        res.status(200).json({ message: 'Logout successful' });
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+      res.status(500).json({ message: 'Logout failed' });
+    }
+  });
+
   // Debug endpoint to check session status
   app.get('/api/debug/session', (req, res) => {
     const sessionUser = (req as any).session?.user;

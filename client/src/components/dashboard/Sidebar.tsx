@@ -33,6 +33,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useLanguage } from "@/hooks/use-language";
 
 interface SidebarProps {
   collapsed: boolean;
@@ -41,6 +42,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
+  const { t } = useLanguage();
   
   // Auto-expand the relevant menu based on the current location
   const initialExpandedState = {
@@ -79,32 +81,32 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
   const menuItems = [
     { 
       icon: <LayoutDashboard size={20} />, 
-      label: "Dashboard", 
+      label: t('admin.sidebar.dashboard', 'Dashboard'), 
       href: "/admin" 
     },
     { 
       icon: <Users size={20} />, 
-      label: "User Management", 
+      label: t('admin.sidebar.userManagement', 'User Management'), 
       href: "/admin/users" 
     },
     { 
       icon: <ImageIcon size={20} />, 
-      label: "Hero Slider", 
+      label: t('admin.sidebar.heroSlider', 'Hero Slider'), 
       href: "/admin/slider" 
     },
     { 
       icon: <GlobeIcon size={20} />, 
-      label: "Countries & Cities", 
+      label: t('admin.sidebar.countriesCities', 'Countries & Cities'), 
       href: "/admin/countries-cities" 
     },
     { 
       icon: <MapPin size={20} />, 
-      label: "Destinations", 
+      label: t('admin.sidebar.destinations', 'Destinations'), 
       href: "/admin/destinations" 
     },
     { 
       icon: <Map size={20} />, 
-      label: "Tours", 
+      label: t('admin.sidebar.tours', 'Tours'), 
       href: "/admin/tours",
       hasSubmenu: true,
       menuKey: "tours",
@@ -113,29 +115,29 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
       submenuItems: [
         { 
           icon: <List size={16} />, 
-          label: "All Tours", 
+          label: t('admin.sidebar.allTours', 'All Tours'), 
           href: "/admin/tours" 
         },
         { 
           icon: <Plus size={16} />, 
-          label: "Create Tour", 
+          label: t('admin.sidebar.createTour', 'Create Tour'), 
           href: "/admin/tours/create" 
         },
         { 
           icon: <Star size={16} />, 
-          label: "Featured Tours", 
+          label: t('admin.sidebar.featuredTours', 'Featured Tours'), 
           href: "/admin/tours?filter=featured" 
         },
         { 
           icon: <Tag size={16} />, 
-          label: "Category Manager", 
+          label: t('admin.sidebar.tourCategories', 'Category Manager'), 
           href: "/admin/tours/categories" 
         },
       ]
     },
     { 
       icon: <Building size={20} />, 
-      label: "Hotels", 
+      label: t('admin.sidebar.hotels', 'Hotels'), 
       href: "/admin/hotels",
       hasSubmenu: true,
       menuKey: "hotels",
@@ -144,44 +146,44 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
       submenuItems: [
         { 
           icon: <List size={16} />, 
-          label: "All Hotels", 
+          label: t('admin.sidebar.allHotels', 'All Hotels'), 
           href: "/admin/hotels" 
         },
         { 
           icon: <Plus size={16} />, 
-          label: "Add Hotel", 
+          label: t('admin.sidebar.addHotel', 'Add Hotel'), 
           href: "/admin/hotels/create" 
         },
         { 
           icon: <Star size={16} />, 
-          label: "Featured Hotels", 
+          label: t('admin.sidebar.featuredHotels', 'Featured Hotels'), 
           href: "/admin/hotels?filter=featured" 
         },
         { 
           icon: <Tag size={16} />, 
-          label: "Category Manager", 
+          label: t('admin.sidebar.hotelCategories', 'Category Manager'), 
           href: "/admin/hotels/categories" 
         },
         { 
           icon: <Building size={16} />, 
-          label: "Facilities Manager", 
+          label: t('admin.sidebar.hotelFacilities', 'Facilities Manager'), 
           href: "/admin/hotels/facilities" 
         },
         { 
           icon: <Star size={16} />, 
-          label: "Highlights Manager", 
+          label: t('admin.sidebar.hotelHighlights', 'Highlights Manager'), 
           href: "/admin/hotels/highlights" 
         },
         { 
           icon: <ShieldCheck size={16} />, 
-          label: "Cleanliness Features", 
+          label: t('admin.sidebar.cleanlinessFeatures', 'Cleanliness Features'), 
           href: "/admin/hotels/cleanliness-features" 
         },
       ]
     },
     { 
       icon: <Bed size={20} />, 
-      label: "Rooms", 
+      label: t('admin.sidebar.rooms', 'Rooms'), 
       href: "/admin/rooms",
       hasSubmenu: true,
       menuKey: "rooms",
@@ -190,39 +192,39 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
       submenuItems: [
         { 
           icon: <List size={16} />, 
-          label: "All Rooms", 
+          label: t('admin.sidebar.allRooms', 'All Rooms'), 
           href: "/admin/rooms" 
         },
         { 
           icon: <Plus size={16} />, 
-          label: "Add Room", 
+          label: t('admin.sidebar.addRoom', 'Add Room'), 
           href: "/admin/rooms/create" 
         },
         { 
           icon: <Star size={16} />, 
-          label: "Standard Rooms", 
+          label: t('admin.sidebar.standardRooms', 'Standard Rooms'), 
           href: "/admin/rooms?filter=standard" 
         },
         { 
           icon: <Star size={16} />, 
-          label: "Deluxe Rooms", 
+          label: t('admin.sidebar.deluxeRooms', 'Deluxe Rooms'), 
           href: "/admin/rooms?filter=deluxe" 
         },
         { 
           icon: <Tag size={16} />, 
-          label: "Category Manager", 
+          label: t('admin.sidebar.roomCategories', 'Category Manager'), 
           href: "/admin/rooms/categories" 
         },
         { 
           icon: <Settings size={16} />, 
-          label: "Room Amenities", 
+          label: t('admin.sidebar.roomAmenities', 'Room Amenities'), 
           href: "/admin/rooms/amenities" 
         },
       ]
     },
     { 
       icon: <Package size={20} />, 
-      label: "Packages", 
+      label: t('admin.sidebar.packages', 'Packages'), 
       href: "/admin/packages",
       hasSubmenu: true,
       menuKey: "packages",
@@ -231,64 +233,64 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
       submenuItems: [
         { 
           icon: <List size={16} />, 
-          label: "All Packages", 
+          label: t('admin.sidebar.allPackages', 'All Packages'), 
           href: "/admin/packages" 
         },
         { 
           icon: <Plus size={16} />, 
-          label: "Create Package", 
+          label: t('admin.sidebar.createPackage', 'Create Package'), 
           href: "/admin/packages/create" 
         },
         { 
           icon: <Plus size={16} />, 
-          label: "Create Manual", 
+          label: t('admin.sidebar.createManual', 'Create Manual'), 
           href: "/admin/packages/create-manual" 
         },
         { 
           icon: <Star size={16} />, 
-          label: "Featured Packages", 
+          label: t('admin.sidebar.featuredPackages', 'Featured Packages'), 
           href: "/admin/packages?filter=featured" 
         },
         { 
           icon: <Tag size={16} />, 
-          label: "Category Manager", 
+          label: t('admin.sidebar.packageCategories', 'Category Manager'), 
           href: "/admin/packages/categories" 
         },
       ]
     },
     { 
       icon: <Car size={20} />, 
-      label: "Transportation", 
+      label: t('admin.sidebar.transportation', 'Transportation'), 
       href: "/admin/transportation" 
     },
     { 
       icon: <Tag size={20} />, 
-      label: "Vehicle Types", 
+      label: t('admin.sidebar.vehicleTypes', 'Vehicle Types'), 
       href: "/admin/transport-types" 
     },
     { 
       icon: <MapPin size={20} />, 
-      label: "Locations", 
+      label: t('admin.sidebar.locations', 'Locations'), 
       href: "/admin/transport-locations" 
     },
     { 
       icon: <Clock size={20} />, 
-      label: "Durations", 
+      label: t('admin.sidebar.durations', 'Durations'), 
       href: "/admin/transport-durations" 
     },
     { 
       icon: <Menu size={20} />, 
-      label: "Menu Manager", 
+      label: t('admin.sidebar.menuManager', 'Menu Manager'), 
       href: "/admin/menus" 
     },
     { 
       icon: <Languages size={20} />, 
-      label: "Translations", 
+      label: t('admin.sidebar.translations', 'Translations'), 
       href: "/admin/translations" 
     },
     { 
       icon: <FileCheck size={20} />, 
-      label: "Visa Management", 
+      label: t('admin.sidebar.visaManagement', 'Visa Management'), 
       href: "/admin/visas",
       hasSubmenu: true,
       menuKey: "visas",
@@ -297,24 +299,24 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
       submenuItems: [
         { 
           icon: <List size={16} />, 
-          label: "All Visas", 
+          label: t('admin.sidebar.allVisas', 'All Visas'), 
           href: "/admin/visas" 
         },
         { 
           icon: <GlobeIcon size={16} />, 
-          label: "Nationality Requirements", 
+          label: t('admin.sidebar.nationalityRequirements', 'Nationality Requirements'), 
           href: "/admin/visas?tab=requirements" 
         },
         { 
           icon: <Tag size={16} />, 
-          label: "Nationalities", 
+          label: t('admin.sidebar.nationalities', 'Nationalities'), 
           href: "/admin/visas?tab=nationalities" 
         },
       ]
     },
     { 
       icon: <Database size={20} />, 
-      label: "Data Export/Import", 
+      label: t('admin.sidebar.dataExportImport', 'Data Export/Import'), 
       href: "/admin/data-export-import" 
     },
   ];
