@@ -1,36 +1,23 @@
-#!/usr/bin/env node
+const { spawn } = require('child_process');
 
-import { spawn } from 'child_process';
-import path from 'path';
+process.env.NODE_ENV = 'development';
+process.env.PORT = '8080';
 
-console.log('Starting Sahara Journeys development server...');
-
-const serverProcess = spawn('npx', ['tsx', 'server/index.ts'], {
+const server = spawn('npx', ['tsx', 'server/index.ts'], {
+  cwd: process.cwd(),
   stdio: 'inherit',
-  env: {
-    ...process.env,
-    NODE_ENV: 'development'
-  },
-  cwd: process.cwd()
+  detached: false
 });
 
-serverProcess.on('error', (err) => {
+server.on('error', (err) => {
   console.error('Failed to start server:', err);
-  process.exit(1);
 });
 
-serverProcess.on('close', (code) => {
-  console.log(`Server process exited with code ${code}`);
-  process.exit(code);
+server.on('close', (code) => {
+  console.log(`Server exited with code ${code}`);
 });
 
-// Handle process termination
 process.on('SIGINT', () => {
-  console.log('\nShutting down development server...');
-  serverProcess.kill('SIGINT');
-});
-
-process.on('SIGTERM', () => {
-  console.log('\nShutting down development server...');
-  serverProcess.kill('SIGTERM');
+  server.kill();
+  process.exit(0);
 });
