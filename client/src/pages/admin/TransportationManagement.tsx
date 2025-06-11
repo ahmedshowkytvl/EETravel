@@ -13,6 +13,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import { Plus, Loader2, Filter } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { toast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/use-language";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
@@ -135,6 +136,7 @@ const formatPrice = (price: number): string => {
 export default function TransportationManagement() {
   const queryClient = useQueryClient();
   const [_, setLocation] = useLocation();
+  const { t } = useLanguage();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedTransport, setSelectedTransport] = useState<Transportation | null>(null);

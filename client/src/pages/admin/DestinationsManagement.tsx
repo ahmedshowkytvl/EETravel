@@ -401,26 +401,26 @@ export default function DestinationsManagement() {
       <div className="container mx-auto py-6">
         <div className="flex flex-col space-y-8">
           <div className="flex items-center justify-between">
-            <h2 className="text-3xl font-bold tracking-tight">Destinations Management</h2>
+            <h2 className="text-3xl font-bold tracking-tight">{t('admin.destinations.title', 'Destinations Management')}</h2>
             <Button onClick={() => {
               destinationForm.reset();
               setSelectedCountryId(null);
               setIsCreateDialogOpen(true);
             }}>
-              <Plus className="mr-2 h-4 w-4" /> Add Destination
+              <Plus className="mr-2 h-4 w-4" /> {t('admin.destinations.addDestination', 'Add Destination')}
             </Button>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle>All Destinations</CardTitle>
+              <CardTitle>{t('admin.destinations.allDestinations', 'All Destinations')}</CardTitle>
               <CardDescription>
-                Manage destinations for your travel application. Destinations are linked to countries and cities.
+                {t('admin.destinations.description', 'Manage destinations for your travel application. Destinations are linked to countries and cities.')}
               </CardDescription>
               <div className="flex w-full max-w-sm items-center space-x-2 mt-4">
                 <Input
                   type="text"
-                  placeholder="Search destinations..."
+                  placeholder={t('admin.destinations.searchPlaceholder', 'Search destinations...')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full"
