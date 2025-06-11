@@ -4278,7 +4278,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Machine translate a single translation (admin only)
-  app.post('/api/admin/translations/:id/translate', async (req, res) => {
+  app.post('/api/admin/translations/:id/translate', isAdmin, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
@@ -4372,7 +4372,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post('/api/admin/translations/batch-translate', async (req, res) => {
+  app.post('/api/admin/translations/batch-translate', isAdmin, async (req, res) => {
     try {
       // Validate request body
       const batchSchema = z.object({
