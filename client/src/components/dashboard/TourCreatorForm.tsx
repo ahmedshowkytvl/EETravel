@@ -22,7 +22,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
-// Form schema for tour data
 const tourSchema = z.object({
   name: z.string().min(3, { message: "Name must be at least 3 characters" }),
   description: z.string().min(20, { message: "Description should be at least 20 characters" }),
@@ -44,12 +43,6 @@ const tourSchema = z.object({
 
 type TourFormValues = z.infer<typeof tourSchema>;
 
-const statusOptions = [
-  { value: "active", label: "Active" },
-  { value: "inactive", label: "Inactive" },
-  { value: "soldout", label: "Sold Out" },
-];
-
 export interface TourCreatorFormProps {
   tourId?: string;
 }
@@ -64,13 +57,12 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
   const [galleryImages, setGalleryImages] = useState<any[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Fetch destinations
+  // All hooks defined consistently at the top
   const { data: destinations = [] } = useQuery<any[]>({
     queryKey: ['/api/destinations'],
     queryFn: getQueryFn({ on401: "throw" }),
   });
   
-  // Fetch tour categories
   const { data: tourCategories = [] } = useQuery<any[]>({
     queryKey: ['/api/tour-categories'],
     queryFn: getQueryFn({ on401: "throw" }),
@@ -83,7 +75,6 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
         }))
   });
 
-  // Fetch existing tour data for edit mode
   const { data: existingTour, isLoading: tourLoading } = useQuery({
     queryKey: ['/api/tours', tourId],
     queryFn: async () => {
@@ -115,120 +106,6 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
     },
   });
 
-  // Reset form with existing tour data when loaded
-  useEffect(() => {
-    if (existingTour && isEditMode) {
-      form.reset({
-        name: existingTour.name || "",
-        description: existingTour.description || "",
-        destinationId: existingTour.destinationId || 0,
-        tripType: existingTour.tripType || "",
-        duration: existingTour.duration || 1,
-        startDate: existingTour.date ? new Date(existingTour.date) : new Date(),
-        endDate: existingTour.endDate ? new Date(existingTour.endDate) : new Date(),
-        numPassengers: existingTour.numPassengers || 1,
-        price: existingTour.price || 0,
-        discountedPrice: existingTour.discountedPrice || null,
-        included: Array.isArray(existingTour.included) ? existingTour.included : [],
-        excluded: Array.isArray(existingTour.excluded) ? existingTour.excluded : [],
-        itinerary: existingTour.itinerary || "",
-        maxGroupSize: existingTour.maxGroupSize || 10,
-        featured: existingTour.featured || false,
-        status: existingTour.status || "active",
-      });
-
-      // Set images if available
-      if (existingTour.imageUrl) {
-        setImages([{
-          id: 'main-existing',
-          preview: existingTour.imageUrl,
-          isMain: true,
-          file: null
-        }]);
-      }
-
-      // Set gallery images if available
-      if (existingTour.galleryUrls && Array.isArray(existingTour.galleryUrls)) {
-        const galleryImgs = existingTour.galleryUrls.map((url: string, index: number) => ({
-          id: `gallery-existing-${index}`,
-          preview: url,
-          file: null
-        }));
-        setGalleryImages(galleryImgs);
-      }
-    }
-  }, [existingTour, isEditMode, form]);
-
-  // Show loading state while fetching tour data
-  if (isEditMode && tourLoading) {
-    return (
-      <div className="flex items-center justify-center p-8">
-        <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="ml-2">Loading tour data...</span>
-      </div>
-    );
-  }
-
-  // Image upload handlers
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      const id = Date.now().toString();
-      const preview = URL.createObjectURL(file);
-      
-      setImages([
-        ...images.filter(img => !img.isMain),
-        { id, file, preview, isMain: true }
-      ]);
-    }
-  };
-
-  const handleGalleryImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const files = Array.from(e.target.files);
-      
-      const newGalleryImages = files.map(file => {
-        const id = `gallery-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-        const preview = URL.createObjectURL(file);
-        return { id, file, preview };
-      });
-      
-      setGalleryImages(prev => [...prev, ...newGalleryImages]);
-    }
-  };
-
-  const handleRemoveGalleryImage = (id: string) => {
-    setGalleryImages(prev => prev.filter(img => img.id !== id));
-  };
-
-  // Inclusion/exclusion handlers
-  const handleAddInclusion = () => {
-    if (newInclusion.trim()) {
-      const currentInclusions = form.getValues().included || [];
-      form.setValue('included', [...currentInclusions, newInclusion.trim()]);
-      setNewInclusion("");
-    }
-  };
-
-  const handleAddExclusion = () => {
-    if (newExclusion.trim()) {
-      const currentExclusions = form.getValues().excluded || [];
-      form.setValue('excluded', [...currentExclusions, newExclusion.trim()]);
-      setNewExclusion("");
-    }
-  };
-
-  const removeInclusion = (index: number) => {
-    const currentInclusions = form.getValues().included || [];
-    form.setValue('included', currentInclusions.filter((_, i) => i !== index));
-  };
-
-  const removeExclusion = (index: number) => {
-    const currentExclusions = form.getValues().excluded || [];
-    form.setValue('excluded', currentExclusions.filter((_, i) => i !== index));
-  };
-
-  // Tour mutation
   const tourMutation = useMutation({
     mutationFn: async (data: any) => {
       setIsSubmitting(true);
@@ -331,16 +208,16 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/admin/tours'] });
       toast({
-        title: isEditMode ? "Tour Updated" : "Tour Created",
+        title: isEditMode ? "تم تحديث الرحلة" : "تم إنشاء الرحلة",
         description: isEditMode 
-          ? "The tour was successfully updated" 
-          : "The tour was successfully created",
+          ? "تم تحديث الرحلة بنجاح" 
+          : "تم إنشاء الرحلة بنجاح",
       });
       setLocation('/admin/tours');
     },
     onError: (error: Error) => {
       toast({
-        title: "Error",
+        title: "خطأ",
         description: error.message,
         variant: "destructive",
       });
@@ -350,11 +227,47 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
     }
   });
 
-  const onSubmit = (data: TourFormValues) => {
-    tourMutation.mutate(data);
-  };
+  useEffect(() => {
+    if (existingTour && isEditMode) {
+      form.reset({
+        name: existingTour.name || "",
+        description: existingTour.description || "",
+        destinationId: existingTour.destinationId || 0,
+        tripType: existingTour.tripType || "",
+        duration: existingTour.duration || 1,
+        startDate: existingTour.date ? new Date(existingTour.date) : new Date(),
+        endDate: existingTour.endDate ? new Date(existingTour.endDate) : new Date(),
+        numPassengers: existingTour.numPassengers || 1,
+        price: existingTour.price || 0,
+        discountedPrice: existingTour.discountedPrice || null,
+        included: Array.isArray(existingTour.included) ? existingTour.included : [],
+        excluded: Array.isArray(existingTour.excluded) ? existingTour.excluded : [],
+        itinerary: existingTour.itinerary || "",
+        maxGroupSize: existingTour.maxGroupSize || 10,
+        featured: existingTour.featured || false,
+        status: existingTour.status || "active",
+      });
 
-  // Update duration when dates change
+      if (existingTour.imageUrl) {
+        setImages([{
+          id: 'main-existing',
+          preview: existingTour.imageUrl,
+          isMain: true,
+          file: null
+        }]);
+      }
+
+      if (existingTour.galleryUrls && Array.isArray(existingTour.galleryUrls)) {
+        const galleryImgs = existingTour.galleryUrls.map((url: string, index: number) => ({
+          id: `gallery-existing-${index}`,
+          preview: url,
+          file: null
+        }));
+        setGalleryImages(galleryImgs);
+      }
+    }
+  }, [existingTour, isEditMode, form]);
+
   useEffect(() => {
     const subscription = form.watch((value, { name }) => {
       if (name === 'startDate' || name === 'endDate') {
@@ -372,32 +285,99 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
     return () => subscription.unsubscribe();
   }, [form]);
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const id = Date.now().toString();
+      const preview = URL.createObjectURL(file);
+      
+      setImages([
+        ...images.filter(img => !img.isMain),
+        { id, file, preview, isMain: true }
+      ]);
+    }
+  };
+
+  const handleGalleryImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const files = Array.from(e.target.files);
+      
+      const newGalleryImages = files.map(file => {
+        const id = `gallery-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const preview = URL.createObjectURL(file);
+        return { id, file, preview };
+      });
+      
+      setGalleryImages(prev => [...prev, ...newGalleryImages]);
+    }
+  };
+
+  const handleRemoveGalleryImage = (id: string) => {
+    setGalleryImages(prev => prev.filter(img => img.id !== id));
+  };
+
+  const handleAddInclusion = () => {
+    if (newInclusion.trim()) {
+      const currentInclusions = form.getValues().included || [];
+      form.setValue('included', [...currentInclusions, newInclusion.trim()]);
+      setNewInclusion("");
+    }
+  };
+
+  const handleAddExclusion = () => {
+    if (newExclusion.trim()) {
+      const currentExclusions = form.getValues().excluded || [];
+      form.setValue('excluded', [...currentExclusions, newExclusion.trim()]);
+      setNewExclusion("");
+    }
+  };
+
+  const removeInclusion = (index: number) => {
+    const currentInclusions = form.getValues().included || [];
+    form.setValue('included', currentInclusions.filter((_, i) => i !== index));
+  };
+
+  const removeExclusion = (index: number) => {
+    const currentExclusions = form.getValues().excluded || [];
+    form.setValue('excluded', currentExclusions.filter((_, i) => i !== index));
+  };
+
+  const onSubmit = (data: TourFormValues) => {
+    tourMutation.mutate(data);
+  };
+
+  if (isEditMode && tourLoading) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <Loader2 className="h-8 w-8 animate-spin" />
+        <span className="ml-2">جاري تحميل بيانات الرحلة...</span>
+      </div>
+    );
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div>
-          {tourMutation.isError && (
-            <Alert variant="destructive" className="mb-6">
-              <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>
-                {tourMutation.error?.message || `An error occurred while ${isEditMode ? 'updating' : 'creating'} the tour.`} 
-              </AlertDescription>
-            </Alert>
-          )}
-        </div>
+        {tourMutation.isError && (
+          <Alert variant="destructive" className="mb-6">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>خطأ</AlertTitle>
+            <AlertDescription>
+              {tourMutation.error?.message || `حدث خطأ أثناء ${isEditMode ? 'تحديث' : 'إنشاء'} الرحلة.`} 
+            </AlertDescription>
+          </Alert>
+        )}
         
         <FormRequiredFieldsNote />
         
         <Tabs defaultValue="basic" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="basic">Basic Info</TabsTrigger>
-            <TabsTrigger value="dates">Dates & Pricing</TabsTrigger>
-            <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
-            <TabsTrigger value="media">Media & Features</TabsTrigger>
+            <TabsTrigger value="basic">المعلومات الأساسية</TabsTrigger>
+            <TabsTrigger value="dates">التواريخ والأسعار</TabsTrigger>
+            <TabsTrigger value="itinerary">برنامج الرحلة</TabsTrigger>
+            <TabsTrigger value="media">الصور والمميزات</TabsTrigger>
           </TabsList>
           
-          {/* Basic Info Tab */}
           <TabsContent value="basic" className="space-y-4 pt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-6">
@@ -407,11 +387,11 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                   render={({ field, fieldState: { error } }) => (
                     <div>
                       <Label htmlFor="name" className="text-sm font-medium">
-                        Tour Name <span className="text-red-500">*</span>
+                        اسم الرحلة <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         id="name"
-                        placeholder="Enter tour name"
+                        placeholder="أدخل اسم الرحلة"
                         {...field}
                         className={error ? "border-red-500" : ""}
                       />
@@ -428,11 +408,11 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                   render={({ field, fieldState: { error } }) => (
                     <div>
                       <Label htmlFor="destination" className="text-sm font-medium">
-                        Destination <span className="text-red-500">*</span>
+                        الوجهة <span className="text-red-500">*</span>
                       </Label>
                       <Select onValueChange={(value) => field.onChange(parseInt(value))} value={field.value?.toString()}>
                         <SelectTrigger className={error ? "border-red-500" : ""}>
-                          <SelectValue placeholder="Select a destination" />
+                          <SelectValue placeholder="اختر الوجهة" />
                         </SelectTrigger>
                         <SelectContent>
                           {destinations.map((dest) => (
@@ -455,11 +435,11 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                   render={({ field, fieldState: { error } }) => (
                     <div>
                       <Label htmlFor="tripType" className="text-sm font-medium">
-                        Trip Type <span className="text-red-500">*</span>
+                        نوع الرحلة <span className="text-red-500">*</span>
                       </Label>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <SelectTrigger className={error ? "border-red-500" : ""}>
-                          <SelectValue placeholder="Select trip type" />
+                          <SelectValue placeholder="اختر نوع الرحلة" />
                         </SelectTrigger>
                         <SelectContent>
                           {tourCategories.map((category) => (
@@ -475,33 +455,6 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                     </div>
                   )}
                 />
-
-                <Controller
-                  name="maxGroupSize"
-                  control={form.control}
-                  render={({ field, fieldState: { error } }) => (
-                    <div>
-                      <Label htmlFor="maxGroupSize" className="text-sm font-medium">
-                        Max Group Size
-                      </Label>
-                      <Input
-                        id="maxGroupSize"
-                        type="number"
-                        min="1"
-                        placeholder="Enter max group size"
-                        name={field.name}
-                        onBlur={field.onBlur}
-                        disabled={field.disabled}
-                        value={field.value?.toString() || ""}
-                        onChange={(e) => field.onChange(parseInt(e.target.value) || null)}
-                        className={error ? "border-red-500" : ""}
-                      />
-                      {error && (
-                        <p className="text-red-500 text-sm mt-1">{error.message}</p>
-                      )}
-                    </div>
-                  )}
-                />
               </div>
 
               <div className="space-y-6">
@@ -511,11 +464,11 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                   render={({ field, fieldState: { error } }) => (
                     <div>
                       <Label htmlFor="description" className="text-sm font-medium">
-                        Description <span className="text-red-500">*</span>
+                        الوصف <span className="text-red-500">*</span>
                       </Label>
                       <Textarea
                         id="description"
-                        placeholder="Enter tour description"
+                        placeholder="أدخل وصف الرحلة"
                         rows={6}
                         {...field}
                         className={error ? "border-red-500" : ""}
@@ -539,30 +492,8 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                           onCheckedChange={field.onChange}
                         />
                         <Label htmlFor="featured" className="text-sm font-medium">
-                          Featured Tour
+                          رحلة مميزة
                         </Label>
-                      </div>
-                    )}
-                  />
-
-                  <Controller
-                    name="status"
-                    control={form.control}
-                    render={({ field }) => (
-                      <div>
-                        <Label htmlFor="status" className="text-sm font-medium">Status</Label>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <SelectTrigger className="w-32">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {statusOptions.map((option) => (
-                              <SelectItem key={option.value} value={option.value}>
-                                {option.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
                       </div>
                     )}
                   />
@@ -571,7 +502,6 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
             </div>
           </TabsContent>
 
-          {/* Dates & Pricing Tab */}
           <TabsContent value="dates" className="space-y-4 pt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-6">
@@ -581,7 +511,7 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                   render={({ field, fieldState: { error } }) => (
                     <div>
                       <Label className="text-sm font-medium">
-                        Start Date <span className="text-red-500">*</span>
+                        تاريخ البداية <span className="text-red-500">*</span>
                       </Label>
                       <Popover>
                         <PopoverTrigger asChild>
@@ -594,7 +524,7 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                             )}
                           >
                             <CalendarIcon className="mr-2 h-4 w-4" />
-                            {field.value ? format(field.value, "PPP") : "Pick a date"}
+                            {field.value ? format(field.value, "PPP") : "اختر التاريخ"}
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0">
@@ -619,7 +549,7 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                   render={({ field, fieldState: { error } }) => (
                     <div>
                       <Label className="text-sm font-medium">
-                        End Date <span className="text-red-500">*</span>
+                        تاريخ النهاية <span className="text-red-500">*</span>
                       </Label>
                       <Popover>
                         <PopoverTrigger asChild>
@@ -632,7 +562,7 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                             )}
                           >
                             <CalendarIcon className="mr-2 h-4 w-4" />
-                            {field.value ? format(field.value, "PPP") : "Pick a date"}
+                            {field.value ? format(field.value, "PPP") : "اختر التاريخ"}
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0">
@@ -652,20 +582,21 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                 />
 
                 <Controller
-                  name="duration"
+                  name="price"
                   control={form.control}
                   render={({ field, fieldState: { error } }) => (
                     <div>
-                      <Label htmlFor="duration" className="text-sm font-medium">
-                        Duration (Days) <span className="text-red-500">*</span>
+                      <Label htmlFor="price" className="text-sm font-medium">
+                        السعر ($) <span className="text-red-500">*</span>
                       </Label>
                       <Input
-                        id="duration"
+                        id="price"
                         type="number"
-                        min="1"
-                        placeholder="Enter duration"
+                        min="0"
+                        step="0.01"
+                        placeholder="أدخل السعر"
                         {...field}
-                        onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                        onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
                         className={error ? "border-red-500" : ""}
                       />
                       {error && (
@@ -678,47 +609,20 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
 
               <div className="space-y-6">
                 <Controller
-                  name="price"
+                  name="duration"
                   control={form.control}
                   render={({ field, fieldState: { error } }) => (
                     <div>
-                      <Label htmlFor="price" className="text-sm font-medium">
-                        Price ($) <span className="text-red-500">*</span>
+                      <Label htmlFor="duration" className="text-sm font-medium">
+                        المدة (أيام) <span className="text-red-500">*</span>
                       </Label>
                       <Input
-                        id="price"
+                        id="duration"
                         type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Enter price"
+                        min="1"
+                        placeholder="أدخل المدة"
                         {...field}
-                        onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
-                        className={error ? "border-red-500" : ""}
-                      />
-                      {error && (
-                        <p className="text-red-500 text-sm mt-1">{error.message}</p>
-                      )}
-                    </div>
-                  )}
-                />
-
-                <Controller
-                  name="discountedPrice"
-                  control={form.control}
-                  render={({ field, fieldState: { error } }) => (
-                    <div>
-                      <Label htmlFor="discountedPrice" className="text-sm font-medium">
-                        Discounted Price ($)
-                      </Label>
-                      <Input
-                        id="discountedPrice"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="Enter discounted price"
-                        {...field}
-                        value={field.value?.toString() || ""}
-                        onChange={(e) => field.onChange(parseFloat(e.target.value) || null)}
+                        onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
                         className={error ? "border-red-500" : ""}
                       />
                       {error && (
@@ -734,13 +638,13 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                   render={({ field, fieldState: { error } }) => (
                     <div>
                       <Label htmlFor="numPassengers" className="text-sm font-medium">
-                        Number of Passengers <span className="text-red-500">*</span>
+                        عدد المسافرين <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         id="numPassengers"
                         type="number"
                         min="1"
-                        placeholder="Enter number of passengers"
+                        placeholder="أدخل عدد المسافرين"
                         {...field}
                         onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
                         className={error ? "border-red-500" : ""}
@@ -755,7 +659,6 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
             </div>
           </TabsContent>
 
-          {/* Itinerary Tab */}
           <TabsContent value="itinerary" className="space-y-4 pt-4">
             <Controller
               name="itinerary"
@@ -763,11 +666,11 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
               render={({ field, fieldState: { error } }) => (
                 <div>
                   <Label htmlFor="itinerary" className="text-sm font-medium">
-                    Detailed Itinerary <span className="text-red-500">*</span>
+                    برنامج الرحلة التفصيلي <span className="text-red-500">*</span>
                   </Label>
                   <Textarea
                     id="itinerary"
-                    placeholder="Enter detailed itinerary for the tour"
+                    placeholder="أدخل البرنامج التفصيلي للرحلة"
                     rows={10}
                     {...field}
                     className={error ? "border-red-500" : ""}
@@ -779,17 +682,16 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
               )}
             />
 
-            {/* Inclusions Section */}
             <div>
-              <Label className="text-sm font-medium">What's Included</Label>
+              <Label className="text-sm font-medium">ما يشمله</Label>
               <div className="flex gap-2 mt-2">
                 <Input
-                  placeholder="Add what's included"
+                  placeholder="أضف ما يشمله"
                   value={newInclusion}
                   onChange={(e) => setNewInclusion(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleAddInclusion()}
                 />
-                <Button type="button" onClick={handleAddInclusion}>Add</Button>
+                <Button type="button" onClick={handleAddInclusion}>إضافة</Button>
               </div>
               <div className="mt-2 space-y-1">
                 {form.watch('included')?.map((item, index) => (
@@ -808,17 +710,16 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
               </div>
             </div>
 
-            {/* Exclusions Section */}
             <div>
-              <Label className="text-sm font-medium">What's Excluded</Label>
+              <Label className="text-sm font-medium">ما لا يشمله</Label>
               <div className="flex gap-2 mt-2">
                 <Input
-                  placeholder="Add what's excluded"
+                  placeholder="أضف ما لا يشمله"
                   value={newExclusion}
                   onChange={(e) => setNewExclusion(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleAddExclusion()}
                 />
-                <Button type="button" onClick={handleAddExclusion}>Add</Button>
+                <Button type="button" onClick={handleAddExclusion}>إضافة</Button>
               </div>
               <div className="mt-2 space-y-1">
                 {form.watch('excluded')?.map((item, index) => (
@@ -838,11 +739,9 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
             </div>
           </TabsContent>
 
-          {/* Media & Features Tab */}
           <TabsContent value="media" className="space-y-4 pt-4">
-            {/* Main Image Upload */}
             <div>
-              <Label className="text-sm font-medium">Main Tour Image</Label>
+              <Label className="text-sm font-medium">الصورة الرئيسية للرحلة</Label>
               <div className="mt-2">
                 <input
                   type="file"
@@ -854,7 +753,7 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                 <Label htmlFor="main-image-upload" className="cursor-pointer">
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400">
                     <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                    <p className="mt-2 text-sm text-gray-600">Click to upload main image</p>
+                    <p className="mt-2 text-sm text-gray-600">انقر لرفع الصورة الرئيسية</p>
                   </div>
                 </Label>
                 {images.find(img => img.isMain) && (
@@ -869,9 +768,8 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
               </div>
             </div>
 
-            {/* Gallery Images Upload */}
             <div>
-              <Label className="text-sm font-medium">Gallery Images</Label>
+              <Label className="text-sm font-medium">معرض الصور</Label>
               <div className="mt-2">
                 <input
                   type="file"
@@ -884,7 +782,7 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                 <Label htmlFor="gallery-images-upload" className="cursor-pointer">
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400">
                     <Upload className="mx-auto h-12 w-12 text-gray-400" />
-                    <p className="mt-2 text-sm text-gray-600">Click to upload gallery images</p>
+                    <p className="mt-2 text-sm text-gray-600">انقر لرفع صور معرض الصور</p>
                   </div>
                 </Label>
                 {galleryImages.length > 0 && (
@@ -920,7 +818,7 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
             variant="outline"
             onClick={() => setLocation('/admin/tours')}
           >
-            Cancel
+            إلغاء
           </Button>
           <Button
             type="submit"
@@ -929,9 +827,9 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
             {isSubmitting || tourMutation.isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {isEditMode ? "Updating..." : "Creating..."}
+                {isEditMode ? "جاري التحديث..." : "جاري الإنشاء..."}
               </>
-            ) : isEditMode ? "Update Tour" : "Create Tour"}
+            ) : isEditMode ? "تحديث الرحلة" : "إنشاء الرحلة"}
           </Button>
         </div>
       </form>
