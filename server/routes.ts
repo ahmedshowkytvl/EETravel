@@ -4460,272 +4460,112 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Auto-sync translations from codebase
   app.post('/api/admin/translations/sync', async (req, res) => {
-    console.log('📡 Translation sync endpoint hit');
-    console.log('Request headers:', req.headers);
-    console.log('Request body:', req.body);
-    // Define scan results type first
-    type ScanResults = {
-      scannedFiles: number;
-      foundKeys: number;
-      newKeysAdded: number;
-      directories: string[];
-      newTranslations: any[];
-    };
-    
-    // Helper functions defined outside the try-catch block
-    // Scan a single file for translation keys
-    const scanFile = async (
-      filePath: string, 
-      results: ScanResults, 
-      translationPattern: RegExp,
-      existingKeys: Map<string, number>
-    ): Promise<void> => {
-      try {
-        results.scannedFiles++;
-        
-        // Read file content
-        const content = await fsPromises.readFile(filePath, 'utf8');
-        
-        // Find all translation keys
-        let match;
-        translationPattern.lastIndex = 0; // Reset regex for each file
-        
-        // Only show file name without full path to reduce log noise
-        const shortPath = filePath.replace('./client/src/', '');
-        console.log(`Scanning: ${shortPath}`);
-        
-        while ((match = translationPattern.exec(content)) !== null) {
-          // Check if we have all the expected groups
-          if (match.length < 6) {
-            // Don't log every invalid match to reduce noise
-            continue;
-          }
-          
-          // Extract parts carefully to handle different regex group patterns
-          let key = '', defaultText = '';
-          try {
-            if (match[2]) key = match[2];
-            if (match[5]) defaultText = match[5];
-          } catch (e) {
-            console.error('Error parsing match:', e);
-            continue;
-          }
-          
-          // Skip if key is undefined or empty
-          if (!key || key.trim() === '') {
-            continue;
-          }
-          
-          // Less verbose logging
-          results.foundKeys++;
-          
-          // Check if key already exists in the database
-          const existingId = existingKeys.get(key);
-          if (existingId) {
-            // Don't log existing keys to reduce noise
-            continue;
-          }
-          
-          // Only log keys that are actually new
-          console.log(`New key found: "${key}" with text: "${defaultText || 'none'}"`);
-          
-          // Determine category based on file path
-          let category = 'auto-generated';
-          if (filePath.includes('/components/')) {
-            category = 'components';
-          } else if (filePath.includes('/pages/')) {
-            const pathSegments = filePath.split('/');
-            const pageSegmentIndex = pathSegments.findIndex((segment: string) => segment === 'pages');
-            
-            if (pageSegmentIndex !== -1 && pageSegmentIndex + 1 < pathSegments.length) {
-              // Get the next segment after 'pages' as the category
-              category = pathSegments[pageSegmentIndex + 1].replace('.tsx', '').replace('.ts', '');
-            }
-          }
-          
-          // Extract context from nearby comments (simple approach)
-          let context = `Auto-detected from ${filePath.replace('./client/src/', '')}`;
-          
-          // Insert the new translation - simplified approach
-          try {
-            // First check if the key exists with a direct lookup (prevents unique constraint errors)
-            let existingTranslation;
-            try {
-              existingTranslation = await storage.getTranslationByKey(key);
-            } catch (lookupErr) {
-              // Ignore lookup errors and continue with insert attempt
-              console.log(`Key lookup failed for "${key}", will attempt insert`);
-            }
-            
-            // If we found an existing translation, update our map and skip the insert
-            if (existingTranslation && existingTranslation.id) {
-              console.log(`Found existing translation for "${key}" (ID: ${existingTranslation.id})`);
-              existingKeys.set(key, existingTranslation.id);
-              continue; // Skip to next translation key
-            }
-            
-            // If we get here, the key doesn't exist yet, so create a new translation
-            console.log(`Adding new translation: "${key}"`);
-            
-            try {
-              // Use Drizzle ORM's insert method for translations
-              const inserted = await db.insert(translations).values({
-                key: key,
-                enText: defaultText || key,
-                arText: null,
-                category: category,
-                context: context,
-                createdAt: new Date(),
-                updatedAt: new Date()
-              }).returning();
-              
-              const insertedTranslation = inserted[0];
-              if (insertedTranslation && insertedTranslation.id) {
-                console.log(`✓ Added: "${key}" with ID: ${insertedTranslation.id}`);
-                results.newKeysAdded++;
-                results.newTranslations.push(insertedTranslation);
-                existingKeys.set(key, insertedTranslation.id);
-              } else {
-                console.log(`✗ Failed to add: "${key}" - No ID returned`);
-              }
-            } catch (dbErr: any) {
-              // Still handle potential race conditions/duplicates that might have happened
-              if (dbErr.code === '23505' || dbErr.message?.includes('unique') || dbErr.message?.includes('duplicate')) {
-                console.log(`Duplicate detected for "${key}" during insertion`);
-                
-                // Try one more time to get the existing record's ID for our map
-                try {
-                  const existingEntry = await storage.getTranslationByKey(key);
-                  if (existingEntry && existingEntry.id) {
-                    console.log(`Found existing key: ${key}`);
-                  }
-                } catch (finalErr) {
-                  // At this point, we'll just skip this key and continue
-                  console.log(`Unable to process key "${key}"`);
-                }
-              } else {
-                // Log unexpected errors but continue scanning
-                console.error(`Error adding "${key}":`, dbErr.message || dbErr);
-              }
-            }
-          } catch (err: any) {
-            // Catch-all for any other errors in the entire insertion process
-            console.error(`Processing error for "${key}":`, err.message || err);
-          }
-        }
-      } catch (err) {
-        console.error(`Error scanning file ${filePath}:`, err);
-      }
-    };
-    
-    // Helper function to recursively scan directories
-    const scanDir = async (
-      dir: string, 
-      results: ScanResults,
-      translationPattern: RegExp,
-      existingKeys: Map<string, number>,
-      scanFileFn: Function
-    ): Promise<void> => {
-      try {
-        results.directories.push(dir);
-        
-        // Use fsPromises for directory operations
-        const items = await fsPromises.readdir(dir);
-        
-        for (const item of items) {
-          const itemPath = path.join(dir, item);
-          const stats = await fsPromises.stat(itemPath);
-          
-          if (stats.isDirectory()) {
-            await scanDir(itemPath, results, translationPattern, existingKeys, scanFileFn);
-          } else if (stats.isFile() && (itemPath.endsWith('.tsx') || itemPath.endsWith('.ts'))) {
-            await scanFileFn(itemPath, results, translationPattern, existingKeys);
-          }
-        }
-      } catch (err) {
-        console.error(`Error scanning directory ${dir}:`, err);
-        // Continue with other directories even if one fails
-      }
-    };
+    console.log('Starting translation sync from codebase');
     
     try {
-      // Ensure database is connected before proceeding
-      await dbPromise;
-      
-      // Get ALL existing translations to avoid duplicates (don't filter by category)
+      // Get existing translations to avoid duplicates
       const existingTranslations = await storage.listTranslations();
+      const existingKeys = new Set(existingTranslations.map(t => t.key));
       
-      // Debug purposes
-      console.log(`Found ${existingTranslations.length} existing translations in database`);
+      console.log(`Found ${existingTranslations.length} existing translations`);
       
-      // List all existing keys to verify they're loaded correctly
-      console.log('Existing translation keys:');
-      existingTranslations.forEach(t => {
-        console.log(`- ${t.key} (ID: ${t.id})`);
-      });
+      // Results tracking
+      let scannedFiles = 0;
+      let foundKeys = 0;
+      let newKeysAdded = 0;
+      const newTranslations: any[] = [];
       
-      // Create a map with existing keys for faster lookups
-      const existingKeys = new Map();
-      existingTranslations.forEach(t => {
-        existingKeys.set(t.key, t.id);
-      });
+      // Translation pattern to match t('key') or t('key', 'default text')
+      // Improved to avoid whitespace-only keys and ensure meaningful content
+      const translationPattern = /t\(\s*['"`]([^'"`\s][^'"`]*[^'"`\s]|[^'"`\s])['"`](?:\s*,\s*['"`]([^'"`]*)['"`])?\s*\)/g;
       
-      // Define regex pattern to find t() function calls with improvements
-      // This pattern is specifically designed to capture t('key', 'text') format
-      // and avoid false-positives or partial matches
-      const translationPattern = /t\(\s*(['"`])([^'"`]+)(['"`])(?:\s*,\s*(['"`])([^'"`]+)(['"`]))?\s*\)/g;
-      
-      // Keep track of results
-      const results: ScanResults = {
-        scannedFiles: 0,
-        foundKeys: 0,
-        newKeysAdded: 0,
-        directories: [],
-        newTranslations: []
+      // Scan function for a single file
+      const scanFile = async (filePath: string) => {
+        try {
+          const content = await fsPromises.readFile(filePath, 'utf8');
+          scannedFiles++;
+          
+          let match;
+          while ((match = translationPattern.exec(content)) !== null) {
+            const key = match[1];
+            const defaultText = match[2] || key;
+            
+            if (!key || existingKeys.has(key)) continue;
+            
+            foundKeys++;
+            
+            // Determine category from file path
+            let category = 'general';
+            if (filePath.includes('/admin/')) category = 'admin';
+            else if (filePath.includes('/components/')) category = 'components';
+            else if (filePath.includes('/pages/')) category = 'pages';
+            
+            // Add new translation
+            const inserted = await db.insert(translations).values({
+              key,
+              enText: defaultText,
+              arText: null,
+              category,
+              context: `Auto-detected from ${path.relative('.', filePath)}`,
+              createdAt: new Date(),
+              updatedAt: new Date()
+            }).returning();
+            
+            if (inserted[0]) {
+              newKeysAdded++;
+              newTranslations.push(inserted[0]);
+              existingKeys.add(key);
+              console.log(`Added: ${key}`);
+            }
+          }
+        } catch (err) {
+          console.error(`Error scanning ${filePath}:`, err);
+        }
       };
       
-      // Define directories to scan
-      const dirsToScan = [
-        './client/src/pages',
-        './client/src/components'
-      ];
+      // Recursively scan directory
+      const scanDirectory = async (dir: string) => {
+        try {
+          const entries = await fsPromises.readdir(dir, { withFileTypes: true });
+          
+          for (const entry of entries) {
+            const fullPath = path.join(dir, entry.name);
+            
+            if (entry.isDirectory() && !entry.name.startsWith('.')) {
+              await scanDirectory(fullPath);
+            } else if (entry.isFile() && (entry.name.endsWith('.tsx') || entry.name.endsWith('.ts'))) {
+              await scanFile(fullPath);
+            }
+          }
+        } catch (err) {
+          console.error(`Error scanning directory ${dir}:`, err);
+        }
+      };
       
-      // Execute scanning for each directory
+      // Scan client source directories
+      const dirsToScan = ['./client/src/pages', './client/src/components'];
+      
       for (const dir of dirsToScan) {
-        await scanDir(dir, results, translationPattern, existingKeys, scanFile);
+        if (await fsPromises.access(dir).then(() => true).catch(() => false)) {
+          await scanDirectory(dir);
+        }
       }
       
-      // Debug: Check how many new translations we actually found
-      console.log(`Summary of scan:
-      - Scanned ${results.scannedFiles} files
-      - Found ${results.foundKeys} total keys
-      - Found ${existingKeys.size} existing keys (should match ${existingTranslations.length})
-      - Added ${results.newKeysAdded} new translations
-      `);
-      
-      // Debug: Check what keys were found but not added
-      if (results.foundKeys > 0 && results.newKeysAdded === 0) {
-        console.log('WARNING: Found keys but didn\'t add any. This could be a problem!');
-        console.log('Missing key detection mechanism may be incorrect.');
-      }
-      
-      // List first 10 new translations that were added (for debugging)
-      if (results.newTranslations.length > 0) {
-        console.log('New translations added (first 10):');
-        results.newTranslations.slice(0, 10).forEach((t: any) => {
-          console.log(`- ${t.key} (ID: ${t.id})`);
-        });
-      } else {
-        console.log('No new translations were added.');
-      }
+      console.log(`Scan complete: ${scannedFiles} files, ${foundKeys} keys found, ${newKeysAdded} new translations added`);
       
       res.json({
         success: true,
-        message: `Scan complete. Found ${results.foundKeys} keys in ${results.scannedFiles} files. Added ${results.newKeysAdded} new translations.`,
-        results
+        message: `Scan complete. Found ${foundKeys} keys in ${scannedFiles} files. Added ${newKeysAdded} new translations.`,
+        results: {
+          scannedFiles,
+          foundKeys,
+          newKeysAdded,
+          newTranslations: newTranslations.slice(0, 10) // Return first 10 for preview
+        }
       });
+      
     } catch (error: any) {
-      console.error('Error syncing translations:', error);
+      console.error('Translation sync error:', error);
       res.status(500).json({ 
         success: false, 
         message: 'Failed to sync translations', 
