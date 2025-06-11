@@ -47,6 +47,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/use-language";
 
 type Package = {
   id: number;
@@ -75,6 +76,7 @@ export default function PackagesManagement() {
   const [slugPackageId, setSlugPackageId] = useState<number | null>(null);
   const [slugValue, setSlugValue] = useState("");
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   // Fetch packages
   const { data: packages = [], isLoading } = useQuery<Package[]>({
