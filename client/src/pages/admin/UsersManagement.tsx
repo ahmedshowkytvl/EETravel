@@ -155,7 +155,11 @@ export default function UsersManagement() {
   // Update user mutation
   const updateUserMutation = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: UserFormValues }) => {
-      const res = await apiRequest("PUT", `/api/admin/users/${id}`, data);
+      const res = await apiRequest(`/api/admin/users/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      });
       return await res.json();
     },
     onSuccess: () => {
@@ -179,7 +183,9 @@ export default function UsersManagement() {
   // Delete user mutation
   const deleteUserMutation = useMutation({
     mutationFn: async (id: number) => {
-      const res = await apiRequest("DELETE", `/api/admin/users/${id}`);
+      const res = await apiRequest(`/api/admin/users/${id}`, {
+        method: "DELETE"
+      });
       return await res.json();
     },
     onSuccess: () => {
