@@ -3,6 +3,7 @@ import { Sidebar } from "./Sidebar";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ProfileMenu } from "./ProfileMenu";
 import { useLanguage } from "@/hooks/use-language";
 import { Link } from "wouter";
 
@@ -33,6 +34,7 @@ export function DashboardLayout({ children, location }: DashboardLayoutProps) {
                 <span>{t('admin.viewSite', 'View Site')}</span>
               </Button>
             </Link>
+            <ProfileMenu />
           </div>
         </header>
         <main className="flex-1 p-6 overflow-auto">
