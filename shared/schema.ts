@@ -971,6 +971,8 @@ export const roomCategories = pgTable("room_categories", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Room to Category Relationship
@@ -991,6 +993,8 @@ export const packageCategories = pgTable("package_categories", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Package to Category Relationship
@@ -1354,6 +1358,8 @@ export const reviews = pgTable("reviews", {
   moderatorNotes: text("moderator_notes"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Payments table for financial transactions
@@ -1378,6 +1384,8 @@ export const payments = pgTable("payments", {
   metadata: json("metadata"), // Additional payment data
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Notifications table for user communications
@@ -1399,6 +1407,8 @@ export const notifications = pgTable("notifications", {
   metadata: json("metadata"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Traveler details for bookings
@@ -1421,6 +1431,8 @@ export const travelers = pgTable("travelers", {
   emergencyPhone: text("emergency_phone"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Coupons and discounts
@@ -1444,6 +1456,8 @@ export const coupons = pgTable("coupons", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Coupon usage tracking
@@ -1454,6 +1468,10 @@ export const couponUsages = pgTable("coupon_usages", {
   bookingId: integer("booking_id").references(() => bookings.id).notNull(),
   discountAmount: integer("discount_amount").notNull(),
   usedAt: timestamp("used_at").notNull().defaultNow(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 export type InsertFavorite = z.infer<typeof insertFavoriteSchema>;
