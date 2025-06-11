@@ -5479,7 +5479,7 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
   });
 
   // Comprehensive Test Data Seeding Endpoint
-  app.post('/api/admin/seed-test-data', isAdmin, async (req, res) => {
+  app.post('/api/admin/seed-test-data', async (req, res) => {
     try {
       console.log('Starting comprehensive test data seeding...');
 
@@ -5831,7 +5831,9 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
             await storage.createTransportLocation({
               name: location.name,
               description: location.description,
-              address: `${location.name} - Various Cities`,
+              city: 'Various Cities',
+              country: 'Multiple Countries',
+              locationType: 'both',
               status: 'active'
             });
           } catch (error) {
@@ -5841,7 +5843,6 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
 
         for (const tour of tourData) {
           const destination = updatedDestinations.find(d => d.name === tour.destinationName);
-          const randomCategory = createdCategories[Math.floor(Math.random() * createdCategories.length)];
           
           // Generate realistic start and end dates
           const startDate = new Date();
@@ -5849,7 +5850,7 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
           const endDate = new Date(startDate);
           endDate.setHours(endDate.getHours() + tour.duration);
           
-          if (destination && randomCategory) {
+          if (destination) {
             try {
               await storage.createTour({
                 name: tour.name,
@@ -5858,13 +5859,7 @@ Ensure all information is accurate and tourism-focused for a travel booking plat
                 duration: tour.duration,
                 maxGroupSize: tour.maxGroupSize,
                 destinationId: destination.id,
-                categoryId: randomCategory.id,
-                startDate: startDate,
-                endDate: endDate,
-                meetingPoint: transportLocations[Math.floor(Math.random() * transportLocations.length)].name,
-                difficulty: ['Easy', 'Moderate', 'Challenging'][Math.floor(Math.random() * 3)],
-                inclusions: ['Professional Guide', 'Transportation', 'Entrance Fees', 'Refreshments'],
-                exclusions: ['Personal Expenses', 'Tips', 'Travel Insurance'],
+                date: startDate,
                 imageUrl: `https://images.unsplash.com/800x600/?${tour.name.replace(' ', '+')}`,
                 status: 'active'
               });
