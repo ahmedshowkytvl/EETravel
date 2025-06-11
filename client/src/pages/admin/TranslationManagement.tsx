@@ -75,10 +75,9 @@ type TranslationFormValues = z.infer<typeof translationSchema>;
 type LanguageSettingsFormValues = z.infer<typeof languageSettingsSchema>;
 
 export default function TranslationManagement() {
-  const { t } = useLanguage();
+  const { t, languageSettings } = useLanguage();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { t, languageSettings } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [editingTranslation, setEditingTranslation] = useState<Translation | null>(null);
