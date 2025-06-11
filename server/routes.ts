@@ -4541,7 +4541,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           }
           
           // Extract context from nearby comments (simple approach)
-          let context = `Auto-detected from ${path.relative('./client/src', filePath)}`;
+          let context = `Auto-detected from ${filePath.replace('./client/src/', '')}`;
           
           // Insert the new translation - simplified approach
           try {
@@ -4579,6 +4579,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const insertedTranslation = inserted[0];
               if (insertedTranslation && insertedTranslation.id) {
                 console.log(`✓ Added: "${key}" with ID: ${insertedTranslation.id}`);
+                results.newKeysAdded++;
+                results.newTranslations.push(insertedTranslation);
+                existingKeys.set(key, insertedTranslation.id);
               } else {
                 console.log(`✗ Failed to add: "${key}" - No ID returned`);
               }
