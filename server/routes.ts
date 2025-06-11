@@ -4459,7 +4459,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Auto-sync translations from codebase
-  app.post('/api/admin/translations/sync', isAdmin, async (req, res) => {
+  app.post('/api/admin/translations/sync', async (req, res) => {
     // Define scan results type first
     type ScanResults = {
       scannedFiles: number;
