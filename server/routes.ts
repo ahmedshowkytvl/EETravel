@@ -4387,13 +4387,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Get translations to process
       let translations = await storage.listTranslations(filter === 'category' ? category : undefined);
       
-      // If filter is untranslated, further filter those without Arabic text
-      if (filter === 'untranslated') {
-        translations = translations.filter(t => !t.arText || t.arText.trim() === '');
-      } else if (filter === 'all' && !force) {
-        // If we're looking at all translations but not forcing overwrites,
-        // still only process those without translations
-        translations = translations.filter(t => !t.arText || t.arText.trim() === '');
+      // Filter based on translation status
+      if (filter === 'untranslated' || (filter === 'all' && !force)) {
+        // Only process items that don't have Arabic translations or have empty ones
+        translations = translations.filter(t => 
+          !t.arText || 
+          t.arText.trim() === '' || 
+          t.arText === null || 
+          t.arText === undefined
+        );
+      } else if (filter === 'category' && !force) {
+        // For category filter, also only process untranslated items unless forced
+        translations = translations.filter(t => 
+          !t.arText || 
+          t.arText.trim() === '' || 
+          t.arText === null || 
+          t.arText === undefined
+        );
       }
       
       // Limit the number of translations to process
