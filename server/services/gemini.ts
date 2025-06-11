@@ -44,10 +44,25 @@ English text: "${text}"`;
    */
   async batchTranslateToArabic(items: Array<{id: number, text: string}>): Promise<Array<{id: number, translation: string}>> {
     try {
+      // Filter out items with empty or invalid text
+      const validItems = items.filter(item => 
+        item.text && 
+        item.text.trim().length > 1 && 
+        item.text.trim() !== '.' &&
+        item.text.trim() !== '-'
+      );
+      
+      if (validItems.length === 0) {
+        return items.map(item => ({
+          id: item.id,
+          translation: ""
+        }));
+      }
+      
       const modelInstance = this.genAI.getGenerativeModel({ model: this.model });
       
-      // Join all texts with a special separator to translate in a single request
-      const combinedText = items.map((item, index) => `${index + 1}. ${item.text}`).join("\n");
+      // Join all valid texts with a special separator to translate in a single request
+      const combinedText = validItems.map((item, index) => `${index + 1}. ${item.text}`).join("\n");
       
       const prompt = `Please translate each of these numbered English text items to Arabic. Return only the translations, maintaining the same numbering format.
 
@@ -68,15 +83,21 @@ ${combinedText}`;
         return match ? match[1].trim() : line.trim();
       });
       
-      // Ensure we have the same number of translations as inputs
-      if (translations.length !== items.length) {
-        throw new Error("The number of translations does not match the number of inputs");
+      // Ensure we have the same number of translations as valid inputs
+      if (translations.length !== validItems.length) {
+        throw new Error("The number of translations does not match the number of valid inputs");
       }
       
-      // Match translations with their original IDs
-      return items.map((item, index) => ({
+      // Create a map of valid items to their translations
+      const translationMap = new Map();
+      validItems.forEach((item, index) => {
+        translationMap.set(item.id, translations[index]);
+      });
+      
+      // Return results for all original items, with empty translations for invalid ones
+      return items.map(item => ({
         id: item.id,
-        translation: translations[index]
+        translation: translationMap.get(item.id) || ""
       }));
     } catch (error) {
       console.error("Error batch translating with Gemini:", error);
