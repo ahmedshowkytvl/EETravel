@@ -4833,6 +4833,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Update tour Arabic version (admin only)
+  app.put('/api/tours/:id/arabic', isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: 'Invalid tour ID' });
+      }
+
+      // Check if tour exists
+      const existingTour = await storage.getTour(id);
+      if (!existingTour) {
+        return res.status(404).json({ message: 'Tour not found' });
+      }
+
+      // Update Arabic fields
+      const updatedTour = await db
+        .update(tours)
+        .set({
+          nameAr: req.body.nameAr,
+          descriptionAr: req.body.descriptionAr,
+          itineraryAr: req.body.itineraryAr,
+          includedAr: req.body.includedAr,
+          excludedAr: req.body.excludedAr,
+          hasArabicVersion: req.body.hasArabicVersion,
+          updatedAt: new Date(),
+        })
+        .where(eq(tours.id, id))
+        .returning();
+
+      if (updatedTour.length === 0) {
+        return res.status(500).json({ message: 'Failed to update tour Arabic version' });
+      }
+
+      res.json(updatedTour[0]);
+    } catch (error) {
+      console.error('Error updating tour Arabic version:', error);
+      res.status(500).json({ message: 'Failed to update tour Arabic version' });
+    }
+  });
+
   // Import translations (admin only)
   app.post('/api/admin/translations/import', isAdmin, async (req, res) => {
     try {
