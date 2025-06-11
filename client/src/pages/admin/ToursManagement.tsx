@@ -82,8 +82,10 @@ export default function ToursManagement() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isArabicDialogOpen, setIsArabicDialogOpen] = useState(false);
   const [editingTour, setEditingTour] = useState<any>(null);
   const [deletingTour, setDeletingTour] = useState<any>(null);
+  const [arabicTour, setArabicTour] = useState<any>(null);
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -312,6 +314,16 @@ export default function ToursManagement() {
     }
   };
 
+  const handleCreateArabicVersion = (tour: any) => {
+    setArabicTour(tour);
+    setIsArabicDialogOpen(true);
+  };
+
+  const handleEditArabicVersion = (tour: any) => {
+    setArabicTour(tour);
+    setIsArabicDialogOpen(true);
+  };
+
   // Filter and sort tours
   const filteredTours = (tours as any[]).filter((tour: any) => {
     const matchesSearch = tour.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -471,6 +483,26 @@ export default function ToursManagement() {
                           >
                             <Pencil className="h-4 w-4" />
                           </Button>
+                          {!tour.hasArabicVersion && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleCreateArabicVersion(tour)}
+                              className="text-blue-600 hover:text-blue-700"
+                            >
+                              {t('admin.tours.createArabicVersion', 'Arabic')}
+                            </Button>
+                          )}
+                          {tour.hasArabicVersion && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleEditArabicVersion(tour)}
+                              className="text-green-600 hover:text-green-700"
+                            >
+                              {t('admin.tours.editArabicVersion', 'Edit Arabic')}
+                            </Button>
+                          )}
                           <Button
                             variant="outline"
                             size="sm"
@@ -714,6 +746,31 @@ export default function ToursManagement() {
         </DialogContent>
       </Dialog>
 
+      {/* Arabic Version Dialog */}
+      <Dialog open={isArabicDialogOpen} onOpenChange={setIsArabicDialogOpen}>
+        <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {arabicTour?.hasArabicVersion 
+                ? t('admin.tours.editArabicVersion', 'تحرير النسخة العربية')
+                : t('admin.tours.createArabicVersion', 'إنشاء النسخة العربية')
+              }
+            </DialogTitle>
+            <DialogDescription>
+              {t('admin.tours.arabicVersionDescription', 'أضف أو حرر المحتوى العربي للجولة')}
+            </DialogDescription>
+          </DialogHeader>
+          <ArabicVersionForm 
+            tour={arabicTour} 
+            onClose={() => setIsArabicDialogOpen(false)}
+            onSuccess={() => {
+              setIsArabicDialogOpen(false);
+              queryClient.invalidateQueries({ queryKey: ["/api/tours"] });
+            }}
+          />
+        </DialogContent>
+      </Dialog>
+
       {/* Delete Tour Dialog */}
       <Dialog open={isDeleteDialogOpen} onOpenChange={onDeleteDialogOpenChange}>
         <DialogContent>
@@ -735,5 +792,183 @@ export default function ToursManagement() {
         </DialogContent>
       </Dialog>
     </div>
+  );
+}
+
+// Arabic Version Form Component
+interface ArabicVersionFormProps {
+  tour: any;
+  onClose: () => void;
+  onSuccess: () => void;
+}
+
+function ArabicVersionForm({ tour, onClose, onSuccess }: ArabicVersionFormProps) {
+  const { t } = useLanguage();
+  const { toast } = useToast();
+  
+  const arabicSchema = z.object({
+    nameAr: z.string().min(1, "الاسم العربي مطلوب"),
+    descriptionAr: z.string().min(1, "الوصف العربي مطلوب"),
+    itineraryAr: z.string().optional(),
+    includedAr: z.string().optional(),
+    excludedAr: z.string().optional(),
+  });
+
+  const form = useForm<z.infer<typeof arabicSchema>>({
+    resolver: zodResolver(arabicSchema),
+    defaultValues: {
+      nameAr: tour?.nameAr || "",
+      descriptionAr: tour?.descriptionAr || "",
+      itineraryAr: tour?.itineraryAr || "",
+      includedAr: tour?.includedAr ? JSON.stringify(tour.includedAr, null, 2) : "",
+      excludedAr: tour?.excludedAr ? JSON.stringify(tour.excludedAr, null, 2) : "",
+    },
+  });
+
+  const updateArabicMutation = useMutation({
+    mutationFn: async (data: z.infer<typeof arabicSchema>) => {
+      const payload = {
+        ...data,
+        includedAr: data.includedAr ? JSON.parse(data.includedAr) : null,
+        excludedAr: data.excludedAr ? JSON.parse(data.excludedAr) : null,
+        hasArabicVersion: true,
+      };
+      
+      return await apiRequest(`/api/tours/${tour.id}/arabic`, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: t('admin.tours.arabicVersionSaved', 'تم حفظ النسخة العربية'),
+        description: t('admin.tours.arabicVersionSavedDesc', 'تم حفظ النسخة العربية بنجاح'),
+      });
+      onSuccess();
+    },
+    onError: (error: any) => {
+      toast({
+        title: t('admin.tours.arabicVersionError', 'خطأ في حفظ النسخة العربية'),
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof arabicSchema>) => {
+    updateArabicMutation.mutate(data);
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="nameAr"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('admin.tours.nameAr', 'الاسم (عربي)')}</FormLabel>
+              <FormControl>
+                <Input {...field} dir="rtl" placeholder="أدخل اسم الجولة بالعربية" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="descriptionAr"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('admin.tours.descriptionAr', 'الوصف (عربي)')}</FormLabel>
+              <FormControl>
+                <Textarea 
+                  {...field} 
+                  dir="rtl" 
+                  placeholder="أدخل وصف الجولة بالعربية"
+                  rows={4}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="itineraryAr"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('admin.tours.itineraryAr', 'برنامج الرحلة (عربي)')}</FormLabel>
+              <FormControl>
+                <Textarea 
+                  {...field} 
+                  dir="rtl" 
+                  placeholder="أدخل برنامج الرحلة بالعربية"
+                  rows={6}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="includedAr"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('admin.tours.includedAr', 'المشمولات (عربي)')}</FormLabel>
+              <FormControl>
+                <Textarea 
+                  {...field} 
+                  dir="rtl" 
+                  placeholder='["عنصر 1", "عنصر 2", "عنصر 3"]'
+                  rows={3}
+                />
+              </FormControl>
+              <FormDescription>
+                {t('admin.tours.includedArDesc', 'أدخل المشمولات كقائمة JSON بالعربية')}
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="excludedAr"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('admin.tours.excludedAr', 'غير المشمولات (عربي)')}</FormLabel>
+              <FormControl>
+                <Textarea 
+                  {...field} 
+                  dir="rtl" 
+                  placeholder='["عنصر 1", "عنصر 2", "عنصر 3"]'
+                  rows={3}
+                />
+              </FormControl>
+              <FormDescription>
+                {t('admin.tours.excludedArDesc', 'أدخل غير المشمولات كقائمة JSON بالعربية')}
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <DialogFooter>
+          <Button type="button" variant="outline" onClick={onClose}>
+            {t('admin.tours.cancel', 'إلغاء')}
+          </Button>
+          <Button type="submit" disabled={updateArabicMutation.isPending}>
+            {updateArabicMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {t('admin.tours.saveArabicVersion', 'حفظ النسخة العربية')}
+          </Button>
+        </DialogFooter>
+      </form>
+    </Form>
   );
 }

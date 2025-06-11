@@ -241,6 +241,13 @@ export const tours = pgTable("tours", {
   rating: doublePrecision("rating"),
   reviewCount: integer("review_count").default(0),
   status: text("status").default("active"),
+  // Arabic version fields
+  nameAr: text("name_ar"),
+  descriptionAr: text("description_ar"),
+  itineraryAr: text("itinerary_ar"),
+  includedAr: json("included_ar"), // Arabic version of included items
+  excludedAr: json("excluded_ar"), // Arabic version of excluded items
+  hasArabicVersion: boolean("has_arabic_version").default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
