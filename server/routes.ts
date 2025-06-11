@@ -4487,10 +4487,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
           
           let match;
           while ((match = translationPattern.exec(content)) !== null) {
-            const key = match[1];
+            const key = match[1]?.trim();
             const defaultText = match[2] || key;
             
-            if (!key || existingKeys.has(key)) continue;
+            // Skip empty, whitespace-only, or already existing keys
+            if (!key || key.length === 0 || /^\s*$/.test(key) || existingKeys.has(key)) continue;
             
             foundKeys++;
             
