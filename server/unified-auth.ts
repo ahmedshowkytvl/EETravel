@@ -102,13 +102,22 @@ export function setupUnifiedAuth(app: Express) {
         role: newUser.role
       };
 
-      res.status(201).json({
-        id: newUser.id,
-        username: newUser.username,
-        email: newUser.email,
-        fullName: newUser.full_name,
-        role: newUser.role,
-        message: "Registration successful! Welcome to Sahara Travel."
+      // Ensure session is saved before responding
+      (req as any).session.save((err: any) => {
+        if (err) {
+          console.error('Session save error during registration:', err);
+          return res.status(500).json({ message: "Registration failed - session error" });
+        }
+
+        console.log('Session saved successfully for new user:', newUser.username);
+        res.status(201).json({
+          id: newUser.id,
+          username: newUser.username,
+          email: newUser.email,
+          fullName: newUser.full_name,
+          role: newUser.role,
+          message: "Registration successful! Welcome to Sahara Travel."
+        });
       });
 
     } catch (error) {
@@ -190,13 +199,22 @@ export function setupUnifiedAuth(app: Express) {
         role: user.role
       };
 
-      res.status(200).json({
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        fullName: user.full_name,
-        role: user.role,
-        message: "Login successful"
+      // Ensure session is saved before responding
+      (req as any).session.save((err: any) => {
+        if (err) {
+          console.error('Session save error:', err);
+          return res.status(500).json({ message: "Login failed - session error" });
+        }
+
+        console.log('Session saved successfully for user:', user.username);
+        res.status(200).json({
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          fullName: user.full_name,
+          role: user.role,
+          message: "Login successful"
+        });
       });
 
     } catch (error) {

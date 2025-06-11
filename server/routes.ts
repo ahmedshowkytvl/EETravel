@@ -55,33 +55,38 @@ const isAdmin = (req: Request, res: Response, next: NextFunction) => {
   const sessionUser = (req as any).session?.user;
   
   // Debug logging for session issues
-  console.log('Admin check - Session ID:', (req as any).sessionID);
-  console.log('Admin check - Session user:', sessionUser);
-  console.log('Admin check - Session exists:', !!(req as any).session);
+  console.log('=== Admin Check Debug ===');
+  console.log('Session ID:', (req as any).sessionID);
+  console.log('Session exists:', !!(req as any).session);
+  console.log('Session user:', sessionUser);
+  console.log('Full session data:', (req as any).session);
   
   if (!sessionUser) {
-    console.log('Admin check failed: No session user found');
+    console.log('❌ Admin check failed: No session user found');
     return res.status(401).json({ 
       message: 'You must be logged in to access this resource',
       debug: {
         hasSession: !!(req as any).session,
-        sessionID: (req as any).sessionID
+        sessionID: (req as any).sessionID,
+        sessionKeys: Object.keys((req as any).session || {}),
+        sessionData: (req as any).session
       }
     });
   }
   
   if (sessionUser.role !== 'admin') {
-    console.log(`Admin check failed: User role is '${sessionUser.role}', not 'admin'`);
+    console.log(`❌ Admin check failed: User role is '${sessionUser.role}', not 'admin'`);
     return res.status(403).json({ 
       message: 'You do not have permission to access this resource',
       debug: {
         userRole: sessionUser.role,
-        userId: sessionUser.id
+        userId: sessionUser.id,
+        username: sessionUser.username
       }
     });
   }
   
-  console.log(`Admin check passed for user: ${sessionUser.username} (ID: ${sessionUser.id})`);
+  console.log(`✅ Admin check passed for user: ${sessionUser.username} (ID: ${sessionUser.id})`);
   
   // Set req.user for backward compatibility
   (req as any).user = sessionUser;
