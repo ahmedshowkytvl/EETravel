@@ -64,7 +64,7 @@ const isAdmin = (req: Request, res: Response, next: NextFunction) => {
   if (!sessionUser) {
     console.log('❌ Admin check failed: No session user found');
     return res.status(401).json({ 
-      message: 'You must be logged in to access this resource',
+      message: 'You must be logged in',
       debug: {
         hasSession: !!(req as any).session,
         sessionID: (req as any).sessionID,
