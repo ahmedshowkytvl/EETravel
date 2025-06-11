@@ -104,7 +104,7 @@ export default function AdvancedSystemSettings() {
     refetchInterval: 30000, // Refresh every 30 seconds
   });
 
-  const { data: backupHistory } = useQuery({
+  const { data: backupHistory = [] } = useQuery({
     queryKey: ['/api/admin/backups/history'],
   });
 
@@ -760,7 +760,7 @@ export default function AdvancedSystemSettings() {
                 </Button>
               </div>
 
-              {backupHistory && (
+              {backupHistory && Array.isArray(backupHistory) && backupHistory.length > 0 && (
                 <div className="space-y-3">
                   <h3 className="font-semibold">تاريخ النسخ الاحتياطية</h3>
                   {backupHistory.slice(0, 5).map((backup: any) => (

@@ -77,7 +77,12 @@ export default function AdvancedUserManagement() {
     queryKey: ['/api/admin/users', { search: searchTerm, role: roleFilter, status: statusFilter }],
   });
 
-  const { data: userStats } = useQuery({
+  const { data: userStats = { 
+    totalUsers: 0, 
+    activeUsers: 0, 
+    adminUsers: 0, 
+    vipUsers: 0 
+  } } = useQuery({
     queryKey: ['/api/admin/users/stats'],
   });
 

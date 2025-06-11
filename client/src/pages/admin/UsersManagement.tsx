@@ -118,7 +118,7 @@ export default function UsersManagement() {
   } = useQuery<User[]>({
     queryKey: ["/api/admin/users"],
     queryFn: async () => {
-      const res = await apiRequest("GET", "/api/admin/users");
+      const res = await apiRequest("/api/admin/users");
       return await res.json();
     },
     staleTime: 5000,
@@ -127,7 +127,11 @@ export default function UsersManagement() {
   // Create user mutation
   const createUserMutation = useMutation({
     mutationFn: async (userData: UserFormValues) => {
-      const res = await apiRequest("POST", "/api/admin/users", userData);
+      const res = await apiRequest("/api/admin/users", {
+        method: "POST",
+        body: JSON.stringify(userData),
+        headers: { "Content-Type": "application/json" }
+      });
       return await res.json();
     },
     onSuccess: () => {

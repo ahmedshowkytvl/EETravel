@@ -120,7 +120,11 @@ export default function RoomsManagement() {
   // Create room mutation
   const createRoomMutation = useMutation({
     mutationFn: async (data: RoomFormValues) => {
-      const response = await apiRequest("POST", "/api/admin/rooms", data);
+      const response = await apiRequest("/api/admin/rooms", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      });
       return response.json();
     },
     onSuccess: () => {
@@ -143,7 +147,11 @@ export default function RoomsManagement() {
   // Update room mutation
   const updateRoomMutation = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: RoomFormValues }) => {
-      const response = await apiRequest("PUT", `/api/admin/rooms/${id}`, data);
+      const response = await apiRequest(`/api/admin/rooms/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      });
       return response.json();
     },
     onSuccess: () => {
@@ -166,7 +174,9 @@ export default function RoomsManagement() {
   // Delete room mutation
   const deleteRoomMutation = useMutation({
     mutationFn: async (id: number) => {
-      const response = await apiRequest("DELETE", `/api/admin/rooms/${id}`);
+      const response = await apiRequest(`/api/admin/rooms/${id}`, {
+        method: "DELETE"
+      });
       if (!response.ok) {
         throw new Error("Failed to delete room");
       }
