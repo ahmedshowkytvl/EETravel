@@ -489,8 +489,11 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                         type="number"
                         min="1"
                         placeholder="Enter max group size"
-                        {...field}
-                        onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                        name={field.name}
+                        onBlur={field.onBlur}
+                        disabled={field.disabled}
+                        value={field.value?.toString() || ""}
+                        onChange={(e) => field.onChange(parseInt(e.target.value) || null)}
                         className={error ? "border-red-500" : ""}
                       />
                       {error && (
@@ -714,7 +717,7 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
                         step="0.01"
                         placeholder="Enter discounted price"
                         {...field}
-                        value={field.value || ""}
+                        value={field.value?.toString() || ""}
                         onChange={(e) => field.onChange(parseFloat(e.target.value) || null)}
                         className={error ? "border-red-500" : ""}
                       />
