@@ -13,6 +13,8 @@ export const countries = pgTable("countries", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Cities table
@@ -25,6 +27,8 @@ export const cities = pgTable("cities", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Airports table
@@ -38,6 +42,8 @@ export const airports = pgTable("airports", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Define relations after all tables are defined to avoid circular dependencies
@@ -111,6 +117,8 @@ export const heroSlides = pgTable("hero_slides", {
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 export const destinations = pgTable("destinations", {
@@ -124,6 +132,8 @@ export const destinations = pgTable("destinations", {
   featured: boolean("featured").default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 export const packages = pgTable("packages", {
@@ -174,6 +184,12 @@ export const packages = pgTable("packages", {
   maxGroupSize: integer("max_group_size").default(15),
   language: text("language").default("english"),
   bestTimeToVisit: text("best_time_to_visit"),
+  
+  // Audit fields
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 export const bookings = pgTable("bookings", {
@@ -206,6 +222,8 @@ export const bookings = pgTable("bookings", {
   cancellationReason: text("cancellation_reason"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // User favorites
@@ -213,6 +231,9 @@ export const favorites = pgTable("favorites", {
   userId: integer("user_id").notNull().references(() => users.id),
   destinationId: integer("destination_id").notNull().references(() => destinations.id),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 }, (table) => {
   return {
     pk: primaryKey({ columns: [table.userId, table.destinationId] }),
@@ -250,6 +271,9 @@ export const tours = pgTable("tours", {
   hasArabicVersion: boolean("has_arabic_version").default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
+  categoryId: integer("category_id").references(() => tourCategories.id),
 });
 
 // Hotels table
@@ -309,6 +333,8 @@ export const hotels = pgTable("hotels", {
   verificationStatus: text("verification_status").default("pending"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Rooms table
@@ -333,6 +359,8 @@ export const rooms = pgTable("rooms", {
   status: text("status").default("active"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  createdBy: integer("created_by").references(() => users.id),
+  updatedBy: integer("updated_by").references(() => users.id),
 });
 
 // Room Combinations table
