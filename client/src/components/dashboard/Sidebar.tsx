@@ -450,7 +450,7 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
             )}
           >
             <Settings size={20} />
-            {!collapsed && <span>Settings</span>}
+            {!collapsed && <span>{t('admin.sidebar.settings', 'Settings')}</span>}
           </Button>
         </Link>
       </div>
