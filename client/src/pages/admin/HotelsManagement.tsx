@@ -82,6 +82,7 @@ type HotelFormValues = z.infer<typeof hotelSchema>;
 export default function HotelsManagement() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { t } = useLanguage();
   const [, navigate] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -299,7 +300,7 @@ export default function HotelsManagement() {
     <div>
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>Hotels Management</CardTitle>
+          <CardTitle>{t('admin.hotels.title', 'Hotels Management')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
@@ -307,7 +308,7 @@ export default function HotelsManagement() {
               <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Search hotels..."
+                placeholder={t('admin.hotels.searchPlaceholder', 'Search hotels...')}
                 className="pl-8 w-full md:w-[300px]"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -316,13 +317,13 @@ export default function HotelsManagement() {
             <div className="flex gap-2">
               <Button onClick={() => navigate("/admin/hotels/create")} variant="default">
                 <Plus className="h-4 w-4 mr-2" />
-                Add Hotel (Full Form)
+                {t('admin.hotels.addHotelFull', 'Add Hotel (Full Form)')}
               </Button>
               <Dialog open={isCreateDialogOpen} onOpenChange={onCreateDialogOpenChange}>
                 <DialogTrigger asChild>
                   <Button variant="outline">
                     <Plus className="h-4 w-4 mr-2" />
-                    Quick Add
+                    {t('admin.hotels.quickAdd', 'Quick Add')}
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto dialog-content">
