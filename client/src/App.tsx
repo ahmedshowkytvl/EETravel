@@ -85,6 +85,12 @@ import CleanlinessPage from "@/pages/admin/hotels/CleanlinessPage";
 import DataExportImportPage from "@/pages/admin/DataExportImportPage";
 import VisasManagement from "@/pages/admin/VisasManagement";
 
+// Advanced Admin Pages
+import AdvancedDashboard from "@/pages/admin/AdvancedDashboard";
+import AdvancedBookingsManagement from "@/pages/admin/AdvancedBookingsManagement";
+import AdvancedUserManagement from "@/pages/admin/AdvancedUserManagement";
+import AdvancedSystemSettings from "@/pages/admin/AdvancedSystemSettings";
+
 function Router() {
   const [location] = useLocation();
   const isAdminRoute = location.startsWith("/admin");
@@ -135,6 +141,10 @@ function Router() {
           <AdminRoute path="/admin/analytics" component={AnalyticsDashboard} />
           <AdminRoute path="/admin/system-monitoring" component={SystemMonitoring} />
           <AdminRoute path="/admin/settings" component={SettingsPage} />
+          <AdminRoute path="/admin/advanced-settings" component={AdvancedSystemSettings} />
+          <AdminRoute path="/admin/advanced-dashboard" component={AdvancedDashboard} />
+          <AdminRoute path="/admin/advanced-bookings" component={AdvancedBookingsManagement} />
+          <AdminRoute path="/admin/advanced-users" component={AdvancedUserManagement} />
           <AdminRoute path="/admin/slider" component={SliderManagement} />
           <AdminRoute path="/admin" component={AdminDashboard} />
           <AdminRoute path="/admin/visas" component={VisasManagement} />
