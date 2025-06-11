@@ -5,6 +5,7 @@ import * as z from "zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/use-language";
 import { queryClient, apiRequest, getQueryFn } from "@/lib/queryClient";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -50,6 +51,7 @@ export interface TourCreatorFormProps {
 export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
   const isEditMode = !!tourId;
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [, setLocation] = useLocation();
   const [newInclusion, setNewInclusion] = useState("");
   const [newExclusion, setNewExclusion] = useState("");
@@ -388,10 +390,10 @@ export function TourCreatorForm({ tourId }: TourCreatorFormProps) {
         
         <Tabs defaultValue="basic" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="basic">المعلومات الأساسية</TabsTrigger>
-            <TabsTrigger value="dates">التواريخ والأسعار</TabsTrigger>
-            <TabsTrigger value="itinerary">برنامج الرحلة</TabsTrigger>
-            <TabsTrigger value="media">الصور والمميزات</TabsTrigger>
+            <TabsTrigger value="basic">{t('tour_basic_info', 'Basic Information')}</TabsTrigger>
+            <TabsTrigger value="dates">{t('tour_dates_pricing', 'Dates & Pricing')}</TabsTrigger>
+            <TabsTrigger value="itinerary">{t('tour_itinerary', 'Itinerary')}</TabsTrigger>
+            <TabsTrigger value="media">{t('tour_media_features', 'Media & Features')}</TabsTrigger>
           </TabsList>
           
           <TabsContent value="basic" className="space-y-4 pt-4">
