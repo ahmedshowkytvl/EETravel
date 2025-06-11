@@ -281,26 +281,8 @@ export default function ToursManagement() {
 
   // Event handlers
   const handleEdit = (tour: any) => {
-    setEditingTour(tour);
-    editForm.reset({
-      name: tour.name || "",
-      description: tour.description || "",
-      price: tour.price || 0,
-      duration: tour.duration || 1,
-      maxGroupSize: tour.maxGroupSize || 1,
-      difficulty: tour.difficulty || "Easy",
-      categoryId: tour.categoryId || 0,
-      locationId: tour.locationId || 0,
-      startDate: tour.startDate ? format(parseISO(tour.startDate), "yyyy-MM-dd") : "",
-      endDate: tour.endDate ? format(parseISO(tour.endDate), "yyyy-MM-dd") : "",
-      isActive: tour.isActive ?? true,
-      includes: tour.includes || "",
-      excludes: tour.excludes || "",
-      highlights: tour.highlights || "",
-      itinerary: tour.itinerary || "",
-      gallery: tour.gallery || [],
-    });
-    setIsEditDialogOpen(true);
+    // Navigate to dedicated edit page
+    setLocation(`/admin/tours/edit/${tour.id}`);
   };
 
   const handleDelete = (tour: any) => {
