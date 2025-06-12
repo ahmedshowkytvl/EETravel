@@ -124,7 +124,7 @@ export default function AdvancedSystemSettings() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/admin/settings'] });
-      toast({ title: "تم حفظ الإعدادات بنجاح" });
+      toast({ title: t("admin.settings_saved_success", "Settings saved successfully") });
     }
   });
 
@@ -133,7 +133,7 @@ export default function AdvancedSystemSettings() {
       return apiRequest('/api/admin/settings/test-email', { method: 'POST' });
     },
     onSuccess: () => {
-      toast({ title: "تم إرسال رسالة اختبار بنجاح" });
+      toast({ title: t("admin.test_email_sent_success", "Test email sent successfully") });
     }
   });
 
@@ -196,8 +196,8 @@ export default function AdvancedSystemSettings() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">t("admin.system_settings", "System Settings") المتقدمة</h1>
-          <p className="text-gray-600 mt-1">إدارة شاملة لإعدادات وتكوين النظام</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t("admin.advanced_system_settings", "Advanced System Settings")}</h1>
+          <p className="text-gray-600 mt-1">{t("admin.system_settings_desc", "Comprehensive system settings and configuration management")}</p>
         </div>
         <div className="flex gap-3">
           <Button 
@@ -307,8 +307,8 @@ export default function AdvancedSystemSettings() {
         <TabsContent value="general">
           <Card>
             <CardHeader>
-              <CardTitle>t("admin.general_settings", "General Settings")</CardTitle>
-              <CardDescription>إعدادات الموقع الأساسية والتكوين العام</CardDescription>
+              <CardTitle>{t("admin.general_settings", "General Settings")}</CardTitle>
+              <CardDescription>{t("admin.basic_site_settings_desc", "Basic site settings and general configuration")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-2 gap-6">
@@ -499,7 +499,7 @@ export default function AdvancedSystemSettings() {
                   variant="outline"
                 >
                   <Mail className="w-4 h-4 mr-2" />
-                  اختبار الإعدادات
+                  {t("admin.test_settings", "Test Settings")}
                 </Button>
               </div>
             </CardContent>
@@ -759,11 +759,11 @@ export default function AdvancedSystemSettings() {
                   disabled={createBackupMutation.isPending}
                 >
                   <Download className="w-4 h-4 mr-2" />
-                  إنشاء نسخة احتياطية الآن
+                  {t("admin.create_backup_now", "Create Backup Now")}
                 </Button>
                 <Button variant="outline">
                   <Upload className="w-4 h-4 mr-2" />
-                  استرداد نسخة احتياطية
+                  {t("admin.restore_backup", "Restore Backup")}
                 </Button>
               </div>
 
