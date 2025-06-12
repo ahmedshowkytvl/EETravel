@@ -80,7 +80,12 @@ export default function AdvancedBookingsManagement() {
     confirmedBookings: 0, 
     pendingBookings: 0, 
     totalRevenue: 0 
-  } } = useQuery({
+  } } = useQuery<{
+    totalBookings: number;
+    confirmedBookings: number;
+    pendingBookings: number;
+    totalRevenue: number;
+  }>({
     queryKey: ['/api/admin/bookings/stats'],
   });
 
@@ -210,7 +215,7 @@ export default function AdvancedBookingsManagement() {
                 <Calendar className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">t("admin.total_bookings", "Total Bookings")</p>
+                <p className="text-sm text-gray-600">{t("admin.total_bookings", "Total Bookings")}</p>
                 <p className="text-2xl font-bold">{bookingStats?.totalBookings || 0}</p>
               </div>
             </div>
@@ -224,7 +229,7 @@ export default function AdvancedBookingsManagement() {
                 <CheckCircle className="w-6 h-6 text-green-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">t("admin.confirmed_bookings", "Confirmed Bookings")</p>
+                <p className="text-sm text-gray-600">{t("admin.confirmed_bookings", "Confirmed Bookings")}</p>
                 <p className="text-2xl font-bold">{bookingStats?.confirmedBookings || 0}</p>
               </div>
             </div>
@@ -266,7 +271,7 @@ export default function AdvancedBookingsManagement() {
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1">
               <Input
-                placeholder="الt("admin.search", "Search") بالاسم، رقم الحجز، أو اسم الباقة..."
+                placeholder={t("admin.search_bookings_placeholder", "Search by name, booking reference, or package name...")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full"
@@ -492,7 +497,7 @@ export default function AdvancedBookingsManagement() {
                       className="flex items-center gap-2"
                     >
                       <Send className="w-4 h-4" />
-                      إرسال t("admin.confirm", "Confirm")
+                      {t("admin.send_confirmation", "Send Confirmation")}
                     </Button>
                     <Button
                       onClick={() => handleSendNotification('reminder')}

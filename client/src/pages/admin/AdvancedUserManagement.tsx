@@ -243,7 +243,7 @@ export default function AdvancedUserManagement() {
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1">
               <Input
-                placeholder="الt("admin.search", "Search") بالاسم، البريد الإلكتروني، أو اسم المستخدم..."
+                placeholder={t("admin.search_users_placeholder", "Search by name, email, or username...")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full"

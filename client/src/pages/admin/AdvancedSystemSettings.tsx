@@ -399,8 +399,8 @@ export default function AdvancedSystemSettings() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label>t("admin.confirm", "Confirm") البريد الإلكتروني مطلوب</Label>
-                    <p className="text-sm text-gray-600">يجب على المستخدمين t("admin.confirm", "Confirm") بريدهم الإلكتروني</p>
+                    <Label>{t("admin.email_verification_required", "Email verification required")}</Label>
+                    <p className="text-sm text-gray-600">{t("admin.users_must_confirm_email", "Users must confirm their email address")}</p>
                   </div>
                   <Switch 
                     checked={settings.general.emailVerificationRequired}
