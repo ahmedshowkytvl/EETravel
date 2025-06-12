@@ -106,7 +106,12 @@ export default function AdvancedSystemSettings() {
     refetchInterval: 30000, // Refresh every 30 seconds
   });
 
-  const { data: backupHistory = [] } = useQuery({
+  const { data: backupHistory = [] } = useQuery<Array<{
+    id: string;
+    name: string;
+    created_at: string;
+    size: string;
+  }>>({
     queryKey: ['/api/admin/backups/history'],
   });
 
@@ -138,7 +143,7 @@ export default function AdvancedSystemSettings() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/admin/backups/history'] });
-      toast({ title: "تم إنشاء نسخة احتياطية بنجاح" });
+      toast({ title: t("admin.backup_created_success", "Backup created successfully") });
     }
   });
 
@@ -147,7 +152,7 @@ export default function AdvancedSystemSettings() {
       return apiRequest(`/api/admin/backups/${backupId}/restore`, { method: 'POST' });
     },
     onSuccess: () => {
-      toast({ title: "تم استرداد النسخة الاحتياطية بنجاح" });
+      toast({ title: t("admin.backup_restored_success", "Backup restored successfully") });
     }
   });
 
@@ -698,8 +703,8 @@ export default function AdvancedSystemSettings() {
             <CardContent className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <Label>النسخ الاحتياطي التلقائي</Label>
-                  <p className="text-sm text-gray-600">إنشاء نسخ احتياطية تلقائية</p>
+                  <Label>{t("admin.automatic_backup", "Automatic Backup")}</Label>
+                  <p className="text-sm text-gray-600">{t("admin.automatic_backups_desc", "Create automatic backups")}</p>
                 </div>
                 <Switch 
                   checked={settings.backup.autoBackupEnabled}
@@ -735,15 +740,15 @@ export default function AdvancedSystemSettings() {
               </div>
 
               <div className="border rounded-lg p-4">
-                <h3 className="font-semibold mb-4">معلومات t("admin.backups", "Backups")</h3>
+                <h3 className="font-semibold mb-4">{t("admin.backup_information", "Backup Information")}</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-gray-600">آخر نسخة احتياطية:</span>
-                    <div className="font-medium">{settings.backup.lastBackup || 'لا توجد'}</div>
+                    <span className="text-gray-600">{t("admin.last_backup", "Last backup:")} </span>
+                    <div className="font-medium">{settings.backup.lastBackup || t("admin.none", "None")}</div>
                   </div>
                   <div>
-                    <span className="text-gray-600">النسخة القادمة:</span>
-                    <div className="font-medium">{settings.backup.nextBackup || 'غير محدد'}</div>
+                    <span className="text-gray-600">{t("admin.next_backup", "Next backup:")} </span>
+                    <div className="font-medium">{settings.backup.nextBackup || t("admin.not_scheduled", "Not scheduled")}</div>
                   </div>
                 </div>
               </div>
