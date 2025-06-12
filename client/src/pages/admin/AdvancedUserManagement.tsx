@@ -84,7 +84,12 @@ export default function AdvancedUserManagement() {
     activeUsers: 0, 
     adminUsers: 0, 
     vipUsers: 0 
-  } } = useQuery({
+  } } = useQuery<{
+    totalUsers: number;
+    activeUsers: number;
+    adminUsers: number;
+    vipUsers: number;
+  }>({
     queryKey: ['/api/admin/users/stats'],
   });
 
@@ -187,7 +192,7 @@ export default function AdvancedUserManagement() {
                 <Users className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">t("admin.total_users", "Total Users")</p>
+                <p className="text-sm text-gray-600">{t("admin.total_users", "Total Users")}</p>
                 <p className="text-2xl font-bold">{userStats?.totalUsers || 0}</p>
               </div>
             </div>
@@ -201,7 +206,7 @@ export default function AdvancedUserManagement() {
                 <CheckCircle className="w-6 h-6 text-green-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">t("admin.active_users", "Active Users")</p>
+                <p className="text-sm text-gray-600">{t("admin.active_users", "Active Users")}</p>
                 <p className="text-2xl font-bold">{userStats?.activeUsers || 0}</p>
               </div>
             </div>
@@ -215,7 +220,7 @@ export default function AdvancedUserManagement() {
                 <Shield className="w-6 h-6 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">المديرون والموظفون</p>
+                <p className="text-sm text-gray-600">{t("admin.admin_users", "Admin Users")}</p>
                 <p className="text-2xl font-bold">{userStats?.adminUsers || 0}</p>
               </div>
             </div>
@@ -229,7 +234,7 @@ export default function AdvancedUserManagement() {
                 <Star className="w-6 h-6 text-yellow-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">العملاء المميزون</p>
+                <p className="text-sm text-gray-600">{t("admin.vip_users", "VIP Users")}</p>
                 <p className="text-2xl font-bold">{userStats?.vipUsers || 0}</p>
               </div>
             </div>

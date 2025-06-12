@@ -243,7 +243,7 @@ export default function AdvancedBookingsManagement() {
                 <Clock className="w-6 h-6 text-yellow-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">قيد الانتظار</p>
+                <p className="text-sm text-gray-600">{t("admin.pending_bookings", "Pending Bookings")}</p>
                 <p className="text-2xl font-bold">{bookingStats?.pendingBookings || 0}</p>
               </div>
             </div>
@@ -257,7 +257,7 @@ export default function AdvancedBookingsManagement() {
                 <DollarSign className="w-6 h-6 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">t("admin.total_revenue", "Total Revenue")</p>
+                <p className="text-sm text-gray-600">{t("admin.total_revenue", "Total Revenue")}</p>
                 <p className="text-2xl font-bold">${bookingStats?.totalRevenue?.toLocaleString() || 0}</p>
               </div>
             </div>

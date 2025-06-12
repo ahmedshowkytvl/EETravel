@@ -762,9 +762,9 @@ export default function AdvancedSystemSettings() {
                 </Button>
               </div>
 
-              {backupHistory && Array.isArray(backupHistory) && backupHistory.length > 0 && (
+              {backupHistory && Array.isArray(backupHistory) && backupHistory.length > 0 ? (
                 <div className="space-y-3">
-                  <h3 className="font-semibold">تاريخ t("admin.backups", "Backups")</h3>
+                  <h3 className="font-semibold">{t("admin.backup_history", "Backup History")}</h3>
                   {backupHistory.slice(0, 5).map((backup: any) => (
                     <div key={backup.id} className="flex items-center justify-between p-3 border rounded">
                       <div>
@@ -778,13 +778,13 @@ export default function AdvancedSystemSettings() {
                           variant="outline"
                           onClick={() => restoreBackupMutation.mutate(backup.id)}
                         >
-                          استرداد
+                          {t("admin.restore", "Restore")}
                         </Button>
                       </div>
                     </div>
                   ))}
                 </div>
-              )}
+              ) : null}
             </CardContent>
           </Card>
         </TabsContent>
