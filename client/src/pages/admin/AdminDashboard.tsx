@@ -26,6 +26,7 @@ import {
   AlertTriangle
 } from "lucide-react";
 import { Link } from "wouter";
+import { useLanguage } from "@/hooks/use-language";
 
 interface DashboardStats {
   totalUsers: number;

@@ -4,6 +4,7 @@ import { TourCreatorForm } from "../../components/dashboard/TourCreatorForm";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Home, Map, ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 
 export default function TourCreatorPage() {
   const { t } = useLanguage();
