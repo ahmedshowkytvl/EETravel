@@ -100,28 +100,6 @@ const geminiApiKey = process.env.GEMINI_API_KEY;
 // ... use geminiApiKey when initializing the Gemini client
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Health check endpoint for Cloud Run
-  app.get('/health', async (req, res) => {
-    try {
-      // Check database connection
-      await db.execute(sql`SELECT 1`);
-      
-      res.status(200).json({
-        status: 'healthy',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime(),
-        environment: process.env.NODE_ENV || 'development'
-      });
-    } catch (error) {
-      console.error('Health check failed:', error);
-      res.status(503).json({
-        status: 'unhealthy',
-        timestamp: new Date().toISOString(),
-        error: 'Database connection failed'
-      });
-    }
-  });
-
   // Set up unified authentication system
   setupUnifiedAuth(app);
   
