@@ -1,0 +1,560 @@
+7:26:23 AM [express] GET /api/destinations 200 in 183ms :: [{"id":1,"name":"Cairo","country":"Egypt","countryId":1,"cityId":1,"description":"Explore the ancient pyramid…
+Error fetching active hero slides: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "hero_slides.created_at".',
+  position: '190',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:26:23 AM [express] GET /api/hero-slides/active 500 in 241ms :: {"message":"Failed to fetch slides"}
+7:26:23 AM [express] GET /api/tour-categories 200 in 194ms :: [{"id":1,"name":"Adventure","description":"sadsa","active":true,"createdAt":"2025-06-11T12:58:10.001Z","up…
+Error fetching countries: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "countries.created_at".',
+  position: '96',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:26:23 AM [express] GET /api/countries 500 in 190ms :: {"message":"Failed to fetch countries"}
+Error fetching cities: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "cities.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:26:23 AM [express] GET /api/cities 500 in 194ms :: {"message":"Failed to fetch cities"}
+7:26:23 AM [express] GET /api/packages 200 in 215ms :: [{"id":1,"title":"Test Package","description":"Test description for package creation","shortDescription":null,"pr…
+Error fetching menu by location: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "menus.created_at".',
+  position: '87',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:26:23 AM [express] GET /api/menus/location/footer 500 in 23ms :: {"message":"Failed to fetch menu by location"}
+Error fetching translations: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "translations.created_at".',
+  position: '94',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:26:23 AM [express] GET /api/translations 500 in 21ms :: {"message":"Failed to fetch translations"}
+Error fetching language settings: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "site_language_settings.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:26:23 AM [express] GET /api/translations/settings 500 in 23ms :: {"message":"Failed to fetch language settings"}
+Error fetching active hero slides: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "hero_slides.created_at".',
+  position: '190',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:26:24 AM [express] GET /api/hero-slides/active 500 in 227ms :: {"message":"Failed to fetch slides"}
+Error fetching active hero slides: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "hero_slides.created_at".',
+  position: '190',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:26:25 AM [express] GET /api/hero-slides/active 500 in 204ms :: {"message":"Failed to fetch slides"}
+7:27:57 AM [vite] hmr update /src/pages/admin/AdminDashboard.tsx, /src/index.css?v=hgLdnfDUU6dpMRf4c9DXT
+7:28:09 AM [express] GET /api/admin/dashboard-stats 200 in 6ms
+Error fetching translations: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "translations.created_at".',
+  position: '94',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:28:10 AM [express] GET /api/translations 500 in 185ms :: {"message":"Failed to fetch translations"}
+Error fetching language settings: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "site_language_settings.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:28:10 AM [express] GET /api/translations/settings 500 in 205ms :: {"message":"Failed to fetch language settings"}
+Error fetching translations: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "translations.created_at".',
+  position: '94',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:28:58 AM [express] GET /api/translations 500 in 180ms :: {"message":"Failed to fetch translations"}
+Error fetching language settings: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "site_language_settings.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:28:58 AM [express] GET /api/translations/settings 500 in 201ms :: {"message":"Failed to fetch language settings"}
+7:28:59 AM [express] GET /api/admin/dashboard-stats 200 in 3ms
+7:29:03 AM [express] GET /api/admin/bookings/recent 403 in 0ms :: {"message":"Admin access required"}
+7:29:03 AM [express] GET /api/admin/system/health 403 in 0ms :: {"message":"Admin access required"}
+7:29:03 AM [express] GET /api/admin/dashboard/stats 403 in 0ms :: {"message":"Admin access required"}
+7:29:06 AM [express] GET /api/admin/roles 200 in 3ms
+⚠️ Using temporary admin access - session not found
+7:29:06 AM [express] GET /api/admin/users/stats 400 in 1ms :: {"message":"Invalid user ID"}
+⚠️ Using temporary admin access - session not found
+7:29:07 AM [express] GET /api/admin/users 200 in 23ms :: [{"id":4,"username":"testregistration","email":"test@registration.com","displayName":"testregistration","firstN…
+7:29:08 AM [express] GET /api/admin/bookings/stats 403 in 0ms :: {"message":"Admin access required"}
+7:29:09 AM [express] GET /api/admin/bookings 403 in 1ms :: {"message":"Admin access required"}
+7:29:22 AM [express] GET /api/admin/bookings/stats 403 in 0ms :: {"message":"Admin access required"}
+Error fetching translations: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "translations.created_at".',
+  position: '94',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:29:22 AM [express] GET /api/translations 500 in 178ms :: {"message":"Failed to fetch translations"}
+Error fetching language settings: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "site_language_settings.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:29:22 AM [express] GET /api/translations/settings 500 in 177ms :: {"message":"Failed to fetch language settings"}
+7:29:22 AM [express] GET /api/admin/bookings 403 in 1ms :: {"message":"Admin access required"}
+7:29:40 AM [express] GET /api/admin/bookings/stats 403 in 1ms :: {"message":"Admin access required"}
+Error fetching translations: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "translations.created_at".',
+  position: '94',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:29:40 AM [express] GET /api/translations 500 in 183ms :: {"message":"Failed to fetch translations"}
+Error fetching language settings: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "site_language_settings.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:29:40 AM [express] GET /api/translations/settings 500 in 184ms :: {"message":"Failed to fetch language settings"}
+7:29:41 AM [express] GET /api/admin/bookings 403 in 1ms :: {"message":"Admin access required"}
+⚠️ Using temporary admin access - session not found
+7:29:44 AM [express] GET /api/destinations 304 in 22ms :: [{"id":1,"name":"Cairo","country":"Egypt","countryId":1,"cityId":1,"description":"Explore the ancient pyramids…
+Error fetching cities: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "cities.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:29:44 AM [express] GET /api/admin/cities 500 in 21ms :: {"message":"Failed to fetch cities"}
+⚠️ Using temporary admin access - session not found
+Error fetching countries: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "countries.created_at".',
+  position: '96',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:29:45 AM [express] GET /api/admin/countries 500 in 21ms :: {"message":"Failed to fetch countries"}
+7:29:46 AM [express] GET /api/locations 200 in 3ms
+7:29:46 AM [express] GET /api/tour-categories 304 in 21ms :: [{"id":1,"name":"Adventure","description":"sadsa","active":true,"createdAt":"2025-06-11T12:58:10.001Z","upd…
+Error fetching tours: PostgresError: column "category_id" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  position: '420',
+  file: 'parse_relation.c',
+  line: '3716',
+  routine: 'errorMissingColumn'
+}
+7:29:47 AM [express] GET /api/tours 500 in 31ms :: {"message":"Failed to fetch tours"}
+7:30:01 AM [express] GET /api/locations 200 in 5ms
+Error fetching language settings: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "site_language_settings.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:30:01 AM [express] GET /api/translations/settings 500 in 193ms :: {"message":"Failed to fetch language settings"}
+7:30:01 AM [express] GET /api/tour-categories 304 in 200ms :: [{"id":1,"name":"Adventure","description":"sadsa","active":true,"createdAt":"2025-06-11T12:58:10.001Z","up…
+Error fetching translations: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "translations.created_at".',
+  position: '94',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:30:01 AM [express] GET /api/translations 500 in 188ms :: {"message":"Failed to fetch translations"}
+Error fetching tours: PostgresError: column "category_id" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  position: '420',
+  file: 'parse_relation.c',
+  line: '3716',
+  routine: 'errorMissingColumn'
+}
+7:30:02 AM [express] GET /api/tours 500 in 21ms :: {"message":"Failed to fetch tours"}
+7:31:49 AM [vite] hmr update /src/pages/admin/AdminDashboard.tsx, /src/index.css?v=hgLdnfDUU6dpMRf4c9DXT (x2)
+7:32:09 AM [express] GET /api/locations 200 in 4ms
+7:32:10 AM [express] GET /api/tour-categories 304 in 198ms :: [{"id":1,"name":"Adventure","description":"sadsa","active":true,"createdAt":"2025-06-11T12:58:10.001Z","up…
+Error fetching tours: PostgresError: column "category_id" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  position: '420',
+  file: 'parse_relation.c',
+  line: '3716',
+  routine: 'errorMissingColumn'
+}
+7:32:10 AM [express] GET /api/tours 500 in 197ms :: {"message":"Failed to fetch tours"}
+Error fetching translations: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "translations.created_at".',
+  position: '94',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:32:10 AM [express] GET /api/translations 500 in 206ms :: {"message":"Failed to fetch translations"}
+Error fetching language settings: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "site_language_settings.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:32:10 AM [express] GET /api/translations/settings 500 in 196ms :: {"message":"Failed to fetch language settings"}
+7:32:26 AM [express] GET /api/locations 200 in 8ms
+Error fetching translations: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "translations.created_at".',
+  position: '94',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:32:27 AM [express] GET /api/translations 500 in 179ms :: {"message":"Failed to fetch translations"}
+Error fetching language settings: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "site_language_settings.created_at".',
+  position: '102',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
+7:32:27 AM [express] GET /api/translations/settings 500 in 181ms :: {"message":"Failed to fetch language settings"}
+Error fetching tours: PostgresError: column "category_id" does not exist
+    at ErrorResponse (file:///home/runner/workspace/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/runner/workspace/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/runner/workspace/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:191:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  position: '420',
+  file: 'parse_relation.c',
+  line: '3716',
+  routine: 'errorMissingColumn'
+}
+7:32:27 AM [express] GET /api/tours 500 in 182ms :: {"message":"Failed to fetch tours"}
+7:32:27 AM [express] GET /api/tour-categories 304 in 181ms :: [{"id":1,"name":"Adventure","description":"sadsa","active":true,"createdAt":"2025-06-11T12:58:10.001Z","up…
