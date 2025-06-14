@@ -30,6 +30,8 @@ An advanced AI-powered travel platform specializing in Middle Eastern tourism wi
 - **June 14, 2025:** Completed translation system implementation with proper key management
 
 ## Project Architecture
+
+### Current Implementation (Express.js)
 **Frontend Structure:**
 - `/client/src/pages/` - All application pages including admin panel
 - `/client/src/components/` - Reusable UI components
@@ -41,14 +43,25 @@ An advanced AI-powered travel platform specializing in Middle Eastern tourism wi
 - `/server/admin-api-routes.ts` - Admin-specific endpoints
 - `/server/db.ts` - Database connection and initialization
 
+### Laravel Backend Alternative (NEW)
+**Complete Laravel Implementation:**
+- `/laravel-backend/` - Full Laravel 10 backend with enterprise features
+- **Models:** User, Destination, Tour, Package, Hotel, Booking, Review, Payment
+- **Controllers:** Complete API controllers with validation and error handling
+- **Authentication:** Laravel Sanctum with role-based permissions
+- **Localization:** Spatie Translatable package for Arabic/English content
+- **Database:** Comprehensive migrations and seeders
+- **Payment Integration:** Stripe, PayPal, and webhook handlers
+
 **Key Features:**
-- Comprehensive admin panel with analytics dashboard
-- Multi-language support (Arabic/English)
-- Role-based access control
-- Advanced booking management
-- Tour creation and management
-- Hotel and package management
-- User management with audit tracking
+- RESTful API architecture with proper HTTP status codes
+- Multi-language content management (Arabic/English)
+- Role-based authentication and authorization
+- Complete booking system with payment processing
+- Review and rating system with verification
+- Admin dashboard with analytics and user management
+- Database seeding with sample data and admin user
+- Comprehensive validation and error handling
 
 ## User Preferences
 *To be updated based on user feedback and preferences*
