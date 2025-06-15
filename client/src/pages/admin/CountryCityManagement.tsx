@@ -299,14 +299,14 @@ export default function CountryCityManagement() {
 
   // Query cities
   const { data: cities = [], isLoading: isLoadingCities } = useQuery<City[]>({
-    queryKey: ["/api/admin/cities"],
+    queryKey: ["/api/cities"],
   });
 
   // Query airports
   const { data: airports = [], isLoading: isLoadingAirports } = useQuery<
     Airport[]
   >({
-    queryKey: ["/api/admin/airports"],
+    queryKey: ["/api/airports"],
   });
 
   // Advanced filtering logic with professional search capabilities
