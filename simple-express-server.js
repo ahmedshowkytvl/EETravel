@@ -51,7 +51,7 @@ app.get('/api/destinations', async (req, res) => {
 // Tours API
 app.get('/api/tours', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM tours WHERE active = true ORDER BY title');
+    const result = await pool.query('SELECT * FROM tours WHERE active = true ORDER BY name');
     res.json(result.rows);
   } catch (error) {
     console.error('Database error:', error);
@@ -67,6 +67,47 @@ app.get('/api/hotels', async (req, res) => {
   } catch (error) {
     console.error('Database error:', error);
     res.status(500).json({ error: 'Database connection failed' });
+  }
+});
+
+// Cities API (if needed)
+app.get('/api/cities', async (req, res) => {
+  try {
+    const query = `
+      SELECT c.*, co.name as country_name 
+      FROM cities c 
+      LEFT JOIN countries co ON c.country_id = co.id 
+      WHERE c.active = true 
+      ORDER BY co.name, c.name
+    `;
+    const result = await pool.query(query);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Database error:', error);
+    // Return destinations as cities for compatibility
+    try {
+      const destResult = await pool.query(`
+        SELECT d.id, d.name, d.country_id, c.name as country_name, d.active, d.created_at, d.updated_at
+        FROM destinations d 
+        JOIN countries c ON d.country_id = c.id 
+        WHERE d.active = true 
+        ORDER BY c.name, d.name
+      `);
+      res.json(destResult.rows);
+    } catch (fallbackError) {
+      res.status(500).json({ error: 'Database connection failed' });
+    }
+  }
+});
+
+// Airports API (if needed)
+app.get('/api/airports', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM airports WHERE active = true ORDER BY name');
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ error: 'No airports data available' });
   }
 });
 

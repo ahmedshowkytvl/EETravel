@@ -69,13 +69,12 @@ An advanced AI-powered travel platform specializing in Middle Eastern tourism wi
 - `/client/src/hooks/` - Custom React hooks including useLanguage
 - `/client/src/lib/laravelApiClient.ts` - Laravel API integration layer
 
-**Backend Structure (Laravel):**
-- `/laravel-backend/` - Complete Laravel backend replacing Express.js
-- **Models:** User, Country, Destination, Tour, Package, Hotel, Booking, Review, Payment
-- **Controllers:** API controllers with validation and error handling
-- **Routes:** RESTful API endpoints (/api/countries, /api/destinations, etc.)
-- **Database:** PostgreSQL with comprehensive travel booking schema
-- **Authentication:** Ready for Laravel Sanctum integration
+**Backend Structure (Express.js Optimized):**
+- `/server/` - Express.js + TypeScript backend optimized for Replit
+- **Direct PostgreSQL Integration:** Using authentic travel database
+- **API Endpoints:** RESTful endpoints (/api/countries, /api/destinations, etc.)
+- **Database:** PostgreSQL with verified Middle Eastern travel data
+- **Authentication:** Replit Auth integration
 
 **Database Schema:**
 - `users` - User management with role-based access
