@@ -39,13 +39,16 @@ interface MenuResponse {
 const Footer: React.FC = () => {
   const { t, isRTL } = useLanguage();
   
-  // Fetch the "footer" menu from Laravel API
+  // Fetch the "footer" menu from Express API
   const { data: footerMenu, isLoading } = useQuery<MenuResponse>({
     queryKey: ['menus', 'location', 'footer'],
     queryFn: async (): Promise<MenuResponse> => {
       try {
-        const { laravelApi } = await import('@/lib/laravelApiClient');
-        const result = await laravelApi.getMenuByLocation('footer') as MenuResponse;
+        const response = await fetch('/api/menus/location/footer');
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        const result = await response.json();
         return result;
       } catch (error) {
         console.error('Error fetching footer menu:', error);
