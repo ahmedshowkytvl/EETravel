@@ -4,58 +4,42 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Destination extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory;
 
     protected $fillable = [
         'name',
         'description',
-        'country',
-        'city',
-        'latitude',
-        'longitude',
-        'featured_image',
-        'gallery',
-        'is_active',
-        'meta_title',
-        'meta_description',
-        'seo_keywords',
+        'country_id',
+        'image_url',
+        'is_featured',
     ];
-
-    public array $translatable = ['name', 'description', 'meta_title', 'meta_description'];
 
     protected $casts = [
-        'gallery' => 'array',
-        'is_active' => 'boolean',
-        'latitude' => 'decimal:8',
-        'longitude' => 'decimal:8',
+        'is_featured' => 'boolean',
     ];
 
-    public function tours()
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function tours(): HasMany
     {
         return $this->hasMany(Tour::class);
     }
 
-    public function packages()
+    public function packages(): HasMany
     {
         return $this->hasMany(Package::class);
     }
 
-    public function hotels()
+    public function hotels(): HasMany
     {
         return $this->hasMany(Hotel::class);
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
-
-    public function scopeByCountry($query, $country)
-    {
-        return $query->where('country', $country);
     }
 }

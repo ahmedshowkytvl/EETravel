@@ -4,114 +4,42 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tour extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory;
 
     protected $fillable = [
-        'title',
+        'name',
         'description',
-        'short_description',
-        'destination_id',
-        'category_id',
-        'duration_days',
-        'duration_nights',
         'price',
-        'discount_price',
+        'duration_hours',
         'max_participants',
-        'min_participants',
-        'difficulty_level',
-        'featured_image',
-        'gallery',
-        'itinerary',
-        'includes',
-        'excludes',
-        'requirements',
-        'is_active',
+        'destination_id',
+        'tour_type_id',
+        'image_url',
         'is_featured',
-        'availability_start',
-        'availability_end',
-        'booking_deadline',
-        'meta_title',
-        'meta_description',
-        'seo_keywords',
-    ];
-
-    public array $translatable = [
-        'title', 
-        'description', 
-        'short_description', 
-        'itinerary', 
-        'includes', 
-        'excludes', 
-        'requirements',
-        'meta_title',
-        'meta_description'
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
-        'discount_price' => 'decimal:2',
-        'gallery' => 'array',
-        'itinerary' => 'array',
-        'includes' => 'array',
-        'excludes' => 'array',
-        'requirements' => 'array',
-        'is_active' => 'boolean',
         'is_featured' => 'boolean',
-        'availability_start' => 'date',
-        'availability_end' => 'date',
-        'booking_deadline' => 'date',
     ];
 
-    public function destination()
+    public function destination(): BelongsTo
     {
         return $this->belongsTo(Destination::class);
     }
 
-    public function category()
+    public function tourType(): BelongsTo
     {
-        return $this->belongsTo(TourCategory::class);
+        return $this->belongsTo(TourType::class);
     }
 
-    public function bookings()
+    public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class);
-    }
-
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
-
-    public function scopeFeatured($query)
-    {
-        return $query->where('is_featured', true);
-    }
-
-    public function scopeAvailable($query)
-    {
-        return $query->where('availability_start', '<=', now())
-                    ->where('availability_end', '>=', now());
-    }
-
-    public function getDiscountPercentageAttribute()
-    {
-        if ($this->discount_price && $this->price > 0) {
-            return round((($this->price - $this->discount_price) / $this->price) * 100);
-        }
-        return 0;
-    }
-
-    public function getEffectivePriceAttribute()
-    {
-        return $this->discount_price ?? $this->price;
     }
 }

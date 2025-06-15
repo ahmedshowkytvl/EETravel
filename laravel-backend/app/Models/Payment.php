@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payment extends Model
 {
@@ -11,62 +12,20 @@ class Payment extends Model
 
     protected $fillable = [
         'booking_id',
-        'user_id',
         'amount',
         'payment_method',
-        'payment_gateway_id',
-        'payment_details',
-        'status',
+        'payment_status',
         'transaction_id',
-        'gateway_response',
-        'verified_at',
+        'payment_date',
     ];
 
     protected $casts = [
         'amount' => 'decimal:2',
-        'payment_details' => 'array',
-        'gateway_response' => 'array',
-        'verified_at' => 'datetime',
+        'payment_date' => 'datetime',
     ];
 
-    const STATUS_PENDING = 'pending';
-    const STATUS_COMPLETED = 'completed';
-    const STATUS_FAILED = 'failed';
-    const STATUS_REFUNDED = 'refunded';
-
-    public function booking()
+    public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function scopeCompleted($query)
-    {
-        return $query->where('status', self::STATUS_COMPLETED);
-    }
-
-    public function scopePending($query)
-    {
-        return $query->where('status', self::STATUS_PENDING);
-    }
-
-    public function scopeFailed($query)
-    {
-        return $query->where('status', self::STATUS_FAILED);
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-        
-        static::creating(function ($payment) {
-            if (!$payment->transaction_id) {
-                $payment->transaction_id = 'TXN_' . strtoupper(uniqid());
-            }
-        });
     }
 }
