@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Console;
@@ -13,7 +12,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // Schedule queue worker to restart every hour
+        $schedule->command('queue:restart')->hourly();
+        
+        // Clean up failed jobs daily
+        $schedule->command('queue:prune-failed --hours=48')->daily();
+        
+        // Cache clear weekly
+        $schedule->command('cache:clear')->weekly();
     }
 
     /**

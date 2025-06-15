@@ -1,7 +1,8 @@
-modules = ["nodejs-20", "postgresql-16"]
+modules = ["nodejs-20", "postgresql-16", "php-8.2"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["php82Packages.composer-local-repo-plugin", "php81"]
 
 [[ports]]
 localPort = 3000
