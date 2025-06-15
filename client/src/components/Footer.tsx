@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
         return result;
       } catch (error) {
         console.error('Error fetching footer menu:', error);
-        return { menu: null, items: [] } as MenuResponse;
+        return { menu: null, items: [] };
       }
     },
     staleTime: 1000 * 60 * 5, // Cache for 5 minutes
