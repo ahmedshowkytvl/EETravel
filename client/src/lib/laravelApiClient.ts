@@ -1,5 +1,5 @@
 // Laravel API Client - Complete replacement for Express.js backend
-const LARAVEL_API_BASE = import.meta.env.VITE_LARAVEL_API_URL || 'http://localhost:8000/api';
+const LARAVEL_API_BASE = import.meta.env.VITE_LARAVEL_API_URL || 'http://127.0.0.1:8001/api';
 
 interface ApiResponse<T = any> {
   data?: T;
