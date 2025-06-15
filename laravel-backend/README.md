@@ -4,17 +4,41 @@
 
 تم إنشاء مشروع Laravel كامل مع جميع الملفات المطلوبة، بما في ذلك ملف `artisan` المفقود.
 
+## حل مشكلة vendor المفقود
+
+```bash
+# الحل السريع - تثبيت التبعيات
+composer install
+
+# أو استخدم السكريبت التلقائي
+./install-dependencies.sh
+```
+
 ## التشغيل السريع
 
 ```bash
-# 1. اختبار أن كل شيء يعمل
+# 1. تثبيت التبعيات (مطلوب أولاً)
+composer install
+
+# 2. اختبار أن كل شيء يعمل
 ./test-setup.sh
 
-# 2. تشغيل السكريبت الأساسي
+# 3. تشغيل السكريبت الأساسي
 ./deploy-simple.sh
 
-# 3. تشغيل الخادم
+# 4. تشغيل الخادم
 php artisan serve --host=0.0.0.0 --port=8000
+```
+
+## إذا لم يكن Composer مثبت
+
+```bash
+# تحميل وتثبيت Composer محلياً
+curl -sS https://getcomposer.org/installer | php
+php composer.phar install
+
+# أو على Windows
+php composer.phar install
 ```
 
 ## معلومات الدخول الافتراضية

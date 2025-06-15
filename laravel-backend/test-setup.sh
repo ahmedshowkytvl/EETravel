@@ -11,6 +11,30 @@ else
     exit 1
 fi
 
+# Check if vendor directory exists
+if [ ! -d "vendor" ]; then
+    echo "📦 Vendor directory not found. Installing Composer dependencies..."
+    
+    # Check if composer is available
+    if ! command -v composer &> /dev/null; then
+        echo "❌ Composer is not installed. Please install Composer first."
+        echo "Download from: https://getcomposer.org/download/"
+        exit 1
+    fi
+    
+    # Install dependencies
+    composer install --no-dev --optimize-autoloader
+    
+    if [ $? -ne 0 ]; then
+        echo "❌ Composer install failed"
+        exit 1
+    fi
+    
+    echo "✅ Composer dependencies installed successfully"
+else
+    echo "✅ Vendor directory exists"
+fi
+
 # Test basic artisan commands
 echo "Testing basic artisan commands..."
 
