@@ -1,13 +1,39 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
-// Laravel API base URL
-const LARAVEL_API_BASE = 'http://localhost:8000/api';
+// Laravel API base URL - Try multiple potential URLs
+const POTENTIAL_LARAVEL_URLS = [
+  'http://localhost:8000/api',
+  'http://127.0.0.1:8000/api',
+  'http://0.0.0.0:8000/api'
+];
+
+let LARAVEL_API_BASE = POTENTIAL_LARAVEL_URLS[0];
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = (await res.text()) || res.statusText;
     throw new Error(`${res.status}: ${text}`);
   }
+}
+
+// Auto-detect working Laravel server
+async function findWorkingLaravelServer(): Promise<string | null> {
+  for (const baseUrl of POTENTIAL_LARAVEL_URLS) {
+    try {
+      const response = await fetch(`${baseUrl}/health`, { 
+        method: 'GET',
+        signal: AbortSignal.timeout(3000) // 3 second timeout
+      });
+      if (response.ok) {
+        LARAVEL_API_BASE = baseUrl;
+        return baseUrl;
+      }
+    } catch (error) {
+      // Continue to next URL
+      continue;
+    }
+  }
+  return null;
 }
 
 export async function laravelApiRequest<T = any>(
@@ -22,15 +48,34 @@ export async function laravelApiRequest<T = any>(
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
+    signal: AbortSignal.timeout(10000), // 10 second timeout
   };
 
   const mergedOptions = options 
     ? { ...defaultOptions, ...options } 
     : defaultOptions;
 
-  const res = await fetch(url, mergedOptions);
-  await throwIfResNotOk(res);
-  return await res.json();
+  try {
+    const res = await fetch(url, mergedOptions);
+    await throwIfResNotOk(res);
+    return await res.json();
+  } catch (error) {
+    // If main URL fails, try to find working server
+    const workingServer = await findWorkingLaravelServer();
+    if (workingServer && workingServer !== LARAVEL_API_BASE) {
+      // Retry with working server
+      const newUrl = `${workingServer}${endpoint}`;
+      const res = await fetch(newUrl, mergedOptions);
+      await throwIfResNotOk(res);
+      return await res.json();
+    }
+    
+    // Provide clear error message for Laravel server connection issues
+    if (error instanceof Error && (error.name === 'TypeError' || error.message.includes('fetch'))) {
+      throw new Error(`Laravel server not available. Please start the Laravel server with: cd laravel-backend && php artisan serve --host=0.0.0.0 --port=8000`);
+    }
+    throw error;
+  }
 }
 
 // Laravel API query function for TanStack Query
