@@ -1,9 +1,29 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
-    'default' => env('CACHE_DRIVER', 'redis'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Cache Store
+    |--------------------------------------------------------------------------
+    */
+
+    'default' => env('CACHE_DRIVER', 'file'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Stores
+    |--------------------------------------------------------------------------
+    */
 
     'stores' => [
+
+        'apc' => [
+            'driver' => 'apc',
+        ],
+
         'array' => [
             'driver' => 'array',
             'serialize' => false,
@@ -13,7 +33,7 @@ return [
             'driver' => 'database',
             'table' => 'cache',
             'connection' => null,
-            'prefix' => '',
+            'lock_connection' => null,
         ],
 
         'file' => [
@@ -29,7 +49,7 @@ return [
                 env('MEMCACHED_PASSWORD'),
             ],
             'options' => [
-                // Memcached options
+                // Memcached::OPT_CONNECT_TIMEOUT => 2000,
             ],
             'servers' => [
                 [
@@ -43,7 +63,7 @@ return [
         'redis' => [
             'driver' => 'redis',
             'connection' => 'cache',
-            'prefix' => env('CACHE_PREFIX', 'sahara_cache'),
+            'lock_connection' => 'default',
         ],
 
         'dynamodb' => [
@@ -58,7 +78,15 @@ return [
         'octane' => [
             'driver' => 'octane',
         ],
+
     ],
 
-    'prefix' => env('CACHE_PREFIX', 'sahara'),
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Key Prefix
+    |--------------------------------------------------------------------------
+    */
+
+    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache_'),
+
 ];

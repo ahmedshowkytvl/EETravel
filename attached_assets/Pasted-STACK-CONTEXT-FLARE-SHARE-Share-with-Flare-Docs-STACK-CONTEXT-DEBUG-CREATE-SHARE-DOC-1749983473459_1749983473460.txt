@@ -1,0 +1,228 @@
+STACK
+CONTEXT
+FLARE
+SHARE
+Share with Flare
+Docs
+
+STACK
+
+CONTEXT
+
+DEBUG
+CREATE SHARE
+DOCS
+
+Ignition Settings
+Docs
+EDITOR
+
+PhpStorm
+THEME
+Auto
+SAVE SETTINGS
+Settings will be saved locally in ~/.ignition.json.
+
+Trying to access array offset on value of type null
+ErrorException
+PHP 8.2.28
+10.48.29
+Trying to access array offset on value of type null
+
+Expand vendor frames
+40 vendor frames
+C:\Users\mark5\Downloads\EETravel-main\EETravel-main\laravel-backend\public\index
+.php
+ 
+: 51
+require_once
+1 vendor frame
+C:\Users\mark5\Downloads\EETravel-main\EETravel-main\laravel-backend\public\index
+.php
+ 
+: 51
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|--------------------------------------------------------------------------
+
+|
+
+| Composer provides a convenient, automatically generated class loader for
+
+| this application. We just need to utilize it! We'll simply require it
+
+| into the script here so we don't need to manually load our classes.
+
+|
+
+*/
+
+
+
+require __DIR__.'/../vendor/autoload.php';
+
+
+
+/*
+
+|--------------------------------------------------------------------------
+
+| Run The Application
+
+|--------------------------------------------------------------------------
+
+|
+
+| Once we have the application, we can handle the incoming request using
+
+| the application's HTTP kernel. Then, we will send the response back
+
+| to this client's browser, allowing them to enjoy our application.
+
+|
+
+*/
+
+
+
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+
+
+$kernel = $app->make(Kernel::class);
+
+
+
+$response = $kernel->handle(
+
+    $request = Request::capture()
+
+)->send();
+
+
+
+$kernel->terminate($request, $response);
+ARGUMENTS
+$request:Illuminate\Http\Request
+GET http://127.0.0.1:8000/
+
+APP
+Routing
+Controller
+Closure
+
+Middleware
+web
+
+REQUEST
+http://127.0.0.1:8000/
+GET
+curl "http://127.0.0.1:8000/" \
+   -X GET \
+   -H 'host: 127.0.0.1:8000' \
+   -H 'connection: keep-alive' \
+   -H 'upgrade-insecure-requests: 1' \
+   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36 Edg/84.0.522.52' \
+   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
+   -H 'sec-fetch-site: none' \
+   -H 'sec-fetch-mode: navigate' \
+   -H 'sec-fetch-user: ?1' \
+   -H 'sec-fetch-dest: document' \
+   -H 'accept-encoding: gzip, deflate, br' \
+   -H 'accept-language: en-US,en;q=0.9';
+
+
+Browser
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36 Edg/84.0.522.52
+
+Headers
+host
+127.0.0.1:8000
+
+connection
+keep-alive
+
+upgrade-insecure-requests
+1
+
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36 Edg/84.0.522.52
+
+accept
+text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+
+sec-fetch-site
+none
+
+sec-fetch-mode
+navigate
+
+sec-fetch-user
+?1
+
+sec-fetch-dest
+document
+
+accept-encoding
+gzip, deflate, br
+
+accept-language
+en-US,en;q=0.9
+
+Body
+[]
+
+CONTEXT
+Versions
+Php Version
+8.2.28
+
+Laravel Version
+10.48.29
+
+Laravel Locale
+en
+
+Laravel Config Cached
+false
+App Debug
+true
+App Env
+local
+
+·
+SOURCE
+·
+DOCS
+·
+LARAVEL
+Ignition is built byFlare, the Laravel error reporting service.
