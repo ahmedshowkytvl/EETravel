@@ -34,6 +34,9 @@ import {
   PackagesSearchResults
 } from "@/pages/search-results";
 
+// Laravel Integration
+import LaravelDestinations from "@/pages/LaravelDestinations";
+
 // Admin Pages
 import PackagesManagement from "@/pages/admin/PackagesManagement";
 import PackageCreatorPage from "@/pages/admin/PackageCreatorPage";
@@ -160,6 +163,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/auth" component={AuthPage} />
         <Route path="/destinations" component={DestinationsPage} />
+        <Route path="/laravel-destinations" component={LaravelDestinations} />
         <Route path="/about" component={AboutPage} />
         <Route path="/contact" component={ContactPage} />
         <Route path="/social-demo" component={SocialMediaBoxDemo} />
