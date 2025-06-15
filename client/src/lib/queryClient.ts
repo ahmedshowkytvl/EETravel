@@ -11,10 +11,8 @@ export async function apiRequest<T = any>(
   url: string, 
   options?: RequestInit
 ): Promise<T> {
-  // Route all API requests through Laravel backend
-  const laravelUrl = url.startsWith('/api') 
-    ? `http://localhost:8000${url}` 
-    : `http://localhost:8000/api${url}`;
+  // Use Laravel API compatibility layer in Express.js
+  const apiUrl = url.startsWith('/api') ? url : `/api${url}`;
 
   const defaultOptions: RequestInit = {
     method: 'GET',
@@ -29,12 +27,22 @@ export async function apiRequest<T = any>(
     ? { ...defaultOptions, ...options } 
     : defaultOptions;
 
-  const res = await fetch(laravelUrl, mergedOptions);
-  await throwIfResNotOk(res);
-  const data = await res.json();
-  
-  // Handle Laravel API response format
-  return data.data || data;
+  // Try Express.js with Laravel API compatibility first
+  try {
+    const res = await fetch(apiUrl, mergedOptions);
+    await throwIfResNotOk(res);
+    const data = await res.json();
+    return data.data || data;
+  } catch (error) {
+    console.error('Express countries API failed, using direct database approach:', error);
+    
+    // Fallback to Laravel compatibility endpoints
+    const laravelApiUrl = url.replace('/api/', '/laravel-api/');
+    const fallbackRes = await fetch(laravelApiUrl, mergedOptions);
+    await throwIfResNotOk(fallbackRes);
+    const fallbackData = await fallbackRes.json();
+    return fallbackData.data || fallbackData;
+  }
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";
@@ -45,28 +53,46 @@ export const getQueryFn: <T>(options?: {
   async ({ queryKey }) => {
     const unauthorizedBehavior = options?.on401 || "throw";
     
-    // Route all queries through Laravel backend
+    // Use Express.js API endpoints with Laravel compatibility
     const url = queryKey[0] as string;
-    const laravelUrl = url.startsWith('/api') 
-      ? `http://localhost:8000${url}` 
-      : `http://localhost:8000/api${url}`;
+    const apiUrl = url.startsWith('/api') ? url : `/api${url}`;
     
-    const res = await fetch(laravelUrl, {
-      credentials: "include",
-      headers: {
-        "Accept": "application/json"
+    // Try Express.js API first
+    try {
+      const res = await fetch(apiUrl, {
+        credentials: "include",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      if (unauthorizedBehavior === "returnNull" && res.status === 401) {
+        return null;
       }
-    });
 
-    if (unauthorizedBehavior === "returnNull" && res.status === 401) {
-      return null;
+      await throwIfResNotOk(res);
+      const data = await res.json();
+      return data.data || data;
+    } catch (error) {
+      console.error('Express countries API failed, using direct database approach:', error);
+      
+      // Fallback to Laravel compatibility endpoints
+      const laravelApiUrl = url.replace('/api/', '/laravel-api/');
+      const fallbackRes = await fetch(laravelApiUrl, {
+        credentials: "include",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      if (unauthorizedBehavior === "returnNull" && fallbackRes.status === 401) {
+        return null;
+      }
+
+      await throwIfResNotOk(fallbackRes);
+      const fallbackData = await fallbackRes.json();
+      return fallbackData.data || fallbackData;
     }
-
-    await throwIfResNotOk(res);
-    const data = await res.json();
-    
-    // Handle Laravel API response format
-    return data.data || data;
   };
 
 export const queryClient = new QueryClient({
