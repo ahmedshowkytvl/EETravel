@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tour;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
-class TourController extends Controller
+class PackageController extends Controller
 {
     public function index(): JsonResponse
     {
-        $tours = Tour::with(['destination', 'tourType'])->get();
-        return response()->json($tours);
+        $packages = Package::with(['destination', 'packageType'])->get();
+        return response()->json($packages);
     }
 
     public function show($id): JsonResponse
     {
-        $tour = Tour::with(['destination', 'tourType', 'bookings'])
+        $package = Package::with(['destination', 'packageType', 'inclusions', 'exclusions'])
             ->findOrFail($id);
-        return response()->json($tour);
+        return response()->json($package);
     }
 
     public function store(Request $request): JsonResponse
@@ -28,36 +28,38 @@ class TourController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
-            'duration_hours' => 'required|integer|min:1',
+            'duration_days' => 'required|integer|min:1',
             'max_participants' => 'required|integer|min:1',
             'destination_id' => 'required|exists:destinations,id',
+            'package_type_id' => 'required|exists:package_types,id',
         ]);
 
-        $tour = Tour::create($validated);
-        return response()->json($tour, 201);
+        $package = Package::create($validated);
+        return response()->json($package, 201);
     }
 
     public function update(Request $request, $id): JsonResponse
     {
-        $tour = Tour::findOrFail($id);
+        $package = Package::findOrFail($id);
         
         $validated = $request->validate([
             'name' => 'string|max:255',
             'description' => 'string',
             'price' => 'numeric|min:0',
-            'duration_hours' => 'integer|min:1',
+            'duration_days' => 'integer|min:1',
             'max_participants' => 'integer|min:1',
             'destination_id' => 'exists:destinations,id',
+            'package_type_id' => 'exists:package_types,id',
         ]);
 
-        $tour->update($validated);
-        return response()->json($tour);
+        $package->update($validated);
+        return response()->json($package);
     }
 
     public function destroy($id): JsonResponse
     {
-        $tour = Tour::findOrFail($id);
-        $tour->delete();
-        return response()->json(['message' => 'Tour deleted successfully']);
+        $package = Package::findOrFail($id);
+        $package->delete();
+        return response()->json(['message' => 'Package deleted successfully']);
     }
 }
