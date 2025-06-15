@@ -27,22 +27,10 @@ export async function apiRequest<T = any>(
     ? { ...defaultOptions, ...options } 
     : defaultOptions;
 
-  // Try Express.js with Laravel API compatibility first
-  try {
-    const res = await fetch(apiUrl, mergedOptions);
-    await throwIfResNotOk(res);
-    const data = await res.json();
-    return data.data || data;
-  } catch (error) {
-    console.error('Express countries API failed, using direct database approach:', error);
-    
-    // Fallback to Laravel compatibility endpoints
-    const laravelApiUrl = url.replace('/api/', '/laravel-api/');
-    const fallbackRes = await fetch(laravelApiUrl, mergedOptions);
-    await throwIfResNotOk(fallbackRes);
-    const fallbackData = await fallbackRes.json();
-    return fallbackData.data || fallbackData;
-  }
+  const res = await fetch(apiUrl, mergedOptions);
+  await throwIfResNotOk(res);
+  const data = await res.json();
+  return data;
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";
@@ -57,42 +45,20 @@ export const getQueryFn: <T>(options?: {
     const url = queryKey[0] as string;
     const apiUrl = url.startsWith('/api') ? url : `/api${url}`;
     
-    // Try Express.js API first
-    try {
-      const res = await fetch(apiUrl, {
-        credentials: "include",
-        headers: {
-          "Accept": "application/json"
-        }
-      });
-
-      if (unauthorizedBehavior === "returnNull" && res.status === 401) {
-        return null;
+    const res = await fetch(apiUrl, {
+      credentials: "include",
+      headers: {
+        "Accept": "application/json"
       }
+    });
 
-      await throwIfResNotOk(res);
-      const data = await res.json();
-      return data.data || data;
-    } catch (error) {
-      console.error('Express countries API failed, using direct database approach:', error);
-      
-      // Fallback to Laravel compatibility endpoints
-      const laravelApiUrl = url.replace('/api/', '/laravel-api/');
-      const fallbackRes = await fetch(laravelApiUrl, {
-        credentials: "include",
-        headers: {
-          "Accept": "application/json"
-        }
-      });
-
-      if (unauthorizedBehavior === "returnNull" && fallbackRes.status === 401) {
-        return null;
-      }
-
-      await throwIfResNotOk(fallbackRes);
-      const fallbackData = await fallbackRes.json();
-      return fallbackData.data || fallbackData;
+    if (unauthorizedBehavior === "returnNull" && res.status === 401) {
+      return null;
     }
+
+    await throwIfResNotOk(res);
+    const data = await res.json();
+    return data;
   };
 
 export const queryClient = new QueryClient({
