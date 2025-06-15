@@ -11,9 +11,17 @@ export async function apiRequest<T = any>(
   url: string, 
   options?: RequestInit
 ): Promise<T> {
+  // Route all API requests through Laravel backend
+  const laravelUrl = url.startsWith('/api') 
+    ? `http://localhost:8000${url}` 
+    : `http://localhost:8000/api${url}`;
+
   const defaultOptions: RequestInit = {
     method: 'GET',
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
     credentials: "include",
   };
 
@@ -21,9 +29,12 @@ export async function apiRequest<T = any>(
     ? { ...defaultOptions, ...options } 
     : defaultOptions;
 
-  const res = await fetch(url, mergedOptions);
+  const res = await fetch(laravelUrl, mergedOptions);
   await throwIfResNotOk(res);
-  return await res.json();
+  const data = await res.json();
+  
+  // Handle Laravel API response format
+  return data.data || data;
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";
@@ -33,8 +44,18 @@ export const getQueryFn: <T>(options?: {
   (options) =>
   async ({ queryKey }) => {
     const unauthorizedBehavior = options?.on401 || "throw";
-    const res = await fetch(queryKey[0] as string, {
+    
+    // Route all queries through Laravel backend
+    const url = queryKey[0] as string;
+    const laravelUrl = url.startsWith('/api') 
+      ? `http://localhost:8000${url}` 
+      : `http://localhost:8000/api${url}`;
+    
+    const res = await fetch(laravelUrl, {
       credentials: "include",
+      headers: {
+        "Accept": "application/json"
+      }
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
@@ -42,7 +63,10 @@ export const getQueryFn: <T>(options?: {
     }
 
     await throwIfResNotOk(res);
-    return await res.json();
+    const data = await res.json();
+    
+    // Handle Laravel API response format
+    return data.data || data;
   };
 
 export const queryClient = new QueryClient({
