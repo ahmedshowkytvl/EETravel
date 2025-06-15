@@ -8,11 +8,14 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('destinations', function (Blueprint $table) {
+        Schema::create('tours', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->foreignId('country_id')->constrained()->onDelete('cascade');
+            $table->decimal('price', 10, 2);
+            $table->integer('duration_hours');
+            $table->integer('max_participants');
+            $table->foreignId('destination_id')->constrained()->onDelete('cascade');
             $table->string('image_url')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->timestamps();
@@ -21,6 +24,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('destinations');
+        Schema::dropIfExists('tours');
     }
 };

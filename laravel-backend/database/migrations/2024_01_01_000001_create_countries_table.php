@@ -8,19 +8,18 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('destinations', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
-            $table->foreignId('country_id')->constrained()->onDelete('cascade');
-            $table->string('image_url')->nullable();
-            $table->boolean('is_featured')->default(false);
+            $table->string('code', 3);
+            $table->string('currency')->nullable();
+            $table->string('flag_url')->nullable();
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('destinations');
+        Schema::dropIfExists('countries');
     }
 };
