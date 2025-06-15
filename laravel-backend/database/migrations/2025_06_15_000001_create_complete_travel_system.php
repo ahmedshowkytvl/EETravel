@@ -191,7 +191,7 @@ return new class extends Migration
                 $table->unsignedBigInteger('user_id');
                 $table->string('reviewable_type');
                 $table->unsignedBigInteger('reviewable_id');
-                $table->integer('rating')->min(1)->max(5);
+                $table->integer('rating')->unsigned();
                 $table->text('comment')->nullable();
                 $table->boolean('is_verified')->default(false);
                 $table->boolean('active')->default(true);
