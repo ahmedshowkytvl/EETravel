@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Country extends Model
 {
@@ -14,10 +13,21 @@ class Country extends Model
         'name',
         'code',
         'currency',
-        'flag_url',
+        'active'
     ];
 
-    public function destinations(): HasMany
+    protected $casts = [
+        'active' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
+
+    public function destinations()
     {
         return $this->hasMany(Destination::class);
     }

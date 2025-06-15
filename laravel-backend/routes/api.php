@@ -31,6 +31,12 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
 });
 
+// Countries API
+Route::get('countries', [App\Http\Controllers\Api\CountryController::class, 'index']);
+Route::get('countries/{id}', [App\Http\Controllers\Api\CountryController::class, 'show']);
+Route::get('countries/code/{code}', [App\Http\Controllers\Api\CountryController::class, 'getByCode']);
+Route::get('countries/{id}/cities', [App\Http\Controllers\Api\CountryController::class, 'cities']);
+
 // Public content routes
 Route::get('destinations', [App\Http\Controllers\Api\SimpleDestinationController::class, 'index']);
 Route::get('destinations/{id}', [App\Http\Controllers\Api\SimpleDestinationController::class, 'show']);
