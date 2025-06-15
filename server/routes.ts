@@ -115,6 +115,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // The setupHotelFeatureRoutes isn't implemented yet, so we'll comment it out
   // setupHotelFeatureRoutes(app, storage, isAdmin);
   
+  // Health endpoint with database connection test
+  app.get('/api/health', async (req, res) => {
+    try {
+      const dbTest = await storage.listCountries();
+      res.json({ 
+        status: 'healthy', 
+        database: 'connected',
+        countriesCount: dbTest.length,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Health check failed:', error);
+      res.status(500).json({ 
+        status: 'unhealthy', 
+        database: 'disconnected',
+        error: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString()
+      });
+    }
+  });
+
   // Logout endpoint
   app.post('/api/logout', (req, res) => {
     try {
@@ -1008,8 +1029,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const active = req.query.active === 'true' ? true : 
                     req.query.active === 'false' ? false : undefined;
-      const countries = await storage.listCountries(active);
-      res.json(countries);
+      
+      // Direct database query as fallback if storage fails
+      try {
+        const countries = await storage.listCountries(active);
+        res.json(countries);
+      } catch (storageError) {
+        console.error('Storage failed, using direct database query:', storageError);
+        
+        // Direct database query using environment connection
+        const postgres = (await import('postgres')).default;
+        const sql = postgres(process.env.DATABASE_URL || '', {
+          ssl: process.env.DATABASE_URL?.includes('localhost') ? false : 'require'
+        });
+        
+        let result;
+        if (active !== undefined) {
+          result = await sql`SELECT id, name, code, currency, created_at, updated_at, active FROM countries WHERE active = ${active}`;
+        } else {
+          result = await sql`SELECT id, name, code, currency, created_at, updated_at, active FROM countries`;
+        }
+        
+        const countries = result.map(row => ({
+          id: parseInt(row.id.toString()),
+          name: row.name,
+          code: row.code,
+          currency: row.currency,
+          createdAt: row.created_at,
+          updatedAt: row.updated_at,
+          active: row.active
+        }));
+        
+        await sql.end();
+        
+        res.json(countries);
+      }
     } catch (error) {
       console.error('Error fetching countries:', error);
       res.status(500).json({ message: 'Failed to fetch countries' });
