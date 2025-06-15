@@ -3,99 +3,75 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Destination;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\JsonResponse;
 
 class SimpleDestinationController extends Controller
 {
-    public function index()
+    /**
+     * Display a listing of destinations
+     */
+    public function index(Request $request): JsonResponse
     {
         try {
-            $destinations = DB::select("
-                SELECT 
-                    d.id,
-                    d.name,
-                    d.description,
-                    d.country_id,
-                    d.is_featured,
-                    d.created_at,
-                    d.updated_at,
-                    c.name as country_name,
-                    c.code as country_code,
-                    c.currency as country_currency
-                FROM destinations d
-                LEFT JOIN countries c ON d.country_id = c.id
-                ORDER BY d.is_featured DESC, d.name ASC
-            ");
-
-            $formatted = array_map(function($dest) {
-                return [
-                    'id' => $dest->id,
-                    'name' => $dest->name,
-                    'description' => $dest->description,
-                    'country_id' => $dest->country_id,
-                    'is_featured' => $dest->is_featured,
-                    'created_at' => $dest->created_at,
-                    'updated_at' => $dest->updated_at,
-                    'country' => [
-                        'id' => $dest->country_id,
-                        'name' => $dest->country_name,
-                        'code' => $dest->country_code,
-                        'currency' => $dest->country_currency
-                    ]
-                ];
-            }, $destinations);
-
-            return response()->json($formatted);
+            $query = Destination::with('country')->where('active', true);
+            
+            // Filter by country if provided
+            if ($request->has('country_id')) {
+                $query->where('country_id', $request->country_id);
+            }
+            
+            // Filter by featured status
+            if ($request->has('featured')) {
+                $query->where('featured', $request->boolean('featured'));
+            }
+            
+            $destinations = $query->orderBy('name')->get();
+            
+            return response()->json([
+                'data' => $destinations,
+                'meta' => [
+                    'total' => $destinations->count(),
+                    'timestamp' => now()
+                ]
+            ]);
+            
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Database connection failed: ' . $e->getMessage()], 500);
+            return response()->json([
+                'message' => 'Failed to fetch destinations',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
-
-    public function show($id)
+    
+    /**
+     * Display the specified destination
+     */
+    public function show(string $id): JsonResponse
     {
         try {
-            $destination = DB::select("
-                SELECT 
-                    d.id,
-                    d.name,
-                    d.description,
-                    d.country_id,
-                    d.is_featured,
-                    d.created_at,
-                    d.updated_at,
-                    c.name as country_name,
-                    c.code as country_code,
-                    c.currency as country_currency
-                FROM destinations d
-                LEFT JOIN countries c ON d.country_id = c.id
-                WHERE d.id = ?
-            ", [$id]);
-
-            if (empty($destination)) {
-                return response()->json(['error' => 'Destination not found'], 404);
-            }
-
-            $dest = $destination[0];
-            $formatted = [
-                'id' => $dest->id,
-                'name' => $dest->name,
-                'description' => $dest->description,
-                'country_id' => $dest->country_id,
-                'is_featured' => $dest->is_featured,
-                'created_at' => $dest->created_at,
-                'updated_at' => $dest->updated_at,
-                'country' => [
-                    'id' => $dest->country_id,
-                    'name' => $dest->country_name,
-                    'code' => $dest->country_code,
-                    'currency' => $dest->country_currency
+            $destination = Destination::with(['country', 'tours', 'packages', 'hotels'])
+                ->where('active', true)
+                ->findOrFail($id);
+                
+            return response()->json([
+                'data' => $destination,
+                'meta' => [
+                    'timestamp' => now()
                 ]
-            ];
-
-            return response()->json($formatted);
+            ]);
+            
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Destination not found'
+            ], 404);
+            
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Database connection failed: ' . $e->getMessage()], 500);
+            return response()->json([
+                'message' => 'Failed to fetch destination',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }
