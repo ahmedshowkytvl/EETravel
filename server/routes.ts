@@ -5225,6 +5225,84 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Laravel API compatibility endpoints for frontend migration
+  
+  // Laravel Health Check
+  app.get('/laravel-api/health', (req, res) => {
+    res.json({
+      status: 'OK',
+      message: 'Laravel API compatibility layer active',
+      timestamp: new Date().toISOString()
+    });
+  });
+
+  // Laravel Countries API
+  app.get('/laravel-api/countries', async (req, res) => {
+    try {
+      const countries = await storage.listCountries();
+      res.json(countries);
+    } catch (error) {
+      console.error('Laravel Countries API error:', error);
+      res.status(500).json({ error: 'Failed to fetch countries' });
+    }
+  });
+
+  // Laravel Destinations API
+  app.get('/laravel-api/destinations', async (req, res) => {
+    try {
+      const destinations = await storage.listDestinations();
+      res.json(destinations);
+    } catch (error) {
+      console.error('Laravel Destinations API error:', error);
+      res.status(500).json({ error: 'Failed to fetch destinations' });
+    }
+  });
+
+  // Laravel Tours API
+  app.get('/laravel-api/tours', async (req, res) => {
+    try {
+      const tours = await storage.listTours();
+      res.json(tours);
+    } catch (error) {
+      console.error('Laravel Tours API error:', error);
+      res.status(500).json({ error: 'Failed to fetch tours' });
+    }
+  });
+
+  // Laravel Packages API
+  app.get('/laravel-api/packages', async (req, res) => {
+    try {
+      const packages = await storage.listPackages();
+      res.json(packages);
+    } catch (error) {
+      console.error('Laravel Packages API error:', error);
+      res.status(500).json({ error: 'Failed to fetch packages' });
+    }
+  });
+
+  // Laravel Hotels API
+  app.get('/laravel-api/hotels', async (req, res) => {
+    try {
+      const hotels = await storage.listHotels();
+      res.json(hotels);
+    } catch (error) {
+      console.error('Laravel Hotels API error:', error);
+      res.status(500).json({ error: 'Failed to fetch hotels' });
+    }
+  });
+
+  // Laravel Menu API
+  app.get('/laravel-api/menus/location/:location', async (req, res) => {
+    try {
+      const location = req.params.location;
+      const menuItems = await storage.getMenuByLocation(location);
+      res.json(menuItems);
+    } catch (error) {
+      console.error('Laravel Menu API error:', error);
+      res.status(500).json({ error: 'Failed to fetch menu' });
+    }
+  });
+
   // Setup advanced admin routes
   setupAdvancedAdminRoutes(app);
 
