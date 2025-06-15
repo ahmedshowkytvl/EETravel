@@ -10,8 +10,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use function Laravel\Prompts\suggest;
-
 #[AsCommand(name: 'make:policy')]
 class PolicyMakeCommand extends GeneratorCommand
 {
@@ -21,6 +19,17 @@ class PolicyMakeCommand extends GeneratorCommand
      * @var string
      */
     protected $name = 'make:policy';
+
+    /**
+     * The name of the console command.
+     *
+     * This name is used to identify the command during lazy loading.
+     *
+     * @var string|null
+     *
+     * @deprecated
+     */
+    protected static $defaultName = 'make:policy';
 
     /**
      * The console command description.
@@ -216,12 +225,13 @@ class PolicyMakeCommand extends GeneratorCommand
             return;
         }
 
-        $model = suggest(
-            'What model should this policy apply to? (Optional)',
+        $model = $this->components->askWithCompletion(
+            'What model should this policy apply to?',
             $this->possibleModels(),
+            'none'
         );
 
-        if ($model) {
+        if ($model && $model !== 'none') {
             $input->setOption('model', $model);
         }
     }

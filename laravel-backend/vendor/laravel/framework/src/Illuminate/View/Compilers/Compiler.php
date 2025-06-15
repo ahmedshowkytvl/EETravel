@@ -2,7 +2,6 @@
 
 namespace Illuminate\View\Compilers;
 
-use ErrorException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -82,7 +81,7 @@ abstract class Compiler
      */
     public function getCompiledPath($path)
     {
-        return $this->cachePath.'/'.hash('xxh128', 'v2'.Str::after($path, $this->basePath)).'.'.$this->compiledExtension;
+        return $this->cachePath.'/'.sha1('v2'.Str::after($path, $this->basePath)).'.'.$this->compiledExtension;
     }
 
     /**
@@ -90,8 +89,6 @@ abstract class Compiler
      *
      * @param  string  $path
      * @return bool
-     *
-     * @throws \ErrorException
      */
     public function isExpired($path)
     {
@@ -108,16 +105,8 @@ abstract class Compiler
             return true;
         }
 
-        try {
-            return $this->files->lastModified($path) >=
-                $this->files->lastModified($compiled);
-        } catch (ErrorException $exception) {
-            if (! $this->files->exists($compiled)) {
-                return true;
-            }
-
-            throw $exception;
-        }
+        return $this->files->lastModified($path) >=
+               $this->files->lastModified($compiled);
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace Illuminate\Mail;
 
-use Closure;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Mail\Mailable as MailableContract;
 use Illuminate\Contracts\Mail\Mailer as MailerContract;
@@ -13,7 +12,6 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Mail\Events\MessageSent;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
@@ -97,7 +95,7 @@ class Mailer implements MailerContract, MailQueueContract
      * @param  \Illuminate\Contracts\Events\Dispatcher|null  $events
      * @return void
      */
-    public function __construct(string $name, Factory $views, TransportInterface $transport, ?Dispatcher $events = null)
+    public function __construct(string $name, Factory $views, TransportInterface $transport, Dispatcher $events = null)
     {
         $this->name = $name;
         $this->views = $views;
@@ -156,15 +154,10 @@ class Mailer implements MailerContract, MailQueueContract
      * Begin the process of mailing a mailable class instance.
      *
      * @param  mixed  $users
-     * @param  string|null  $name
      * @return \Illuminate\Mail\PendingMail
      */
-    public function to($users, $name = null)
+    public function to($users)
     {
-        if (! is_null($name) && is_string($users)) {
-            $users = new Address($users, $name);
-        }
-
         return (new PendingMail($this))->to($users);
     }
 
@@ -172,15 +165,10 @@ class Mailer implements MailerContract, MailQueueContract
      * Begin the process of mailing a mailable class instance.
      *
      * @param  mixed  $users
-     * @param  string|null  $name
      * @return \Illuminate\Mail\PendingMail
      */
-    public function cc($users, $name = null)
+    public function cc($users)
     {
-        if (! is_null($name) && is_string($users)) {
-            $users = new Address($users, $name);
-        }
-
         return (new PendingMail($this))->cc($users);
     }
 
@@ -188,15 +176,10 @@ class Mailer implements MailerContract, MailQueueContract
      * Begin the process of mailing a mailable class instance.
      *
      * @param  mixed  $users
-     * @param  string|null  $name
      * @return \Illuminate\Mail\PendingMail
      */
-    public function bcc($users, $name = null)
+    public function bcc($users)
     {
-        if (! is_null($name) && is_string($users)) {
-            $users = new Address($users, $name);
-        }
-
         return (new PendingMail($this))->bcc($users);
     }
 
@@ -253,38 +236,7 @@ class Mailer implements MailerContract, MailQueueContract
 
         $data['message'] = $this->createMessage();
 
-        return $this->replaceEmbeddedAttachments(
-            $this->renderView($view ?: $plain, $data),
-            $data['message']->getSymfonyMessage()->getAttachments()
-        );
-    }
-
-    /**
-     * Replace the embedded image attachments with raw, inline image data for browser rendering.
-     *
-     * @param  string  $renderedView
-     * @param  array  $attachments
-     * @return string
-     */
-    protected function replaceEmbeddedAttachments(string $renderedView, array $attachments)
-    {
-        if (preg_match_all('/<img.+?src=[\'"]cid:([^\'"]+)[\'"].*?>/i', $renderedView, $matches)) {
-            foreach (array_unique($matches[1]) as $image) {
-                foreach ($attachments as $attachment) {
-                    if ($attachment->getFilename() === $image) {
-                        $renderedView = str_replace(
-                            'cid:'.$image,
-                            'data:'.$attachment->getContentType().';base64,'.$attachment->bodyToString(),
-                            $renderedView
-                        );
-
-                        break;
-                    }
-                }
-            }
-        }
-
-        return $renderedView;
+        return $this->renderView($view ?: $plain, $data);
     }
 
     /**
@@ -360,14 +312,14 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Parse the given view name or array.
      *
-     * @param  \Closure|array|string  $view
+     * @param  string|array  $view
      * @return array
      *
      * @throws \InvalidArgumentException
      */
     protected function parseView($view)
     {
-        if (is_string($view) || $view instanceof Closure) {
+        if (is_string($view)) {
             return [$view, null, null];
         }
 
@@ -420,14 +372,12 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Render the given view.
      *
-     * @param  \Closure|string  $view
+     * @param  string  $view
      * @param  array  $data
      * @return string
      */
     protected function renderView($view, $data)
     {
-        $view = value($view, $data);
-
         return $view instanceof Htmlable
                         ? $view->toHtml()
                         : $this->views->make($view, $data)->render();

@@ -2,7 +2,6 @@
 
 namespace Illuminate\Database;
 
-use Exception;
 use Illuminate\Database\PDO\PostgresDriver;
 use Illuminate\Database\Query\Grammars\PostgresGrammar as QueryGrammar;
 use Illuminate\Database\Query\Processors\PostgresProcessor;
@@ -14,50 +13,13 @@ use Illuminate\Filesystem\Filesystem;
 class PostgresConnection extends Connection
 {
     /**
-     * Escape a binary value for safe SQL embedding.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    protected function escapeBinary($value)
-    {
-        $hex = bin2hex($value);
-
-        return "'\x{$hex}'::bytea";
-    }
-
-    /**
-     * Escape a bool value for safe SQL embedding.
-     *
-     * @param  bool  $value
-     * @return string
-     */
-    protected function escapeBool($value)
-    {
-        return $value ? 'true' : 'false';
-    }
-
-    /**
-     * Determine if the given database exception was caused by a unique constraint violation.
-     *
-     * @param  \Exception  $exception
-     * @return bool
-     */
-    protected function isUniqueConstraintError(Exception $exception)
-    {
-        return '23505' === $exception->getCode();
-    }
-
-    /**
      * Get the default query grammar instance.
      *
      * @return \Illuminate\Database\Query\Grammars\PostgresGrammar
      */
     protected function getDefaultQueryGrammar()
     {
-        ($grammar = new QueryGrammar)->setConnection($this);
-
-        return $this->withTablePrefix($grammar);
+        return $this->withTablePrefix(new QueryGrammar);
     }
 
     /**
@@ -81,9 +43,7 @@ class PostgresConnection extends Connection
      */
     protected function getDefaultSchemaGrammar()
     {
-        ($grammar = new SchemaGrammar)->setConnection($this);
-
-        return $this->withTablePrefix($grammar);
+        return $this->withTablePrefix(new SchemaGrammar);
     }
 
     /**
@@ -93,7 +53,7 @@ class PostgresConnection extends Connection
      * @param  callable|null  $processFactory
      * @return \Illuminate\Database\Schema\PostgresSchemaState
      */
-    public function getSchemaState(?Filesystem $files = null, ?callable $processFactory = null)
+    public function getSchemaState(Filesystem $files = null, callable $processFactory = null)
     {
         return new PostgresSchemaState($this, $files, $processFactory);
     }

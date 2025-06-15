@@ -100,7 +100,7 @@ class Migrator
     public function __construct(MigrationRepositoryInterface $repository,
                                 Resolver $resolver,
                                 Filesystem $files,
-                                ?Dispatcher $dispatcher = null)
+                                Dispatcher $dispatcher = null)
     {
         $this->files = $files;
         $this->events = $dispatcher;
@@ -270,10 +270,6 @@ class Migrator
             return $this->repository->getMigrations($steps);
         }
 
-        if (($batch = $options['batch'] ?? 0) > 0) {
-            return $this->repository->getMigrationsByBatch($batch);
-        }
-
         return $this->repository->getLast();
     }
 
@@ -340,7 +336,7 @@ class Migrator
             return [];
         }
 
-        return tap($this->resetMigrations($migrations, Arr::wrap($paths), $pretend), function () {
+        return tap($this->resetMigrations($migrations, $paths, $pretend), function () {
             if ($this->output) {
                 $this->output->writeln('');
             }
@@ -446,11 +442,10 @@ class Migrator
             }
 
             $this->write(TwoColumnDetail::class, $name);
-
             $this->write(BulletList::class, collect($this->getQueries($migration, $method))->map(function ($query) {
                 return $query['query'];
             }));
-        } catch (SchemaException) {
+        } catch (SchemaException $e) {
             $name = get_class($migration);
 
             $this->write(Error::class, sprintf(
@@ -744,7 +739,7 @@ class Migrator
      */
     public function deleteRepository()
     {
-        $this->repository->deleteRepository();
+        return $this->repository->deleteRepository();
     }
 
     /**

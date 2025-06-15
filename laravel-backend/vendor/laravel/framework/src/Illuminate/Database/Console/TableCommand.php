@@ -10,8 +10,6 @@ use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-use function Laravel\Prompts\select;
-
 #[AsCommand(name: 'db:table')]
 class TableCommand extends DatabaseInspectionCommand
 {
@@ -47,9 +45,9 @@ class TableCommand extends DatabaseInspectionCommand
 
         $schema = $connection->getDoctrineSchemaManager();
 
-        $this->registerTypeMappings($connection->getDoctrineConnection()->getDatabasePlatform());
+        $this->registerTypeMappings($schema->getDatabasePlatform());
 
-        $table = $this->argument('table') ?: select(
+        $table = $this->argument('table') ?: $this->components->choice(
             'Which table would you like to inspect?',
             collect($schema->listTables())->flatMap(fn (Table $table) => [$table->getName()])->toArray()
         );
@@ -58,7 +56,7 @@ class TableCommand extends DatabaseInspectionCommand
             return $this->components->warn("Table [{$table}] doesn't exist.");
         }
 
-        $table = $schema->introspectTable($table);
+        $table = $schema->listTableDetails($table);
 
         $columns = $this->columns($table);
         $indexes = $this->indexes($table);
@@ -212,7 +210,7 @@ class TableCommand extends DatabaseInspectionCommand
             $columns->each(function ($column) {
                 $this->components->twoColumnDetail(
                     $column['column'].' <fg=gray>'.$column['attributes']->implode(', ').'</>',
-                    (! is_null($column['default']) ? '<fg=gray>'.$column['default'].'</> ' : '').''.$column['type'].''
+                    ($column['default'] ? '<fg=gray>'.$column['default'].'</> ' : '').''.$column['type'].''
                 );
             });
 

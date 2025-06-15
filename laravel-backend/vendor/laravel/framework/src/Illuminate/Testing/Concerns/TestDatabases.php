@@ -88,7 +88,7 @@ trait TestDatabases
             $this->usingDatabase($testDatabase, function () {
                 Schema::hasTable('dummy');
             });
-        } catch (QueryException) {
+        } catch (QueryException $e) {
             $this->usingDatabase($database, function () use ($testDatabase) {
                 Schema::dropDatabaseIfExists($testDatabase);
                 Schema::createDatabase($testDatabase);
@@ -141,10 +141,6 @@ trait TestDatabases
      */
     protected function whenNotUsingInMemoryDatabase($callback)
     {
-        if (ParallelTesting::option('without_databases')) {
-            return;
-        }
-
         $database = DB::getConfig('database');
 
         if ($database !== ':memory:') {

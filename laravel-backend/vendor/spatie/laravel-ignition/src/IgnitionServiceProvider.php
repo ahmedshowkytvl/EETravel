@@ -2,7 +2,6 @@
 
 namespace Spatie\LaravelIgnition;
 
-use Exception;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Log;
@@ -12,15 +11,13 @@ use Laravel\Octane\Events\RequestReceived;
 use Laravel\Octane\Events\RequestTerminated;
 use Laravel\Octane\Events\TaskReceived;
 use Laravel\Octane\Events\TickReceived;
-use Monolog\Level;
 use Monolog\Logger;
-use Spatie\ErrorSolutions\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
-use Spatie\ErrorSolutions\SolutionProviderRepository;
 use Spatie\FlareClient\Flare;
 use Spatie\FlareClient\FlareMiddleware\AddSolutions;
 use Spatie\Ignition\Config\FileConfigManager;
 use Spatie\Ignition\Config\IgnitionConfig;
 use Spatie\Ignition\Contracts\ConfigManager;
+use Spatie\Ignition\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 use Spatie\Ignition\Ignition;
 use Spatie\LaravelIgnition\Commands\SolutionMakeCommand;
 use Spatie\LaravelIgnition\Commands\SolutionProviderMakeCommand;
@@ -35,6 +32,8 @@ use Spatie\LaravelIgnition\Recorders\JobRecorder\JobRecorder;
 use Spatie\LaravelIgnition\Recorders\LogRecorder\LogRecorder;
 use Spatie\LaravelIgnition\Recorders\QueryRecorder\QueryRecorder;
 use Spatie\LaravelIgnition\Renderers\IgnitionExceptionRenderer;
+use Spatie\LaravelIgnition\Renderers\IgnitionWhoopsHandler;
+use Spatie\LaravelIgnition\Solutions\SolutionProviders\SolutionProviderRepository;
 use Spatie\LaravelIgnition\Support\FlareLogHandler;
 use Spatie\LaravelIgnition\Support\SentReports;
 use Spatie\LaravelIgnition\Views\ViewExceptionMapper;
@@ -101,10 +100,19 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerRenderer(): void
     {
-        $this->app->bind(
-            'Illuminate\Contracts\Foundation\ExceptionRenderer',
-            fn (Application $app) => $app->make(IgnitionExceptionRenderer::class)
-        );
+        if (interface_exists('Whoops\Handler\HandlerInterface')) {
+            $this->app->bind(
+                'Whoops\Handler\HandlerInterface',
+                fn (Application $app) => $app->make(IgnitionWhoopsHandler::class)
+            );
+        }
+
+        if (interface_exists('Illuminate\Contracts\Foundation\ExceptionRenderer')) {
+            $this->app->bind(
+                'Illuminate\Contracts\Foundation\ExceptionRenderer',
+                fn (Application $app) => $app->make(IgnitionExceptionRenderer::class)
+            );
+        }
     }
 
     protected function registerFlare(): void
@@ -117,9 +125,7 @@ class IgnitionServiceProvider extends ServiceProvider
                 ->setStage(app()->environment())
                 ->setContextProviderDetector(new LaravelContextProviderDetector())
                 ->registerMiddleware($this->getFlareMiddleware())
-                ->registerMiddleware(new AddSolutions(new SolutionProviderRepository($this->getSolutionProviders())))
-                ->argumentReducers(config('ignition.argument_reducers', []))
-                ->withStackFrameArguments(config('ignition.with_stack_frame_arguments', true));
+                ->registerMiddleware(new AddSolutions(new SolutionProviderRepository($this->getSolutionProviders())));
         });
 
         $this->app->singleton(SentReports::class);
@@ -145,7 +151,8 @@ class IgnitionServiceProvider extends ServiceProvider
 
         $this->app->singleton(
             Ignition::class,
-            fn () => (new Ignition($this->app->make(Flare::class)))->applicationPath(base_path())
+            fn () => (new Ignition())
+                ->applicationPath(base_path())
         );
     }
 
@@ -181,7 +188,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
     public function configureTinker(): void
     {
-        if ($this->app->runningInConsole()) {
+        if (! $this->app->runningInConsole()) {
             if (isset($_SERVER['argv']) && ['artisan', 'tinker'] === $_SERVER['argv']) {
                 app(Flare::class)->sendReportsImmediately();
             }
@@ -268,17 +275,13 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function getLogLevel(string $logLevelString): int
     {
-        try {
-            $logLevel = Level::fromName($logLevelString);
-        } catch (Exception $exception) {
-            $logLevel = null;
-        }
+        $logLevel = Logger::getLevels()[strtoupper($logLevelString)] ?? null;
 
         if (! $logLevel) {
             throw InvalidConfig::invalidLogLevel($logLevelString);
         }
 
-        return $logLevel->value;
+        return $logLevel;
     }
 
     protected function getFlareMiddleware(): array

@@ -2,6 +2,7 @@
 
 namespace Spatie\LaravelIgnition\Views;
 
+use Exception;
 use Illuminate\Contracts\View\Engine;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
@@ -10,7 +11,7 @@ use Illuminate\View\Engines\PhpEngine;
 use Illuminate\View\ViewException;
 use ReflectionClass;
 use ReflectionProperty;
-use Spatie\ErrorSolutions\Contracts\ProvidesSolution;
+use Spatie\Ignition\Contracts\ProvidesSolution;
 use Spatie\LaravelIgnition\Exceptions\ViewException as IgnitionViewException;
 use Spatie\LaravelIgnition\Exceptions\ViewExceptionWithSolution;
 use Throwable;
@@ -18,9 +19,7 @@ use Throwable;
 class ViewExceptionMapper
 {
     protected Engine $compilerEngine;
-
     protected BladeSourceMapCompiler $bladeSourceMapCompiler;
-
     protected array $knownPaths;
 
     public function __construct(BladeSourceMapCompiler $bladeSourceMapCompiler)
@@ -81,27 +80,15 @@ class ViewExceptionMapper
 
     protected function modifyViewsInTrace(IgnitionViewException $exception): void
     {
-        $viewIndex = null;
-
         $trace = Collection::make($exception->getPrevious()->getTrace())
-            ->map(function ($trace, $index) use (&$viewIndex) {
+            ->map(function ($trace) {
                 if ($originalPath = $this->findCompiledView(Arr::get($trace, 'file', ''))) {
-
                     $trace['file'] = $originalPath;
                     $trace['line'] = $this->getBladeLineNumber($trace['file'], $trace['line']);
-
-                    if ($viewIndex === null) {
-                        $viewIndex = $index;
-                    }
                 }
 
                 return $trace;
-            })
-            ->when(
-                $viewIndex !== null && str_ends_with($exception->getFile(), '.blade.php'),
-                fn (Collection $trace) => $trace->slice($viewIndex + 1)  // Remove all traces before the view
-            )
-            ->toArray();
+            })->toArray();
 
         $traceProperty = new ReflectionProperty('Exception', 'trace');
         $traceProperty->setAccessible(true);
