@@ -1,4 +1,5 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
+import { ExpressToLaravelAdapter } from "./expressToLaravelAdapter";
 
 // Laravel API base URL - Try multiple potential URLs
 const POTENTIAL_LARAVEL_URLS = [
@@ -72,7 +73,7 @@ export async function laravelApiRequest<T = any>(
     
     // Provide clear error message for Laravel server connection issues
     if (error instanceof Error && (error.name === 'TypeError' || error.message.includes('fetch'))) {
-      throw new Error(`Laravel server not available. Please start the Laravel server with: cd laravel-backend && php artisan serve --host=0.0.0.0 --port=8000`);
+      throw new Error(`Laravel server not available at ${LARAVEL_API_BASE}. Database migration required.`);
     }
     throw error;
   }
@@ -85,47 +86,96 @@ export const getLaravelQueryFn: <T>() => QueryFunction<T> = () =>
     return laravelApiRequest(endpoint);
   };
 
-// Laravel API service class
+// Laravel API service class with Express backend fallback
 export class LaravelApiService {
   // Destinations
   static async getDestinations() {
-    return laravelApiRequest('/destinations');
+    try {
+      return await laravelApiRequest('/destinations');
+    } catch (error) {
+      // Fallback to Express backend with Laravel format transformation
+      return await ExpressToLaravelAdapter.getDestinations();
+    }
   }
 
   static async getDestination(id: string) {
-    return laravelApiRequest(`/destinations/${id}`);
+    try {
+      return await laravelApiRequest(`/destinations/${id}`);
+    } catch (error) {
+      const destinations = await ExpressToLaravelAdapter.getDestinations();
+      const destination = destinations.find(d => d.id === parseInt(id));
+      if (!destination) throw new Error(`Destination ${id} not found`);
+      return destination;
+    }
   }
 
   // Tours
   static async getTours() {
-    return laravelApiRequest('/tours');
+    try {
+      return await laravelApiRequest('/tours');
+    } catch (error) {
+      return await ExpressToLaravelAdapter.getTours();
+    }
   }
 
   static async getTour(id: string) {
-    return laravelApiRequest(`/tours/${id}`);
+    try {
+      return await laravelApiRequest(`/tours/${id}`);
+    } catch (error) {
+      const tours = await ExpressToLaravelAdapter.getTours();
+      const tour = tours.find((t: any) => t.id === parseInt(id));
+      if (!tour) throw new Error(`Tour ${id} not found`);
+      return tour;
+    }
   }
 
   // Packages
   static async getPackages() {
-    return laravelApiRequest('/packages');
+    try {
+      return await laravelApiRequest('/packages');
+    } catch (error) {
+      return await ExpressToLaravelAdapter.getPackages();
+    }
   }
 
   static async getPackage(id: string) {
-    return laravelApiRequest(`/packages/${id}`);
+    try {
+      return await laravelApiRequest(`/packages/${id}`);
+    } catch (error) {
+      const packages = await ExpressToLaravelAdapter.getPackages();
+      const pkg = packages.find((p: any) => p.id === parseInt(id));
+      if (!pkg) throw new Error(`Package ${id} not found`);
+      return pkg;
+    }
   }
 
   // Hotels
   static async getHotels() {
-    return laravelApiRequest('/hotels');
+    try {
+      return await laravelApiRequest('/hotels');
+    } catch (error) {
+      return await ExpressToLaravelAdapter.getHotels();
+    }
   }
 
   static async getHotel(id: string) {
-    return laravelApiRequest(`/hotels/${id}`);
+    try {
+      return await laravelApiRequest(`/hotels/${id}`);
+    } catch (error) {
+      const hotels = await ExpressToLaravelAdapter.getHotels();
+      const hotel = hotels.find((h: any) => h.id === parseInt(id));
+      if (!hotel) throw new Error(`Hotel ${id} not found`);
+      return hotel;
+    }
   }
 
   // Health check
   static async healthCheck() {
-    return laravelApiRequest('/health');
+    try {
+      return await laravelApiRequest('/health');
+    } catch (error) {
+      return await ExpressToLaravelAdapter.healthCheck();
+    }
   }
 
   // Authentication
