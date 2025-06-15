@@ -86,96 +86,60 @@ export const getLaravelQueryFn: <T>() => QueryFunction<T> = () =>
     return laravelApiRequest(endpoint);
   };
 
-// Laravel API service class with Express backend fallback
+// Laravel API service class with Express backend adapter
 export class LaravelApiService {
   // Destinations
   static async getDestinations() {
-    try {
-      return await laravelApiRequest('/destinations');
-    } catch (error) {
-      // Fallback to Express backend with Laravel format transformation
-      return await ExpressToLaravelAdapter.getDestinations();
-    }
+    // Use Express backend with Laravel format transformation for authentic data
+    return await ExpressToLaravelAdapter.getDestinations();
   }
 
   static async getDestination(id: string) {
-    try {
-      return await laravelApiRequest(`/destinations/${id}`);
-    } catch (error) {
-      const destinations = await ExpressToLaravelAdapter.getDestinations();
-      const destination = destinations.find(d => d.id === parseInt(id));
-      if (!destination) throw new Error(`Destination ${id} not found`);
-      return destination;
-    }
+    const destinations = await ExpressToLaravelAdapter.getDestinations();
+    const destination = destinations.find(d => d.id === parseInt(id));
+    if (!destination) throw new Error(`Destination ${id} not found`);
+    return destination;
   }
 
   // Tours
   static async getTours() {
-    try {
-      return await laravelApiRequest('/tours');
-    } catch (error) {
-      return await ExpressToLaravelAdapter.getTours();
-    }
+    return await ExpressToLaravelAdapter.getTours();
   }
 
   static async getTour(id: string) {
-    try {
-      return await laravelApiRequest(`/tours/${id}`);
-    } catch (error) {
-      const tours = await ExpressToLaravelAdapter.getTours();
-      const tour = tours.find((t: any) => t.id === parseInt(id));
-      if (!tour) throw new Error(`Tour ${id} not found`);
-      return tour;
-    }
+    const tours = await ExpressToLaravelAdapter.getTours();
+    const tour = tours.find((t: any) => t.id === parseInt(id));
+    if (!tour) throw new Error(`Tour ${id} not found`);
+    return tour;
   }
 
   // Packages
   static async getPackages() {
-    try {
-      return await laravelApiRequest('/packages');
-    } catch (error) {
-      return await ExpressToLaravelAdapter.getPackages();
-    }
+    return await ExpressToLaravelAdapter.getPackages();
   }
 
   static async getPackage(id: string) {
-    try {
-      return await laravelApiRequest(`/packages/${id}`);
-    } catch (error) {
-      const packages = await ExpressToLaravelAdapter.getPackages();
-      const pkg = packages.find((p: any) => p.id === parseInt(id));
-      if (!pkg) throw new Error(`Package ${id} not found`);
-      return pkg;
-    }
+    const packages = await ExpressToLaravelAdapter.getPackages();
+    const pkg = packages.find((p: any) => p.id === parseInt(id));
+    if (!pkg) throw new Error(`Package ${id} not found`);
+    return pkg;
   }
 
   // Hotels
   static async getHotels() {
-    try {
-      return await laravelApiRequest('/hotels');
-    } catch (error) {
-      return await ExpressToLaravelAdapter.getHotels();
-    }
+    return await ExpressToLaravelAdapter.getHotels();
   }
 
   static async getHotel(id: string) {
-    try {
-      return await laravelApiRequest(`/hotels/${id}`);
-    } catch (error) {
-      const hotels = await ExpressToLaravelAdapter.getHotels();
-      const hotel = hotels.find((h: any) => h.id === parseInt(id));
-      if (!hotel) throw new Error(`Hotel ${id} not found`);
-      return hotel;
-    }
+    const hotels = await ExpressToLaravelAdapter.getHotels();
+    const hotel = hotels.find((h: any) => h.id === parseInt(id));
+    if (!hotel) throw new Error(`Hotel ${id} not found`);
+    return hotel;
   }
 
   // Health check
   static async healthCheck() {
-    try {
-      return await laravelApiRequest('/health');
-    } catch (error) {
-      return await ExpressToLaravelAdapter.healthCheck();
-    }
+    return await ExpressToLaravelAdapter.healthCheck();
   }
 
   // Authentication
