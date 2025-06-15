@@ -32,8 +32,8 @@ Route::prefix('auth')->group(function () {
 });
 
 // Public content routes
-Route::get('destinations', [DestinationController::class, 'index']);
-Route::get('destinations/{id}', [DestinationController::class, 'show']);
+Route::get('destinations', [App\Http\Controllers\Api\SimpleDestinationController::class, 'index']);
+Route::get('destinations/{id}', [App\Http\Controllers\Api\SimpleDestinationController::class, 'show']);
 
 Route::get('tours', [TourController::class, 'index']);
 Route::get('tours/{id}', [TourController::class, 'show']);
