@@ -50,6 +50,10 @@ Route::get('packages/{id}', [PackageController::class, 'show']);
 Route::get('hotels', [HotelController::class, 'index']);
 Route::get('hotels/{id}', [HotelController::class, 'show']);
 
+// Menu routes
+Route::get('menus', [\App\Http\Controllers\Api\MenuController::class, 'index']);
+Route::get('menus/location/{location}', [\App\Http\Controllers\Api\MenuController::class, 'getByLocation']);
+
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
     

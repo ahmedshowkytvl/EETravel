@@ -1,5 +1,5 @@
 // Laravel API Client - Complete replacement for Express.js backend
-const LARAVEL_API_BASE = 'http://127.0.0.1:8000/api';
+const LARAVEL_API_BASE = import.meta.env.VITE_LARAVEL_API_URL || 'http://127.0.0.1:8000/api';
 
 interface ApiResponse<T = any> {
   data?: T;
@@ -39,7 +39,7 @@ class LaravelApiClient {
       }
 
       const data = await response.json();
-      return data.data || data;
+      return data as T;
     } catch (error) {
       console.error(`Laravel API request failed for ${endpoint}:`, error);
       throw error;
@@ -135,6 +135,15 @@ class LaravelApiClient {
         'Authorization': `Bearer ${token}`,
       },
     });
+  }
+
+  // Menu API
+  async getMenus() {
+    return this.makeRequest('/menus');
+  }
+
+  async getMenuByLocation(location: string) {
+    return this.makeRequest(`/menus/location/${location}`);
   }
 
   // Bookings API (authenticated)
