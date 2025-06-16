@@ -1059,6 +1059,7 @@ export const insertDestinationSchema = createInsertSchema(destinations).pick({
   description: true,
   imageUrl: true,
   featured: true,
+  active: true,
 });
 
 export const insertPackageSchema = createInsertSchema(packages).pick({
