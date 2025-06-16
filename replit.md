@@ -106,6 +106,12 @@ The application uses a comprehensive PostgreSQL schema with the following core e
 
 ## Recent Changes
 
+- **Database Schema Completion (June 16, 2025)**: Resolved all remaining database schema errors
+  - Added missing columns: context to translations, title to packages
+  - Added comprehensive user profile columns (display_name, phone_number, status, avatar_url, nationality, date_of_birth, last_login_at, email_verified, phone_verified, preferred_language, email_notifications, sms_notifications, marketing_emails)
+  - Fixed API endpoints for /api/packages, /api/admin/users, /api/translations
+  - All database queries now work correctly with PostgreSQL
+
 - **Currency Migration (June 16, 2025)**: Converted all pricing throughout the platform from USD to Egyptian Pounds (EGP)
   - Applied 50:1 exchange rate conversion (1 USD = 50 EGP)
   - Updated packages, tours, hotels, visas, and flights pricing data
