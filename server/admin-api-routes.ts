@@ -243,51 +243,41 @@ export function setupAdvancedAdminRoutes(app: Express) {
       const { search, role, status } = req.query;
       
       let query = db
-        .select({
-          id: users.id,
-          username: users.username,
-          email: users.email,
-          displayName: users.displayName,
-          firstName: users.firstName,
-          lastName: users.lastName,
-          phoneNumber: users.phoneNumber,
-          role: users.role,
-          status: users.status,
-          avatarUrl: users.avatarUrl,
-          nationality: users.nationality,
-          dateOfBirth: users.dateOfBirth,
-          lastLoginAt: users.lastLoginAt,
-          emailVerified: users.emailVerified,
-          phoneVerified: users.phoneVerified,
-          createdAt: users.createdAt,
-          updatedAt: users.updatedAt,
-          totalBookings: sql<number>`coalesce((select count(*) from ${bookings} where ${bookings.userId} = ${users.id}), 0)`,
-          totalSpent: sql<number>`coalesce((select sum(${bookings.totalAmount}) from ${bookings} where ${bookings.userId} = ${users.id}), 0)`,
-          preferredLanguage: users.preferredLanguage,
-          emailNotifications: users.emailNotifications,
-          smsNotifications: users.smsNotifications,
-          marketingEmails: users.marketingEmails
-        })
+        .select()
         .from(users);
 
+      // Apply filters if provided
+      let conditions = [];
+      
       if (search) {
-        query = query.where(
-          sql`${users.displayName} ILIKE ${`%${search}%`} OR 
-              ${users.email} ILIKE ${`%${search}%`} OR 
-              ${users.username} ILIKE ${`%${search}%`}`
+        conditions.push(
+          sql`(${users.displayName} ILIKE ${'%' + search + '%'} OR 
+              ${users.email} ILIKE ${'%' + search + '%'} OR 
+              ${users.username} ILIKE ${'%' + search + '%'})`
         );
       }
 
       if (role && role !== 'all') {
-        query = query.where(eq(users.role, role as string));
+        conditions.push(eq(users.role, role as string));
       }
 
       if (status && status !== 'all') {
-        query = query.where(eq(users.status, status as string));
+        conditions.push(eq(users.status, status as string));
+      }
+
+      if (conditions.length > 0) {
+        query = query.where(and(...conditions));
       }
 
       const usersList = await query.orderBy(desc(users.createdAt));
-      res.json(usersList);
+      
+      // Remove password from response for security
+      const safeUsers = usersList.map(user => {
+        const { password, ...userWithoutPassword } = user;
+        return userWithoutPassword;
+      });
+      
+      res.json(safeUsers);
     } catch (error) {
       console.error('Users fetch error:', error);
       res.status(500).json({ message: "Failed to fetch users" });

@@ -122,6 +122,8 @@ The application uses a comprehensive PostgreSQL schema with the following core e
   - Fixed authentication middleware causing 403 errors in admin API endpoints
   - Resolved user statistics API endpoint returning 400 errors
   - All admin panel functionality now working correctly with proper language support
+  - Fixed admin users endpoint causing "Failed to load users" error by simplifying SQL queries
+  - Secured user data responses by removing passwords from API responses
   - All API endpoints now functional: /api/packages, /api/countries, /api/cities, /api/hero-slides/active, /api/menus
   - Complete PostgreSQL integration with proper EGP pricing throughout
 
