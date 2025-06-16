@@ -20,7 +20,7 @@ export default function PackageCreatorPage() {
     console.log("packageId:", packageId);
   }, [isEditMode, packageId]);
   
-  const pageTitle = isEditMode ? "Edit Package" : "Create New Package";
+  const pageTitle = isEditMode ? t('admin.packages.editPackage', 'Edit Package') : t('admin.packages.createPackage', 'Create New Package');
 
   return (
     <div>

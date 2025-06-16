@@ -1770,21 +1770,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // ADMIN ROUTES
   // ========================
   
-  // Get all users (admin only)
-  app.get('/api/admin/users', isAdmin, async (req, res) => {
-    try {
-      const users = await storage.listUsers();
-      // Remove sensitive information like passwords before sending
-      const safeUsers = users.map(user => {
-        const { password, ...userWithoutPassword } = user;
-        return userWithoutPassword;
-      });
-      res.json(safeUsers);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-      res.status(500).json({ message: 'Failed to fetch users' });
-    }
-  });
+  // NOTE: /api/admin/users route moved to admin-api-routes.ts to avoid conflicts
 
   // Get user by ID (admin only)
   app.get('/api/admin/users/:id', isAdmin, async (req, res) => {
