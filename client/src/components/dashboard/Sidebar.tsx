@@ -86,7 +86,7 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
     },
     { 
       icon: <LayoutDashboard size={20} />, 
-      label: 'لوحة التحكم المتقدمة', 
+      label: t('admin.sidebar.advancedDashboard', 'Advanced Dashboard'), 
       href: "/admin/advanced-dashboard" 
     },
     { 
@@ -96,12 +96,12 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
     },
     { 
       icon: <Users size={20} />, 
-      label: 'إدارة المستخدمين المتقدمة', 
+      label: t('admin.sidebar.advancedUserManagement', 'Advanced User Management'), 
       href: "/admin/advanced-users" 
     },
     { 
       icon: <FileCheck size={20} />, 
-      label: 'إدارة الحجوزات المتقدمة', 
+      label: t('admin.sidebar.advancedBookings', 'Advanced Bookings'), 
       href: "/admin/advanced-bookings" 
     },
     { 
@@ -336,7 +336,7 @@ export function Sidebar({ collapsed, onToggle, location }: SidebarProps) {
     },
     { 
       icon: <Settings size={20} />, 
-      label: 'إعدادات النظام المتقدمة', 
+      label: t('admin.sidebar.advancedSettings', 'Advanced System Settings'), 
       href: "/admin/advanced-settings" 
     },
   ];

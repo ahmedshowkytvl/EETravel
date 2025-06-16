@@ -172,8 +172,8 @@ export default function AdvancedUserManagement() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">{t("admin.manage_users", "Manage Users")} المتقدمة</h1>
-          <p className="text-gray-600 mt-1">إدارة شاملة للمستخدمين والأدوار والصلاحيات</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t("admin.advanced_user_management", "Advanced User Management")}</h1>
+          <p className="text-gray-600 mt-1">{t("admin.comprehensive_user_management_desc", "Comprehensive management of users, roles and permissions")}</p>
         </div>
         <div className="flex gap-3">
           <Button onClick={() => setShowCreateDialog(true)}>
@@ -256,27 +256,27 @@ export default function AdvancedUserManagement() {
             </div>
             <Select value={roleFilter} onValueChange={setRoleFilter}>
               <SelectTrigger className="w-48">
-                <SelectValue placeholder="فلترة حسب الدور" />
+                <SelectValue placeholder={t("admin.filter_by_role", "Filter by Role")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">جميع الأدوار</SelectItem>
-                <SelectItem value="admin">مدير</SelectItem>
-                <SelectItem value="manager">مدير مساعد</SelectItem>
-                <SelectItem value="agent">وكيل</SelectItem>
-                <SelectItem value="user">مستخدم عادي</SelectItem>
-                <SelectItem value="vip">عميل مميز</SelectItem>
+                <SelectItem value="all">{t("admin.all_roles", "All Roles")}</SelectItem>
+                <SelectItem value="admin">{t("admin.admin", "Admin")}</SelectItem>
+                <SelectItem value="manager">{t("admin.manager", "Manager")}</SelectItem>
+                <SelectItem value="agent">{t("admin.agent", "Agent")}</SelectItem>
+                <SelectItem value="user">{t("admin.user", "User")}</SelectItem>
+                <SelectItem value="vip">{t("admin.vip", "VIP")}</SelectItem>
               </SelectContent>
             </Select>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-48">
-                <SelectValue placeholder="فلترة حسب الحالة" />
+                <SelectValue placeholder={t("admin.filter_by_status", "Filter by Status")} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">{t("admin.all_statuses", "All Statuses")}</SelectItem>
-                <SelectItem value="active">نشط</SelectItem>
-                <SelectItem value="inactive">غير نشط</SelectItem>
-                <SelectItem value="suspended">معلق</SelectItem>
-                <SelectItem value="pending">قيد المراجعة</SelectItem>
+                <SelectItem value="active">{t("status.active", "Active")}</SelectItem>
+                <SelectItem value="inactive">{t("status.inactive", "Inactive")}</SelectItem>
+                <SelectItem value="suspended">{t("status.suspended", "Suspended")}</SelectItem>
+                <SelectItem value="pending">{t("status.pending", "Pending")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -286,7 +286,7 @@ export default function AdvancedUserManagement() {
       {/* Users List */}
       <Card>
         <CardHeader>
-          <CardTitle>قائمة المستخدمين ({filteredUsers?.length || 0})</CardTitle>
+          <CardTitle>{t("admin.users_list", "Users List")} ({filteredUsers?.length || 0})</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -324,12 +324,12 @@ export default function AdvancedUserManagement() {
                         )}
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
-                          <span>انضم في {new Date(user.createdAt).toLocaleDateString('ar-EG')}</span>
+                          <span>{t("admin.joined_on", "Joined on")} {new Date(user.createdAt).toLocaleDateString()}</span>
                         </div>
                         {user.lastLoginAt && (
                           <div className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
-                            <span>آخر دخول {new Date(user.lastLoginAt).toLocaleDateString('ar-EG')}</span>
+                            <span>{t("admin.last_login", "Last login")} {new Date(user.lastLoginAt).toLocaleDateString()}</span>
                           </div>
                         )}
                       </div>
@@ -337,11 +337,11 @@ export default function AdvancedUserManagement() {
                       <div className="flex items-center gap-6 text-sm">
                         <div className="flex items-center gap-1">
                           <CreditCard className="w-4 h-4 text-gray-500" />
-                          <span>{user.totalBookings} حجز</span>
+                          <span>{user.totalBookings} {t("admin.bookings", "bookings")}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Activity className="w-4 h-4 text-gray-500" />
-                          <span>${user.totalSpent?.toLocaleString()} إجمالي الإنفاق</span>
+                          <span>{user.totalSpent?.toLocaleString()} EGP {t("admin.total_spent", "total spent")}</span>
                         </div>
                         {user.nationality && (
                           <div className="flex items-center gap-1">
