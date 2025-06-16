@@ -143,6 +143,7 @@ export const packages = pgTable("packages", {
   shortDescription: text("short_description"),
   price: integer("price").notNull(),
   discountedPrice: integer("discounted_price"),
+  currency: text("currency").default("EGP").notNull(),
   imageUrl: text("image_url"),
   galleryUrls: json("gallery_urls"), // Using native JSON in PostgreSQL
   duration: integer("duration").notNull(),
@@ -210,7 +211,7 @@ export const bookings = pgTable("bookings", {
   basePrice: integer("base_price").notNull(),
   taxAmount: integer("tax_amount").default(0),
   discountAmount: integer("discount_amount").default(0),
-  currency: text("currency").default("USD").notNull(),
+  currency: text("currency").default("EGP").notNull(),
   status: text("status").default("pending").notNull(),
   paymentStatus: text("payment_status").default("pending").notNull(),
   paymentMethod: text("payment_method"),
@@ -254,6 +255,7 @@ export const tours = pgTable("tours", {
   numPassengers: integer("num_passengers"),
   price: integer("price").notNull(),
   discountedPrice: integer("discounted_price"),
+  currency: text("currency").default("EGP").notNull(),
   included: json("included"), // Using native JSON in PostgreSQL
   excluded: json("excluded"), // Using native JSON in PostgreSQL
   itinerary: text("itinerary"),
@@ -350,6 +352,7 @@ export const rooms = pgTable("rooms", {
   maxInfants: integer("max_infants").notNull().default(0),
   price: integer("price").notNull(),
   discountedPrice: integer("discounted_price"),
+  currency: text("currency").default("EGP").notNull(),
   imageUrl: text("image_url"),
   size: text("size"),
   bedType: text("bed_type"),
@@ -1369,7 +1372,7 @@ export const payments = pgTable("payments", {
   bookingId: integer("booking_id").references(() => bookings.id).notNull(),
   userId: integer("user_id").references(() => users.id).notNull(),
   amount: integer("amount").notNull(),
-  currency: text("currency").default("USD").notNull(),
+  currency: text("currency").default("EGP").notNull(),
   paymentMethod: text("payment_method").notNull(), // card, paypal, bank_transfer
   paymentProvider: text("payment_provider"), // stripe, paypal, etc.
   providerTransactionId: text("provider_transaction_id"),

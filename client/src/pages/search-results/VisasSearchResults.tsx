@@ -50,8 +50,8 @@ const VisasSearchResults: React.FC = () => {
       country: 'Egypt',
       visaType: 'Tourist Visa',
       validityDuration: '30 days',
-      price: 25,
-      currency: 'USD',
+      price: 1250,
+      currency: 'EGP',
       processingTime: '5-7 working days',
       requirements: [
         'Valid passport with at least 6 months validity',
@@ -73,8 +73,8 @@ const VisasSearchResults: React.FC = () => {
       country: 'Egypt',
       visaType: 'Business Visa',
       validityDuration: '90 days',
-      price: 60,
-      currency: 'USD',
+      price: 3000,
+      currency: 'EGP',
       processingTime: '7-10 working days',
       requirements: [
         'Valid passport with at least 6 months validity',
@@ -98,8 +98,8 @@ const VisasSearchResults: React.FC = () => {
       country: 'Egypt',
       visaType: 'Transit Visa',
       validityDuration: '7 days',
-      price: 15,
-      currency: 'USD',
+      price: 750,
+      currency: 'EGP',
       processingTime: '3-5 working days',
       requirements: [
         'Valid passport with at least 6 months validity',
