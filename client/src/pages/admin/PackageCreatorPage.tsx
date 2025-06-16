@@ -4,6 +4,7 @@ import { PackageCreatorForm } from "@/components/dashboard/PackageCreatorForm";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Home, Package, ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 
 export default function PackageCreatorPage() {
   const { t } = useLanguage();
