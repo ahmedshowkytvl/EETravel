@@ -1,0 +1,67 @@
+PM [express] GET /api/admin/roles 200 in 11ms
+1:58:51 PM [express] GET /api/translations 304 in 194ms :: [{"id":1,"key":"home","enText":null,"arText":null,"context":"general","category":"navigation","createdAt":"20…
+1:58:51 PM [express] GET /api/admin/users 304 in 196ms :: [{"id":"1","username":"admin","email":"admin@saharajourneys.com","displayName":null,"firstName":"Admin","lastN…
+1:58:51 PM [express] GET /api/translations/settings 304 in 231ms :: {"id":1,"defaultLanguage":"en","availableLanguages":["en","ar"],"rtlLanguages":["ar"],"createdAt":"2…
+2:01:03 PM [vite] hmr update /src/pages/admin/AdvancedUserManagement.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY (x4)
+2:01:04 PM [express] GET /api/admin/roles 200 in 3ms
+⚠️ Using temporary admin access - session not found
+2:01:04 PM [express] GET /api/admin/users/stats 400 in 1ms :: {"message":"Invalid user ID"}
+2:01:48 PM [express] GET /api/admin/dashboard/stats 403 in 0ms :: {"message":"Admin access required"}
+2:01:48 PM [express] GET /api/admin/bookings/recent 403 in 0ms :: {"message":"Admin access required"}
+2:02:04 PM [vite] hmr update /src/pages/admin/AdvancedUserManagement.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY (x5)
+2:02:06 PM [express] GET /api/admin/settings 403 in 1ms :: {"message":"Admin access required"}
+2:02:07 PM [express] GET /api/admin/system/health 403 in 1ms :: {"message":"Admin access required"}
+2:02:24 PM [vite] hmr update /src/pages/admin/AdvancedUserManagement.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY (x6)
+2:02:24 PM [express] GET /api/translations 304 in 404ms :: [{"id":1,"key":"home","enText":null,"arText":null,"context":"general","category":"navigation","createdAt":"20…
+2:02:24 PM [express] GET /api/translations 304 in 21ms :: [{"id":1,"key":"home","enText":null,"arText":null,"context":"general","category":"navigation","createdAt":"202…
+2:02:25 PM [express] GET /api/admin/backups/history 200 in 4ms
+⚠️ Using temporary admin access - session not found
+2:02:26 PM [express] GET /api/admin/menus 200 in 55ms :: [{"id":1,"name":"Footer Menu","location":"footer","description":null,"active":true,"createdAt":"2025-06-16T10:1…
+⚠️ Using temporary admin access - session not found
+2:02:29 PM [express] GET /api/admin/menus/1/items 200 in 101ms :: []
+2:02:35 PM [vite] hmr update /src/pages/admin/AdvancedUserManagement.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY (x7)
+2:02:43 PM [vite] hmr update /src/pages/admin/AdvancedUserManagement.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY (x8)
+2:03:02 PM [vite] hmr update /src/pages/admin/AdvancedUserManagement.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY (x9)
+2:03:17 PM [vite] hmr update /src/pages/admin/AdvancedUserManagement.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY (x10)
+2:03:58 PM [vite] hmr update /src/components/dashboard/Sidebar.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY
+2:04:13 PM [vite] hmr update /src/components/dashboard/Sidebar.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY (x2)
+2:04:44 PM [vite] hmr update /src/components/dashboard/Sidebar.tsx, /src/index.css?v=44pl7LNjzmgnjFjXhR4uY (x3)
+2:10:01 PM [express] GET /api/admin/dashboard/stats 403 in 1ms :: {"message":"Admin access required"}
+2:10:01 PM [express] GET /api/admin/bookings/recent 403 in 1ms :: {"message":"Admin access required"}
+2:10:02 PM [express] GET /api/admin/system/health 403 in 0ms :: {"message":"Admin access required"}
+⚠️ Using temporary admin access - session not found
+2:10:07 PM [express] GET /api/admin/users 304 in 844ms :: [{"id":"1","username":"admin","email":"admin@saharajourneys.com","displayName":null,"firstName":"Admin","lastN…
+2:10:08 PM [express] GET /api/admin/dashboard/stats 403 in 1ms :: {"message":"Admin access required"}
+2:10:08 PM [express] GET /api/admin/system/health 403 in 1ms :: {"message":"Admin access required"}
+2:10:08 PM [express] GET /api/admin/bookings/recent 403 in 1ms :: {"message":"Admin access required"}
+⚠️ Using temporary admin access - session not found
+2:10:10 PM [express] GET /api/admin/users 304 in 22ms :: [{"id":"1","username":"admin","email":"admin@saharajourneys.com","displayName":null,"firstName":"Admin","lastNa…
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
