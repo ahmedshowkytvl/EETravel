@@ -30,8 +30,8 @@ const getTourById = (id: string) => {
       duration: '4 days, 3 nights',
       rating: 4.8,
       reviewCount: 245,
-      price: 450,
-      currency: 'USD',
+      price: 22500,
+      currency: 'EGP',
       pricePerPerson: true,
       image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?q=80&w=2069&auto=format&fit=crop',
       highlights: [

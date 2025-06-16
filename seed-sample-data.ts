@@ -309,7 +309,7 @@ async function seedSampleData() {
         starRating: 5,
         pricePerNight: 25000, // $250
         discountedPrice: 20000, // $200
-        currency: 'USD',
+        currency: 'EGP',
         checkInTime: '15:00',
         checkOutTime: '12:00',
         featured: true,
@@ -348,7 +348,7 @@ async function seedSampleData() {
         starRating: 4,
         pricePerNight: 18000, // $180
         discountedPrice: 15000, // $150
-        currency: 'USD',
+        currency: 'EGP',
         checkInTime: '14:00',
         checkOutTime: '11:00',
         featured: true,

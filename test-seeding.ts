@@ -125,7 +125,7 @@ async function testSeeding() {
             checkOutTime: '11:00',
             featured: Math.random() > 0.7,
             basePrice: Math.floor(Math.random() * 30000) + 10000,
-            currency: 'USD',
+            currency: 'EGP',
             totalRooms: Math.floor(Math.random() * 200) + 50,
             totalFloors: Math.floor(Math.random() * 20) + 3,
             wifiAvailable: true,
