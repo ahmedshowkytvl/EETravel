@@ -196,8 +196,8 @@ export const packagesData: Package[] = [
     duration: '7 days, 6 nights',
     rating: 4.6,
     reviewCount: 187,
-    price: 950,
-    currency: 'USD',
+    price: 47500,
+    currency: 'EGP',
     pricePerPerson: true,
     image: 'https://images.unsplash.com/photo-1581335167266-5662e1958b2f?q=80&w=2070',
     images: [
@@ -289,8 +289,8 @@ export const packagesData: Package[] = [
     duration: '14 days, 13 nights',
     rating: 4.9,
     reviewCount: 156,
-    price: 2100,
-    currency: 'USD',
+    price: 105000,
+    currency: 'EGP',
     pricePerPerson: true,
     image: 'https://images.unsplash.com/photo-1552250575-e508473b090f?q=80&w=2070',
     images: [
@@ -436,8 +436,8 @@ export const packagesData: Package[] = [
     duration: '10 days, 9 nights',
     rating: 4.7,
     reviewCount: 132,
-    price: 1400,
-    currency: 'USD',
+    price: 70000,
+    currency: 'EGP',
     pricePerPerson: true,
     image: 'https://images.unsplash.com/photo-1491555103944-7c647fd857e6?q=80&w=2070',
     images: [
