@@ -104,9 +104,24 @@ The application uses a comprehensive PostgreSQL schema with the following core e
 - Seeding scripts for initial data population
 - Export/import functionality for data backup and migration
 
+## Recent Changes
+
+- **Currency Migration (June 16, 2025)**: Converted all pricing throughout the platform from USD to Egyptian Pounds (EGP)
+  - Applied 50:1 exchange rate conversion (1 USD = 50 EGP)
+  - Updated packages, tours, hotels, visas, and flights pricing data
+  - Modified all frontend components to display EGP currency
+  - Updated database schema with EGP defaults
+
+- **Database Migration (June 16, 2025)**: Completed migration from SQLite to PostgreSQL
+  - Removed all SQLite dependencies (better-sqlite3)
+  - Updated all schema references to use PostgreSQL
+  - Added currency columns to pricing tables with EGP defaults
+  - Maintained data integrity during conversion
+
 ## Changelog
 
 - June 16, 2025. Initial setup
+- June 16, 2025. Currency conversion to EGP and PostgreSQL migration completed
 
 ## User Preferences
 
