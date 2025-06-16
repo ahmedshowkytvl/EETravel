@@ -92,8 +92,8 @@ export const packagesData: Package[] = [
     duration: '8 days, 7 nights',
     rating: 4.8,
     reviewCount: 324,
-    price: 1200,
-    currency: 'USD',
+    price: 60000,
+    currency: 'EGP',
     pricePerPerson: true,
     image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?q=80&w=2069',
     images: [
@@ -1498,8 +1498,8 @@ export const packagesData: Package[] = [
     duration: '12 days, 11 nights',
     rating: 4.9,
     reviewCount: 47,
-    price: 2800,
-    currency: 'USD',
+    price: 140000,
+    currency: 'EGP',
     pricePerPerson: true,
     image: 'https://images.unsplash.com/photo-1572254008234-3273ff5bed0d?q=80&w=2071',
     images: [

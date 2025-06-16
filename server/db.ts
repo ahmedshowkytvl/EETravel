@@ -3,7 +3,7 @@ import postgres from 'postgres';
 import * as schema from "@shared/schema";
 
 // Use environment variable for database configuration
-const DATABASE_URL = process.env.DATABASE_URL || 'file:./data/sqlite.db';
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://postgres:password@localhost:5432/travel_app';
 
 // Create a postgres client connection with better error handling
 let client: postgres.Sql;

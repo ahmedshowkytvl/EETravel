@@ -124,7 +124,7 @@ const PackagesSearchResults: React.FC = () => {
       rating: pkg.rating || 4.5,
       reviewCount: pkg.reviewCount || 0,
       price: pkg.price,
-      currency: 'USD',
+      currency: 'EGP',
       pricePerPerson: true,
       image: pkg.imageUrl || 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?q=80&w=2069&auto=format&fit=crop',
       highlights: [
@@ -144,6 +144,9 @@ const PackagesSearchResults: React.FC = () => {
       slug: pkg.slug
     }));
   }, [apiPackages]);
+
+  // Fallback packages when API data is empty
+  const fallbackPackages = packages.length === 0 ? [
     {
       id: 2,
       name: 'Cairo & Red Sea Adventure',
@@ -152,8 +155,8 @@ const PackagesSearchResults: React.FC = () => {
       duration: '7 days, 6 nights',
       rating: 4.6,
       reviewCount: 187,
-      price: 950,
-      currency: 'USD',
+      price: 47500,
+      currency: 'EGP',
       pricePerPerson: true,
       image: 'https://images.unsplash.com/photo-1581335167266-5662e1958b2f?q=80&w=2070&auto=format&fit=crop',
       highlights: [

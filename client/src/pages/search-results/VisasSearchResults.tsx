@@ -65,7 +65,7 @@ const VisasSearchResults: React.FC = () => {
       embassy: true,
       urgent: true,
       urgentProcessingTime: '1-2 working days',
-      urgentPrice: 50,
+      urgentPrice: 2500,
       description: 'Tourist Visa for short-term visits to Egypt for leisure, sightseeing, or visiting family/friends.'
     },
     {
@@ -90,7 +90,7 @@ const VisasSearchResults: React.FC = () => {
       embassy: true,
       urgent: true,
       urgentProcessingTime: '2-3 working days',
-      urgentPrice: 100,
+      urgentPrice: 5000,
       description: 'Business Visa for attending meetings, conferences, or other business-related activities in Egypt.'
     },
     {
@@ -112,7 +112,7 @@ const VisasSearchResults: React.FC = () => {
       embassy: true,
       urgent: true,
       urgentProcessingTime: '1 working day',
-      urgentPrice: 30,
+      urgentPrice: 1500,
       description: 'Transit Visa for short stays in Egypt while traveling to another destination.'
     }
   ];
