@@ -34,7 +34,7 @@ import {
 } from "@shared/schema";
 import session from "express-session";
 import MemoryStore from "memorystore";
-import { db } from "./db";
+import { db, dbPromise } from "./db";
 import { eq, and, or, ilike } from "drizzle-orm";
 
 // Interface for storage operations
@@ -2498,6 +2498,12 @@ export class DatabaseStorage implements IStorage {
 
 // PostgreSQL database storage implementation
 export class PostgresDatabaseStorage implements IStorage {
+  private async ensureDbInitialized() {
+    await dbPromise;
+    if (!db) {
+      throw new Error('Database connection failed to initialize');
+    }
+  }
   // Hotel Facilities methods
   async listHotelFacilities(): Promise<any[]> {
     try {
@@ -3096,6 +3102,7 @@ export class PostgresDatabaseStorage implements IStorage {
   }
 
   async listPackages(featured?: boolean): Promise<Package[]> {
+    await this.ensureDbInitialized();
     if (featured !== undefined) {
       return db.select().from(packages).where(eq(packages.featured, featured));
     }
