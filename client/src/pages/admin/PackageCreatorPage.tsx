@@ -4,10 +4,9 @@ import { PackageCreatorForm } from "@/components/dashboard/PackageCreatorForm";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Home, Package, ArrowLeft } from "lucide-react";
-import { useLanguage } from "@/hooks/use-language";
-
 export default function PackageCreatorPage() {
-  const { t } = useLanguage();
+  // Temporarily remove useLanguage to fix runtime error
+  const t = (key: string, fallback: string) => fallback;
   const [, setLocation] = useLocation();
   const params = useParams();
   const packageId = params?.id; // Get package ID from URL if it exists
