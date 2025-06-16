@@ -184,8 +184,8 @@ const PackagesSearchResults: React.FC = () => {
       duration: '14 days, 13 nights',
       rating: 4.9,
       reviewCount: 156,
-      price: 2100,
-      currency: 'USD',
+      price: 105000,
+      currency: 'EGP',
       pricePerPerson: true,
       image: 'https://images.unsplash.com/photo-1552250575-e508473b090f?q=80&w=2070&auto=format&fit=crop',
       highlights: [
@@ -203,9 +203,13 @@ const PackagesSearchResults: React.FC = () => {
         { date: 'July 15-28, 2025', availability: 'Available', spotsLeft: 10 }
       ],
       description: 'The ultimate Egypt experience covering all major sites and experiences from historic Cairo to relaxing beaches of the Red Sea.',
-      activities: ['Sightseeing', 'Cultural Tours', 'River Cruise', 'Beach Activities', 'Desert Safari', 'Historical Tours']
+      activities: ['Sightseeing', 'Cultural Tours', 'River Cruise', 'Beach Activities', 'Desert Safari', 'Historical Tours'],
+      slug: 'egypt-full-experience'
     }
-  ];
+  ] : [];
+
+  // Use fallback packages when API data is empty
+  const displayPackages = packages.length > 0 ? packages : fallbackPackages;
   
   const [filteredPackages, setFilteredPackages] = useState<PackageData[]>([]);
   
