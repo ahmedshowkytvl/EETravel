@@ -272,10 +272,10 @@ export default function AdvancedUserManagement() {
                 <SelectValue placeholder="فلترة حسب الحالة" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">t("admin.all_statuses", "All Statuses")</SelectItem>
+                <SelectItem value="all">{t("admin.all_statuses", "All Statuses")}</SelectItem>
                 <SelectItem value="active">نشط</SelectItem>
                 <SelectItem value="inactive">غير نشط</SelectItem>
-                <SelectItem value="suspended">t("admin.pending", "Pending")</SelectItem>
+                <SelectItem value="suspended">معلق</SelectItem>
                 <SelectItem value="pending">قيد المراجعة</SelectItem>
               </SelectContent>
             </Select>
