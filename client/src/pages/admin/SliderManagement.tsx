@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/use-language";
 import { Plus, Edit, Trash2, MoveUp, MoveDown, Image, Eye, EyeOff, Upload, Link2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { HeroSlide, insertHeroSlideSchema } from "@shared/schema";
