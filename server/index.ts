@@ -95,6 +95,7 @@ app.use((req, res, next) => {
       console.log('✅ Admin setup completed');
     } catch (error) {
       console.error('❌ Admin setup failed:', error);
+      throw error; // Fail fast if admin setup fails
     }
 
     // Setup authentication and hero slides routes
@@ -113,8 +114,9 @@ app.use((req, res, next) => {
     }
 
     // Start the server and register routes
+    let server;
     try {
-      const server = await registerRoutes(app);
+      server = await registerRoutes(app);
       console.log('✅ Routes registered successfully');
     } catch (error) {
       console.error('❌ Route registration failed:', error);
