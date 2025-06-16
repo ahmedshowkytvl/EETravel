@@ -111,10 +111,11 @@ The application uses a comprehensive PostgreSQL schema with the following core e
   - Fixed countries table: Added missing created_by and updated_by audit columns
   - Fixed cities table: Corrected column type mismatches and added missing active column
   - Fixed hero_slides table: Added missing secondary_button_text and secondary_button_link columns
-  - Created missing menu_items table with proper relationships
+  - Created missing menu_items table with proper relationships and columns (icon_type, item_type)
   - Fixed user profile columns (passport_number, emergency_contact, dietary_requirements, medical_conditions)
   - Created missing airports table with proper schema structure
   - Fixed database initialization timing issues in storage layer
+  - Fixed translation rendering issues in admin components (useLanguage import and JSX syntax)
   - All API endpoints now functional: /api/packages, /api/countries, /api/cities, /api/hero-slides/active, /api/menus
   - Complete PostgreSQL integration with proper EGP pricing throughout
 

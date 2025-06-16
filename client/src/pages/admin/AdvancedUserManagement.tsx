@@ -172,13 +172,13 @@ export default function AdvancedUserManagement() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">t("admin.manage_users", "Manage Users") المتقدمة</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{t("admin.manage_users", "Manage Users")} المتقدمة</h1>
           <p className="text-gray-600 mt-1">إدارة شاملة للمستخدمين والأدوار والصلاحيات</p>
         </div>
         <div className="flex gap-3">
           <Button onClick={() => setShowCreateDialog(true)}>
             <UserPlus className="w-4 h-4 mr-2" />
-            t("admin.add_new_user", "Add New User")
+            {t("admin.add_new_user", "Add New User")}
           </Button>
         </div>
       </div>
