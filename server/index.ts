@@ -90,14 +90,36 @@ app.use((req, res, next) => {
     }
 
     // Setup admin users after database is initialized
-    await setupAdmin();
+    try {
+      await setupAdmin();
+      console.log('✅ Admin setup completed');
+    } catch (error) {
+      console.error('❌ Admin setup failed:', error);
+    }
 
     // Setup authentication and hero slides routes
-    setupUnifiedAuth(app);
-    setupHeroSlidesRoutes(app);
+    try {
+      setupUnifiedAuth(app);
+      console.log('✅ Unified auth setup completed');
+    } catch (error) {
+      console.error('❌ Unified auth setup failed:', error);
+    }
+
+    try {
+      setupHeroSlidesRoutes(app);
+      console.log('✅ Hero slides routes setup completed');
+    } catch (error) {
+      console.error('❌ Hero slides routes setup failed:', error);
+    }
 
     // Start the server and register routes
-    const server = await registerRoutes(app);
+    try {
+      const server = await registerRoutes(app);
+      console.log('✅ Routes registered successfully');
+    } catch (error) {
+      console.error('❌ Route registration failed:', error);
+      throw error;
+    }
 
     // Serve the admin test page
     app.get('/admin-test', (req, res) => {
