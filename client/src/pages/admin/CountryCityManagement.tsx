@@ -87,7 +87,6 @@ import {
   FormRequiredFieldsNote,
   FormValidationAlert,
 } from "@/components/dashboard/FormValidationAlert";
-import { useLanguage } from "@/hooks/useLanguage";
 
 // Interfaces matching our schema
 interface Country {
@@ -294,19 +293,19 @@ export default function CountryCityManagement() {
   const { data: countries = [], isLoading: isLoadingCountries } = useQuery<
     Country[]
   >({
-    queryKey: ["/api/countries"],
+    queryKey: ["/api/admin/countries"],
   });
 
   // Query cities
   const { data: cities = [], isLoading: isLoadingCities } = useQuery<City[]>({
-    queryKey: ["/api/cities"],
+    queryKey: ["/api/admin/cities"],
   });
 
   // Query airports
   const { data: airports = [], isLoading: isLoadingAirports } = useQuery<
     Airport[]
   >({
-    queryKey: ["/api/airports"],
+    queryKey: ["/api/admin/airports"],
   });
 
   // Advanced filtering logic with professional search capabilities

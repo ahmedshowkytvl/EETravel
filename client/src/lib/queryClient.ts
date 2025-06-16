@@ -11,15 +11,9 @@ export async function apiRequest<T = any>(
   url: string, 
   options?: RequestInit
 ): Promise<T> {
-  // Use Laravel API compatibility layer in Express.js
-  const apiUrl = url.startsWith('/api') ? url : `/api${url}`;
-
   const defaultOptions: RequestInit = {
     method: 'GET',
-    headers: { 
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     credentials: "include",
   };
 
@@ -27,10 +21,9 @@ export async function apiRequest<T = any>(
     ? { ...defaultOptions, ...options } 
     : defaultOptions;
 
-  const res = await fetch(apiUrl, mergedOptions);
+  const res = await fetch(url, mergedOptions);
   await throwIfResNotOk(res);
-  const data = await res.json();
-  return data;
+  return await res.json();
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";
@@ -40,16 +33,8 @@ export const getQueryFn: <T>(options?: {
   (options) =>
   async ({ queryKey }) => {
     const unauthorizedBehavior = options?.on401 || "throw";
-    
-    // Use Express.js API endpoints with Laravel compatibility
-    const url = queryKey[0] as string;
-    const apiUrl = url.startsWith('/api') ? url : `/api${url}`;
-    
-    const res = await fetch(apiUrl, {
+    const res = await fetch(queryKey[0] as string, {
       credentials: "include",
-      headers: {
-        "Accept": "application/json"
-      }
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
@@ -57,8 +42,7 @@ export const getQueryFn: <T>(options?: {
     }
 
     await throwIfResNotOk(res);
-    const data = await res.json();
-    return data;
+    return await res.json();
   };
 
 export const queryClient = new QueryClient({

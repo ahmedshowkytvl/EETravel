@@ -2930,15 +2930,10 @@ export class PostgresDatabaseStorage implements IStorage {
   }
   
   async listCountries(active?: boolean): Promise<Country[]> {
-    try {
-      if (active !== undefined) {
-        return await db.select().from(countries).where(eq(countries.active, active));
-      }
-      return await db.select().from(countries);
-    } catch (error) {
-      console.error('Database error in listCountries:', error);
-      throw new Error(`Failed to fetch countries: ${error.message}`);
+    if (active !== undefined) {
+      return await db.select().from(countries).where(eq(countries.active, active));
     }
+    return await db.select().from(countries);
   }
   
   async createCountry(country: InsertCountry): Promise<Country> {

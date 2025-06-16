@@ -32,30 +32,30 @@ interface Menu {
 }
 
 interface MenuResponse {
-  menu: Menu | null;
+  menu: Menu;
   items: MenuItem[];
 }
 
 const Footer: React.FC = () => {
   const { t, isRTL } = useLanguage();
   
-  // Fetch the "footer" menu from Express API
+  // Fetch the "footer" menu from the API
   const { data: footerMenu, isLoading } = useQuery<MenuResponse>({
-    queryKey: ['menus', 'location', 'footer'],
-    queryFn: async (): Promise<MenuResponse> => {
+    queryKey: ['/api/menus/location/footer'],
+    queryFn: async () => {
       try {
         const response = await fetch('/api/menus/location/footer');
         if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          throw new Error('Failed to fetch footer menu');
         }
-        const result = await response.json();
-        return result;
+        return response.json();
       } catch (error) {
         console.error('Error fetching footer menu:', error);
         return { menu: null, items: [] };
       }
     },
     staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+    // By default, return null if there's an error or no menu found
     refetchOnWindowFocus: false
   });
 

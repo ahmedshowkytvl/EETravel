@@ -114,14 +114,6 @@ const Header: React.FC = () => {
             </li>
             <li>
               <Link
-                href="/laravel-api"
-                className={`font-medium hover:text-primary transition-colors ${location.startsWith("/laravel") ? "text-primary" : ""}`}
-              >
-                {t('Laravel API', 'Laravel API')}
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="/packages"
                 className={`font-medium hover:text-primary transition-colors ${location.startsWith("/packages") ? "text-primary" : ""}`}
               >
@@ -271,16 +263,6 @@ const Header: React.FC = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('nav.destinations', 'Destinations')}
-              </Link>
-            </li>
-            
-            <li>
-              <Link
-                href="/laravel-api"
-                className={`block font-medium hover:text-primary transition-colors ${location.startsWith("/laravel") ? "text-primary" : ""}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('Laravel API', 'Laravel API')}
               </Link>
             </li>
             

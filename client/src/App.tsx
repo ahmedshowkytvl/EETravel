@@ -34,12 +34,6 @@ import {
   PackagesSearchResults
 } from "@/pages/search-results";
 
-// Laravel Integration
-import LaravelDestinations from "@/pages/LaravelDestinations";
-import ApiTest from "@/pages/ApiTest";
-import LaravelIntegration from "@/pages/LaravelIntegration";
-import LaravelApiMenu from "@/components/LaravelApiMenu";
-
 // Admin Pages
 import PackagesManagement from "@/pages/admin/PackagesManagement";
 import PackageCreatorPage from "@/pages/admin/PackageCreatorPage";
@@ -166,10 +160,6 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/auth" component={AuthPage} />
         <Route path="/destinations" component={DestinationsPage} />
-        <Route path="/laravel-destinations" component={LaravelDestinations} />
-        <Route path="/api-test" component={ApiTest} />
-        <Route path="/laravel-integration" component={LaravelIntegration} />
-        <Route path="/laravel-api" component={LaravelApiMenu} />
         <Route path="/about" component={AboutPage} />
         <Route path="/contact" component={ContactPage} />
         <Route path="/social-demo" component={SocialMediaBoxDemo} />
