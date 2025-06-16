@@ -510,7 +510,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const packages = await storage.listPackages();
       res.json(packages);
     } catch (error) {
-      res.status(500).json({ message: 'Failed to fetch packages' });
+      console.error('Packages API Error:', error);
+      res.status(500).json({ message: 'Failed to fetch packages', error: error.message });
     }
   });
 

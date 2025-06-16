@@ -52,5 +52,16 @@ async function initializeDatabase() {
 // Initialize the database connection and export a promise
 const dbPromise = initializeDatabase();
 
-// Export the database connection
-export { db, client, dbPromise };
+// Export the database connection with proper initialization check
+export { client, dbPromise };
+
+// Export db with initialization check
+export function getDb() {
+  if (!db) {
+    throw new Error('Database not initialized. Call initializeDatabase() first.');
+  }
+  return db;
+}
+
+// Export db directly for backward compatibility, but ensure it's initialized
+export { db };
