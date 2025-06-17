@@ -2,13 +2,23 @@ import express, { type Request, Response, NextFunction } from "express";
 import dotenv from 'dotenv'; // استيراد dotenv
 import cors from 'cors'; // استيراد cors
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
 import { dbPromise } from './db'; // استيراد dbPromise
 import session from 'express-session'; // استيراد session
 import { setupAdmin } from './admin-setup'; // استيراد setupAdmin
 import { setupUnifiedAuth } from './unified-auth';
 import { setupHeroSlidesRoutes } from './hero-slides-routes';
+
+// Fallback logger function
+const log = (message: string, source = "express") => {
+  const formattedTime = new Date().toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit", 
+    second: "2-digit",
+    hour12: true,
+  });
+  console.log(`${formattedTime} [${source}] ${message}`);
+};
 
 // Load environment variables first
 dotenv.config();
@@ -71,6 +81,23 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Conditional import of Vite to avoid configuration errors
+  let setupVite: any = null, serveStatic: any = null;
+
+  try {
+    const viteModule = await import("./vite");
+    setupVite = viteModule.setupVite;
+    serveStatic = viteModule.serveStatic;
+    console.log('✅ Vite modules loaded successfully');
+  } catch (error) {
+    console.warn('⚠️ Vite import failed, using fallback configuration');
+    
+    serveStatic = (app: any) => {
+      // Simple static file serving fallback
+      app.use(express.static('dist/public'));
+    };
+  }
+
   try {
     // Try to initialize database, but continue with fallback if it fails
     console.log('⏳ Waiting for database initialization...');
@@ -152,9 +179,18 @@ app.use((req, res, next) => {
     // setting up all the other routes so the catch-all route
     // doesn\'t interfere with the other routes
     if (app.get("env") === "development") {
-      await setupVite(app, server);
+      if (setupVite) {
+        await setupVite(app, server);
+      } else {
+        console.log('Vite setup skipped due to configuration error - serving static files');
+        app.use(express.static('dist/public'));
+      }
     } else {
-      serveStatic(app);
+      if (serveStatic) {
+        serveStatic(app);
+      } else {
+        app.use(express.static('dist/public'));
+      }
     }
 
     // ALWAYS serve the app on port 8080
