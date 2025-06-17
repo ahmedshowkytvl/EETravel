@@ -196,7 +196,7 @@ app.use((req, res, next) => {
     // ALWAYS serve the app on port 8080
     // this serves both the API and the client.
     // Using port 8080 as discussed previously
-    const port = parseInt(process.env.PORT || "80"); // Use PORT environment variable, fallback to 80
+    const port = parseInt(process.env.PORT || "3000"); // Use PORT environment variable, fallback to 3000
     const host = process.env.HOST || "0.0.0.0";
     
     server.listen(port, host, () => {
