@@ -107,7 +107,7 @@ The application uses a comprehensive PostgreSQL schema with the following core e
 ## Recent Changes
 
 - **Production Deployment Complete (June 17, 2025)**: Successfully deployed platform for external access
-  - **External Access Configured**: Server accessible from IP 74.179.85.9:8080 with proper network binding
+  - **Standard Port Configuration**: Server now accessible from IP 74.179.85.9 on port 80 (standard HTTP port)
   - **Production Scripts Created**: Built deployment tools (start-production.sh, deploy-production.sh)
   - **Database Schema Complete**: All 52+ tables from Drizzle schema properly created in PostgreSQL
   - **Database Repair Tools**: Comprehensive diagnostic and repair scripts (fix-database.sh, complete-db-fix.sh)
