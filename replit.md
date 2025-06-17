@@ -106,9 +106,10 @@ The application uses a comprehensive PostgreSQL schema with the following core e
 
 ## Recent Changes
 
-- **Server Configuration Resolved (June 16, 2025)**: Eliminated Vite configuration errors preventing server startup
+- **Server Configuration Resolved (June 17, 2025)**: Eliminated Vite configuration errors preventing server startup
   - **Vite Path Resolution Fixed**: Implemented conditional import strategy to bypass import.meta.dirname compatibility issues
   - **Server Startup Stable**: Direct server execution with npx tsx server/index.ts now works reliably
+  - **Auto-Start Script Added**: Created start.sh for one-command server deployment
   - **Database Connection Restored**: Proper Neon PostgreSQL connectivity with fallback handling
   - **Admin Panel Operational**: Complete user management functionality with API returning HTTP 200 responses
   - **Translation System Active**: English/Arabic support with proper language selection handling
