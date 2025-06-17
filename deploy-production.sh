@@ -1,74 +1,103 @@
 #!/bin/bash
 
-# Production deployment script for Sahara Journeys
-# Configures and starts server on port 80
+# Production Deployment Script for Sahara Journeys
+# Configures server for external access and production environment
 
 echo "🚀 Deploying Sahara Journeys to Production"
+echo "=========================================="
 
-# Kill any existing processes
-sudo pkill -f "tsx server/index.ts" 2>/dev/null || true
-sudo pkill -f "node.*server" 2>/dev/null || true
-sleep 3
-
-# Create necessary directories
-sudo mkdir -p /var/log/sahara-journeys
-sudo mkdir -p /var/run/sahara-journeys
-
-# Set ownership
-sudo chown -R ahmed:ahmed /var/log/sahara-journeys
-sudo chown -R ahmed:ahmed /var/run/sahara-journeys
-
-echo "📊 Starting server on port 80..."
-
-# Start server with proper environment
-sudo -E NODE_ENV=production PORT=80 HOST=0.0.0.0 nohup npx tsx server/index.ts > /var/log/sahara-journeys/production.log 2>&1 &
-
-SERVER_PID=$!
-echo $SERVER_PID | sudo tee /var/run/sahara-journeys/server.pid > /dev/null
-
-echo "Server PID: $SERVER_PID"
-echo "Waiting for startup..."
-
-# Monitor startup progress
-for i in {1..30}; do
-    sleep 2
-    
-    if ! sudo ps -p $SERVER_PID > /dev/null 2>&1; then
-        echo "❌ Server process terminated"
-        echo "📋 Last log entries:"
-        sudo tail -20 /var/log/sahara-journeys/production.log
-        exit 1
-    fi
-    
-    # Check if server is responding
-    if curl -s -o /dev/null -w "%{http_code}" http://localhost:80 2>/dev/null | grep -q "200\|404\|302"; then
-        echo "✅ Server is responding on port 80"
-        break
-    fi
-    
-    echo "⏳ Waiting for server startup... ($i/30)"
-done
-
-# Final status check
-if sudo ps -p $SERVER_PID > /dev/null 2>&1; then
-    echo ""
-    echo "🎉 Sahara Journeys Production Deployment Complete!"
-    echo ""
-    echo "🌐 Access URLs:"
-    echo "   Main Site: http://74.179.85.9"
-    echo "   Admin Panel: http://74.179.85.9/admin"
-    echo ""
-    echo "📊 Server Info:"
-    echo "   PID: $SERVER_PID"
-    echo "   Port: 80"
-    echo "   Log: /var/log/sahara-journeys/production.log"
-    echo ""
-    echo "🔧 Management Commands:"
-    echo "   View logs: sudo tail -f /var/log/sahara-journeys/production.log"
-    echo "   Stop server: sudo kill $SERVER_PID"
-    echo ""
+# Check if running as root or with sudo
+if [[ $EUID -eq 0 ]]; then
+   echo "⚠️ Running as root - production deployment"
 else
-    echo "❌ Server failed to start properly"
-    echo "📋 Check logs: sudo tail -50 /var/log/sahara-journeys/production.log"
+   echo "ℹ️ Running as regular user"
+fi
+
+# Check if .env exists
+if [ ! -f ".env" ]; then
+    echo "❌ Error: .env file not found"
+    echo "Creating sample .env file..."
+    cat > .env << 'EOF'
+# Database Configuration
+DATABASE_URL=postgresql://username:password@host:port/database
+
+# Server Configuration
+NODE_ENV=production
+PORT=80
+HOST=0.0.0.0
+
+# Session Configuration
+SESSION_SECRET=your-super-secret-session-key-here
+
+# Application Configuration
+APP_NAME="Sahara Journeys"
+APP_URL=http://74.179.85.9
+EOF
+    echo "⚠️ Please update .env with your actual configuration"
     exit 1
 fi
+
+# Load environment variables
+export $(grep -v '^#' .env | xargs)
+
+# Set production environment
+export NODE_ENV=production
+export PORT=${PORT:-8080}
+export HOST=${HOST:-0.0.0.0}
+
+echo "🔍 Configuration:"
+echo "- Environment: $NODE_ENV"
+echo "- Port: $PORT"
+echo "- Host: $HOST"
+
+# Kill any existing processes
+echo "🔄 Stopping existing server processes..."
+pkill -f "tsx server/index.ts" 2>/dev/null || true
+pkill -f "node server/index.js" 2>/dev/null || true
+
+# Install dependencies if needed
+if [ ! -d "node_modules" ]; then
+    echo "📦 Installing dependencies..."
+    npm install
+fi
+
+# Check database connection
+if [ -n "$DATABASE_URL" ]; then
+    echo "🔍 Testing database connection..."
+    npx tsx -e "
+import postgres from 'postgres';
+const sql = postgres('$DATABASE_URL', { max: 1 });
+sql\`SELECT 1 as test\`.then(() => {
+  console.log('✅ Database connection successful');
+  process.exit(0);
+}).catch(err => {
+  console.log('❌ Database connection failed:', err.message);
+  process.exit(1);
+}).finally(() => sql.end());
+"
+    if [ $? -ne 0 ]; then
+        echo "❌ Database connection failed. Please check DATABASE_URL"
+        exit 1
+    fi
+else
+    echo "⚠️ DATABASE_URL not set"
+fi
+
+# Configure firewall (if ufw is available)
+if command -v ufw &> /dev/null; then
+    echo "🔧 Configuring firewall..."
+    sudo ufw allow $PORT/tcp 2>/dev/null || echo "ℹ️ Could not configure firewall (may need sudo)"
+fi
+
+# Start server in production mode
+echo "🚀 Starting production server..."
+echo "Server will be available at:"
+echo "- Local: http://localhost${PORT:+:$PORT}"
+echo "- Network: http://74.179.85.9${PORT:+:$PORT}"
+echo "- Admin: http://74.179.85.9${PORT:+:$PORT}/admin"
+echo ""
+echo "Press Ctrl+C to stop the server"
+echo "=========================================="
+
+# Start with proper logging
+exec npx tsx server/index.ts 2>&1 | tee production.log
