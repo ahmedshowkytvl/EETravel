@@ -1,0 +1,145 @@
+ahmed@EETHost:~/EETravel$ ./start.sh
+🏜️ Starting Sahara Journeys Travel Platform...
+==============================================
+Node.js version: v18.20.8
+🔍 Checking for existing server processes...
+⚠️ Warning: .env file not found
+Database connection may fail without proper environment variables
+🚀 Starting Sahara Journeys server...
+Server will be available at: http://localhost:8080
+Admin panel: http://localhost:8080/admin
+
+Press Ctrl+C to stop the server
+==============================================
+Attempting to connect with URL: postgresql://neondb_owner:****@ep-frosty-sunset-a85ha3la-pooler.eastus2.azure.neon.tech/neondb?sslmode=require
+Database connection established successfully
+⚠️ Vite import failed, using fallback configuration
+⏳ Waiting for database initialization...
+✅ Database initialized.
+🔐 Setting up admin users...
+❌ Error setting up admin users: PostgresError: relation "users" does not exist
+    at ErrorResponse (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:517:28)
+    at addChunk (node:internal/streams/readable:368:12)
+    at readableAddChunk (node:internal/streams/readable:341:9)
+    at Readable.push (node:internal/streams/readable:278:10)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42P01',
+  position: '485',
+  file: 'parse_relation.c',
+  line: '1449',
+  routine: 'parserOpenTable'
+}
+✅ Admin setup completed
+✅ Unified auth setup completed
+✅ Hero slides routes setup completed
+✅ Routes registered successfully
+Vite setup skipped due to configuration error - serving static files
+8:40:45 AM [express] serving on port 8080
+🔧 Initializing database...
+📋 Creating database schema...
+✅ Database schema created successfully
+🔄 Checking database setup...
+{
+  severity_local: 'NOTICE',
+  severity: 'NOTICE',
+  code: '42701',
+  message: 'column "slug" of relation "packages" already exists, skipping',
+  file: 'tablecmds.c',
+  line: '7471',
+  routine: 'check_for_column_name_collision'
+}
+✅ Ensured packages table has slug column
+{
+  severity_local: 'NOTICE',
+  severity: 'NOTICE',
+  code: '42P07',
+  message: 'relation "countries" already exists, skipping',
+  file: 'parse_utilcmd.c',
+  line: '207',
+  routine: 'transformCreateStmt'
+}
+✅ Ensured countries table exists
+✅ Ensured nationalities table exists
+✅ Ensured visas table exists
+✅ Ensured nationality_visa_requirements table exists
+✅ All necessary visa tables are created
+✅ Database setup complete!
+🔐 Setting up admin users...
+❌ Error setting up admin users: PostgresError: relation "users" does not exist
+    at ErrorResponse (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:517:28)
+    at addChunk (node:internal/streams/readable:368:12)
+    at readableAddChunk (node:internal/streams/readable:341:9)
+    at Readable.push (node:internal/streams/readable:278:10)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42P01',
+  position: '485',
+  file: 'parse_relation.c',
+  line: '1449',
+  routine: 'parserOpenTable'
+}
+🏷️ Seeding package categories...
+🏷️ Seeding package categories...
+❌ Error seeding package categories: PostgresError: relation "package_categories" does not exist
+    at ErrorResponse (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:517:28)
+    at addChunk (node:internal/streams/readable:368:12)
+    at readableAddChunk (node:internal/streams/readable:341:9)
+    at Readable.push (node:internal/streams/readable:278:10)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42P01',
+  position: '107',
+  file: 'parse_relation.c',
+  line: '1449',
+  routine: 'parserOpenTable'
+}
+❌ Error seeding package categories: PostgresError: relation "package_categories" does not exist
+    at ErrorResponse (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:517:28)
+    at addChunk (node:internal/streams/readable:368:12)
+    at readableAddChunk (node:internal/streams/readable:341:9)
+    at Readable.push (node:internal/streams/readable:278:10)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42P01',
+  position: '107',
+  file: 'parse_relation.c',
+  line: '1449',
+  routine: 'parserOpenTable'
+}
+✅ Package categories seeding complete
+🌱 Seeding data...
+❌ Database initialization failed: PostgresError: column "created_by" does not exist
+    at ErrorResponse (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:788:26)
+    at handle (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:474:6)
+    at TLSSocket.data (file:///home/ahmed/EETravel/node_modules/postgres/src/connection.js:315:9)
+    at TLSSocket.emit (node:events:517:28)
+    at addChunk (node:internal/streams/readable:368:12)
+    at readableAddChunk (node:internal/streams/readable:341:9)
+    at Readable.push (node:internal/streams/readable:278:10)
+    at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23) {
+  severity_local: 'ERROR',
+  severity: 'ERROR',
+  code: '42703',
+  hint: 'Perhaps you meant to reference the column "destinations.created_at".',
+  position: '126',
+  file: 'parse_relation.c',
+  line: '3723',
+  routine: 'errorMissingColumn'
+}
