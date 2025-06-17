@@ -15,14 +15,14 @@
 ./start-production.sh
 ```
 
-### 2. إذا كنت تريد التشغيل المباشر:
+### 2. للتشغيل على المنفذ 8080 (الأفضل للينكس):
 
 ```bash
-# تشغيل مباشر على المنفذ 3000
-PORT=3000 NODE_ENV=production npx tsx server/index.ts
+# الطريقة المُوصى بها
+./start-port8080.sh
 
-# أو للمنفذ 80 (يتطلب sudo)
-sudo PORT=80 NODE_ENV=production npx tsx server/index.ts
+# أو التشغيل المباشر
+PORT=8080 NODE_ENV=production npx tsx server/index.ts
 ```
 
 ### 3. حل مشكلة cross-env:
@@ -37,15 +37,15 @@ NODE_ENV=development npx tsx server/index.ts
 
 ## الوصول للمنصة
 
-### إذا كان الخادم يعمل على المنفذ 3000:
-- الموقع الرئيسي: http://74.179.85.9:3000
-- لوحة الإدارة: http://74.179.85.9:3000/admin
-- واجهات API: http://74.179.85.9:3000/api/admin/users
+### الخادم يعمل على المنفذ 8080 (الأفضل للينكس):
+- الموقع الرئيسي: http://74.179.85.9:8080
+- لوحة الإدارة: http://74.179.85.9:8080/admin
+- واجهات API: http://74.179.85.9:8080/api/admin/users
 
-### للحصول على المنفذ 80:
+### للحصول على المنفذ 80 (اختياري):
 ```bash
-# إعداد إعادة التوجيه (مُوصى به)
-sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+# إعداد إعادة التوجيه من المنفذ 80 إلى 8080
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 ```
 
 ## ملفات مهمة

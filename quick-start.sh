@@ -12,7 +12,7 @@ sleep 2
 
 # Set environment variables
 export NODE_ENV=production
-export PORT=3000
+export PORT=8080
 export HOST=0.0.0.0
 
 # Check if DATABASE_URL is available
@@ -22,7 +22,7 @@ else
     echo "⚠️ DATABASE_URL not found"
 fi
 
-echo "🚀 Starting server on port 3000..."
+echo "🚀 Starting server on port 8080..."
 
 # Start server directly without database initialization
 nohup npx tsx server/index.ts > sahara-server.log 2>&1 &
@@ -35,8 +35,8 @@ sleep 8
 # Check if server is running
 if ps -p $SERVER_PID > /dev/null; then
     echo "✅ Server running successfully"
-    echo "🌐 Access: http://74.179.85.9:3000"
-    echo "⚙️ Admin: http://74.179.85.9:3000/admin"
+    echo "🌐 Access: http://74.179.85.9:8080"
+    echo "⚙️ Admin: http://74.179.85.9:8080/admin"
     echo ""
     echo "To stop: kill $SERVER_PID"
 else

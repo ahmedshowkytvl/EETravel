@@ -107,7 +107,7 @@ The application uses a comprehensive PostgreSQL schema with the following core e
 ## Recent Changes
 
 - **Linux Production Deployment (June 17, 2025)**: Successfully deployed platform for external access with port solutions
-  - **Port Configuration Resolved**: Server configured for port 3000 with port 80 forwarding solutions for Linux systems
+  - **Port Configuration Resolved**: Server configured for port 8080 (optimal for Linux) with port forwarding solutions available
   - **Server Management**: Created comprehensive start/stop scripts and documentation for Linux deployment
   - **Production Scripts Created**: Built deployment tools (start-production.sh, deploy-production.sh)
   - **Database Schema Complete**: All 52+ tables from Drizzle schema properly created in PostgreSQL

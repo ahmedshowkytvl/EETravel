@@ -9,11 +9,11 @@ echo "============================================"
 # Check if running with appropriate permissions
 USER_ID=$(id -u)
 if [ "$USER_ID" -eq 0 ]; then
-    echo "⚠️ Running as root - can use port 80"
-    DEFAULT_PORT=80
+    echo "⚠️ Running as root - using port 8080"
+    DEFAULT_PORT=8080
 else
-    echo "ℹ️ Running as regular user - using port 3000"
-    DEFAULT_PORT=3000
+    echo "ℹ️ Running as regular user - using port 8080"
+    DEFAULT_PORT=8080
 fi
 
 # Set environment variables
@@ -74,13 +74,8 @@ if ps -p $SERVER_PID > /dev/null; then
     echo "✅ Server is running successfully"
     
     # Display access information
-    if [ "$PORT" = "80" ]; then
-        echo "🌐 External access: http://74.179.85.9"
-        echo "⚙️ Admin panel: http://74.179.85.9/admin"
-    else
-        echo "🌐 External access: http://74.179.85.9:$PORT"
-        echo "⚙️ Admin panel: http://74.179.85.9:$PORT/admin"
-    fi
+    echo "🌐 External access: http://74.179.85.9:$PORT"
+    echo "⚙️ Admin panel: http://74.179.85.9:$PORT/admin"
     
     # Test connectivity
     if command -v curl &> /dev/null; then
