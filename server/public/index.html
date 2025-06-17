@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahara Journeys - Travel Platform</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .status {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        .link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .api-status {
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏜️ Sahara Journeys</h1>
+        <div class="subtitle">Middle Eastern Travel Platform</div>
+        
+        <div class="status">
+            <h3>Server Status: Running</h3>
+            <p>Your travel booking platform is operational</p>
+            
+            <div class="api-status">
+                <div>Database: Connected to Neon PostgreSQL</div>
+                <div>Environment: Production</div>
+                <div>Server: Node.js + Express</div>
+                <div>Authentication: Active</div>
+            </div>
+        </div>
+
+        <div>
+            <a href="/admin" class="link">Admin Panel</a>
+            <a href="/api/admin/users" class="link">User API</a>
+            <a href="/api/packages" class="link">Packages API</a>
+            <a href="/api/countries" class="link">Countries API</a>
+        </div>
+
+        <div style="margin-top: 40px; opacity: 0.7; font-size: 0.9rem;">
+            <p>External Access: http://74.179.85.9:8080</p>
+            <p>Admin Panel: http://74.179.85.9:8080/admin</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple API health check
+        fetch('/api/admin/users')
+            .then(response => {
+                if (response.ok) {
+                    document.querySelector('.api-status').innerHTML += 
+                        '<div style="color: #4ade80;">✓ API Status: Healthy</div>';
+                } else {
+                    document.querySelector('.api-status').innerHTML += 
+                        '<div style="color: #f87171;">⚠ API Status: Issues Detected</div>';
+                }
+            })
+            .catch(() => {
+                document.querySelector('.api-status').innerHTML += 
+                    '<div style="color: #f87171;">✗ API Status: Connection Failed</div>';
+            });
+    </script>
+</body>
+</html>
