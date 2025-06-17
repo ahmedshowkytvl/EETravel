@@ -32,9 +32,17 @@ if [ ! -d "node_modules" ]; then
     npm install
 fi
 
+# Ensure drizzle-kit is available
+if ! npm list drizzle-kit >/dev/null 2>&1; then
+    echo "📦 Installing drizzle-kit..."
+    npm install drizzle-kit
+fi
+
 # Check database connection
 if [ -n "$DATABASE_URL" ]; then
-    echo "🔍 Testing database connection..."
+    echo "✅ Database connection configured"
+    echo "🔧 Testing database connectivity..."
+    node init-database-simple.js || echo "⚠️ Database test failed - continuing anyway"
 else
     echo "⚠️ DATABASE_URL not set - server may fail to start"
 fi

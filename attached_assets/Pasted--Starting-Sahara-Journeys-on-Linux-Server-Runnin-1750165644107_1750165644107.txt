@@ -1,0 +1,65 @@
+🌍 Starting Sahara Journeys on Linux Server
+============================================
+ℹ️ Running as regular user - using port 3000
+^C
+ahmed@EETHost:~/EETravel$ ./start-linux.sh
+🌍 Starting Sahara Journeys on Linux Server
+============================================
+ℹ️ Running as regular user - using port 3000
+📦 Installing dependencies...
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+
+added 530 packages, and audited 531 packages in 10s
+
+71 packages are looking for funding
+  run `npm fund` for details
+
+5 vulnerabilities (1 low, 2 moderate, 2 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+⚠️ DATABASE_URL not set - server may fail to start
+🚀 Starting server on port 3000...
+Server started with PID: 14247
+Waiting for initialization...
+✅ Server is running successfully
+🌐 External access: http://74.179.85.9:3000
+⚙️ Admin panel: http://74.179.85.9:3000/admin
+✅ Local connectivity confirmed
+LISTEN 0      511          0.0.0.0:3000      0.0.0.0:*    users:(("node",pid=14283,fd=30))
+
+📋 Server Information:
+- PID: 14247
+- Port: 3000
+- Environment: production
+- Log file: sahara-server.log
+
+To stop the server: kill 14247
+ahmed@EETHost:~/EETravel$ To stop the server: kill 14247
+sahara-server.log
+To: command not found
+sahara-server.log: command not found
+ahmed@EETHost:~/EETravel$ nano sahara-server.log
+  GNU nano 6.2                    sahara-server.log *
+  stderr: 'sh: 1: drizzle-kit: not found\n'
+}
+
+❌ Database initialization failed: Error: Command failed: npm run db:push
+sh: 1: drizzle-kit: not found
+
+    at __node_internal_genericNodeError (node:internal/errors:865:15)
+    at ChildProcess.exithandler (node:child_process:422:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:303:5) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'npm run db:push',
+  stdout: '\n> rest-express@1.0.0 db:push\n> drizzle-kit push\n\n',
+  stderr: 'sh: 1: drizzle-kit: not found\n'
+}
+
+
