@@ -3,7 +3,7 @@ import postgres from 'postgres';
 import * as schema from "@shared/schema";
 
 // Use environment variable for database configuration
-const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://postgres:password@localhost:5432/travel_app';
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_ZN9Ylt3AoQRJ@ep-frosty-sunset-a85ha3la-pooler.eastus2.azure.neon.tech/neondb?sslmode=require';
 
 // Create a postgres client connection with better error handling
 let client: postgres.Sql;
