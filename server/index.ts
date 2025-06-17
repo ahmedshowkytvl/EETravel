@@ -197,7 +197,13 @@ app.use((req, res, next) => {
     // this serves both the API and the client.
     // Using port 8080 as discussed previously
     const port = parseInt(process.env.PORT || "8080"); // Use PORT environment variable, fallback to 8080
-    server.listen(port, "0.0.0.0", () => {
+    const host = process.env.HOST || "0.0.0.0";
+    
+    server.listen(port, host, () => {
+      console.log(`🌍 Sahara Journeys server running on ${host}:${port}`);
+      console.log(`📱 Local access: http://localhost:${port}`);
+      console.log(`🌐 External access: http://74.179.85.9:${port}`);
+      console.log(`⚙️ Admin panel: http://74.179.85.9:${port}/admin`);
       log(`serving on port ${port}`);
     });
   } catch (error) {
