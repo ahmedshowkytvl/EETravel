@@ -29,10 +29,10 @@ if ! command -v npx &> /dev/null; then
     exit 1
 fi
 
-# Kill any existing server processes on port 8080
+# Kill any existing server processes on port 80
 echo "🔍 Checking for existing server processes..."
-if lsof -ti:8080 > /dev/null 2>&1; then
-    echo "⚠️ Stopping existing server on port 8080..."
+if lsof -ti:80 > /dev/null 2>&1; then
+    echo "⚠️ Stopping existing server on port 80..."
     pkill -f "tsx server/index.ts" 2>/dev/null || true
     sleep 2
 fi
@@ -51,8 +51,8 @@ fi
 
 # Start the server
 echo "🚀 Starting Sahara Journeys server..."
-echo "Server will be available at: http://localhost:8080"
-echo "Admin panel: http://localhost:8080/admin"
+echo "Server will be available at: http://localhost"
+echo "Admin panel: http://localhost/admin"
 echo ""
 echo "Press Ctrl+C to stop the server"
 echo "=============================================="

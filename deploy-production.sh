@@ -23,7 +23,7 @@ DATABASE_URL=postgresql://username:password@host:port/database
 
 # Server Configuration
 NODE_ENV=production
-PORT=8080
+PORT=80
 HOST=0.0.0.0
 
 # Session Configuration
@@ -31,7 +31,7 @@ SESSION_SECRET=your-super-secret-session-key-here
 
 # Application Configuration
 APP_NAME="Sahara Journeys"
-APP_URL=http://74.179.85.9:8080
+APP_URL=http://74.179.85.9
 EOF
     echo "⚠️ Please update .env with your actual configuration"
     exit 1
@@ -92,9 +92,9 @@ fi
 # Start server in production mode
 echo "🚀 Starting production server..."
 echo "Server will be available at:"
-echo "- Local: http://localhost:$PORT"
-echo "- Network: http://74.179.85.9:$PORT"
-echo "- Admin: http://74.179.85.9:$PORT/admin"
+echo "- Local: http://localhost${PORT:+:$PORT}"
+echo "- Network: http://74.179.85.9${PORT:+:$PORT}"
+echo "- Admin: http://74.179.85.9${PORT:+:$PORT}/admin"
 echo ""
 echo "Press Ctrl+C to stop the server"
 echo "=========================================="
